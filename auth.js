@@ -106,7 +106,9 @@ function handleLogin(event) {
         const groups = getGroups();
         let authenticatedAdmin = null;
         let adminGroup = null;
-        
+        let authenticatedUser = null;
+        let userGroup = null;
+
         // Search for admin in all groups
         for (const groupId in groups) {
             const group = groups[groupId];
@@ -120,7 +122,24 @@ function handleLogin(event) {
                 break;
             }
         }
-        
+
+        // Search for user in all groups
+        if (!authenticatedAdmin) {
+            for (const groupId in groups) {
+                const group = groups[groupId];
+                const member = group.members.find(m =>
+                    m.username === username &&
+                    m.password === password &&
+                    m.isActive
+                );
+                if (member) {
+                    authenticatedUser = member;
+                    userGroup = group;
+                    break;
+                }
+            }
+        }
+
         if (authenticatedAdmin) {
             // Store admin session data
             const sessionData = {
@@ -133,17 +152,33 @@ function handleLogin(event) {
                 isAdmin: true,
                 loginTime: new Date().toISOString()
             };
-            
             localStorage.setItem('userSession', JSON.stringify(sessionData));
             showAlert('adminAlert', 'Admin login successful! Redirecting...', 'success');
-            
             setTimeout(() => {
                 window.location.href = 'admin.html';
             }, 1500);
+        } else if (authenticatedUser) {
+            // Store user session data
+            const sessionData = {
+                userId: authenticatedUser.id,
+                username: authenticatedUser.username,
+                name: authenticatedUser.name,
+                resourceCode: authenticatedUser.resourceCode,
+                role: authenticatedUser.role,
+                groupId: userGroup.groupId,
+                groupName: userGroup.groupName,
+                isAdmin: false,
+                loginTime: new Date().toISOString()
+            };
+            localStorage.setItem('userSession', JSON.stringify(sessionData));
+            showAlert('loginAlert', 'Login successful! Redirecting...', 'success');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
         } else {
-            showAlert('adminAlert', 'Invalid admin credentials. Please try again.', 'error');
+            showAlert('loginAlert', 'Invalid username or password. Please try again.', 'error');
         }
-        
+
         // Hide loading
         submitText.style.display = 'inline';
         submitLoader.style.display = 'none';
@@ -263,68 +298,14 @@ function checkExistingSession() {
 
 // Initialize authentication system
 document.addEventListener('DOMContentLoaded', function() {
+    // Force re-initialization of demo data on every page load
+    localStorage.removeItem('engineeringGroups');
+    localStorage.removeItem('userSession');
     initializeStorage();
     checkExistingSession();
-    
     // Show login form by default
     showLogin();
 });
-    submitText.style.display = 'none';
-    submitLoader.style.display = 'inline-block';
-    submitBtn.disabled = true;
-    
-    // Simulate authentication delay
-    setTimeout(() => {
-        const groups = getGroups();
-        let authenticatedUser = null;
-        let userGroup = null;
-        
-        // Search for user in all groups
-        for (const groupId in groups) {
-            const group = groups[groupId];
-            const member = group.members.find(m => 
-                m.username === username && 
-                m.password === password && 
-                m.isActive
-            );
-            
-            if (member) {
-                authenticatedUser = member;
-                userGroup = group;
-                break;
-            }
-        }
-        
-        if (authenticatedUser) {
-            // Store session data
-            const sessionData = {
-                userId: authenticatedUser.id,
-                username: authenticatedUser.username,
-                name: authenticatedUser.name,
-                resourceCode: authenticatedUser.resourceCode,
-                role: authenticatedUser.role,
-                groupId: userGroup.groupId,
-                groupName: userGroup.groupName,
-                isAdmin: false,
-                loginTime: new Date().toISOString()
-            };
-            
-            localStorage.setItem('userSession', JSON.stringify(sessionData));
-            showAlert('loginAlert', 'Login successful! Redirecting...', 'success');
-            
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1500);
-        } else {
-            showAlert('loginAlert', 'Invalid username or password. Please try again.', 'error');
-        }
-        
-        // Hide loading
-        submitText.style.display = 'inline';
-        submitLoader.style.display = 'none';
-        submitBtn.disabled = false;
-    }, 1000);
-}
 
 // Handle admin login
 function handleAdminLogin(event) {
@@ -338,3 +319,53 @@ function handleAdminLogin(event) {
     const submitLoader = document.getElementById('adminLoader');
     
     // Show loading
+    submitText.style.display = 'none';
+    submitLoader.style.display = 'inline-block';
+    submitBtn.disabled = true;
+
+    setTimeout(() => {
+        const groups = getGroups();
+        let authenticatedAdmin = null;
+        let adminGroup = null;
+
+        // Search for admin in all groups
+        for (const groupId in groups) {
+            const group = groups[groupId];
+            if (group.adminUsername === username && group.adminPassword === password) {
+                authenticatedAdmin = {
+                    username: group.adminUsername,
+                    name: group.adminName,
+                    email: group.adminEmail
+                };
+                adminGroup = group;
+                break;
+            }
+        }
+
+        if (authenticatedAdmin) {
+            // Store admin session data
+            const sessionData = {
+                userId: 'ADMIN_' + adminGroup.groupId,
+                username: authenticatedAdmin.username,
+                name: authenticatedAdmin.name,
+                role: 'Group Administrator',
+                groupId: adminGroup.groupId,
+                groupName: adminGroup.groupName,
+                isAdmin: true,
+                loginTime: new Date().toISOString()
+            };
+            localStorage.setItem('userSession', JSON.stringify(sessionData));
+            showAlert('adminAlert', 'Admin login successful! Redirecting...', 'success');
+            setTimeout(() => {
+                window.location.href = 'admin.html';
+            }, 1500);
+        } else {
+            showAlert('adminAlert', 'Invalid admin credentials. Please try again.', 'error');
+        }
+
+        // Hide loading
+        submitText.style.display = 'inline';
+        submitLoader.style.display = 'none';
+        submitBtn.disabled = false;
+    }, 1000);
+}
