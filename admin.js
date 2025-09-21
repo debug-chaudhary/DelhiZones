@@ -182,15 +182,35 @@ function addMember(event) {
         isActive: true
     };
 
-    // Add to group
-    currentGroup.members.push(newMember);
-    allGroups[currentSession.groupId] = currentGroup;
-    localStorage.setItem('engineeringGroups', JSON.stringify(allGroups));
-
-    hideAddMemberModal();
-    loadMembers();
-    updateMemberStats();
-    showAlert('memberAlert', `Member ${formData.name} added successfully`, 'success');
+    // Send new member data to backend
+    fetch('/api/members', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            groupId: currentSession.groupId,
+            member: newMember
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            // Add to local group for immediate UI update
+            currentGroup.members.push(newMember);
+            allGroups[currentSession.groupId] = currentGroup;
+            localStorage.setItem('engineeringGroups', JSON.stringify(allGroups));
+            hideAddMemberModal();
+            loadMembers();
+            updateMemberStats();
+            showAlert('memberAlert', `Member ${formData.name} added successfully`, 'success');
+        } else {
+            showAlert('memberAlert', data.message || 'Failed to add member', 'error');
+        }
+    })
+    .catch(() => {
+        showAlert('memberAlert', 'Error connecting to backend', 'error');
+    });
 }
 
 // Edit member

@@ -1,3 +1,26 @@
+// REST API: Add new member to a group
+app.post('/api/members', async (req, res) => {
+  const { groupId, member } = req.body;
+  if (!groupId || !member) {
+    return res.status(400).json({ success: false, message: 'Missing groupId or member data' });
+  }
+
+  // Find group and add member (simple demo: store in a Group collection)
+  // For demo, assume a Group model with members array
+  // If you have a Group schema, update accordingly
+  try {
+    // Example: update group document in MongoDB
+    const group = await Group.findOne({ groupId });
+    if (!group) {
+      return res.status(404).json({ success: false, message: 'Group not found' });
+    }
+    group.members.push(member);
+    await group.save();
+    res.json({ success: true, member });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Server error', error: err.message });
+  }
+});
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
