@@ -905,4 +905,240 @@
                         if (score > 50) {
                             const cleanedTitle = this.cleanTitle(line);
                             if (!foundTitles.has(cleanedTitle.toLowerCase()) && cleanedTitle !== 'Untitled') {
-                                foundTitles.add(
+                                foundTitles.add(cleanedTitle.toLowerCase());
+                                
+                                this.tableOfContents.push({
+                                    title: cleanedTitle,
+                                    page: parseInt(pageNum),
+                                    fullTitle: line
+                                });
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                // If no good titles found, create page-based TOC
+                if (this.tableOfContents.length === 0) {
+                    for (let i = 1; i <= this.totalPages; i++) {
+                        this.tableOfContents.push({
+                            title: `Page ${i}`,
+                            page: i,
+                            fullTitle: `Page ${i}`
+                        });
+                    }
+                }
+                
+                // Sort by page number
+                this.tableOfContents.sort((a, b) => a.page - b.page);
+                
+                console.log(`Generated TOC with ${this.tableOfContents.length} items`);
+                setTimeout(() => this.renderTableOfContents(), 100);
+            }
+
+            scoreTitleCandidate(text) {
+                if (!text || text.length < 3) return 0;
+                
+                let score = 0;
+                const cleanText = text.trim();
+                
+                // Mathematical content patterns
+                if (/^\d+\.\d+\s+[A-Z][A-Z\s]+$/i.test(cleanText)) score += 160;
+                if (/^UNIT\s+\d+/i.test(cleanText)) score += 150;
+                if (/^(DETERMINANTS|INTRODUCTION|OBJECTIVES|DEFINITION|EXAMPLE|SOLUTION)/i.test(cleanText)) score += 140;
+                if (/^\d+\.\d+\s+[A-Z]/i.test(cleanText)) score += 130;
+                if (/^(Definition|Example|Solution)\s*\d*\s*:/i.test(cleanText)) score += 125;
+                
+                // General patterns
+                if (/^[A-Z\s]{8,}$/.test(cleanText) && cleanText.length <= 60) score += 80;
+                if (/^(chapter|part|section)\s*\d+/i.test(cleanText)) score += 100;
+                if (/^\d+\.\s*[A-Z]/i.test(cleanText)) score += 90;
+                
+                // Length bonus
+                if (cleanText.length >= 5 && cleanText.length <= 80) score += 10;
+                
+                // Penalties
+                if (/^\d+$/.test(cleanText)) score -= 50;
+                if (cleanText.includes('=') || cleanText.includes('+')) score -= 30;
+                if (cleanText.length < 5) score -= 30;
+                
+                return Math.max(0, score);
+            }
+
+            cleanTitle(title) {
+                let cleaned = title.replace(/\s+/g, ' ').trim();
+                cleaned = cleaned.replace(/^[\.\-\*\+\s]+/, '');
+                cleaned = cleaned.replace(/[\.\-\*\+\s]+$/, '');
+                
+                if (cleaned.length > 60) {
+                    const truncated = cleaned.substring(0, 57);
+                    const lastSpace = truncated.lastIndexOf(' ');
+                    if (lastSpace > 30) {
+                        cleaned = truncated.substring(0, lastSpace) + '...';
+                    } else {
+                        cleaned = truncated + '...';
+                    }
+                }
+                
+                return cleaned || 'Untitled';
+            }
+
+            renderTableOfContents() {
+                const tocContent = document.getElementById('tocContent');
+                
+                if (tocContent.dataset.rendered === 'true') {
+                    return;
+                }
+                
+                if (this.tableOfContents.length === 0) {
+                    tocContent.innerHTML = `
+                        <div class="loading">
+                            <div style="color: #e74c3c;">⚠️</div>
+                            <div style="margin-top: 10px;">No contents found</div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const tocHTML = this.tableOfContents.map((item, index) => `
+                    <div class="toc-item" data-page="${item.page}" data-index="${index}" title="${item.fullTitle}">
+                        <div class="toc-item-title">${item.title}</div>
+                    </div>
+                `).join('');
+                
+                tocContent.innerHTML = tocHTML;
+                tocContent.dataset.rendered = 'true';
+                
+                const tocItems = tocContent.querySelectorAll('.toc-item');
+                
+                tocItems.forEach((item, index) => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const page = parseInt(item.dataset.page);
+                        
+                        if (page && page >= 1 && page <= this.totalPages) {
+                            this.goToPage(page);
+                            
+                            tocItems.forEach(i => i.classList.remove('active'));
+                            item.classList.add('active');
+                            
+                            if (window.innerWidth <= 768) {
+                                setTimeout(() => {
+                                    this.isSidebarVisible = false;
+                                    this.updateSidebarVisibility();
+                                }, 300);
+                            }
+                        }
+                    });
+                    
+                    item.addEventListener('mouseenter', () => {
+                        item.style.transform = 'translateX(5px)';
+                    });
+                    
+                    item.addEventListener('mouseleave', () => {
+                        if (!item.classList.contains('active')) {
+                            item.style.transform = 'translateX(0)';
+                        }
+                    });
+                });
+                
+                if (tocItems.length > 0) {
+                    tocItems[0].classList.add('active');
+                }
+                
+                // Hide progress bar
+                const progressBar = document.getElementById('progressBar');
+                progressBar.style.width = '0%';
+            }
+
+            updateActiveTocItem() {
+                document.querySelectorAll('.toc-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                for (let i = this.tableOfContents.length - 1; i >= 0; i--) {
+                    if (this.tableOfContents[i].page <= this.currentPage) {
+                        const tocItem = document.querySelector(`[data-index="${i}"]`);
+                        if (tocItem) {
+                            tocItem.classList.add('active');
+                        }
+                        break;
+                    }
+                }
+            }
+
+            async goToPage(pageNumber) {
+                if (pageNumber >= 1 && pageNumber <= this.totalPages) {
+                    this.currentPage = pageNumber;
+                    await this.displayCurrentPage();
+                    this.updateNavigation();
+                }
+            }
+
+            goToNextPage() {
+                if (this.currentPage < this.totalPages) {
+                    this.goToPage(this.currentPage + 1);
+                }
+            }
+
+            goToPreviousPage() {
+                if (this.currentPage > 1) {
+                    this.goToPage(this.currentPage - 1);
+                }
+            }
+
+            updateNavigation() {
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const pageInput = document.getElementById('pageInput');
+                const totalPages = document.getElementById('totalPages');
+                
+                prevBtn.disabled = this.currentPage === 1;
+                nextBtn.disabled = this.currentPage === this.totalPages;
+                pageInput.value = this.currentPage;
+                pageInput.max = this.totalPages;
+                totalPages.textContent = this.totalPages;
+            }
+
+            showLoading() {
+                document.getElementById('contentArea').innerHTML = `
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <div style="font-size: 18px; margin-bottom: 10px;">Loading PDF...</div>
+                        <div style="font-size: 14px; opacity: 0.7;">Preparing visual and text content</div>
+                    </div>
+                `;
+                
+                document.getElementById('tocContent').innerHTML = `
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <div>Generating TOC...</div>
+                    </div>
+                `;
+            }
+
+            showError(message) {
+                document.getElementById('contentArea').innerHTML = `
+                    <div class="error">
+                        <div style="font-size: 24px; margin-bottom: 15px;">⚠️</div>
+                        <div>${message}</div>
+                    </div>
+                `;
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => {
+            new VisualPDFReader();
+        });
+    </script>
+</body>
+</html>(
