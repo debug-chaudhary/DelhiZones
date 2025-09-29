@@ -3,1142 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF eBook Reader - Visual Mode</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <title>Web Tools - Delhizones.com</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Custom styles */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
-
-        /* Navbar Styles */
-        .navbar {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            padding: 15px 20px;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .navbar-brand {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .navbar-brand .icon {
-            font-size: 28px;
-            background: linear-gradient(135deg, #3498db, #2ecc71);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .navbar-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .upload-btn, .toc-toggle, .mode-toggle {
-            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-        }
-
-        .upload-btn:hover, .toc-toggle:hover, .mode-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
-        }
-
-        .mode-toggle {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-        }
-
-        .book-info-nav {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
-            display: none;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        /* Main Container */
-        .main-container {
-            display: flex;
-            height: calc(100vh - 70px);
-            position: relative;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            margin: 0 auto;
-            max-width: 1400px;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Sidebar TOC */
-        .sidebar {
-            width: 350px;
-            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            transform: translateX(0);
-            transition: transform 0.3s ease;
-            position: relative;
-            z-index: 100;
-        }
-
-        .sidebar.hidden {
-            transform: translateX(-350px);
-        }
-
-        .sidebar-header {
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ecf0f1;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .toc-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .toc-item {
-            padding: 15px 18px;
-            cursor: pointer;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .toc-item:hover {
-            background: rgba(52, 152, 219, 0.2);
-            border-left-color: #3498db;
-            transform: translateX(5px);
-        }
-
-        .toc-item.active {
-            background: rgba(52, 152, 219, 0.3);
-            border-left-color: #3498db;
-        }
-
-        .toc-item-title {
-            font-weight: 500;
-            font-size: 15px;
-            line-height: 1.4;
-            color: #ecf0f1;
-        }
-
-        /* Slide Arrow */
-        .slide-arrow {
-            position: absolute;
-            right: -40px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 60px;
-            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
-            border: none;
-            border-radius: 0 8px 8px 0;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            z-index: 101;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .slide-arrow:hover {
-            width: 45px;
-            box-shadow: 2px 0 20px rgba(52, 152, 219, 0.3);
-        }
-
-        .slide-arrow.flipped {
-            transform: translateY(-50%) rotate(180deg);
-        }
-
-        /* Content Wrapper */
-        .content-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            transition: margin-left 0.3s ease;
-        }
-
-        .content-header {
-            background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            padding: 20px 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .book-title {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .book-meta {
-            font-size: 14px;
-            opacity: 0.9;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .content-area {
-            flex: 1;
-            overflow-y: auto;
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 20px;
-        }
-
-        /* Visual Mode - PDF Canvas Display */
-        .pdf-canvas-container {
-            background: white;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 0 auto;
-            max-width: 100%;
-        }
-
-        .pdf-canvas {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-        }
-
-        /* Text Mode Styles */
-        .text-mode .content-area {
-            padding: 30px;
-        }
-
-        .text-content {
-            max-width: 800px;
-            margin: 0 auto;
-            font-family: 'Times New Roman', serif;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #000;
-            white-space: pre-wrap;
-        }
-
-        /* Navigation */
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 30px;
-            background: #f8f9fa;
-            border-top: 1px solid #dee2e6;
-        }
-
-        .nav-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .page-info {
-            color: #6c757d;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .page-input {
-            width: 60px;
-            padding: 5px 8px;
-            border: 2px solid #dee2e6;
-            border-radius: 5px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        /* Loading and Error States */
-        .loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            flex-direction: column;
-            color: #7f8c8d;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #ecf0f1;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error {
-            color: #e74c3c;
-            text-align: center;
-            padding: 20px;
-            background: rgba(231, 76, 60, 0.1);
-            border-radius: 8px;
-            margin: 20px;
-        }
-
-        .progress-bar {
-            height: 3px;
-            background: linear-gradient(90deg, #3498db 0%, #2ecc71 100%);
-            transition: width 0.3s ease;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1001;
-            width: 0%;
-        }
-
-        .welcome-screen {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            flex-direction: column;
-            text-align: center;
-            padding: 40px;
-        }
-
-        .welcome-icon {
-            font-size: 80px;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #3498db, #2ecc71);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .welcome-title {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-
-        .welcome-subtitle {
-            font-size: 18px;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-        }
-
-        .mode-info {
-            background: #e8f5e8;
-            border: 1px solid #4caf50;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            font-size: 12px;
-            color: #2e7d32;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 10px 15px;
-            }
-            
-            .navbar-brand {
-                font-size: 20px;
-            }
-            
-            .navbar-controls {
-                gap: 8px;
-            }
-            
-            .upload-btn, .toc-toggle, .mode-toggle {
-                padding: 8px 12px;
-                font-size: 13px;
-            }
-            
-            .main-container {
-                height: calc(100vh - 60px);
-            }
-            
-            .sidebar {
-                width: 300px;
-                position: absolute;
-                height: 100%;
-                z-index: 200;
-            }
-            
-            .sidebar.hidden {
-                transform: translateX(-300px);
-            }
-            
-            .slide-arrow {
-                right: -35px;
-                width: 35px;
-                height: 50px;
-            }
-            
-            .content-area {
-                padding: 15px;
-            }
-            
-            .pdf-canvas-container {
-                padding: 10px;
-            }
-            
-            .navigation {
-                padding: 15px;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            
-            .page-info {
-                order: -1;
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .navbar-brand .brand-text {
-                display: none;
-            }
-            
-            .sidebar {
-                width: 280px;
-            }
-            
-            .sidebar.hidden {
-                transform: translateX(-280px);
-            }
-            
-            .nav-btn {
-                padding: 8px 12px;
-                font-size: 14px;
-            }
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
         }
     </style>
 </head>
-<body>
-    <div id="progressBar" class="progress-bar"></div>
-    
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbar-brand">
-            <span class="icon">📚</span>
-            <span class="brand-text">PDF Reader</span>
-        </div>
-        <div class="navbar-controls">
-            <div class="book-info-nav" id="bookInfoNav"></div>
-            <button class="upload-btn" id="uploadBtn">
-                <span>📁</span>
-                <span>Upload PDF</span>
-            </button>
-            <button class="mode-toggle" id="modeToggle">
-                <span>🖼️</span>
-                <span>Visual Mode</span>
-            </button>
-            <button class="toc-toggle" id="tocToggle">
-                <span>📋</span>
-                <span>Contents</span>
-            </button>
-            <input type="file" id="fileInput" class="file-input" accept=".pdf">
-        </div>
-    </nav>
+<body class="text-gray-800">
 
-    <!-- Main Container -->
-    <div class="main-container" id="mainContainer">
-        <!-- Sidebar TOC -->
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-title">
-                    <span>📋</span>
-                    <span>Table of Contents</span>
-                </div>
-            </div>
-            
-            <div class="toc-content" id="tocContent">
-                <div class="loading">
-                    <div>📖</div>
-                    <div style="margin-top: 10px;">Upload a PDF to see contents</div>
-                </div>
-            </div>
-            
-            <button class="slide-arrow" id="slideArrow">←</button>
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold text-gray-900">
+                Delhi<span class="text-blue-600">zones</span>.com
+            </a>
+            <nav>
+                <a href="/" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium flex items-center">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                    Back to Home
+                </a>
+            </nav>
         </div>
+    </header>
 
-        <!-- Content Wrapper -->
-        <div class="content-wrapper" id="contentWrapper">
-            <!-- Content Header -->
-            <div class="content-header" id="contentHeader" style="display: none;">
-                <div class="book-title" id="bookTitle">Document Title</div>
-                <div class="book-meta" id="bookMeta">
-                    <span id="bookPages">0 pages</span>
-                    <span id="bookSize">0 KB</span>
-                    <span id="bookType">PDF Document</span>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-white">
+            <div class="container mx-auto px-6 py-16 md:py-24 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                    Our Collection of Web Tools
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    A suite of powerful and easy-to-use online utilities to boost your productivity.
+                </p>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="py-16 md:py-20">
+            <div class="container mx-auto px-6">
+                <!-- Grid of Tool Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                    <!-- Excel Search Pro Card -->
+                    <a href="/Web-Tool/Excel-search-pro/" class="group block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 text-green-600">
+                           <i data-lucide="file-spreadsheet"></i>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-xl font-semibold text-gray-900">Excel Search Pro</h3>
+                            <p class="mt-2 text-gray-600">An advanced tool to search and filter data within your Excel files online.</p>
+                        </div>
+                    </a>
+                    
+                    <!-- File Structure Creator Card -->
+                    <a href="/Web-Tool/File-Structure-Creator/" class="group block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                           <i data-lucide="folder-tree"></i>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-xl font-semibold text-gray-900">File Structure Creator</h3>
+                            <p class="mt-2 text-gray-600">Quickly generate and visualize directory structures for your projects.</p>
+                        </div>
+                    </a>
+
+                    <!-- Prompt Generator Card -->
+                    <a href="/Web-Tool/Prompt-Genrator/" class="group block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 text-indigo-600">
+                           <i data-lucide="bot"></i>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-xl font-semibold text-gray-900">Prompt Generator</h3>
+                            <p class="mt-2 text-gray-600">Create effective and creative prompts for AI models and other applications.</p>
+                        </div>
+                    </a>
+
+                    <!-- eBook Reader Card -->
+                    <a href="/Web-Tool/ebook-Reader/" class="group block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 text-orange-600">
+                           <i data-lucide="book-marked"></i>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-xl font-semibold text-gray-900">eBook Reader</h3>
+                            <p class="mt-2 text-gray-600">A simple and clean interface for reading your favorite e-books online.</p>
+                        </div>
+                    </a>
+
                 </div>
             </div>
+        </section>
 
-            <!-- Content Area -->
-            <div class="content-area" id="contentArea">
-                <div class="welcome-screen">
-                    <div class="welcome-icon">📚</div>
-                    <div class="welcome-title">PDF eBook Reader</div>
-                    <div class="welcome-subtitle">Upload a PDF file to start reading</div>
-                    <div class="mode-info">
-                        <strong>Visual Mode:</strong> Shows PDF pages as images - perfect for mathematical content, diagrams, and complex formatting
-                    </div>
-                </div>
-            </div>
+    </main>
 
-            <!-- Navigation -->
-            <div class="navigation" id="navigation" style="display: none;">
-                <button class="nav-btn" id="prevBtn">
-                    <span>←</span>
-                    <span>Previous</span>
-                </button>
-                <div class="page-info" id="pageInfo">
-                    <span>Page</span>
-                    <input type="number" id="pageInput" class="page-input" min="1" value="1">
-                    <span>of <span id="totalPages">1</span></span>
-                </div>
-                <button class="nav-btn" id="nextBtn">
-                    <span>Next</span>
-                    <span>→</span>
-                </button>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-16">
+        <div class="container mx-auto px-6 py-8">
+            <div class="text-center">
+                <p>&copy; 2024 Delhizones.com. All Rights Reserved.</p>
             </div>
         </div>
-    </div>
+    </footer>
 
     <script>
-        class VisualPDFReader {
-            constructor() {
-                this.pdfDoc = null;
-                this.currentPage = 1;
-                this.totalPages = 0;
-                this.extractedText = {};
-                this.renderedPages = {};
-                this.tableOfContents = [];
-                this.isSidebarVisible = true;
-                this.isVisualMode = true;
-                this.currentFile = null;
-                
-                this.init();
-            }
-
-            init() {
-                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-                this.setupEventListeners();
-                this.updateSidebarVisibility();
-            }
-
-            setupEventListeners() {
-                // File upload
-                const uploadBtn = document.getElementById('uploadBtn');
-                const fileInput = document.getElementById('fileInput');
-                
-                uploadBtn.addEventListener('click', () => fileInput.click());
-                fileInput.addEventListener('change', (e) => this.handleFileUpload(e.target.files[0]));
-
-                // Mode toggle
-                const modeToggle = document.getElementById('modeToggle');
-                modeToggle.addEventListener('click', () => this.toggleMode());
-
-                // Sidebar toggle
-                const tocToggle = document.getElementById('tocToggle');
-                const slideArrow = document.getElementById('slideArrow');
-                
-                tocToggle.addEventListener('click', () => this.toggleSidebar());
-                slideArrow.addEventListener('click', () => this.toggleSidebar());
-
-                // Navigation
-                const prevBtn = document.getElementById('prevBtn');
-                const nextBtn = document.getElementById('nextBtn');
-                const pageInput = document.getElementById('pageInput');
-                
-                prevBtn.addEventListener('click', () => this.goToPreviousPage());
-                nextBtn.addEventListener('click', () => this.goToNextPage());
-                pageInput.addEventListener('change', (e) => this.goToPage(parseInt(e.target.value)));
-                pageInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        this.goToPage(parseInt(e.target.value));
-                    }
-                });
-
-                // Responsive handling
-                window.addEventListener('resize', () => this.handleResize());
-                
-                // Drag and drop
-                document.addEventListener('dragover', (e) => e.preventDefault());
-                document.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    const files = e.dataTransfer.files;
-                    if (files[0] && files[0].type === 'application/pdf') {
-                        this.handleFileUpload(files[0]);
-                    }
-                });
-            }
-
-            toggleMode() {
-                this.isVisualMode = !this.isVisualMode;
-                const modeToggle = document.getElementById('modeToggle');
-                const mainContainer = document.getElementById('mainContainer');
-                
-                if (this.isVisualMode) {
-                    modeToggle.innerHTML = '<span>🖼️</span><span>Visual Mode</span>';
-                    mainContainer.classList.remove('text-mode');
-                } else {
-                    modeToggle.innerHTML = '<span>📝</span><span>Text Mode</span>';
-                    mainContainer.classList.add('text-mode');
-                }
-                
-                // Re-display current page in new mode
-                if (this.pdfDoc) {
-                    this.displayCurrentPage();
-                }
-            }
-
-            toggleSidebar() {
-                this.isSidebarVisible = !this.isSidebarVisible;
-                this.updateSidebarVisibility();
-            }
-
-            updateSidebarVisibility() {
-                const sidebar = document.getElementById('sidebar');
-                const slideArrow = document.getElementById('slideArrow');
-                
-                if (this.isSidebarVisible) {
-                    sidebar.classList.remove('hidden');
-                    slideArrow.innerHTML = '←';
-                    slideArrow.classList.remove('flipped');
-                } else {
-                    sidebar.classList.add('hidden');
-                    slideArrow.innerHTML = '→';
-                    slideArrow.classList.add('flipped');
-                }
-            }
-
-            handleResize() {
-                if (window.innerWidth <= 768 && this.isSidebarVisible) {
-                    this.isSidebarVisible = false;
-                    this.updateSidebarVisibility();
-                }
-            }
-
-            async handleFileUpload(file) {
-                if (!file || file.type !== 'application/pdf') {
-                    this.showError('Please select a valid PDF file');
-                    return;
-                }
-
-                try {
-                    this.currentFile = file;
-                    this.showLoading();
-                    
-                    const arrayBuffer = await file.arrayBuffer();
-                    this.pdfDoc = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
-                    this.totalPages = this.pdfDoc.numPages;
-                    
-                    // Update UI
-                    this.updateBookInfo(file);
-                    
-                    // Extract text for TOC generation (lightweight)
-                    await this.extractTextForTOC();
-                    this.generateTableOfContents();
-                    
-                    // Show first page
-                    this.currentPage = 1;
-                    await this.displayCurrentPage();
-                    this.updateNavigation();
-                    
-                    // Show navigation and header
-                    document.getElementById('navigation').style.display = 'flex';
-                    document.getElementById('contentHeader').style.display = 'block';
-                    
-                    if (window.innerWidth > 768) {
-                        this.isSidebarVisible = true;
-                        this.updateSidebarVisibility();
-                    }
-                    
-                } catch (error) {
-                    console.error('Error loading PDF:', error);
-                    this.showError('Error loading PDF. Please try again with a different file.');
-                }
-            }
-
-            updateBookInfo(file) {
-                const fileName = file.name.replace('.pdf', '');
-                const fileSize = this.formatFileSize(file.size);
-                
-                document.getElementById('bookTitle').textContent = fileName;
-                document.getElementById('bookPages').textContent = `${this.totalPages} pages`;
-                document.getElementById('bookSize').textContent = fileSize;
-                document.getElementById('bookInfoNav').textContent = `${fileName} • ${this.totalPages} pages`;
-                document.getElementById('bookInfoNav').style.display = 'block';
-            }
-
-            formatFileSize(bytes) {
-                if (bytes === 0) return '0 Bytes';
-                const k = 1024;
-                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            }
-
-            async extractTextForTOC() {
-                this.extractedText = {};
-                const progressBar = document.getElementById('progressBar');
-                
-                // Only extract text from first few pages and every 5th page for TOC
-                const pagesToExtract = [];
-                for (let i = 1; i <= Math.min(10, this.totalPages); i++) {
-                    pagesToExtract.push(i);
-                }
-                for (let i = 15; i <= this.totalPages; i += 5) {
-                    pagesToExtract.push(i);
-                }
-                
-                for (let i = 0; i < pagesToExtract.length; i++) {
-                    const pageNum = pagesToExtract[i];
-                    try {
-                        const page = await this.pdfDoc.getPage(pageNum);
-                        const textContent = await page.getTextContent();
-                        
-                        let pageText = '';
-                        textContent.items.forEach(item => {
-                            if (item.str.trim()) {
-                                pageText += item.str + ' ';
-                            }
-                        });
-                        
-                        this.extractedText[pageNum] = pageText.trim();
-                        
-                        // Update progress
-                        const progress = (i / pagesToExtract.length) * 50; // 50% for text extraction
-                        progressBar.style.width = `${progress}%`;
-                        
-                    } catch (error) {
-                        console.error(`Error extracting text from page ${pageNum}:`, error);
-                        this.extractedText[pageNum] = '';
-                    }
-                }
-            }
-
-            async renderPageToCanvas(pageNumber, scale = 1.5) {
-                if (this.renderedPages[pageNumber]) {
-                    return this.renderedPages[pageNumber];
-                }
-                
-                try {
-                    const page = await this.pdfDoc.getPage(pageNumber);
-                    const viewport = page.getViewport({ scale });
-                    
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-                    
-                    const renderContext = {
-                        canvasContext: context,
-                        viewport: viewport
-                    };
-                    
-                    await page.render(renderContext).promise;
-                    
-                    // Cache the rendered page
-                    this.renderedPages[pageNumber] = canvas;
-                    
-                    return canvas;
-                } catch (error) {
-                    console.error(`Error rendering page ${pageNumber}:`, error);
-                    return null;
-                }
-            }
-
-            async displayCurrentPage() {
-                const contentArea = document.getElementById('contentArea');
-                
-                if (this.isVisualMode) {
-                    // Visual mode - render PDF page as canvas
-                    contentArea.innerHTML = '<div class="loading"><div class="loading-spinner"></div><div>Rendering page...</div></div>';
-                    
-                    const canvas = await this.renderPageToCanvas(this.currentPage);
-                    
-                    if (canvas) {
-                        contentArea.innerHTML = `
-                            <div class="pdf-canvas-container">
-                                <canvas class="pdf-canvas" width="${canvas.width}" height="${canvas.height}"></canvas>
-                            </div>
-                        `;
-                        
-                        const displayCanvas = contentArea.querySelector('.pdf-canvas');
-                        const ctx = displayCanvas.getContext('2d');
-                        ctx.drawImage(canvas, 0, 0);
-                    } else {
-                        contentArea.innerHTML = '<div class="error">Error rendering page</div>';
-                    }
-                } else {
-                    // Text mode - extract and display text
-                    if (!this.extractedText[this.currentPage]) {
-                        try {
-                            const page = await this.pdfDoc.getPage(this.currentPage);
-                            const textContent = await page.getTextContent();
-                            
-                            let pageText = '';
-                            textContent.items.forEach(item => {
-                                pageText += item.str + ' ';
-                            });
-                            
-                            this.extractedText[this.currentPage] = pageText.trim();
-                        } catch (error) {
-                            this.extractedText[this.currentPage] = 'Error extracting text';
-                        }
-                    }
-                    
-                    const pageText = this.extractedText[this.currentPage] || 'No text content available';
-                    contentArea.innerHTML = `
-                        <div class="text-content">${this.escapeHtml(pageText)}</div>
-                    `;
-                }
-                
-                // Update active TOC item
-                this.updateActiveTocItem();
-                
-                // Scroll to top
-                contentArea.scrollTop = 0;
-            }
-
-            generateTableOfContents() {
-                this.tableOfContents = [];
-                const foundTitles = new Set();
-                
-                // Look for titles in extracted text
-                for (const pageNum of Object.keys(this.extractedText)) {
-                    const text = this.extractedText[pageNum];
-                    if (!text) continue;
-                    
-                    const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
-                    
-                    for (let i = 0; i < Math.min(lines.length, 5); i++) {
-                        const line = lines[i];
-                        const score = this.scoreTitleCandidate(line);
-                        
-                        if (score > 50) {
-                            const cleanedTitle = this.cleanTitle(line);
-                            if (!foundTitles.has(cleanedTitle.toLowerCase()) && cleanedTitle !== 'Untitled') {
-                                foundTitles.add(cleanedTitle.toLowerCase());
-                                
-                                this.tableOfContents.push({
-                                    title: cleanedTitle,
-                                    page: parseInt(pageNum),
-                                    fullTitle: line
-                                });
-                                break;
-                            }
-                        }
-                    }
-                }
-                
-                // If no good titles found, create page-based TOC
-                if (this.tableOfContents.length === 0) {
-                    for (let i = 1; i <= this.totalPages; i++) {
-                        this.tableOfContents.push({
-                            title: `Page ${i}`,
-                            page: i,
-                            fullTitle: `Page ${i}`
-                        });
-                    }
-                }
-                
-                // Sort by page number
-                this.tableOfContents.sort((a, b) => a.page - b.page);
-                
-                console.log(`Generated TOC with ${this.tableOfContents.length} items`);
-                setTimeout(() => this.renderTableOfContents(), 100);
-            }
-
-            scoreTitleCandidate(text) {
-                if (!text || text.length < 3) return 0;
-                
-                let score = 0;
-                const cleanText = text.trim();
-                
-                // Mathematical content patterns
-                if (/^\d+\.\d+\s+[A-Z][A-Z\s]+$/i.test(cleanText)) score += 160;
-                if (/^UNIT\s+\d+/i.test(cleanText)) score += 150;
-                if (/^(DETERMINANTS|INTRODUCTION|OBJECTIVES|DEFINITION|EXAMPLE|SOLUTION)/i.test(cleanText)) score += 140;
-                if (/^\d+\.\d+\s+[A-Z]/i.test(cleanText)) score += 130;
-                if (/^(Definition|Example|Solution)\s*\d*\s*:/i.test(cleanText)) score += 125;
-                
-                // General patterns
-                if (/^[A-Z\s]{8,}$/.test(cleanText) && cleanText.length <= 60) score += 80;
-                if (/^(chapter|part|section)\s*\d+/i.test(cleanText)) score += 100;
-                if (/^\d+\.\s*[A-Z]/i.test(cleanText)) score += 90;
-                
-                // Length bonus
-                if (cleanText.length >= 5 && cleanText.length <= 80) score += 10;
-                
-                // Penalties
-                if (/^\d+$/.test(cleanText)) score -= 50;
-                if (cleanText.includes('=') || cleanText.includes('+')) score -= 30;
-                if (cleanText.length < 5) score -= 30;
-                
-                return Math.max(0, score);
-            }
-
-            cleanTitle(title) {
-                let cleaned = title.replace(/\s+/g, ' ').trim();
-                cleaned = cleaned.replace(/^[\.\-\*\+\s]+/, '');
-                cleaned = cleaned.replace(/[\.\-\*\+\s]+$/, '');
-                
-                if (cleaned.length > 60) {
-                    const truncated = cleaned.substring(0, 57);
-                    const lastSpace = truncated.lastIndexOf(' ');
-                    if (lastSpace > 30) {
-                        cleaned = truncated.substring(0, lastSpace) + '...';
-                    } else {
-                        cleaned = truncated + '...';
-                    }
-                }
-                
-                return cleaned || 'Untitled';
-            }
-
-            renderTableOfContents() {
-                const tocContent = document.getElementById('tocContent');
-                
-                if (tocContent.dataset.rendered === 'true') {
-                    return;
-                }
-                
-                if (this.tableOfContents.length === 0) {
-                    tocContent.innerHTML = `
-                        <div class="loading">
-                            <div style="color: #e74c3c;">⚠️</div>
-                            <div style="margin-top: 10px;">No contents found</div>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                const tocHTML = this.tableOfContents.map((item, index) => `
-                    <div class="toc-item" data-page="${item.page}" data-index="${index}" title="${item.fullTitle}">
-                        <div class="toc-item-title">${item.title}</div>
-                    </div>
-                `).join('');
-                
-                tocContent.innerHTML = tocHTML;
-                tocContent.dataset.rendered = 'true';
-                
-                const tocItems = tocContent.querySelectorAll('.toc-item');
-                
-                tocItems.forEach((item, index) => {
-                    item.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        const page = parseInt(item.dataset.page);
-                        
-                        if (page && page >= 1 && page <= this.totalPages) {
-                            this.goToPage(page);
-                            
-                            tocItems.forEach(i => i.classList.remove('active'));
-                            item.classList.add('active');
-                            
-                            if (window.innerWidth <= 768) {
-                                setTimeout(() => {
-                                    this.isSidebarVisible = false;
-                                    this.updateSidebarVisibility();
-                                }, 300);
-                            }
-                        }
-                    });
-                    
-                    item.addEventListener('mouseenter', () => {
-                        item.style.transform = 'translateX(5px)';
-                    });
-                    
-                    item.addEventListener('mouseleave', () => {
-                        if (!item.classList.contains('active')) {
-                            item.style.transform = 'translateX(0)';
-                        }
-                    });
-                });
-                
-                if (tocItems.length > 0) {
-                    tocItems[0].classList.add('active');
-                }
-                
-                // Hide progress bar
-                const progressBar = document.getElementById('progressBar');
-                progressBar.style.width = '0%';
-            }
-
-            updateActiveTocItem() {
-                document.querySelectorAll('.toc-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                for (let i = this.tableOfContents.length - 1; i >= 0; i--) {
-                    if (this.tableOfContents[i].page <= this.currentPage) {
-                        const tocItem = document.querySelector(`[data-index="${i}"]`);
-                        if (tocItem) {
-                            tocItem.classList.add('active');
-                        }
-                        break;
-                    }
-                }
-            }
-
-            async goToPage(pageNumber) {
-                if (pageNumber >= 1 && pageNumber <= this.totalPages) {
-                    this.currentPage = pageNumber;
-                    await this.displayCurrentPage();
-                    this.updateNavigation();
-                }
-            }
-
-            goToNextPage() {
-                if (this.currentPage < this.totalPages) {
-                    this.goToPage(this.currentPage + 1);
-                }
-            }
-
-            goToPreviousPage() {
-                if (this.currentPage > 1) {
-                    this.goToPage(this.currentPage - 1);
-                }
-            }
-
-            updateNavigation() {
-                const prevBtn = document.getElementById('prevBtn');
-                const nextBtn = document.getElementById('nextBtn');
-                const pageInput = document.getElementById('pageInput');
-                const totalPages = document.getElementById('totalPages');
-                
-                prevBtn.disabled = this.currentPage === 1;
-                nextBtn.disabled = this.currentPage === this.totalPages;
-                pageInput.value = this.currentPage;
-                pageInput.max = this.totalPages;
-                totalPages.textContent = this.totalPages;
-            }
-
-            showLoading() {
-                document.getElementById('contentArea').innerHTML = `
-                    <div class="loading">
-                        <div class="loading-spinner"></div>
-                        <div style="font-size: 18px; margin-bottom: 10px;">Loading PDF...</div>
-                        <div style="font-size: 14px; opacity: 0.7;">Preparing visual and text content</div>
-                    </div>
-                `;
-                
-                document.getElementById('tocContent').innerHTML = `
-                    <div class="loading">
-                        <div class="loading-spinner"></div>
-                        <div>Generating TOC...</div>
-                    </div>
-                `;
-            }
-
-            showError(message) {
-                document.getElementById('contentArea').innerHTML = `
-                    <div class="error">
-                        <div style="font-size: 24px; margin-bottom: 15px;">⚠️</div>
-                        <div>${message}</div>
-                    </div>
-                `;
-            }
-
-            escapeHtml(text) {
-                const div = document.createElement('div');
-                div.textContent = text;
-                return div.innerHTML;
-            }
-        }
-
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', () => {
-            new VisualPDFReader();
-        });
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
+
 </body>
-</html>(
+</html>
