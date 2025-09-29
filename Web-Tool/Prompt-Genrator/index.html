@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Generator - Create Perfect Prompts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .sidebar {
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-item {
+            margin-bottom: 10px;
+        }
+
+        .category-btn {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: left;
+            transition: all 0.3s ease;
+            color: #495057;
+        }
+
+        .category-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .content-area {
+            padding: 40px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .template-card {
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .template-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .template-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        }
+
+        .template-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .template-description {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .template-preview {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #495057;
+            border-left: 4px solid #667eea;
+        }
+
+        .customization-panel {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .customization-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .generated-prompt {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #667eea;
+            margin-bottom: 20px;
+        }
+
+        .prompt-text {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #495057;
+            white-space: pre-wrap;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-ai {
+            background: white;
+            color: #495057;
+            border: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            padding: 10px 16px;
+            min-width: 120px;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-ai:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn-ai.chatgpt:hover {
+            background: #10a37f;
+            border-color: #10a37f;
+        }
+
+        .btn-ai.claude:hover {
+            background: #ff6b35;
+            border-color: #ff6b35;
+        }
+
+        .btn-ai.gemini:hover {
+            background: #4285f4;
+            border-color: #4285f4;
+        }
+
+        .btn-ai.perplexity:hover {
+            background: #20808d;
+            border-color: #20808d;
+        }
+
+        .btn-ai.copilot:hover {
+            background: #0078d4;
+            border-color: #0078d4;
+        }
+
+        .btn-ai.midjourney:hover {
+            background: #7289da;
+            border-color: #7289da;
+        }
+
+        .platform-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .platform-icon {
+            font-size: 18px;
+        }
+
+        .ai-platforms {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .platform-note {
+            margin: 0;
+            text-align: center;
+        }
+
+        .random-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .random-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+            
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Prompt Generator</h1>
+            <p class="subtitle">Create perfect prompts for any AI model</p>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <h3 style="margin-bottom: 20px; color: #495057;">Categories</h3>
+                <ul class="category-list">
+                    <li class="category-item">
+                        <button class="category-btn active" data-category="writing">✍️ Creative Writing</button>
+                    </li>
+                    <li class="category-item">
+                        <button class="category-btn" data-category="business">💼 Business</button>
+                    </li>
+                    <li class="category-item">
+                        <button class="category-btn" data-category="coding">💻 Programming</button>
+                    </li>
+                    <li class="category-item">
+                        <button class="category-btn" data-category="analysis">📊 Analysis</button>
+                    </li>
+                    <li class="category-item">
+                        <button class="category-btn" data-category="education">🎓 Education</button>
+                    </li>
+                    <li class="category-item">
+                        <button class="category-btn" data-category="marketing">📈 Marketing</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-area">
+                <div id="templates-container">
+                    <!-- Templates will be populated here -->
+                </div>
+
+                <div class="customization-panel" id="customization-panel">
+                    <h3 style="margin-bottom: 20px; color: #495057;">Customize Your Prompt</h3>
+                    <div id="customization-fields">
+                        <!-- Dynamic fields will be populated here -->
+                    </div>
+                </div>
+
+                <div class="generated-prompt" id="generated-prompt" style="display: none;">
+                    <h3 style="margin-bottom: 20px; color: #495057;">Generated Prompt</h3>
+                    <div class="prompt-text" id="prompt-text"></div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="copyPrompt()">📋 Copy to Clipboard</button>
+                        <button class="btn btn-secondary" onclick="generateNew()">🔄 Generate Another</button>
+                        <button class="btn btn-success" onclick="savePrompt()">💾 Save Prompt</button>
+                    </div>
+                    
+                    <div class="ai-platforms" id="ai-platforms">
+                        <h4 style="margin: 25px 0 15px 0; color: #495057;">🤖 Try this prompt on AI platforms:</h4>
+                        <div class="platform-buttons">
+                            <a class="btn btn-ai chatgpt" onclick="openInChatGPT()">
+                                <span class="platform-icon">🧠</span>
+                                <span>ChatGPT</span>
+                            </a>
+                            <a class="btn btn-ai claude" onclick="openInClaude()">
+                                <span class="platform-icon">🎯</span>
+                                <span>Claude</span>
+                            </a>
+                            <a class="btn btn-ai gemini" onclick="openInGemini()">
+                                <span class="platform-icon">💎</span>
+                                <span>Gemini</span>
+                            </a>
+                            <a class="btn btn-ai perplexity" onclick="openInPerplexity()">
+                                <span class="platform-icon">🔍</span>
+                                <span>Perplexity</span>
+                            </a>
+                            <a class="btn btn-ai copilot" onclick="openInCopilot()">
+                                <span class="platform-icon">🚀</span>
+                                <span>Copilot</span>
+                            </a>
+                            <a class="btn btn-ai midjourney" onclick="openInMidjourney()">
+                                <span class="platform-icon">🎨</span>
+                                <span>Midjourney</span>
+                            </a>
+                        </div>
+                        <p class="platform-note">
+                            <span style="color: #6c757d; font-size: 0.9rem;">
+                                💡 Tip: The prompt will be automatically copied to your clipboard when you click a platform button
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="random-btn" onclick="generateRandomPrompt()" title="Random Prompt">🎲</button>
+
+    <script>
+        const promptTemplates = {
+            writing: [
+                {
+                    title: "Story Generator",
+                    description: "Create compelling stories with custom characters and settings",
+                    template: "Write a {length} {genre} story about {character} who {conflict}. Set it in {setting} and include themes of {theme}. The tone should be {tone}.",
+                    fields: {
+                        length: { type: "select", options: ["short", "medium-length", "long"], default: "short" },
+                        genre: { type: "select", options: ["fantasy", "sci-fi", "mystery", "romance", "horror", "drama"], default: "fantasy" },
+                        character: { type: "text", placeholder: "a brave knight", default: "a young adventurer" },
+                        conflict: { type: "text", placeholder: "must save their village", default: "discovers a hidden power" },
+                        setting: { type: "text", placeholder: "medieval times", default: "a magical realm" },
+                        theme: { type: "text", placeholder: "friendship and courage", default: "self-discovery" },
+                        tone: { type: "select", options: ["dramatic", "humorous", "mysterious", "inspiring", "dark"], default: "inspiring" }
+                    }
+                },
+                {
+                    title: "Character Development",
+                    description: "Develop complex, multi-dimensional characters",
+                    template: "Create a detailed character profile for {name}, a {age}-year-old {occupation} who {personality}. Include their background growing up in {background}, their main goal of {goal}, and their greatest fear of {fear}. Describe their appearance, mannerisms, and how they speak.",
+                    fields: {
+                        name: { type: "text", placeholder: "Character name", default: "Alex" },
+                        age: { type: "number", placeholder: "25", default: "25" },
+                        occupation: { type: "text", placeholder: "detective", default: "artist" },
+                        personality: { type: "text", placeholder: "is introverted but determined", default: "is creative but struggles with confidence" },
+                        background: { type: "text", placeholder: "a small town", default: "a bustling city" },
+                        goal: { type: "text", placeholder: "solving a mystery", default: "opening their own gallery" },
+                        fear: { type: "text", placeholder: "being alone", default: "failure and rejection" }
+                    }
+                }
+            ],
+            business: [
+                {
+                    title: "Business Plan Generator",
+                    description: "Create comprehensive business plans and strategies",
+                    template: "Create a detailed business plan for {businessName}, a {businessType} targeting {targetMarket}. Include market analysis, competitive advantages, revenue model, marketing strategy, and financial projections. The business aims to {objective} with a budget of {budget}.",
+                    fields: {
+                        businessName: { type: "text", placeholder: "Your business name", default: "TechStart Solutions" },
+                        businessType: { type: "select", options: ["tech startup", "restaurant", "e-commerce store", "consulting firm", "retail shop", "service business"], default: "tech startup" },
+                        targetMarket: { type: "text", placeholder: "young professionals", default: "small business owners" },
+                        objective: { type: "text", placeholder: "solve a specific problem", default: "streamline business operations" },
+                        budget: { type: "select", options: ["$10,000", "$50,000", "$100,000", "$500,000", "$1M+"], default: "$50,000" }
+                    }
+                },
+                {
+                    title: "Marketing Campaign",
+                    description: "Design effective marketing campaigns",
+                    template: "Design a {duration} marketing campaign for {product} targeting {audience}. Use {channels} as primary channels. The campaign goal is to {goal} with a focus on {focus}. Budget is {budget}. Include specific tactics, timeline, and success metrics.",
+                    fields: {
+                        duration: { type: "select", options: ["1-month", "3-month", "6-month", "1-year"], default: "3-month" },
+                        product: { type: "text", placeholder: "Your product/service", default: "mobile app" },
+                        audience: { type: "text", placeholder: "millennials interested in fitness", default: "busy professionals" },
+                        channels: { type: "select", options: ["social media", "email marketing", "content marketing", "paid advertising", "influencer partnerships"], default: "social media" },
+                        goal: { type: "select", options: ["increase brand awareness", "generate leads", "boost sales", "improve engagement"], default: "increase brand awareness" },
+                        focus: { type: "text", placeholder: "sustainability", default: "convenience and efficiency" },
+                        budget: { type: "select", options: ["$1,000", "$5,000", "$10,000", "$25,000", "$50,000+"], default: "$5,000" }
+                    }
+                }
+            ],
+            coding: [
+                {
+                    title: "Code Review Assistant",
+                    description: "Get detailed code reviews and improvement suggestions",
+                    template: "Please review this {language} code for {purpose}. Focus on {aspects}. Provide specific suggestions for improvement, identify potential bugs, and recommend best practices. Code complexity level: {complexity}.",
+                    fields: {
+                        language: { type: "select", options: ["JavaScript", "Python", "Java", "C++", "React", "Node.js", "PHP", "C#"], default: "JavaScript" },
+                        purpose: { type: "text", placeholder: "user authentication", default: "data processing" },
+                        aspects: { type: "select", options: ["performance optimization", "security vulnerabilities", "code structure", "best practices", "all aspects"], default: "all aspects" },
+                        complexity: { type: "select", options: ["beginner", "intermediate", "advanced"], default: "intermediate" }
+                    }
+                },
+                {
+                    title: "Algorithm Design",
+                    description: "Design efficient algorithms for specific problems",
+                    template: "Design an efficient algorithm to {problem}. The input size is {inputSize} and optimization priority is {priority}. Provide the algorithm in {language}, explain the time and space complexity, and include test cases. Consider {constraints}.",
+                    fields: {
+                        problem: { type: "text", placeholder: "sort an array of integers", default: "find the shortest path in a graph" },
+                        inputSize: { type: "select", options: ["small (< 100)", "medium (100-10,000)", "large (10,000+)"], default: "medium (100-10,000)" },
+                        priority: { type: "select", options: ["time complexity", "space complexity", "readability", "balanced approach"], default: "balanced approach" },
+                        language: { type: "select", options: ["Python", "JavaScript", "Java", "C++", "pseudocode"], default: "Python" },
+                        constraints: { type: "text", placeholder: "memory limitations", default: "real-time processing requirements" }
+                    }
+                }
+            ],
+            analysis: [
+                {
+                    title: "Data Analysis Report",
+                    description: "Generate comprehensive data analysis reports",
+                    template: "Analyze the {dataType} dataset focusing on {analysisType}. The data contains {dataDescription}. Provide insights on {insights}, identify trends, patterns, and anomalies. Include visualizations suggestions and actionable recommendations for {stakeholder}.",
+                    fields: {
+                        dataType: { type: "select", options: ["sales", "customer behavior", "website analytics", "survey responses", "financial"], default: "sales" },
+                        analysisType: { type: "select", options: ["descriptive analysis", "predictive modeling", "trend analysis", "comparative analysis"], default: "trend analysis" },
+                        dataDescription: { type: "text", placeholder: "monthly revenue data", default: "quarterly sales figures" },
+                        insights: { type: "text", placeholder: "seasonal patterns", default: "growth opportunities" },
+                        stakeholder: { type: "select", options: ["management team", "marketing department", "product team", "executives"], default: "management team" }
+                    }
+                },
+                {
+                    title: "Market Research",
+                    description: "Conduct thorough market research analysis",
+                    template: "Conduct a comprehensive market research analysis for {industry} focusing on {market}. Analyze market size, growth trends, competitive landscape, consumer behavior, and opportunities. Target demographic: {demographic}. Research depth: {depth}.",
+                    fields: {
+                        industry: { type: "text", placeholder: "e-commerce", default: "mobile applications" },
+                        market: { type: "select", options: ["local market", "national market", "global market", "niche market"], default: "national market" },
+                        demographic: { type: "text", placeholder: "millennials aged 25-35", default: "tech-savvy professionals" },
+                        depth: { type: "select", options: ["high-level overview", "detailed analysis", "deep-dive research"], default: "detailed analysis" }
+                    }
+                }
+            ],
+            education: [
+                {
+                    title: "Lesson Plan Creator",
+                    description: "Create engaging and effective lesson plans",
+                    template: "Create a {duration} lesson plan for {subject} targeting {gradeLevel} students. The lesson should cover {topic} with learning objectives focusing on {objectives}. Include {activities} and assessment methods. Accommodate {learningStyles} learning styles.",
+                    fields: {
+                        duration: { type: "select", options: ["30-minute", "45-minute", "60-minute", "90-minute"], default: "45-minute" },
+                        subject: { type: "select", options: ["Mathematics", "Science", "English", "History", "Art", "Computer Science"], default: "Science" },
+                        gradeLevel: { type: "select", options: ["Elementary", "Middle School", "High School", "College"], default: "Middle School" },
+                        topic: { type: "text", placeholder: "photosynthesis", default: "renewable energy" },
+                        objectives: { type: "text", placeholder: "understanding and application", default: "critical thinking and analysis" },
+                        activities: { type: "select", options: ["hands-on experiments", "group discussions", "interactive presentations", "problem-solving tasks"], default: "hands-on experiments" },
+                        learningStyles: { type: "select", options: ["visual", "auditory", "kinesthetic", "mixed"], default: "mixed" }
+                    }
+                },
+                {
+                    title: "Study Guide Generator",
+                    description: "Create comprehensive study guides and materials",
+                    template: "Create a comprehensive study guide for {subject} covering {topics}. The guide should be suitable for {level} level students preparing for {examType}. Include key concepts, practice questions, mnemonics, and study tips. Format: {format}.",
+                    fields: {
+                        subject: { type: "text", placeholder: "Biology", default: "World History" },
+                        topics: { type: "text", placeholder: "cell structure and function", default: "World War II events" },
+                        level: { type: "select", options: ["beginner", "intermediate", "advanced"], default: "intermediate" },
+                        examType: { type: "select", options: ["midterm exam", "final exam", "standardized test", "certification exam"], default: "final exam" },
+                        format: { type: "select", options: ["outline format", "flashcards", "mind maps", "Q&A format"], default: "outline format" }
+                    }
+                }
+            ],
+            marketing: [
+                {
+                    title: "Social Media Content",
+                    description: "Create engaging social media content and campaigns",
+                    template: "Create a {contentType} for {platform} promoting {product}. Target audience: {audience}. The content should be {tone} and include {elements}. Campaign goal: {goal}. Include relevant hashtags and call-to-action.",
+                    fields: {
+                        contentType: { type: "select", options: ["single post", "content series", "story sequence", "video script"], default: "single post" },
+                        platform: { type: "select", options: ["Instagram", "Facebook", "Twitter", "LinkedIn", "TikTok", "YouTube"], default: "Instagram" },
+                        product: { type: "text", placeholder: "fitness app", default: "eco-friendly products" },
+                        audience: { type: "text", placeholder: "fitness enthusiasts", default: "environmentally conscious consumers" },
+                        tone: { type: "select", options: ["professional", "casual", "inspirational", "humorous", "educational"], default: "inspirational" },
+                        elements: { type: "select", options: ["user testimonials", "behind-the-scenes content", "educational tips", "product demonstrations"], default: "educational tips" },
+                        goal: { type: "select", options: ["increase engagement", "drive website traffic", "generate leads", "boost sales"], default: "increase engagement" }
+                    }
+                },
+                {
+                    title: "Email Marketing Campaign",
+                    description: "Design effective email marketing campaigns",
+                    template: "Create an email marketing campaign for {campaign}. Email type: {emailType}. Target {audience} with the goal to {objective}. Tone should be {tone}. Include subject line suggestions, email content structure, and call-to-action. Campaign duration: {duration}.",
+                    fields: {
+                        campaign: { type: "text", placeholder: "product launch", default: "holiday sale" },
+                        emailType: { type: "select", options: ["promotional", "newsletter", "welcome series", "abandoned cart", "re-engagement"], default: "promotional" },
+                        audience: { type: "text", placeholder: "existing customers", default: "potential customers" },
+                        objective: { type: "select", options: ["increase sales", "improve engagement", "build brand awareness", "gather feedback"], default: "increase sales" },
+                        tone: { type: "select", options: ["friendly", "professional", "urgent", "informative", "conversational"], default: "friendly" },
+                        duration: { type: "select", options: ["single email", "3-day series", "1-week campaign", "1-month campaign"], default: "3-day series" }
+                    }
+                }
+            ]
+        };
+
+        let currentCategory = 'writing';
+        let selectedTemplate = null;
+        let generatedPrompts = [];
+
+        function initializeApp() {
+            renderTemplates();
+            setupEventListeners();
+        }
+
+        function setupEventListeners() {
+            // Category buttons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentCategory = e.target.dataset.category;
+                    renderTemplates();
+                    hideCustomization();
+                });
+            });
+        }
+
+        function renderTemplates() {
+            const container = document.getElementById('templates-container');
+            const templates = promptTemplates[currentCategory];
+            
+            container.innerHTML = `
+                <h2 style="margin-bottom: 25px; color: #495057; text-transform: capitalize;">${currentCategory} Templates</h2>
+                <div class="template-grid">
+                    ${templates.map((template, index) => `
+                        <div class="template-card" onclick="selectTemplate(${index})">
+                            <div class="template-title">${template.title}</div>
+                            <div class="template-description">${template.description}</div>
+                            <div class="template-preview">${template.template}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function selectTemplate(index) {
+            selectedTemplate = promptTemplates[currentCategory][index];
+            
+            // Update UI
+            document.querySelectorAll('.template-card').forEach(card => card.classList.remove('selected'));
+            document.querySelectorAll('.template-card')[index].classList.add('selected');
+            
+            renderCustomizationPanel();
+            showCustomization();
+        }
+
+        function renderCustomizationPanel() {
+            const fieldsContainer = document.getElementById('customization-fields');
+            const fields = selectedTemplate.fields;
+            
+            fieldsContainer.innerHTML = Object.entries(fields).map(([key, field]) => {
+                if (field.type === 'select') {
+                    return `
+                        <div class="form-group">
+                            <label class="form-label" for="${key}">${key.charAt(0).toUpperCase() + key.slice(1)}</label>
+                            <select class="form-select" id="${key}">
+                                ${field.options.map(option => `
+                                    <option value="${option}" ${option === field.default ? 'selected' : ''}>${option}</option>
+                                `).join('')}
+                            </select>
+                        </div>
+                    `;
+                } else if (field.type === 'textarea') {
+                    return `
+                        <div class="form-group">
+                            <label class="form-label" for="${key}">${key.charAt(0).toUpperCase() + key.slice(1)}</label>
+                            <textarea class="form-textarea" id="${key}" placeholder="${field.placeholder || ''}">${field.default || ''}</textarea>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="form-group">
+                            <label class="form-label" for="${key}">${key.charAt(0).toUpperCase() + key.slice(1)}</label>
+                            <input type="${field.type}" class="form-input" id="${key}" placeholder="${field.placeholder || ''}" value="${field.default || ''}">
+                        </div>
+                    `;
+                }
+            }).join('') + `
+                <button class="btn btn-primary" onclick="generatePrompt()">Generate Prompt</button>
+            `;
+        }
+
+        function showCustomization() {
+            document.getElementById('customization-panel').classList.add('active');
+        }
+
+        function hideCustomization() {
+            document.getElementById('customization-panel').classList.remove('active');
+            document.getElementById('generated-prompt').style.display = 'none';
+        }
+
+        function generatePrompt() {
+            if (!selectedTemplate) return;
+            
+            let prompt = selectedTemplate.template;
+            const fields = selectedTemplate.fields;
+            
+            // Replace placeholders with user input
+            Object.keys(fields).forEach(key => {
+                const element = document.getElementById(key);
+                const value = element ? element.value : fields[key].default;
+                prompt = prompt.replace(new RegExp(`{${key}}`, 'g'), value);
+            });
+            
+            // Display generated prompt
+            document.getElementById('prompt-text').textContent = prompt;
+            document.getElementById('generated-prompt').style.display = 'block';
+            
+            // Add to history
+            generatedPrompts.unshift({
+                prompt: prompt,
+                category: currentCategory,
+                template: selectedTemplate.title,
+                timestamp: new Date()
+            });
+        }
+
+        function generateRandomPrompt() {
+            // Pick random category
+            const categories = Object.keys(promptTemplates);
+            const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+            
+            // Pick random template
+            const templates = promptTemplates[randomCategory];
+            const randomTemplate = templates[Math.floor(Math.random() * templates.length)];
+            
+            // Switch to category and select template
+            currentCategory = randomCategory;
+            selectedTemplate = randomTemplate;
+            
+            // Update UI
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === randomCategory);
+            });
+            
+            renderTemplates();
+            
+            setTimeout(() => {
+                const templateIndex = templates.indexOf(randomTemplate);
+                selectTemplate(templateIndex);
+                
+                // Fill with random values or defaults
+                setTimeout(() => {
+                    generatePrompt();
+                }, 100);
+            }, 100);
+        }
+
+        function copyPrompt() {
+            const promptText = document.getElementById('prompt-text').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                // Visual feedback
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                btn.style.background = '#28a745';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            });
+        }
+
+        function generateNew() {
+            // Reset form to defaults and regenerate
+            if (selectedTemplate) {
+                Object.keys(selectedTemplate.fields).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.value = selectedTemplate.fields[key].default || '';
+                    }
+                });
+                generatePrompt();
+            }
+        }
+
+        function savePrompt() {
+            const promptText = document.getElementById('prompt-text').textContent;
+            const savedPrompts = JSON.parse(localStorage.getItem('savedPrompts') || '[]');
+            
+            const promptData = {
+                id: Date.now(),
+                prompt: promptText,
+                category: currentCategory,
+                template: selectedTemplate.title,
+                timestamp: new Date().toISOString()
+            };
+            
+            savedPrompts.unshift(promptData);
+            localStorage.setItem('savedPrompts', JSON.stringify(savedPrompts.slice(0, 50))); // Keep only last 50
+            
+            // Visual feedback
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Saved!';
+            btn.style.background = '#28a745';
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+            }, 2000);
+        }
+
+        // AI Platform Integration Functions
+        function getCurrentPrompt() {
+            return document.getElementById('prompt-text').textContent;
+        }
+
+        function copyToClipboardSilent(text) {
+            navigator.clipboard.writeText(text).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            });
+        }
+
+        function openInChatGPT() {
+            const prompt = getCurrentPrompt();
+            copyToClipboardSilent(prompt);
+            
+            // Open ChatGPT with the prompt pre-filled (using URL parameter)
+            const encodedPrompt = encodeURIComponent(prompt);
+            window.open(`https://chat.openai.com/?q=${encodedPrompt}`, '_blank');
+            
+            showPlatformFeedback('ChatGPT');
+        }
+
+        function openInClaude() {
+            const prompt = getCurrentPrompt();
+            copyToClipboardSilent(prompt);
+            
+            // Open Claude.ai
+            window.open('https://claude.ai/chat', '_blank');
+            
+            showPlatformFeedback('Claude');
+        }
+
+        function openInGemini() {
+            const prompt = getCurrentPrompt();
+            copyToClipboardSilent(prompt);
+            
+            // Open Google Gemini
+            window.open('https://gemini.google.com/app', '_blank');
+            
+            showPlatformFeedback('Gemini');
+        }
+
+        function openInPerplexity() {
+            const prompt = getCurrentPrompt();
+            copyToClipboardSilent(prompt);
+            
+            // Open Perplexity AI
+            const encodedPrompt = encodeURIComponent(prompt);
+            window.open(`https://www.perplexity.ai/?q=${encodedPrompt}`, '_blank');
+            
+            showPlatformFeedback('Perplexity');
+        }
+
+        function openInCopilot() {
+            const prompt = getCurrentPrompt();
+            copyToClipboardSilent(prompt);
+            
+            // Open Microsoft Copilot
+            window.open('https://copilot.microsoft.com/', '_blank');
+            
+            showPlatformFeedback('Copilot');
+        }
+
+        function openInMidjourney() {
+            const prompt = getCurrentPrompt();
+            copyToClipboardSilent(prompt);
+            
+            // Open Discord (Midjourney is Discord-based)
+            window.open('https://discord.com/channels/@me', '_blank');
+            
+            showPlatformFeedback('Midjourney', 'Paste your prompt in a Midjourney Discord channel with /imagine');
+        }
+
+        function showPlatformFeedback(platformName, customMessage = null) {
+            // Create and show a temporary notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #28a745, #20c997);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+                z-index: 10000;
+                font-weight: 600;
+                animation: slideIn 0.3s ease;
+                max-width: 350px;
+            `;
+            
+            const message = customMessage || `Prompt copied! Opening ${platformName}...`;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 20px;">✅</span>
+                    <div>
+                        <div>${message}</div>
+                        <div style="font-size: 12px; opacity: 0.9; margin-top: 2px;">
+                            Paste (Ctrl+V) when the platform opens
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Add the slide-in animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Remove notification after 4 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                    if (style.parentNode) {
+                        style.parentNode.removeChild(style);
+                    }
+                }, 300);
+            }, 4000);
+            
+            // Add slide-out animation
+            const slideOutStyle = document.createElement('style');
+            slideOutStyle.textContent = `
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(slideOutStyle);
+        }
+
+        // Initialize the app
+        initializeApp();
+    </script>
+</body>
+</html>

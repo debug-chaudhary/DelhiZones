@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGNOU BCA Study Materials</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-tab:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .content-area {
+            padding: 30px;
+            min-height: 500px;
+        }
+
+        .semester-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .semester-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .semester-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .semester-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .subject-card {
+            background: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .subject-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .subject-code {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.9rem;
+        }
+
+        .subject-name {
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .toc-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .toc-item {
+            padding: 10px 15px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .toc-item:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .content-viewer {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .semester-grid,
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 IGNOU BCA Study Materials</h1>
+            <p>Access your semester-wise ebooks and study materials</p>
+        </header>
+
+        <div class="main-content">
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showHome()">🏠 Home</button>
+                <button class="nav-tab" onclick="showSubjects()">📖 Subjects</button>
+                <button class="nav-tab" onclick="showContent()">📄 Content</button>
+            </div>
+
+            <div class="content-area">
+                <!-- Home View -->
+                <div id="home-view">
+                    <h2 style="margin-bottom: 20px; color: #333;">Select Your Semester</h2>
+                    <div class="semester-grid">
+                        <div class="semester-card" onclick="selectSemester(1)">
+                            <h3>Semester 1</h3>
+                            <p>Foundation Courses</p>
+                            <small>6 Subjects</small>
+                        </div>
+                        <div class="semester-card" onclick="selectSemester(2)">
+                            <h3>Semester 2</h3>
+                            <p>Core Programming</p>
+                            <small>6 Subjects</small>
+                        </div>
+                        <div class="semester-card" onclick="selectSemester(3)">
+                            <h3>Semester 3</h3>
+                            <p>Data Structures & Web</p>
+                            <small>6 Subjects</small>
+                        </div>
+                        <div class="semester-card" onclick="selectSemester(4)">
+                            <h3>Semester 4</h3>
+                            <p>Database & Networks</p>
+                            <small>6 Subjects</small>
+                        </div>
+                        <div class="semester-card" onclick="selectSemester(5)">
+                            <h3>Semester 5</h3>
+                            <p>Software Engineering</p>
+                            <small>6 Subjects</small>
+                        </div>
+                        <div class="semester-card" onclick="selectSemester(6)">
+                            <h3>Semester 6</h3>
+                            <p>Project & Electives</p>
+                            <small>4 Subjects + Project</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subjects View -->
+                <div id="subjects-view" class="hidden">
+                    <button class="back-btn" onclick="showHome()">← Back to Semesters</button>
+                    <div class="breadcrumb">Home > <span id="current-semester">Semester</span></div>
+                    
+                    <h2 style="margin-bottom: 20px; color: #333;">Select Subject</h2>
+                    <div class="subjects-grid" id="subjects-container">
+                        <!-- Subjects will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Content View -->
+                <div id="content-view" class="hidden">
+                    <button class="back-btn" onclick="showSubjects()">← Back to Subjects</button>
+                    <div class="breadcrumb">Home > <span id="breadcrumb-semester">Semester</span> > <span id="breadcrumb-subject">Subject</span></div>
+                    
+                    <h2 style="margin-bottom: 20px; color: #333;">Table of Contents</h2>
+                    <div class="toc-container" id="toc-container">
+                        <!-- Table of contents will be loaded here -->
+                    </div>
+
+                    <div class="content-viewer" id="content-viewer" style="display: none;">
+                        <h3 id="content-title"></h3>
+                        <div id="content-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data structure for IGNOU BCA subjects
+        const semesterData = {
+            1: {
+                name: "Semester 1",
+                subjects: [
+                    { code: "BCS-011", name: "Computer Basics and PC Software", units: 4 },
+                    { code: "BCS-012", name: "Basic Mathematics", units: 4 },
+                    { code: "BEGAE-182", name: "English Communication", units: 4 },
+                    { code: "BEGF-137", name: "Language Through Literature", units: 4 },
+                    { code: "FHS-001", name: "Foundation Course in Humanities and Social Sciences", units: 4 },
+                    { code: "ECO-001", name: "Business Organisation", units: 4 }
+                ]
+            },
+            2: {
+                name: "Semester 2",
+                subjects: [
+                    { code: "BCS-021", name: "C Language Programming", units: 4 },
+                    { code: "BCS-022", name: "Assembly Language Programming", units: 3 },
+                    { code: "BCS-023", name: "Introduction to Database Management Systems", units: 3 },
+                    { code: "MTE-001", name: "Calculus", units: 4 },
+                    { code: "MTE-002", name: "Linear Algebra", units: 3 },
+                    { code: "BCS-024", name: "Discrete Mathematics", units: 3 }
+                ]
+            },
+            3: {
+                name: "Semester 3",
+                subjects: [
+                    { code: "BCS-031", name: "Programming in C++", units: 4 },
+                    { code: "BCS-032", name: "Object Oriented Programming using C++", units: 3 },
+                    { code: "BCS-040", name: "Statistical Techniques", units: 4 },
+                    { code: "BCS-041", name: "Fundamentals of Computer Networks", units: 4 },
+                    { code: "BCS-042", name: "Introduction to Algorithm Design", units: 2 },
+                    { code: "MCSL-016", name: "Internet Concepts and Web Design", units: 3 }
+                ]
+            },
+            4: {
+                name: "Semester 4",
+                subjects: [
+                    { code: "BCS-051", name: "Introduction to Software Engineering", units: 3 },
+                    { code: "BCS-052", name: "Network Programming and Administration", units: 4 },
+                    { code: "BCS-053", name: "Web Programming", units: 3 },
+                    { code: "BCS-054", name: "Computer Oriented Numerical Techniques", units: 4 },
+                    { code: "BCS-055", name: "Business Communication", units: 2 },
+                    { code: "MCSL-017", name: "C and Assembly Language Programming", units: 4 }
+                ]
+            },
+            5: {
+                name: "Semester 5",
+                subjects: [
+                    { code: "BCS-061", name: "TCP/IP Programming", units: 2 },
+                    { code: "BCS-062", name: "E-Commerce", units: 4 },
+                    { code: "MCSL-045", name: "UNIX and DBMS Programming", units: 3 },
+                    { code: "BCSL-043", name: "Java Programming", units: 3 },
+                    { code: "BCSL-044", name: "Statistical Computing", units: 3 },
+                    { code: "BCSL-045", name: "Algorithm Design and Analysis", units: 3 }
+                ]
+            },
+            6: {
+                name: "Semester 6",
+                subjects: [
+                    { code: "BCSP-064", name: "Project", units: 8 },
+                    { code: "BCS-063", name: "Introduction to System Software", units: 3 },
+                    { code: "BCSL-063", name: "System Software Lab", units: 2 },
+                    { code: "MCSL-054", name: "Advanced Internet Technologies", units: 3 }
+                ]
+            }
+        };
+
+        // Sample table of contents data
+        const tocData = {
+            "BCS-011": [
+                { title: "Unit 1: Introduction to Computer Systems", page: 1 },
+                { title: "Unit 2: Computer Hardware", page: 15 },
+                { title: "Unit 3: Software Concepts", page: 30 },
+                { title: "Unit 4: Operating Systems", page: 45 }
+            ],
+            "BCS-021": [
+                { title: "Unit 1: Introduction to C Programming", page: 1 },
+                { title: "Unit 2: Data Types and Operators", page: 20 },
+                { title: "Unit 3: Control Structures", page: 40 },
+                { title: "Unit 4: Functions", page: 60 },
+                { title: "Unit 5: Arrays and Strings", page: 80 },
+                { title: "Unit 6: Pointers", page: 100 }
+            ],
+            "BCS-031": [
+                { title: "Unit 1: Introduction to C++", page: 1 },
+                { title: "Unit 2: Classes and Objects", page: 25 },
+                { title: "Unit 3: Inheritance", page: 50 },
+                { title: "Unit 4: Polymorphism", page: 75 }
+            ]
+        };
+
+        let currentSemester = null;
+        let currentSubject = null;
+
+        function showHome() {
+            document.getElementById('home-view').classList.remove('hidden');
+            document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('content-view').classList.add('hidden');
+            
+            // Update active tab
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-tab')[0].classList.add('active');
+        }
+
+        function showSubjects() {
+            if (!currentSemester) {
+                showHome();
+                return;
+            }
+            
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('subjects-view').classList.remove('hidden');
+            document.getElementById('content-view').classList.add('hidden');
+            
+            // Update active tab
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-tab')[1].classList.add('active');
+        }
+
+        function showContent() {
+            if (!currentSubject) {
+                showSubjects();
+                return;
+            }
+            
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('content-view').classList.remove('hidden');
+            
+            // Update active tab
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-tab')[2].classList.add('active');
+        }
+
+        function selectSemester(semesterNum) {
+            currentSemester = semesterNum;
+            const semester = semesterData[semesterNum];
+            
+            // Update UI
+            document.getElementById('current-semester').textContent = semester.name;
+            document.getElementById('breadcrumb-semester').textContent = semester.name;
+            
+            // Load subjects
+            const container = document.getElementById('subjects-container');
+            container.innerHTML = '';
+            
+            semester.subjects.forEach(subject => {
+                const subjectDiv = document.createElement('div');
+                subjectDiv.className = 'subject-card';
+                subjectDiv.onclick = () => selectSubject(subject);
+                
+                subjectDiv.innerHTML = `
+                    <div class="subject-code">${subject.code}</div>
+                    <div class="subject-name">${subject.name}</div>
+                    <small>Units: ${subject.units}</small>
+                `;
+                
+                container.appendChild(subjectDiv);
+            });
+            
+            showSubjects();
+        }
+
+        function selectSubject(subject) {
+            currentSubject = subject;
+            
+            // Update breadcrumb
+            document.getElementById('breadcrumb-subject').textContent = `${subject.code} - ${subject.name}`;
+            
+            // Load table of contents
+            loadTableOfContents(subject.code);
+            
+            showContent();
+        }
+
+        function loadTableOfContents(subjectCode) {
+            const container = document.getElementById('toc-container');
+            container.innerHTML = '';
+            
+            const toc = tocData[subjectCode];
+            if (!toc) {
+                container.innerHTML = '<p>Table of contents not available for this subject. Please upload the PDF to extract content.</p>';
+                return;
+            }
+            
+            toc.forEach((item, index) => {
+                const tocDiv = document.createElement('div');
+                tocDiv.className = 'toc-item';
+                tocDiv.onclick = () => loadContent(item, index);
+                
+                tocDiv.innerHTML = `
+                    <strong>${item.title}</strong>
+                    <small style="float: right;">Page ${item.page}</small>
+                `;
+                
+                container.appendChild(tocDiv);
+            });
+        }
+
+        function loadContent(tocItem, index) {
+            const viewer = document.getElementById('content-viewer');
+            const title = document.getElementById('content-title');
+            const content = document.getElementById('content-text');
+            
+            title.textContent = tocItem.title;
+            content.innerHTML = `
+                <div class="loading">
+                    <p>📖 Loading content from page ${tocItem.page}...</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                        This is where the extracted PDF content would appear.<br>
+                        You need to implement the Python backend to extract and serve the content.
+                    </p>
+                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; text-align: left;">
+                        <h4>Sample Content Structure:</h4>
+                        <p><strong>Unit ${index + 1}: ${tocItem.title}</strong></p>
+                        <p>This unit covers the fundamental concepts of...</p>
+                        <ul style="margin-left: 20px;">
+                            <li>Key concepts and definitions</li>
+                            <li>Practical examples and illustrations</li>
+                            <li>Exercises and self-assessment questions</li>
+                        </ul>
+                        <p><em>Note: Actual content will be extracted from your PDF files using Python.</em></p>
+                    </div>
+                </div>
+            `;
+            
+            viewer.style.display = 'block';
+        }
+
+        // Initialize the application
+        showHome();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Search Pro - Offline Data Manager</title>
+    <meta name="theme-color" content="#1e3a8a">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e3a8a;
+            text-decoration: none;
+        }
+        
+        .navbar-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .navbar-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #1e3a8a;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nav-link {
+            color: #374151;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #1e3a8a;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 20px;
+            min-height: 80vh;
+            align-items: start;
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+        }
+        
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #1e3a8a;
+            font-size: 2em;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            color: #6b7280;
+            font-size: 1em;
+        }
+        
+        .upload-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .upload-modal.show { display: flex; }
+        
+        .upload-modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .upload-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f3f4f6;
+        }
+        
+        .upload-modal-title {
+            color: #1e3a8a;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-zone {
+            border: 3px dashed #3b82f6;
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(147, 51, 234, 0.05));
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .upload-zone:hover { transform: scale(1.02); }
+        
+        .upload-icon {
+            font-size: 3em;
+            color: #3b82f6;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-secondary { background: linear-gradient(135deg, #6b7280, #4b5563); }
+        .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .btn-success { background: linear-gradient(135deg, #10b981, #059669); }
+        .btn-small { padding: 6px 12px; font-size: 0.8em; border-radius: 6px; }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .filters { margin-bottom: 20px; }
+        .filter-group { margin-bottom: 15px; }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.9em;
+        }
+        
+        .filter-group select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .stats {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-item { text-align: center; }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #6b7280;
+        }
+        
+        .data-table {
+            overflow-x: auto;
+            max-height: 600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            min-width: 600px;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #1e3a8a, #3730a3);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            transition: background-color 0.2s ease;
+        }
+        
+        tr:hover td { background-color: rgba(59, 130, 246, 0.05); }
+        
+        .file-list { margin-bottom: 20px; }
+        
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .file-info { flex: 1; margin-right: 10px; }
+        
+        .file-name {
+            font-weight: 600;
+            color: #1e3a8a;
+            font-size: 0.9em;
+        }
+        
+        .file-meta {
+            font-size: 0.8em;
+            color: #6b7280;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .pagination button {
+            padding: 8px 12px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .pagination button:hover { background: #f3f4f6; }
+        .pagination button.active { background: #3b82f6; color: white; }
+        
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+        
+        .no-data-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .data-records-section, .sheets-management {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f3f4f6;
+        }
+        
+        .section-header h3 {
+            color: #1e3a8a;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .records-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .record-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+            border-radius: 10px;
+            padding: 15px;
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .record-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .sheets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .sheet-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .sheet-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .transpose-card {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .transpose-card-header {
+            background: linear-gradient(135deg, #1e3a8a, #3730a3);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+        }
+        
+        .transpose-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 0;
+        }
+        
+        .transpose-field { display: contents; }
+        
+        .transpose-field-name {
+            background: rgba(30, 58, 138, 0.1);
+            padding: 12px 20px;
+            font-weight: 600;
+            color: #1e3a8a;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .transpose-field-value {
+            padding: 12px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            background: white;
+        }
+        
+        .record-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-left: 4px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-toggle { display: flex; }
+            .navbar-nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                transition: left 0.3s ease;
+                padding: 20px;
+            }
+            .navbar-nav.active { left: 0; }
+            .main-content { grid-template-columns: 1fr; }
+            .sidebar { position: static; order: 2; }
+            .content { order: 1; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand">
+                <span>📊</span>
+                Excel Search Pro
+            </a>
+            
+            <div class="navbar-toggle" id="navbarToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="navbar-nav" id="navbarNav">
+                <li><a href="#" class="nav-link" id="uploadNavLink">📁 Upload Files</a></li>
+                <li><a href="#" class="nav-link" id="exportNavLink">📥 Export Results</a></li>
+                <li><a href="#" class="nav-link" id="clearNavLink">🗑️ Clear All</a></li>
+                <li><a href="#" class="nav-link" id="installNavLink" style="display: none;">📱 Install App</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="upload-modal" id="uploadModal">
+        <div class="upload-modal-content">
+            <div class="upload-modal-header">
+                <div class="upload-modal-title">📁 Upload Excel Files</div>
+                <button class="close-modal" id="closeModal">×</button>
+            </div>
+            
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">📁</div>
+                <div>Drop Excel Files Here or click to browse</div>
+                <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" multiple style="display: none;">
+            </div>
+            
+            <div id="modalFileList"></div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-secondary" id="closeModalBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">        
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="file-list" id="fileList">
+                    <h3 style="margin-bottom: 15px; color: #1e3a8a;">📂 Loaded Files</h3>
+                    <div class="no-data" style="text-align: center; padding: 20px; color: #6b7280;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">📁</div>
+                        <p>No files loaded</p>
+                    </div>
+                </div>
+                
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Search in Column:</label>
+                        <select id="columnFilter">
+                            <option value="">All Columns</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>View Mode:</label>
+                        <select id="viewMode">
+                            <option value="normal">Normal View</option>
+                            <option value="transpose">Transpose View</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Rows per Page:</label>
+                        <select id="rowsPerPage">
+                            <option value="25">25</option>
+                            <option value="50" selected>50</option>
+                            <option value="100">100</option>
+                            <option value="500">500</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="header">
+                    <h1>Professional Data Management</h1>
+                    <p>Search and analyze your Excel data offline</p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search across all data... (supports fuzzy matching)">
+                </div>
+                
+                <div class="stats" id="stats">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalRows">0</div>
+                            <div class="stat-label">Total Rows</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="filteredRows">0</div>
+                            <div class="stat-label">Filtered</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalFiles">0</div>
+                            <div class="stat-label">Files</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalColumns">0</div>
+                            <div class="stat-label">Columns</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="dataContainer">
+                    <div class="no-data">
+                        <div class="no-data-icon">📋</div>
+                        <h3>No Data Loaded</h3>
+                        <p>Click "Upload Files" in the navigation to start</p>
+                    </div>
+                </div>
+                
+                <div class="pagination" id="pagination"></div>
+                
+                <div class="data-records-section" id="dataRecordsSection" style="display: none;">
+                    <div class="section-header">
+                        <h3>📊 Data Records Summary</h3>
+                        <div>
+                            <button class="btn btn-secondary" id="toggleRecordsBtn">Hide Records</button>
+                        </div>
+                    </div>
+                    <div class="records-grid" id="recordsGrid"></div>
+                </div>
+                
+                <div class="sheets-management" id="sheetsManagement" style="display: none;">
+                    <div class="section-header">
+                        <h3>📑 Worksheet Management</h3>
+                        <div>
+                            <button class="btn" id="mergeAllSheetsBtn">🔗 Merge All Sheets</button>
+                            <button class="btn btn-secondary" id="toggleSheetsBtn">Hide Sheets</button>
+                        </div>
+                    </div>
+                    <div class="sheets-grid" id="sheetsGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.6.2/fuse.min.js"></script>
+
+    <script>
+        class ExcelSearchApp {
+            constructor() {
+                this.data = [];
+                this.filteredData = [];
+                this.files = new Map();
+                this.sheets = new Map();
+                this.activeSheets = new Set();
+                this.fuse = null;
+                this.currentPage = 1;
+                this.rowsPerPage = 50;
+                this.searchQuery = '';
+                this.columnFilter = '';
+                this.viewMode = 'normal';
+                this.currentRecord = 0;
+                
+                this.initApp();
+            }
+            
+            initApp() {
+                this.initElements();
+                this.setupEvents();
+                this.loadData();
+            }
+            
+            initElements() {
+                this.elements = {
+                    uploadZone: document.getElementById('uploadZone'),
+                    fileInput: document.getElementById('fileInput'),
+                    fileList: document.getElementById('fileList'),
+                    modalFileList: document.getElementById('modalFileList'),
+                    searchInput: document.getElementById('searchInput'),
+                    columnFilter: document.getElementById('columnFilter'),
+                    viewMode: document.getElementById('viewMode'),
+                    rowsPerPage: document.getElementById('rowsPerPage'),
+                    dataContainer: document.getElementById('dataContainer'),
+                    pagination: document.getElementById('pagination'),
+                    uploadModal: document.getElementById('uploadModal'),
+                    recordsSection: document.getElementById('dataRecordsSection'),
+                    recordsGrid: document.getElementById('recordsGrid'),
+                    sheetsSection: document.getElementById('sheetsManagement'),
+                    sheetsGrid: document.getElementById('sheetsGrid'),
+                    stats: {
+                        totalRows: document.getElementById('totalRows'),
+                        filteredRows: document.getElementById('filteredRows'),
+                        totalFiles: document.getElementById('totalFiles'),
+                        totalColumns: document.getElementById('totalColumns')
+                    }
+                };
+            }
+            
+            setupEvents() {
+                // Navigation
+                document.getElementById('navbarToggle').onclick = () => {
+                    document.getElementById('navbarNav').classList.toggle('active');
+                };
+                
+                document.getElementById('uploadNavLink').onclick = (e) => {
+                    e.preventDefault();
+                    this.elements.uploadModal.classList.add('show');
+                };
+                
+                document.getElementById('exportNavLink').onclick = (e) => {
+                    e.preventDefault();
+                    this.exportResults();
+                };
+                
+                document.getElementById('clearNavLink').onclick = (e) => {
+                    e.preventDefault();
+                    this.clearAll();
+                };
+                
+                // Modal
+                document.getElementById('closeModal').onclick = () => {
+                    this.elements.uploadModal.classList.remove('show');
+                };
+                
+                document.getElementById('closeModalBtn').onclick = () => {
+                    this.elements.uploadModal.classList.remove('show');
+                };
+                
+                // File upload
+                this.elements.uploadZone.onclick = () => this.elements.fileInput.click();
+                this.elements.fileInput.onchange = (e) => this.handleFiles(e.target.files);
+                
+                // Search
+                this.elements.searchInput.oninput = (e) => {
+                    this.searchQuery = e.target.value;
+                    this.performSearch();
+                };
+                
+                this.elements.columnFilter.onchange = (e) => {
+                    this.columnFilter = e.target.value;
+                    this.performSearch();
+                };
+                
+                this.elements.viewMode.onchange = (e) => {
+                    this.viewMode = e.target.value;
+                    this.renderData();
+                };
+                
+                this.elements.rowsPerPage.onchange = (e) => {
+                    this.rowsPerPage = parseInt(e.target.value);
+                    this.renderData();
+                };
+                
+                // Section toggles
+                document.getElementById('toggleRecordsBtn').onclick = () => {
+                    const section = this.elements.recordsSection;
+                    const isVisible = section.style.display !== 'none';
+                    section.style.display = isVisible ? 'none' : 'block';
+                    document.getElementById('toggleRecordsBtn').textContent = isVisible ? 'Show Records' : 'Hide Records';
+                };
+                
+                document.getElementById('toggleSheetsBtn').onclick = () => {
+                    const section = this.elements.sheetsSection;
+                    const isVisible = section.style.display !== 'none';
+                    section.style.display = isVisible ? 'none' : 'block';
+                    document.getElementById('toggleSheetsBtn').textContent = isVisible ? 'Show Sheets' : 'Hide Sheets';
+                };
+                
+                document.getElementById('mergeAllSheetsBtn').onclick = () => {
+                    this.mergeAllSheets();
+                };
+            }
+            
+            async handleFiles(files) {
+                this.elements.modalFileList.innerHTML = '<div class="loading"><div class="spinner"></div> Processing files...</div>';
+                
+                for (let file of files) {
+                    try {
+                        await this.processFile(file);
+                    } catch (error) {
+                        alert(`Error processing ${file.name}: ${error.message}`);
+                    }
+                }
+                
+                this.updateUI();
+                this.saveData();
+                
+                setTimeout(() => {
+                    this.elements.uploadModal.classList.remove('show');
+                }, 1000);
+            }
+            
+            processFile(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    
+                    reader.onload = (e) => {
+                        try {
+                            let sheetsData = [];
+                            
+                            if (file.name.toLowerCase().endsWith('.csv')) {
+                                const data = this.parseCSV(e.target.result);
+                                if (data.length > 0) {
+                                    sheetsData.push({ name: 'Sheet1', data: data });
+                                }
+                            } else {
+                                const workbook = XLSX.read(e.target.result, { type: 'binary' });
+                                workbook.SheetNames.forEach(sheetName => {
+                                    const worksheet = workbook.Sheets[sheetName];
+                                    const data = XLSX.utils.sheet_to_json(worksheet);
+                                    if (data.length > 0) {
+                                        sheetsData.push({ name: sheetName, data: data });
+                                    }
+                                });
+                            }
+                            
+                            if (sheetsData.length === 0) {
+                                reject(new Error('No data found'));
+                                return;
+                            }
+                            
+                            let totalRows = 0;
+                            sheetsData.forEach(sheet => {
+                                const processedData = sheet.data.map((row, index) => ({
+                                    ...row,
+                                    _file: file.name,
+                                    _sheet: sheet.name,
+                                    _row: index + 1,
+                                    _id: `${file.name}_${sheet.name}_${index}`
+                                }));
+                                
+                                const sheetId = `${file.name}_${sheet.name}`;
+                                this.sheets.set(sheetId, {
+                                    id: sheetId,
+                                    fileName: file.name,
+                                    sheetName: sheet.name,
+                                    data: processedData,
+                                    rows: processedData.length,
+                                    columns: Object.keys(processedData[0] || {}).filter(key => !key.startsWith('_')),
+                                    active: true
+                                });
+                                
+                                this.activeSheets.add(sheetId);
+                                this.data.push(...processedData);
+                                totalRows += processedData.length;
+                            });
+                            
+                            this.files.set(file.name, {
+                                name: file.name,
+                                size: file.size,
+                                rows: totalRows,
+                                sheets: sheetsData.length
+                            });
+                            
+                            resolve();
+                        } catch (error) {
+                            reject(error);
+                        }
+                    };
+                    
+                    reader.onerror = () => reject(new Error('Failed to read file'));
+                    
+                    if (file.name.toLowerCase().endsWith('.csv')) {
+                        reader.readAsText(file);
+                    } else {
+                        reader.readAsBinaryString(file);
+                    }
+                });
+            }
+            
+            parseCSV(csv) {
+                const lines = csv.split('\n').filter(line => line.trim());
+                if (lines.length === 0) return [];
+                
+                const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+                const data = [];
+                
+                for (let i = 1; i < lines.length; i++) {
+                    const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header] = values[index] || '';
+                    });
+                    data.push(row);
+                }
+                
+                return data;
+            }
+            
+            setupSearch() {
+                if (this.data.length === 0) return;
+                
+                const columns = Object.keys(this.data[0]).filter(key => !key.startsWith('_'));
+                
+                this.elements.columnFilter.innerHTML = '<option value="">All Columns</option>';
+                columns.forEach(column => {
+                    const option = document.createElement('option');
+                    option.value = column;
+                    option.textContent = column;
+                    this.elements.columnFilter.appendChild(option);
+                });
+                
+                this.fuse = new Fuse(this.data, {
+                    keys: columns,
+                    threshold: 0.3,
+                    includeScore: true
+                });
+            }
+            
+            performSearch() {
+                if (!this.searchQuery && !this.columnFilter) {
+                    this.filteredData = [...this.data];
+                } else {
+                    let results = [...this.data];
+                    
+                    if (this.columnFilter && this.searchQuery) {
+                        results = results.filter(row => 
+                            String(row[this.columnFilter] || '').toLowerCase().includes(this.searchQuery.toLowerCase())
+                        );
+                    } else if (this.searchQuery && this.fuse) {
+                        const fuseResults = this.fuse.search(this.searchQuery);
+                        results = fuseResults.map(result => result.item);
+                    }
+                    
+                    this.filteredData = results;
+                }
+                
+                this.updateStats();
+                this.renderData();
+            }
+            
+            renderData() {
+                if (this.filteredData.length === 0) {
+                    this.elements.dataContainer.innerHTML = `
+                        <div class="no-data">
+                            <div class="no-data-icon">🔍</div>
+                            <h3>No Results Found</h3>
+                            <p>Try adjusting your search terms</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                if (this.viewMode === 'transpose') {
+                    this.renderTranspose();
+                } else {
+                    this.renderTable();
+                }
+            }
+            
+            renderTable() {
+                const start = (this.currentPage - 1) * this.rowsPerPage;
+                const pageData = this.filteredData.slice(start, start + this.rowsPerPage);
+                
+                if (pageData.length === 0) return;
+                
+                const columns = Object.keys(pageData[0]).filter(key => !key.startsWith('_'));
+                
+                let html = `
+                    <div class="data-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>File</th>
+                                    <th>Sheet</th>
+                                    <th>Row</th>
+                                    ${columns.map(col => `<th>${col}</th>`).join('')}
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                pageData.forEach(row => {
+                    html += `
+                        <tr>
+                            <td><strong>${row._file}</strong></td>
+                            <td>${row._sheet || 'Sheet1'}</td>
+                            <td>${row._row}</td>
+                            ${columns.map(col => `<td>${this.formatValue(row[col])}</td>`).join('')}
+                        </tr>
+                    `;
+                });
+                
+                html += '</tbody></table></div>';
+                this.elements.dataContainer.innerHTML = html;
+                this.renderPagination();
+            }
+            
+            renderTranspose() {
+                const current = this.filteredData[this.currentRecord] || this.filteredData[0];
+                if (!current) return;
+                
+                const columns = Object.keys(current).filter(key => !key.startsWith('_'));
+                
+                let html = `
+                    <div class="record-navigation">
+                        <button class="btn" onclick="app.prevRecord()">‹ Previous</button>
+                        <div style="text-align: center; font-weight: 600; color: #1e3a8a;">
+                            Record ${this.currentRecord + 1} of ${this.filteredData.length}
+                        </div>
+                        <button class="btn" onclick="app.nextRecord()">Next ›</button>
+                    </div>
+                    
+                    <div class="transpose-card">
+                        <div class="transpose-card-header">
+                            📋 Record Details - ${current._file}
+                        </div>
+                        <div class="transpose-grid">
+                            <div class="transpose-field">
+                                <div class="transpose-field-name">📄 Source File</div>
+                                <div class="transpose-field-value"><strong>${current._file}</strong></div>
+                            </div>
+                            <div class="transpose-field">
+                                <div class="transpose-field-name">📑 Sheet</div>
+                                <div class="transpose-field-value"><strong>${current._sheet || 'Sheet1'}</strong></div>
+                            </div>
+                            <div class="transpose-field">
+                                <div class="transpose-field-name">🔢 Row</div>
+                                <div class="transpose-field-value"><strong>${current._row}</strong></div>
+                            </div>
+                `;
+                
+                columns.forEach(column => {
+                    html += `
+                        <div class="transpose-field">
+                            <div class="transpose-field-name">${column}</div>
+                            <div class="transpose-field-value">${this.formatValue(current[column])}</div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div></div>';
+                this.elements.dataContainer.innerHTML = html;
+            }
+            
+            renderPagination() {
+                const totalPages = Math.ceil(this.filteredData.length / this.rowsPerPage);
+                if (totalPages <= 1) {
+                    this.elements.pagination.innerHTML = '';
+                    return;
+                }
+                
+                let html = '';
+                if (this.currentPage > 1) {
+                    html += `<button onclick="app.goToPage(${this.currentPage - 1})">‹ Previous</button>`;
+                }
+                
+                const start = Math.max(1, this.currentPage - 2);
+                const end = Math.min(totalPages, this.currentPage + 2);
+                
+                for (let i = start; i <= end; i++) {
+                    html += `<button class="${i === this.currentPage ? 'active' : ''}" onclick="app.goToPage(${i})">${i}</button>`;
+                }
+                
+                if (this.currentPage < totalPages) {
+                    html += `<button onclick="app.goToPage(${this.currentPage + 1})">Next ›</button>`;
+                }
+                
+                this.elements.pagination.innerHTML = html;
+            }
+            
+            formatValue(value) {
+                if (value === null || value === undefined || value === '') {
+                    return '<em style="color: #9ca3af;">Empty</em>';
+                }
+                return String(value).length > 100 ? String(value).substring(0, 100) + '...' : String(value);
+            }
+            
+            updateStats() {
+                const uniqueColumns = new Set();
+                this.data.forEach(row => {
+                    Object.keys(row).filter(key => !key.startsWith('_')).forEach(col => uniqueColumns.add(col));
+                });
+                
+                this.elements.stats.totalRows.textContent = this.data.length.toLocaleString();
+                this.elements.stats.filteredRows.textContent = this.filteredData.length.toLocaleString();
+                this.elements.stats.totalFiles.textContent = this.files.size.toLocaleString();
+                this.elements.stats.totalColumns.textContent = uniqueColumns.size.toLocaleString();
+            }
+            
+            updateFileList() {
+                let html = '<h3 style="margin-bottom: 15px; color: #1e3a8a;">📂 Loaded Files</h3>';
+                
+                if (this.files.size === 0) {
+                    html += `
+                        <div class="no-data" style="text-align: center; padding: 20px; color: #6b7280;">
+                            <div style="font-size: 2em; margin-bottom: 10px;">📁</div>
+                            <p>No files loaded</p>
+                        </div>
+                    `;
+                } else {
+                    this.files.forEach((file, filename) => {
+                        html += `
+                            <div class="file-item">
+                                <div class="file-info">
+                                    <div class="file-name">${file.name}</div>
+                                    <div class="file-meta">
+                                        ${file.rows.toLocaleString()} rows • 
+                                        ${file.sheets || 1} sheets • 
+                                        ${(file.size / 1024).toFixed(1)} KB
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger" style="padding: 6px 10px; font-size: 12px;" onclick="app.removeFile('${filename}')">×</button>
+                            </div>
+                        `;
+                    });
+                }
+                
+                this.elements.fileList.innerHTML = html;
+                
+                if (this.files.size > 0) {
+                    this.elements.modalFileList.innerHTML = `
+                        <div style="text-align: center; padding: 20px; color: #059669; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                            <div style="font-size: 2em; margin-bottom: 10px;">✅</div>
+                            <strong>Files uploaded successfully!</strong>
+                        </div>
+                    `;
+                }
+            }
+            
+            updateRecords() {
+                if (this.data.length === 0) {
+                    this.elements.recordsSection.style.display = 'none';
+                    return;
+                }
+                
+                this.elements.recordsSection.style.display = 'block';
+                
+                const fileGroups = new Map();
+                this.data.forEach(row => {
+                    const key = row._file;
+                    if (!fileGroups.has(key)) fileGroups.set(key, []);
+                    fileGroups.get(key).push(row);
+                });
+                
+                let html = '';
+                fileGroups.forEach((records, fileName) => {
+                    const uniqueColumns = new Set();
+                    records.forEach(row => {
+                        Object.keys(row).filter(key => !key.startsWith('_')).forEach(col => uniqueColumns.add(col));
+                    });
+                    
+                    html += `
+                        <div class="record-card" onclick="app.filterByFile('${fileName}')">
+                            <div style="font-weight: 700; color: #1e3a8a; margin-bottom: 8px;">📄 ${fileName}</div>
+                            <div style="font-size: 0.9em; color: #6b7280; margin-bottom: 10px;">
+                                ${records.length > 1 ? 'Multiple sheets' : 'Single sheet'}
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85em;">
+                                <span><strong>${records.length.toLocaleString()}</strong> records</span>
+                                <span><strong>${uniqueColumns.size}</strong> columns</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                this.elements.recordsGrid.innerHTML = html;
+            }
+            
+            updateSheets() {
+                if (this.sheets.size === 0) {
+                    this.elements.sheetsSection.style.display = 'none';
+                    return;
+                }
+                
+                this.elements.sheetsSection.style.display = 'block';
+                let html = '';
+                
+                this.sheets.forEach((sheet, sheetId) => {
+                    const isActive = this.activeSheets.has(sheetId);
+                    html += `
+                        <div class="sheet-card">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                                <div style="font-weight: 700; color: #1e3a8a; font-size: 1.2em;">📑 ${sheet.sheetName}</div>
+                                <div style="padding: 4px 8px; border-radius: 20px; font-size: 0.8em; font-weight: 600; ${isActive ? 'background: rgba(16, 185, 129, 0.2); color: #059669;' : 'background: rgba(107, 114, 128, 0.2); color: #6b7280;'}">
+                                    ${isActive ? 'Active' : 'Inactive'}
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                                    <span style="color: #6b7280;">File:</span>
+                                    <span style="font-weight: 600;">${sheet.fileName}</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em;">
+                                    <span style="color: #6b7280;">Rows:</span>
+                                    <span style="font-weight: 600;">${sheet.rows.toLocaleString()}</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.9em;">
+                                    <span style="color: #6b7280;">Columns:</span>
+                                    <span style="font-weight: 600;">${sheet.columns.length}</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button class="btn btn-small ${isActive ? 'btn-danger' : 'btn-success'}" onclick="app.toggleSheet('${sheetId}')">
+                                    ${isActive ? '❌ Deactivate' : '✅ Activate'}
+                                </button>
+                                <button class="btn btn-small btn-secondary" onclick="app.viewSheet('${sheetId}')">👁️ View</button>
+                                <button class="btn btn-small" onclick="app.exportSheet('${sheetId}')">📥 Export</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                this.elements.sheetsGrid.innerHTML = html;
+            }
+            
+            updateUI() {
+                this.updateFileList();
+                this.updateRecords();
+                this.updateSheets();
+                this.setupSearch();
+                this.performSearch();
+            }
+            
+            // Navigation methods
+            goToPage(page) {
+                this.currentPage = page;
+                this.renderData();
+            }
+            
+            nextRecord() {
+                if (this.currentRecord < this.filteredData.length - 1) {
+                    this.currentRecord++;
+                    this.renderTranspose();
+                }
+            }
+            
+            prevRecord() {
+                if (this.currentRecord > 0) {
+                    this.currentRecord--;
+                    this.renderTranspose();
+                }
+            }
+            
+            // Sheet management
+            toggleSheet(sheetId) {
+                const sheet = this.sheets.get(sheetId);
+                if (!sheet) return;
+                
+                if (this.activeSheets.has(sheetId)) {
+                    this.activeSheets.delete(sheetId);
+                    this.data = this.data.filter(row => !(row._file === sheet.fileName && row._sheet === sheet.sheetName));
+                } else {
+                    this.activeSheets.add(sheetId);
+                    this.data.push(...sheet.data);
+                }
+                
+                this.updateUI();
+                this.saveData();
+            }
+            
+            viewSheet(sheetId) {
+                const sheet = this.sheets.get(sheetId);
+                if (!sheet) return;
+                
+                this.elements.searchInput.value = '';
+                this.searchQuery = '';
+                this.filteredData = this.data.filter(row => row._file === sheet.fileName && row._sheet === sheet.sheetName);
+                this.updateStats();
+                this.renderData();
+            }
+            
+            exportSheet(sheetId) {
+                const sheet = this.sheets.get(sheetId);
+                if (!sheet) return;
+                
+                const ws = XLSX.utils.json_to_sheet(sheet.data);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, sheet.sheetName);
+                
+                const filename = `${sheet.fileName}_${sheet.sheetName}_${new Date().toISOString().split('T')[0]}.xlsx`;
+                XLSX.writeFile(wb, filename);
+            }
+            
+            filterByFile(fileName) {
+                this.elements.searchInput.value = '';
+                this.searchQuery = '';
+                this.filteredData = this.data.filter(row => row._file === fileName);
+                this.updateStats();
+                this.renderData();
+            }
+            
+            removeFile(filename) {
+                this.data = this.data.filter(row => row._file !== filename);
+                this.files.delete(filename);
+                
+                const sheetsToRemove = [];
+                this.sheets.forEach((sheet, sheetId) => {
+                    if (sheet.fileName === filename) {
+                        sheetsToRemove.push(sheetId);
+                    }
+                });
+                
+                sheetsToRemove.forEach(sheetId => {
+                    this.sheets.delete(sheetId);
+                    this.activeSheets.delete(sheetId);
+                });
+                
+                this.updateUI();
+                this.saveData();
+            }
+            
+            exportResults() {
+                if (this.filteredData.length === 0) {
+                    alert('No data to export');
+                    return;
+                }
+                
+                const ws = XLSX.utils.json_to_sheet(this.filteredData);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, 'Search Results');
+                
+                const filename = `search_results_${new Date().toISOString().split('T')[0]}.xlsx`;
+                XLSX.writeFile(wb, filename);
+            }
+            
+            mergeAllSheets() {
+                const mergedData = [];
+                this.sheets.forEach(sheet => {
+                    if (this.activeSheets.has(sheet.id)) {
+                        mergedData.push(...sheet.data);
+                    }
+                });
+                
+                if (mergedData.length === 0) {
+                    alert('No active sheets to merge');
+                    return;
+                }
+                
+                const ws = XLSX.utils.json_to_sheet(mergedData);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, 'Merged_Data');
+                
+                const filename = `merged_sheets_${new Date().toISOString().split('T')[0]}.xlsx`;
+                XLSX.writeFile(wb, filename);
+            }
+            
+            clearAll() {
+                if (confirm('Clear all data? This cannot be undone.')) {
+                    this.data = [];
+                    this.filteredData = [];
+                    this.files.clear();
+                    this.sheets.clear();
+                    this.activeSheets.clear();
+                    this.currentPage = 1;
+                    this.currentRecord = 0;
+                    this.searchQuery = '';
+                    
+                    this.elements.searchInput.value = '';
+                    this.elements.columnFilter.selectedIndex = 0;
+                    this.elements.viewMode.selectedIndex = 0;
+                    this.elements.columnFilter.innerHTML = '<option value="">All Columns</option>';
+                    
+                    this.elements.dataContainer.innerHTML = `
+                        <div class="no-data">
+                            <div class="no-data-icon">📋</div>
+                            <h3>No Data Loaded</h3>
+                            <p>Click "Upload Files" to start</p>
+                        </div>
+                    `;
+                    
+                    this.elements.recordsSection.style.display = 'none';
+                    this.elements.sheetsSection.style.display = 'none';
+                    
+                    this.updateFileList();
+                    this.updateStats();
+                    this.clearData();
+                }
+            }
+            
+            saveData() {
+                try {
+                    localStorage.setItem('excelSearchApp', JSON.stringify({
+                        data: this.data,
+                        files: Array.from(this.files.entries()),
+                        sheets: Array.from(this.sheets.entries()),
+                        activeSheets: Array.from(this.activeSheets)
+                    }));
+                } catch (error) {
+                    console.warn('Save failed:', error);
+                }
+            }
+            
+            loadData() {
+                try {
+                    const saved = localStorage.getItem('excelSearchApp');
+                    if (saved) {
+                        const parsed = JSON.parse(saved);
+                        this.data = parsed.data || [];
+                        this.files = new Map(parsed.files || []);
+                        this.sheets = new Map(parsed.sheets || []);
+                        this.activeSheets = new Set(parsed.activeSheets || []);
+                        
+                        if (this.data.length > 0) {
+                            this.updateUI();
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Load failed:', error);
+                }
+            }
+            
+            clearData() {
+                try {
+                    localStorage.removeItem('excelSearchApp');
+                } catch (error) {
+                    console.warn('Clear failed:', error);
+                }
+            }
+        }
+        
+        // Initialize app
+        let app;
+        document.addEventListener('DOMContentLoaded', () => {
+            app = new ExcelSearchApp();
+        });
+        
+        // PWA manifest
+        const manifest = {
+            name: "Excel Search Pro",
+            short_name: "ExcelSearch",
+            description: "Offline Excel data search and management",
+            start_url: "/",
+            display: "standalone",
+            background_color: "#ffffff",
+            theme_color: "#1e3a8a",
+            icons: [{
+                src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgaGVpZ2h0PSI0OFB4IiB3aWR0aD0iNDhQeCI+PHJlY3QgeD0iNiIgeT0iNiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjM2IiBmaWxsPSIjMTUzOWE4Ii+8L3JlY3Q+PHRleHQgeD0iMTQiIHk9IjMiIGZpbGw9IiNmZmZmZmYiPkV4Y2VsPC90ZXh0Pjwvc3ZnPg==",
+                type: "image/svg+xml",
+                sizes: "72x72"
+            }]
+        };
+        
+        const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+        const manifestUrl = URL.createObjectURL(manifestBlob);
+        
+        const link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = manifestUrl;
+        document.head.appendChild(link);
+        
+        // Service worker
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                const CACHE_NAME = 'excel-search-pro-v1';
+                const urlsToCache = [
+                    '/',
+                    'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.6.2/fuse.min.js'
+                ];
+                
+                self.addEventListener('install', event => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+                    );
+                });
+                
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request).then(response => {
+                            return response || fetch(event.request);
+                        })
+                    );
+                });
+            `;
+            
+            const swBlob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(swBlob);
+            
+            navigator.serviceWorker.register(swUrl)
+                .then(registration => console.log('SW registered'))
+                .catch(error => console.log('SW registration failed'));
+        }
+    </script>
+</body>
+</html>

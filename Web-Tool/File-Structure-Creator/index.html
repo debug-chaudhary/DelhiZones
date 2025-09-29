@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Structure Creator & Dev Guides</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background-color: #030712;
+            --primary-text: #e5e7eb;
+            --secondary-text: #9ca3af;
+            --accent-color: #4f46e5;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            background-image: radial-gradient(circle at top left, rgba(79, 70, 229, 0.2), transparent 30%),
+                              radial-gradient(circle at bottom right, rgba(219, 39, 119, 0.15), transparent 40%);
+            color: var(--primary-text);
+        }
+        .editor-font {
+            font-family: 'Fira Code', monospace;
+            line-height: 1.7;
+        }
+        /* Custom scrollbar */
+        textarea::-webkit-scrollbar { width: 8px; }
+        textarea::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 4px; }
+        textarea::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+        textarea::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+        
+        /* Prose styles for content pages */
+        .prose-custom {
+            color: var(--secondary-text);
+        }
+        .prose-custom h1, .prose-custom h2, .prose-custom h3, .prose-custom strong {
+            color: var(--primary-text);
+        }
+        .prose-custom a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .prose-custom a:hover {
+            text-decoration: underline;
+        }
+        .prose-custom code {
+            color: #f0abfc; /* A pinkish color for code */
+            background-color: rgba(200, 200, 255, 0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+        }
+        .nav-link.active {
+            color: #a5b4fc; /* Lighter indigo */
+            font-weight: 600;
+        }
+
+        /* Mobile menu transition */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out;
+        }
+        
+        /* Spinner for loading state */
+        .spinner {
+            border: 2px solid #374151; /* gray-700 */
+            border-top: 2px solid #a5b4fc; /* indigo-300 */
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-900/30 backdrop-blur-lg border-b border-gray-700/50 sticky top-0 z-20">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <a href="#home" class="flex items-center gap-3">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"></path></svg>
+                <h1 class="text-xl font-bold text-white">Project Scripter</h1>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-400">
+                <a href="#home" class="nav-link hover:text-white transition-colors">Creator Tool</a>
+                <a href="#templates" class="nav-link hover:text-white transition-colors">Templates</a>
+                <a href="#how-it-works" class="nav-link hover:text-white transition-colors">How It Works</a>
+                <a href="#blog" class="nav-link hover:text-white transition-colors">Guides</a>
+                <a href="#about" class="nav-link hover:text-white transition-colors">About</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="p-2 rounded-md text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <span class="sr-only">Open main menu</span>
+                    <!-- Hamburger Icon -->
+                    <svg id="menu-open-icon" class="h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                    <!-- Close Icon -->
+                    <svg id="menu-close-icon" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu, hidden by default -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <nav class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#home" class="nav-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Creator Tool</a>
+                <a href="#templates" class="nav-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Templates</a>
+                <a href="#how-it-works" class="nav-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">How It Works</a>
+                <a href="#blog" class="nav-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Guides</a>
+                <a href="#about" class="nav-link text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto p-4 md:p-8">
+        
+        <!-- Page: Home (Creator Tool) -->
+        <div id="page-home" class="page-content">
+            <div class="w-full max-w-3xl mx-auto flex flex-col bg-gray-900/50 backdrop-blur-xl border border-gray-700/50 rounded-lg shadow-2xl shadow-black/30 overflow-hidden">
+                <!-- Gemini API Feature Section -->
+                <div class="p-4 border-b border-gray-700/50">
+                    <label for="ai-prompt" class="block text-sm font-medium text-gray-300 mb-2">Describe Your Project</label>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input type="text" id="ai-prompt" class="flex-grow bg-gray-800/60 border border-gray-700 rounded-md px-3 py-2 text-white placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="e.g., a simple blog with a React frontend...">
+                        <button id="ai-generate-button" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium py-2 px-4 rounded-md transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/20">
+                            <span id="ai-button-text">✨ Generate with AI</span>
+                            <div id="ai-spinner" class="spinner hidden"></div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-4 border-b border-gray-700/50">
+                    <label for="project-name" class="block text-sm font-medium text-gray-300 mb-2">Project Name</label>
+                    <input type="text" id="project-name" class="w-full bg-gray-800/60 border border-gray-700 rounded-md px-3 py-2 text-white placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="my-awesome-project">
+                </div>
+                <div class="p-4 border-b border-gray-700/50 flex flex-wrap justify-between items-center gap-4">
+                    <div>
+                        <h2 class="text-lg font-semibold text-white">Project Blueprint</h2>
+                        <p class="text-sm text-gray-400 mt-1">Design your file and folder structure below.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <label for="file-import" class="cursor-pointer bg-gray-700/50 hover:bg-gray-700 border border-gray-600/80 text-gray-300 text-sm font-medium py-2 px-4 rounded-md transition-all duration-200 flex items-center gap-2">Import</label>
+                        <input type="file" id="file-import" class="hidden" accept=".txt,.text">
+                        <button id="zip-button" class="bg-indigo-600 hover:bg-indigo-500 border border-indigo-500/80 text-white text-sm font-medium py-2 px-4 rounded-md transition-all duration-200 flex items-center gap-2 shadow-lg shadow-indigo-600/20">Download .zip</button>
+                    </div>
+                </div>
+                <div class="p-4 border-b border-gray-700/50 hidden" id="status-panel"><p id="status-message" class="text-sm text-center"></p></div>
+                <div class="flex-grow flex relative editor-font bg-gray-900/80 h-[40vh] min-h-[300px]">
+                    <div id="line-numbers" class="p-3 text-right text-gray-500 select-none sticky top-0 bg-gray-900/80">1</div>
+                    <textarea id="structure-input" class="flex-1 w-full h-full bg-transparent resize-none focus:outline-none p-3 text-gray-300 leading-relaxed editor-font" spellcheck="false"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page: Templates -->
+        <div id="page-templates" class="page-content hidden">
+             <div class="max-w-6xl mx-auto">
+                <h1 class="text-3xl font-bold mb-2">Project Templates</h1>
+                <p class="text-gray-400 mb-8">Get a head start with these popular project structures. Click "Use Template" to load it into the creator.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Template Card: React -->
+                    <div class="bg-gray-900/50 border border-gray-700/50 p-6 rounded-lg flex flex-col">
+                        <h2 class="text-2xl font-semibold mb-2 text-white">React App</h2>
+                        <p class="text-gray-400 mb-4 flex-grow">A standard client-side React application structure, similar to `create-react-app`.</p>
+                        <pre class="bg-gray-800/60 p-3 rounded-md mt-2 text-xs text-gray-300 editor-font mb-4">/public/\n  └── index.html\n/src/\n  ├── /components/\n  ├── /hooks/\n  ├── App.js\n  └── index.js\n.gitignore\npackage.json</pre>
+                        <button class="template-btn mt-auto bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 px-4 rounded-md transition w-full" data-template="react">Use this Template</button>
+                    </div>
+                    <!-- Template Card: Node.js Express -->
+                    <div class="bg-gray-900/50 border border-gray-700/50 p-6 rounded-lg flex flex-col">
+                        <h2 class="text-2xl font-semibold mb-2 text-white">Node.js Express API</h2>
+                        <p class="text-gray-400 mb-4 flex-grow">A robust structure for a Node.js API server using the Express framework.</p>
+                        <pre class="bg-gray-800/60 p-3 rounded-md mt-2 text-xs text-gray-300 editor-font mb-4">/config/\n  └── db.js\n/controllers/\n/models/\n/routes/\n  └── api.js\n.env\n.gitignore\npackage.json\nserver.js</pre>
+                        <button class="template-btn mt-auto bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 px-4 rounded-md transition w-full" data-template="node">Use this Template</button>
+                    </div>
+                    <!-- Template Card: Python Flask -->
+                     <div class="bg-gray-900/50 border border-gray-700/50 p-6 rounded-lg flex flex-col">
+                        <h2 class="text-2xl font-semibold mb-2 text-white">Python Flask App</h2>
+                        <p class="text-gray-400 mb-4 flex-grow">A classic structure for a web application built with the Python Flask micro-framework.</p>
+                        <pre class="bg-gray-800/60 p-3 rounded-md mt-2 text-xs text-gray-300 editor-font mb-4">/static/\n  ├── /css/\n  └── /js/\n/templates/\n  └── index.html\napp.py\nconfig.py\nrequirements.txt</pre>
+                        <button class="template-btn mt-auto bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 px-4 rounded-md transition w-full" data-template="flask">Use this Template</button>
+                    </div>
+                    <!-- NEW Template Card: Vue.js App -->
+                    <div class="bg-gray-900/50 border border-gray-700/50 p-6 rounded-lg flex flex-col">
+                        <h2 class="text-2xl font-semibold mb-2 text-white">Vue.js App</h2>
+                        <p class="text-gray-400 mb-4 flex-grow">A standard project layout for a Vue 3 application, perfect for building interactive UIs.</p>
+                        <pre class="bg-gray-800/60 p-3 rounded-md mt-2 text-xs text-gray-300 editor-font mb-4">/public/\n  └── index.html\n/src/\n  ├── /assets/\n  ├── /components/\n  ├── App.vue\n  └── main.js\n.gitignore\npackage.json</pre>
+                        <button class="template-btn mt-auto bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 px-4 rounded-md transition w-full" data-template="vue">Use this Template</button>
+                    </div>
+                    <!-- NEW Template Card: Next.js App -->
+                    <div class="bg-gray-900/50 border border-gray-700/50 p-6 rounded-lg flex flex-col">
+                        <h2 class="text-2xl font-semibold mb-2 text-white">Next.js App</h2>
+                        <p class="text-gray-400 mb-4 flex-grow">A modern structure for a server-rendered React app using the Next.js App Router.</p>
+                        <pre class="bg-gray-800/60 p-3 rounded-md mt-2 text-xs text-gray-300 editor-font mb-4">/app/\n  ├── /api/\n  ├── layout.js\n  └── page.js\n/public/\n.gitignore\nnext.config.mjs\npackage.json</pre>
+                        <button class="template-btn mt-auto bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 px-4 rounded-md transition w-full" data-template="nextjs">Use this Template</button>
+                    </div>
+                    <!-- NEW Template Card: Basic Website -->
+                    <div class="bg-gray-900/50 border border-gray-700/50 p-6 rounded-lg flex flex-col">
+                        <h2 class="text-2xl font-semibold mb-2 text-white">Basic Website</h2>
+                        <p class="text-gray-400 mb-4 flex-grow">A fundamental template for any simple static website using HTML, CSS, and JavaScript.</p>
+                        <pre class="bg-gray-800/60 p-3 rounded-md mt-2 text-xs text-gray-300 editor-font mb-4">/css/\n  └── style.css\n/images/\n/js/\n  └── script.js\nindex.html</pre>
+                        <button class="template-btn mt-auto bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 px-4 rounded-md transition w-full" data-template="basicWebsite">Use this Template</button>
+                    </div>
+                     <!-- NEW Template Card: Discord Bot -->
+                    <div class="bg-gray-900/50 border border-gray-700/50 p-6 rounded-lg flex flex-col">
+                        <h2 class="text-2xl font-semibold mb-2 text-white">Discord.js Bot</h2>
+                        <p class="text-gray-400 mb-4 flex-grow">A command-handler structure for a modern Discord bot using the Discord.js v14 library.</p>
+                        <pre class="bg-gray-800/60 p-3 rounded-md mt-2 text-xs text-gray-300 editor-font mb-4">/commands/\n  └── ping.js\n/events/\n  └── ready.js\n.env\n.gitignore\nindex.js\npackage.json</pre>
+                        <button class="template-btn mt-auto bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 px-4 rounded-md transition w-full" data-template="discordjs">Use this Template</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page: How It Works -->
+        <div id="page-how-it-works" class="page-content hidden">
+            <div class="max-w-4xl mx-auto prose-custom">
+                <h1 class="text-3xl font-bold text-white">How It Works</h1>
+                <p>Project Scripter is designed to be intuitive. Here’s a breakdown of how to create your project structure, from manual creation to using our new AI-powered assistant.</p>
+                
+                <h2 class="text-2xl font-semibold mt-8 text-white">✨ Method 1: Generate with AI (Recommended)</h2>
+                <ol class="list-decimal list-inside space-y-3 mt-4">
+                    <li><strong class="text-gray-300">Describe Your Project:</strong> In the "Describe Your Project" field, type a natural language description of what you want to build. Be as descriptive as you like! For example: <em>"A full-stack web app using Next.js for the frontend, Express.js for the backend API, and connecting to a MongoDB database."</em></li>
+                    <li><strong class="text-gray-300">Generate Structure:</strong> Click the "✨ Generate with AI" button. Our tool will send your request to the Gemini API.</li>
+                    <li><strong class="text-gray-300">Review & Download:</strong> The AI will generate a professional file structure and populate the editor. It will also suggest a project name. Review the structure, make any tweaks you like, and then click "Download .zip".</li>
+                </ol>
+
+                <h2 class="text-2xl font-semibold mt-8 text-white">Method 2: Manual Creation</h2>
+                <ol class="list-decimal list-inside space-y-3 mt-4">
+                     <li><strong class="text-gray-300">Set Project Name:</strong> Enter your root project name in the input field. This will be the name of your downloaded zip file.</li>
+                    <li><strong class="text-gray-300">Define Structure:</strong> In the editor, type your desired file and folder structure.
+                        <ul class="list-disc list-inside pl-6 mt-2 text-sm space-y-1">
+                            <li>End folder names with a forward slash: <code>/my-folder/</code></li>
+                            <li>Use two spaces for each level of indentation.</li>
+                            <li>File names don't need a special character: <code>index.html</code></li>
+                        </ul>
+                    </li>
+                    <li><strong class="text-gray-300">Download:</strong> Click the "Download .zip" button to generate and save your project skeleton.</li>
+                </ol>
+
+                <h2 class="text-2xl font-semibold mt-8 text-white">Method 3: Use a Template</h2>
+                <ol class="list-decimal list-inside space-y-3 mt-4">
+                    <li><strong class="text-gray-300">Visit the Templates Page:</strong> Navigate to the "Templates" section using the main menu.</li>
+                    <li><strong class="text-gray-300">Choose a Template:</strong> Browse our list of common project types like React, Node.js, and more.</li>
+                    <li><strong class="text-gray-300">Load and Download:</strong> Click "Use this Template". You will be taken back to the Creator Tool with the project name and structure pre-filled. Simply click "Download .zip".</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Page: Blog -->
+        <div id="page-blog" class="page-content hidden">
+             <div class="max-w-4xl mx-auto prose-custom">
+                <h1 class="text-3xl font-bold text-white">Developer Guides</h1>
+                <p class="mb-8">Articles on software development best practices, project structure, and more.</p>
+                <div class="space-y-8">
+                    <div class="p-6 bg-gray-900/50 border border-gray-700/50 rounded-lg">
+                        <h2 class="text-2xl font-semibold text-white">The Perfect Folder Structure for a MERN Stack App</h2>
+                        <p class="mt-2">Discover a robust and scalable folder structure for your next MERN (MongoDB, Express, React, Node.js) project. We'll cover separating concerns, managing state, and organizing components for maintainability.</p>
+                    </div>
+                    <div class="p-6 bg-gray-900/50 border border-gray-700/50 rounded-lg">
+                        <h2 class="text-2xl font-semibold text-white">5 Common Mistakes in Project Scaffolding</h2>
+                        <p class="mt-2">Avoid common pitfalls when starting a new project. This guide covers issues like improper dependency management, neglecting a `.gitignore` file, and creating overly complex initial structures that hinder development speed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Page: About -->
+        <div id="page-about" class="page-content hidden">
+            <div class="max-w-4xl mx-auto prose-custom">
+                <h1 class="text-3xl font-bold text-white">About Project Scripter</h1>
+                <p>Project Scripter was born from the repetitive task that every developer faces: setting up a new project. The initial moments of a project are crucial for establishing a clean, scalable, and maintainable foundation. Our goal is to streamline this process, allowing you to move from idea to coding in seconds.</p>
+                <p>Whether you're a seasoned developer who wants to bootstrap projects quickly or a beginner learning about best-practice file structures, Project Scripter is here to help. With our manual creator, pre-built templates, and powerful AI assistant, you have the flexibility to create the perfect project skeleton for any need.</p>
+                <p>This tool is open-source and built with modern web technologies. We believe in the power of community and welcome contributions and suggestions.</p>
+             </div>
+        </div>
+        
+        <!-- Page: Privacy Policy -->
+        <div id="page-privacy-policy" class="page-content hidden">
+            <div class="max-w-4xl mx-auto prose-custom">
+                <h1 class="text-3xl font-bold text-white">Privacy Policy</h1>
+                <p><strong>Last Updated:</strong> September 27, 2025</p>
+                <p>Your privacy is important to us. It is Project Scripter's policy to respect your privacy regarding any information we may collect from you across our website.</p>
+                <h2 class="text-xl font-semibold mt-6 text-white">1. Information We Collect</h2>
+                <p>We do not collect any personally identifiable information. The project descriptions you enter for AI generation are sent to the Gemini API for processing but are not stored by us. The project structures you create are processed entirely within your browser and are not saved on our servers.</p>
+                <h2 class="text-xl font-semibold mt-6 text-white">2. Cookies</h2>
+                <p>We do not use cookies for tracking purposes.</p>
+                <h2 class="text-xl font-semibold mt-6 text-white">3. Third-Party Services</h2>
+                <p>This website uses Google's Gemini API to provide the AI generation feature. Your use of this feature is subject to Google's privacy policy.</p>
+             </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="p-4 bg-gray-900/30 border-t border-gray-700/50 mt-8">
+        <div class="container mx-auto text-center text-xs text-gray-500">
+             <div class="flex justify-center gap-4 mb-2">
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a>
+            </div>
+            <p>&copy; 2025 Project Scripter. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Elements from Creator Tool ---
+            const projectNameInput = document.getElementById('project-name');
+            const inputArea = document.getElementById('structure-input');
+            const zipButton = document.getElementById('zip-button');
+            const fileImport = document.getElementById('file-import');
+            const statusPanel = document.getElementById('status-panel');
+            const statusMessage = document.getElementById('status-message');
+            const lineNumbers = document.getElementById('line-numbers');
+            
+            // --- Gemini API Feature Elements ---
+            const aiPromptInput = document.getElementById('ai-prompt');
+            const aiGenerateButton = document.getElementById('ai-generate-button');
+            const aiButtonText = document.getElementById('ai-button-text');
+            const aiSpinner = document.getElementById('ai-spinner');
+
+            // --- Responsive Navbar Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-open-icon');
+            const closeIcon = document.getElementById('menu-close-icon');
+
+            const toggleMenu = () => {
+                mobileMenu.classList.toggle('hidden');
+                openIcon.classList.toggle('block');
+                openIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('block');
+            };
+
+            mobileMenuButton.addEventListener('click', toggleMenu);
+            
+            const mobileNavLinks = mobileMenu.querySelectorAll('a');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        toggleMenu();
+                    }
+                });
+            });
+            
+            // --- Gemini API Logic ---
+            const callGeminiApi = async (prompt, retries = 3, delay = 1000) => {
+                const apiKey = ""; // Handled by environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                const systemPrompt = `You are an expert software architect. A user wants to create a file structure for a new project. Based on their description, generate a file and folder structure and also suggest a project name in kebab-case.
+RULES:
+- Your entire response MUST be a single JSON object.
+- The JSON object must have two keys: "projectName" (a string) and "structure" (a string).
+- For the "structure" value:
+  - Represent the structure as plain text.
+  - End all folder names with a forward slash (/).
+  - Use exactly two spaces for each level of indentation.
+  - Do not use any tree-drawing characters like '├──' or '└──'. Only use spaces for indentation.
+- Create a logical and professional structure based on best practices for the described technology stack.
+- If the user prompt is vague or unclear, create a general-purpose web project structure.`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                     generationConfig: {
+                        responseMimeType: "application/json",
+                     }
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 429 && retries > 0) {
+                            // Exponential backoff
+                            await new Promise(res => setTimeout(res, delay));
+                            return callGeminiApi(prompt, retries - 1, delay * 2);
+                        }
+                        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                    }
+                    
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        return JSON.parse(candidate.content.parts[0].text);
+                    } else {
+                        throw new Error("Invalid response structure from Gemini API.");
+                    }
+                } catch (error) {
+                    if (retries > 0) {
+                        await new Promise(res => setTimeout(res, delay));
+                        return callGeminiApi(prompt, retries - 1, delay * 2);
+                    }
+                    console.error("Gemini API call failed:", error);
+                    throw error;
+                }
+            };
+            
+            aiGenerateButton.addEventListener('click', async () => {
+                const userPrompt = aiPromptInput.value.trim();
+                if (!userPrompt) {
+                    showStatus('Please describe the project you want to build.', 'error');
+                    return;
+                }
+
+                // UI loading state
+                aiGenerateButton.disabled = true;
+                aiButtonText.textContent = 'Generating...';
+                aiSpinner.classList.remove('hidden');
+                showStatus('Asking the AI architect for a blueprint...', 'loading');
+
+                try {
+                    const result = await callGeminiApi(userPrompt);
+
+                    if (result && result.structure && result.projectName) {
+                        projectNameInput.value = result.projectName;
+                        inputArea.value = result.structure.trim();
+                        updateLineNumbers();
+                        showStatus('AI-generated structure loaded successfully!', 'success');
+                    } else {
+                         throw new Error("Could not parse the AI's response.");
+                    }
+                } catch (error) {
+                    showStatus(`An error occurred: ${error.message}`, 'error');
+                } finally {
+                    // Reset UI
+                    aiGenerateButton.disabled = false;
+                    aiButtonText.textContent = '✨ Generate with AI';
+                    aiSpinner.classList.add('hidden');
+                }
+            });
+
+
+            // --- Template Data ---
+            const templates = {
+                react: { name: 'react-app', structure: `/public/\n  └── index.html\n/src/\n  ├── /components/\n  ├── /hooks/\n  ├── App.js\n  └── index.js\n.gitignore\npackage.json` },
+                node: { name: 'express-api', structure: `/config/\n  └── db.js\n/controllers/\n/models/\n/routes/\n  └── api.js\n.env\n.gitignore\npackage.json\nserver.js` },
+                flask: { name: 'flask-app', structure: `/static/\n  ├── /css/\n  └── /js/\n/templates/\n  └── index.html\napp.py\nconfig.py\nrequirements.txt` },
+                vue: { name: 'vue-project', structure: `/public/\n  └── index.html\n/src/\n  ├── /assets/\n  ├── /components/\n  ├── App.vue\n  └── main.js\n.gitignore\npackage.json` },
+                nextjs: { name: 'nextjs-app', structure: `/app/\n  ├── /api/\n  ├── layout.js\n  └── page.js\n/public/\n.gitignore\nnext.config.mjs\npackage.json` },
+                basicWebsite: { name: 'simple-website', structure: `/css/\n  └── style.css\n/images/\n/js/\n  └── script.js\nindex.html` },
+                discordjs: { name: 'discord-bot', structure: `/commands/\n  └── ping.js\n/events/\n  └── ready.js\n.env\n.gitignore\nindex.js\npackage.json` }
+            };
+            
+            // --- Template Button Logic ---
+            document.querySelectorAll('.template-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const templateKey = button.dataset.template;
+                    const template = templates[templateKey];
+                    if (template) {
+                        projectNameInput.value = template.name;
+                        inputArea.value = template.structure;
+                        if (typeof updateLineNumbers === 'function') {
+                            updateLineNumbers();
+                        }
+                        window.location.hash = '#home';
+                    }
+                });
+            });
+
+            // --- SPA Navigation Logic ---
+            const pages = document.querySelectorAll('.page-content');
+            const navLinks = document.querySelectorAll('.nav-link, footer a');
+
+            const showPage = (pageId) => {
+                pages.forEach(page => {
+                    page.classList.toggle('hidden', page.id !== pageId);
+                });
+                const currentHash = `#${pageId.replace('page-','')}`;
+                navLinks.forEach(link => {
+                    const linkHash = new URL(link.href).hash;
+                    link.classList.toggle('active', linkHash === currentHash);
+                });
+                window.scrollTo(0, 0);
+            };
+
+            const handleNavigation = () => {
+                const hash = window.location.hash.substring(1) || 'home';
+                showPage(`page-${hash}`);
+            };
+
+            window.addEventListener('hashchange', handleNavigation);
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault(); 
+                    const hash = this.getAttribute('href');
+                    if (window.location.hash !== hash) {
+                        window.location.hash = hash;
+                    }
+                });
+            });
+
+            // --- Initialize Creator Tool ---
+            let updateLineNumbers; 
+            const initializeCreatorTool = () => {
+                if(inputArea) {
+                    const exampleStructure = `/src/\n  ├── /api/\n  │   └── client.js\n  ├── /components/\n  │   ├── Button.jsx\n  │   └── Modal.jsx\n  └── App.jsx\n/public/\n  └── index.html\n.gitignore\npackage.json\nREADME.md`;
+                    if (inputArea.value === '') inputArea.value = exampleStructure.trim();
+                    if (projectNameInput.value === '') projectNameInput.value = 'my-awesome-project';
+
+                    updateLineNumbers = () => {
+                        if (!inputArea) return;
+                        const lineCount = inputArea.value.split('\n').length;
+                        lineNumbers.innerHTML = Array.from({ length: lineCount }, (_, i) => i + 1).join('<br>');
+                    };
+
+                    inputArea.addEventListener('scroll', () => { lineNumbers.scrollTop = inputArea.scrollTop; });
+                    inputArea.addEventListener('input', updateLineNumbers);
+                    inputArea.addEventListener('keydown', (e) => {
+                        if (e.key === 'Tab') {
+                            e.preventDefault();
+                            const start = inputArea.selectionStart;
+                            const end = inputArea.selectionEnd;
+                            inputArea.value = `${inputArea.value.substring(0, start)}  ${inputArea.value.substring(end)}`;
+                            inputArea.selectionStart = inputArea.selectionEnd = start + 2;
+                        }
+                        setTimeout(updateLineNumbers, 0);
+                    });
+
+                    zipButton.addEventListener('click', async () => {
+                        const textToProcess = inputArea.value;
+                        if (!textToProcess.trim()) {
+                            showStatus('Input is empty. Nothing to create.', 'error');
+                            return;
+                        }
+                        zipButton.disabled = true;
+                        showStatus('Parsing structure and creating zip...', 'loading');
+                        try {
+                            const zip = new JSZip();
+                            let projectName = projectNameInput.value.trim() || 'project-structure';
+                            const safeProjectName = projectName.replace(/[^a-z0-9_.-]/gi, '_').toLowerCase();
+                            const rootFolder = zip.folder(safeProjectName);
+                            const structure = parseStructure(textToProcess);
+                            addItemsToZip(rootFolder, structure);
+                            const content = await zip.generateAsync({ type: "blob" });
+                            const url = URL.createObjectURL(content);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = `${safeProjectName}.zip`;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                            URL.revokeObjectURL(url);
+                            showStatus('Zip file created successfully!', 'success');
+                        } catch (error) {
+                            console.error("Error creating zip file:", error);
+                            showStatus(`An error occurred: ${error.message}`, 'error');
+                        } finally {
+                            zipButton.disabled = false;
+                        }
+                    });
+
+                    fileImport.addEventListener('change', (event) => {
+                        const file = event.target.files[0];
+                        if (!file) return;
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            inputArea.value = e.target.result;
+                            updateLineNumbers();
+                        };
+                        reader.readAsText(file);
+                        event.target.value = '';
+                    });
+                    updateLineNumbers();
+                }
+            };
+            
+            // --- Helper Functions for Creator Tool ---
+            function showStatus(message, type) { if(statusPanel) { statusPanel.classList.remove('hidden'); statusMessage.textContent = message; statusMessage.className = 'text-sm text-center font-medium '; if (type === 'success') statusMessage.classList.add('text-green-400'); else if (type === 'error') statusMessage.classList.add('text-red-400'); else statusMessage.classList.add('text-blue-400'); } }
+            function parseStructure(text) { const lines = text.split('\n'); if (lines.length === 0) return []; const root = { children: [], level: -1 }; const levels = [root]; const getIndentLevel = (line) => line.search(/\S|$/) / 2; for (const line of lines) { if (line.trim() === '') continue; const level = getIndentLevel(line); const name = line.trim().replace(/^├──\s*|^│\s*├──\s*|^└──\s*|^│\s*└──\s*/, '').trim(); if (!name) continue; const node = { name: name.replace(/\/$/, ''), type: name.endsWith('/') ? 'folder' : 'file', children: [] }; const parent = levels[level]; if (parent) parent.children.push(node); levels[level + 1] = node; } return root.children; }
+            function addItemsToZip(zipFolder, items) { items.forEach(item => { if (item.type === 'folder') { const newFolder = zipFolder.folder(item.name); if (item.children.length > 0) addItemsToZip(newFolder, item.children); } else { zipFolder.file(item.name, ""); } }); }
+
+            // --- Initial Load ---
+            handleNavigation();
+            initializeCreatorTool();
+        });
+    </script>
+</body>
+</html>
+

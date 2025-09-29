@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DelhiZones - Search and Explore</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* A light gray background */
+        }
+        /* Custom focus ring for better accessibility and branding */
+        .custom-focus-ring:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+        }
+        /* Smooth transition for UI elements */
+        .transition-all {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="font-bold text-xl text-blue-600 flex items-center">
+                        <i class="fas fa-search-location mr-2"></i>
+                        <span>DelhiZones</span>
+                    </a>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#" class="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#" class="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#" class="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <a href="#" class="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Privacy</a>
+                    </div>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button id="mobile-menu-button" type="button" class="bg-gray-100 inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-white hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-white">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu, shown/hidden based on button state -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="text-gray-600 hover:bg-blue-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#" class="text-gray-600 hover:bg-blue-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#" class="text-gray-600 hover:bg-blue-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                <a href="#" class="text-gray-600 hover:bg-blue-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Privacy</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="container mx-auto max-w-4xl py-12 px-4">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                Explore <span class="text-blue-600">DelhiZones</span> Data
+            </h1>
+            <p class="mt-4 text-lg text-gray-600">
+                Your trusted source for site data, posts, and more. Use the search below to explore our database.
+            </p>
+        </div>
+
+        <!-- Search Interface -->
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="relative flex-grow">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="searchBar" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg text-lg custom-focus-ring transition-all" placeholder="Search for anything...">
+                </div>
+                <select id="dataType" class="border border-gray-300 rounded-lg py-3 px-4 text-lg custom-focus-ring transition-all">
+                    <option value="posts">Posts</option>
+                    <option value="sdb">SDB Data</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Results List -->
+        <div id="resultsContainer" class="space-y-4">
+            <!-- Search results will be dynamically inserted here -->
+        </div>
+         <div id="noResults" class="text-center py-10 hidden">
+            <i class="fas fa-box-open text-4xl text-gray-400 mb-4"></i>
+            <p class="text-gray-500 text-lg">No results found. Try a different search term.</p>
+        </div>
+    </div>
+
+    <script>
+        // --- Load Data from JSON files ---
+        let postsData = [];
+        let sdbData = [];
+        let postsLoaded = false;
+        let sdbLoaded = false;
+        // Fetch posts.json
+        fetch('database/posts.json')
+            .then(response => response.json())
+            .then(data => {
+                postsData = data;
+                postsLoaded = true;
+                tryRenderResults();
+            });
+        // Fetch sdb.json
+        fetch('sdb.json')
+            .then(response => response.json())
+            .then(data => {
+                sdbData = data;
+                sdbLoaded = true;
+                tryRenderResults();
+            });
+
+        function tryRenderResults() {
+            if (postsLoaded && sdbLoaded) {
+                renderResults();
+            }
+        }
+        
+        // --- DOM ELEMENT REFERENCES ---
+        const searchBar = document.getElementById('searchBar');
+        const dataTypeSelect = document.getElementById('dataType');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const noResultsMessage = document.getElementById('noResults');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // --- EVENT LISTENERS ---
+        searchBar.addEventListener('input', () => renderResults());
+        dataTypeSelect.addEventListener('change', () => renderResults());
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- CORE FUNCTIONS ---
+        function renderResults() {
+            const searchTerm = searchBar.value.toLowerCase().trim();
+            const dataType = dataTypeSelect.value;
+            
+            resultsContainer.innerHTML = ''; // Clear previous results
+            
+            if (!searchTerm) {
+                noResultsMessage.classList.add('hidden');
+                return; // Don't show anything if search is empty
+            }
+
+            const dataToSearch = dataType === 'posts' ? postsData : sdbData;
+            const filteredData = dataToSearch.filter(item => {
+                // Iterate over all values of an object and check if any of them include the search term.
+                return Object.values(item).some(value =>
+                    String(value).toLowerCase().includes(searchTerm)
+                );
+            });
+
+            if (filteredData.length === 0) {
+                 noResultsMessage.classList.remove('hidden');
+            } else {
+                 noResultsMessage.classList.add('hidden');
+                 filteredData.slice(0, 10).forEach(item => { // Limit to a maximum of 10 results
+                    const resultCard = createResultCard(item, dataType);
+                    resultsContainer.appendChild(resultCard);
+                });
+            }
+
+            // Add event listeners for the new "View Details" buttons
+            document.querySelectorAll('.toggle-details-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const btn = e.currentTarget;
+                    const details = btn.closest('.result-card').querySelector('.details-grid');
+                    const isHidden = details.classList.toggle('hidden');
+                    
+                    if (isHidden) {
+                        btn.innerHTML = '<i class="fas fa-chevron-down mr-2"></i>View Details';
+                    } else {
+                        btn.innerHTML = '<i class="fas fa-chevron-up mr-2"></i>Hide Details';
+                    }
+                });
+            });
+
+            // Add event listeners for the new copy buttons
+            document.querySelectorAll('.copy-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const textToCopy = e.target.closest('.copy-btn').dataset.copy;
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        e.target.innerHTML = '<i class="fas fa-check"></i>';
+                        setTimeout(() => { e.target.innerHTML = '<i class="far fa-copy"></i>'; }, 2000);
+                    });
+                });
+            });
+        }
+
+        function createResultCard(item, dataType) {
+            const card = document.createElement('div');
+            card.className = 'result-card bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-xl hover:border-blue-400 transition-all';
+
+            if (dataType === 'posts') {
+                card.innerHTML = `
+                    <h3 class="text-xl font-bold text-blue-700 mb-2">${item.title || 'No Title'}</h3>
+                    <p class="text-gray-600 mb-3">${item.content || 'No Content'}</p>
+                    <div class="text-sm text-gray-500">
+                        <i class="fas fa-calendar-alt mr-2"></i>
+                        <span>${item.date ? new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'No Date'}</span>
+                    </div>
+                `;
+            } else { // sdb
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div class="flex-grow pr-4">
+                            <h3 class="text-xl font-bold text-teal-700 mb-1">${item["Site Name Master DPR"] || 'No Site Name'}</h3>
+                            <p class="text-sm text-gray-500">Existing ID: ${item["Exist Site ID"] || 'N/A'}</p>
+                        </div>
+                        <span class="bg-teal-100 text-teal-800 text-xs font-semibold px-2.5 py-0.5 rounded-full self-start">${item.Category || ''}</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t">
+                        <div class="flex items-center text-gray-700">
+                            <strong class="mr-2">New IP ID:</strong> ${item["New IP ID"] || 'N/A'}
+                            <button class="copy-btn ml-2 text-gray-500 hover:text-blue-600" data-copy="${item["New IP ID"] || ''}">
+                                <i class="far fa-copy"></i>
+                            </button>
+                        </div>
+                        <button class="toggle-details-btn mt-4 text-sm text-blue-600 hover:text-blue-800 font-semibold py-2 px-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-all">
+                            <i class="fas fa-chevron-down mr-2"></i>View Details
+                        </button>
+                    </div>
+                    <div class="details-grid hidden mt-4 pt-4 border-t grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3 text-sm">
+                        <div class="font-semibold text-gray-800 col-span-full text-base border-b pb-2 mb-2">Site Details</div>
+                        <div><strong>District:</strong> ${item.District || 'N/A'}</div>
+                        <div><strong>BA:</strong> ${item.BA || 'N/A'}</div>
+                        <div><strong>SDCA:</strong> ${item.SDCA || 'N/A'}</div>
+                        <div><strong>On Air Date:</strong> ${item["ON Aired Date"] || 'N/A'}</div>
+                        <div><strong>Media:</strong> ${item["Media Type"] || 'N/A'}</div>
+                        <div><strong>Router:</strong> ${item.Router || 'N/A'}</div>
+                        <div class="font-semibold text-gray-800 col-span-full text-base border-b pb-2 mb-2 mt-3">4G/eNB IDs</div>
+                        <div><strong>4G ID (B1):</strong> ${item["4G Site ID_Band1"] || 'N/A'}</div>
+                        <div><strong>4G ID (B28):</strong> ${item["4G Site ID__Band28"] || 'N/A'}</div>
+                        <div><strong>4G ID (B41):</strong> ${item["4G Site ID_Band41"] || 'N/A'}</div>
+                        <div><strong>eNB (B1):</strong> ${item.Enb_B1 || 'N/A'}</div>
+                        <div><strong>eNB (B28):</strong> ${item.Enb_B28 || 'N/A'}</div>
+                        <div><strong>eNB (B41):</strong> ${item.Enb_B41 || 'N/A'}</div>
+                        <div class="font-semibold text-gray-800 col-span-full text-base border-b pb-2 mb-2 mt-3">OAM Details</div>
+                        <div><strong>OAM CEF Pool:</strong> ${item["OAM CEF IP pool"] || 'N/A'}</div>
+                        <div><strong>OAM CEF GW:</strong> ${item["OAM CEF HW GW"] || 'N/A'}</div>
+                        <div><strong>OAM CEF IP:</strong> ${item["OAM CEF HW IP"] || 'N/A'}</div>
+                        <div><strong>OAM RAC Pool:</strong> ${item["OAM RAC IP Pool"] || 'N/A'}</div>
+                        <div><strong>OAM RAC GW:</strong> ${item["OAM RAC GW"] || 'N/A'}</div>
+                        <div><strong>OAM RAC VLAN:</strong> ${item["OAM RAC VLAN"] || 'N/A'}</div>
+                        <div class="font-semibold text-gray-800 col-span-full text-base border-b pb-2 mb-2 mt-3">S1C/S1U Details</div>
+                        <div><strong>S1C Pool:</strong> ${item["S1C RAC IP Pool"] || 'N/A'}</div>
+                        <div><strong>S1C GW:</strong> ${item["S1C GW"] || 'N/A'}</div>
+                        <div><strong>S1C VLAN:</strong> ${item["S1C VLAN"] || 'N/A'}</div>
+                        <div><strong>S1U Pool:</strong> ${item["S1U RAC IP Pool"] || 'N/A'}</div>
+                        <div><strong>S1U GW:</strong> ${item["S1U GW"] || 'N/A'}</div>
+                        <div><strong>S1U VLAN:</strong> ${item["S1U VLAN"] || 'N/A'}</div>
+                        <div class="font-semibold text-gray-800 col-span-full text-base border-b pb-2 mb-2 mt-3">Other Info</div>
+                        <div><strong>MME:</strong> ${item.MME || 'N/A'}</div>
+                        <div><strong>MME IP:</strong> ${item["MME IP"] || 'N/A'}</div>
+                        <div><strong>TAC ID:</strong> ${item["TAC ID"] || 'N/A'}</div>
+                        <div><strong>Latitude:</strong> ${item.Latitude || 'N/A'}</div>
+                        <div><strong>Longitude:</strong> ${item.Longitude || 'N/A'}</div>
+                    </div>
+                `;
+            }
+            return card;
+        }
+
+    </script>
+
+</body>
+</html>
