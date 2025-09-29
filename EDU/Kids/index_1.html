@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nursery Learning — A, 1, स्वर</title>
+  <style>
+    :root{
+      --brand:#ff7aa2; /* playful pink */
+      --accent:#ffd166; /* soft yellow */
+      --bg:#f8fbff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:#0f172a}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px}
+    .logo{display:flex;gap:12px;align-items:center}
+    .logo .mark{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--brand),#7dd3fc);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px}
+    nav{display:flex;gap:10px;align-items:center}
+    .btn{background:var(--brand);color:white;padding:8px 12px;border-radius:10px;border:none;font-weight:600;cursor:pointer}
+    .secondary{background:transparent;border:2px solid rgba(15,23,42,0.06);padding:8px;border-radius:10px}
+    .container{max-width:1100px;margin:18px auto;padding:0 16px}
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:center}
+    .card{background:var(--card);border-radius:14px;padding:16px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .lesson-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:12px}
+    .lesson{padding:12px;border-radius:12px;text-align:center}
+    .lesson .icon{font-size:42px}
+    .big{font-size:22px;font-weight:700}
+
+    /* interactive area */
+    .play-area{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .canvas-trace{border:4px dashed rgba(15,23,42,0.06);height:260px;border-radius:10px;background:linear-gradient(180deg,#fff,#f6fbff)}
+    .controls{display:flex;gap:8px;align-items:center;margin-top:8px}
+
+    /* games */
+    .game-area{display:flex;flex-direction:column;gap:12px}
+    .droplist{display:flex;gap:8px;flex-wrap:wrap}
+    .draggable{padding:10px;border-radius:10px;background:linear-gradient(180deg,#fff,#fff7);cursor:grab}
+
+    /* dashboard */
+    .dashboard{display:flex;gap:12px;align-items:center}
+    .badge{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#a7f3d0);display:flex;align-items:center;justify-content:center;font-weight:800}
+
+    footer{padding:22px;text-align:center;color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .play-area{grid-template-columns:1fr}
+    }
+
+    /* printable utility */
+    @media print{
+      header, nav, .controls, footer, .nav-actions{display:none}
+      body{background:white}
+      .printable{page-break-after:always}
+    }
+
+    /* accessibility focus styles */
+    button:focus, .draggable:focus{outline:3px solid rgba(34,197,94,0.25)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="mark" aria-hidden>NL</div>
+      <div>
+        <div style="font-weight:800">Nursery Learning</div>
+        <div style="font-size:12px;color:var(--muted)">Play • Learn • Grow</div>
+      </div>
+    </div>
+
+    <nav class="nav-actions" aria-label="Main navigation">
+      <button id="langToggle" class="secondary" aria-pressed="false">हिन्दी / English</button>
+      <button id="parentDashboardBtn" class="btn">Parent Dashboard</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="big" id="welcomeTitle">English Alphabet</div>
+            <div style="color:var(--muted);margin-top:6px" id="welcomeSubtitle">Interactive lessons, tracing & games</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:12px;color:var(--muted)">Progress</div>
+            <div style="font-weight:700;font-size:18px" id="progressText">0 / 0</div>
+          </div>
+        </div>
+
+        <div class="lesson-grid" id="lessonGrid" aria-live="polite">
+          <!-- lessons injected by JS -->
+        </div>
+      </div>
+
+      <aside class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-weight:700">Quick Play</div>
+          <div style="font-size:12px;color:var(--muted)">Tap to start</div>
+        </div>
+
+        <div class="play-area" style="margin-top:12px">
+          <div>
+            <div id="lessonPanel" class="card" style="padding:12px;border-radius:10px">
+              <div style="display:flex;align-items:center;gap:12px">
+                <div style="width:68px;height:68px;border-radius:12px;background:linear-gradient(135deg,var(--brand),#60a5fa);display:flex;align-items:center;justify-content:center;color:white;font-size:34px;font-weight:900" id="activeChar">A</div>
+                <div>
+                  <div id="activeTitle" style="font-weight:800">Letter A</div>
+                  <div style="color:var(--muted);font-size:13px" id="activeHint">Tap Play to hear sound</div>
+                </div>
+              </div>
+
+              <div style="margin-top:12px">
+                <canvas id="traceCanvas" class="canvas-trace" width="700" height="360" aria-label="Tracing area"></canvas>
+                <div class="controls">
+                  <button id="playAudio" class="btn">Play Sound</button>
+                  <button id="clearTrace" class="secondary">Clear</button>
+                  <button id="completeLesson" class="btn" style="background:#10b981">Mark Complete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="padding:12px;border-radius:10px">
+              <div style="font-weight:800">Mini Game</div>
+              <div style="color:var(--muted);font-size:13px;margin-top:6px">Drag the correct item to match the letter</div>
+
+              <div class="game-area" style="margin-top:12px">
+                <div id="dropTarget" style="padding:14px;border-radius:10px;border:2px dashed rgba(15,23,42,0.06);min-height:92px;display:flex;align-items:center;justify-content:center">Drop here</div>
+                <div class="droplist" id="dropList">
+                  <!-- draggable items -->
+                </div>
+                <div style="display:flex;gap:8px;justify-content:flex-end">
+                  <button id="checkGame" class="btn">Check</button>
+                  <button id="newGame" class="secondary">New</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:12px;padding:12px;border-radius:10px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-weight:700">Printables</div>
+                  <div style="font-size:13px;color:var(--muted)">Download worksheet for this lesson</div>
+                </div>
+                <div>
+                  <button id="downloadPrintable" class="btn">Download</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+    </section>
+
+    <section style="margin-top:18px;display:grid;grid-template-columns:1fr 300px;gap:12px;align-items:start">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-weight:700">Hindi Basics</div>
+          <div style="font-size:12px;color:var(--muted)">स्वर • व्यंजन</div>
+        </div>
+
+        <div style="margin-top:12px" id="hindiGrid">
+          <!-- hindi lessons injected by JS -->
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="font-weight:700">Parent Tools</div>
+        <div style="color:var(--muted);font-size:13px;margin-top:6px">Quick access to goals, reminders and reports</div>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+          <button id="setGoal" class="btn">Set Daily Goal</button>
+          <button id="sendFeedback" class="secondary">Send Feedback</button>
+          <button id="openAdmin" class="secondary">Admin Analytics</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Parent Dashboard Modal -->
+  <div id="dashboardModal" role="dialog" aria-hidden="true" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.45);padding:20px">
+    <div class="card" style="width:720px;max-width:98%;padding:18px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-weight:800">Parent Dashboard</div>
+        <button id="closeDashboard" class="secondary">Close</button>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:12px;align-items:center">
+        <div class="badge" id="topBadge">★</div>
+        <div>
+          <div id="pdName" style="font-weight:700">Child: Little Learner</div>
+          <div style="color:var(--muted);font-size:13px" id="pdSummary">Lessons completed: 0. Strength: Letters. Focus: Numbers.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="card" style="padding:12px">
+          <div style="font-weight:700">Lesson Progress</div>
+          <div style="margin-top:8px" id="lessonProgressList"></div>
+        </div>
+        <div class="card" style="padding:12px">
+          <div style="font-weight:700">Recommendations</div>
+          <ul id="recommendations" style="margin-top:8px"></ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <small>Designed for Nursery • LKG • UKG — Accessible, bilingual, printable</small>
+  </footer>
+
+  <script>
+    // --- Sample data ---
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const numbers = Array.from({length:10},(_,i)=>String(i+1));
+    const hindiSwars = ['अ','आ','इ','ई','उ','ऊ','ए','ऐ','ओ','औ'];
+
+    // State and localStorage keys
+    const STATE_KEY = 'nurseryLearningState_v1';
+    let state = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    if(!state.completed) state.completed = {};
+    if(!state.badges) state.badges = [];
+
+    // DOM refs
+    const lessonGrid = document.getElementById('lessonGrid');
+    const activeChar = document.getElementById('activeChar');
+    const activeTitle = document.getElementById('activeTitle');
+    const activeHint = document.getElementById('activeHint');
+    const playAudioBtn = document.getElementById('playAudio');
+    const clearTraceBtn = document.getElementById('clearTrace');
+    const completeLessonBtn = document.getElementById('completeLesson');
+    const traceCanvas = document.getElementById('traceCanvas');
+    const ctx = traceCanvas.getContext('2d');
+
+    const dropList = document.getElementById('dropList');
+    const dropTarget = document.getElementById('dropTarget');
+    const checkGame = document.getElementById('checkGame');
+    const newGame = document.getElementById('newGame');
+
+    const hindiGrid = document.getElementById('hindiGrid');
+    const progressText = document.getElementById('progressText');
+
+    // Helpers
+    function saveState(){ localStorage.setItem(STATE_KEY, JSON.stringify(state)); }
+    function updateProgress(){
+      const total = letters.length + numbers.length + hindiSwars.length;
+      const done = Object.keys(state.completed).length;
+      progressText.textContent = `${done} / ${total}`;
+    }
+
+    // Populate lessons (letters and numbers quick set)
+    function createLessonItem(char, type='letter'){
+      const el = document.createElement('button');
+      el.className = 'lesson card';
+      el.setAttribute('role','button');
+      el.style.cursor='pointer';
+      el.innerHTML = `<div class="icon">${char}</div><div style="font-weight:700;margin-top:6px">${type==='letter'?'Letter':'Number'} ${char}</div><div style="color:var(--muted);font-size:12px">Tap to start</div>`;
+      el.addEventListener('click',()=>openLesson(char,type));
+      return el;
+    }
+
+    function openLesson(char, type){
+      activeChar.textContent = char;
+      activeTitle.textContent = (type==='letter'?`Letter ${char}`:`Number ${char}`);
+      activeHint.textContent = 'Tap Play to hear sound';
+      loadMiniGame(char,type);
+      drawGuide(char);
+    }
+
+    // populate letters
+    letters.forEach(l=>lessonGrid.appendChild(createLessonItem(l,'letter')));
+    numbers.forEach(n=>lessonGrid.appendChild(createLessonItem(n,'number')));
+
+    // populate hindi
+    hindiSwars.forEach(h=>{
+      const b = document.createElement('button');
+      b.className='lesson card';
+      b.innerHTML = `<div class="icon">${h}</div><div style="font-weight:700;margin-top:6px">Hindi ${h}</div><div style="color:var(--muted);font-size:12px">Tap to hear</div>`;
+      b.addEventListener('click',()=>{
+        openLesson(h,'hindi');
+      });
+      hindiGrid.appendChild(b);
+    });
+
+    updateProgress();
+
+    // --- Audio (demo using SpeechSynthesis) ---
+    function speak(text, lang='en-US'){
+      if('speechSynthesis' in window){
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = lang;
+        speechSynthesis.cancel();
+        speechSynthesis.speak(u);
+      } else {
+        alert('Audio not supported on this device');
+      }
+    }
+
+    playAudioBtn.addEventListener('click',()=>{
+      const char = activeChar.textContent;
+      const isHindi = /[\u0900-\u097F]/.test(char);
+      speak(char, isHindi? 'hi-IN':'en-US');
+    });
+
+    // --- simple tracing canvas ---
+    let drawing=false;
+    function drawGuide(char){
+      // basic visual guide: big faint char in center
+      ctx.clearRect(0,0,traceCanvas.width,traceCanvas.height);
+      ctx.save();
+      ctx.globalAlpha = 0.08;
+      ctx.fillStyle = '#000';
+      ctx.font = '220px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(char, traceCanvas.width/2, traceCanvas.height/2);
+      ctx.restore();
+    }
+
+    traceCanvas.addEventListener('pointerdown', (e)=>{
+      drawing=true; ctx.lineWidth=12; ctx.lineCap='round'; ctx.strokeStyle='#ff7aa2'; ctx.beginPath(); const r = traceCanvas.getBoundingClientRect(); ctx.moveTo(e.clientX - r.left, e.clientY - r.top);
+    });
+    traceCanvas.addEventListener('pointermove', (e)=>{ if(!drawing) return; const r = traceCanvas.getBoundingClientRect(); ctx.lineTo(e.clientX - r.left, e.clientY - r.top); ctx.stroke(); });
+    window.addEventListener('pointerup', ()=>{ drawing=false; });
+    clearTraceBtn.addEventListener('click', ()=>{ drawGuide(activeChar.textContent); });
+
+    // --- Mark complete and badges ---
+    completeLessonBtn.addEventListener('click', ()=>{
+      const key = activeChar.textContent;
+      state.completed[key] = {time:Date.now()};
+      if(!state.badges.includes('Starter')) state.badges.push('Starter');
+      saveState(); updateProgress(); renderDashboard();
+      // simple confetti-ish effect
+      alert(`${key} marked complete! Badge earned.`);
+    });
+
+    // --- Simple drag-and-drop mini game ---
+    function loadMiniGame(char,type){
+      dropList.innerHTML=''; dropTarget.textContent='Drop here';
+      // items: correct item and two distractors
+      const correct = (type==='letter') ? `${char} apple` : (type==='number'? `${char} stars` : `${char} example`);
+      const distractors = ['Ball','Cat','Tree'].sort(()=>Math.random()-0.5).slice(0,2);
+      const items = [correct,...distractors].sort(()=>Math.random()-0.5);
+      items.forEach(it=>{
+        const d = document.createElement('div'); d.tabIndex=0; d.className='draggable card'; d.draggable=true; d.textContent=it; d.setAttribute('role','button');
+        d.addEventListener('dragstart',(ev)=>{ ev.dataTransfer.setData('text/plain', it); });
+        dropList.appendChild(d);
+      });
+      dropTarget.addEventListener('dragover',(e)=>{ e.preventDefault(); dropTarget.style.background='#f0fdf4'; });
+      dropTarget.addEventListener('dragleave',(e)=>{ dropTarget.style.background='transparent'; });
+      dropTarget.addEventListener('drop',(e)=>{ e.preventDefault(); dropTarget.style.background='transparent'; const txt = e.dataTransfer.getData('text/plain'); dropTarget.textContent = txt; dropTarget.dataset.selection = txt; });
+    }
+
+    checkGame.addEventListener('click', ()=>{
+      const selected = dropTarget.dataset.selection || '';
+      if(!selected){ alert('Please drop an item then check'); return; }
+      const char = activeChar.textContent;
+      if(selected.startsWith(char)){
+        alert('Correct! +1 star');
+        // award badge if not yet
+        if(!state.badges.includes('Game Hero')) state.badges.push('Game Hero');
+        state.completed[`game-${char}`] = {time:Date.now(),result:'win'};
+        saveState(); updateProgress(); renderDashboard();
+      } else {
+        alert('Try again!');
+      }
+    });
+    newGame.addEventListener('click', ()=> loadMiniGame(activeChar.textContent,'letter'));
+
+    // --- Printable generation (opens new window with printable content) ---
+    document.getElementById('downloadPrintable').addEventListener('click', ()=>{
+      const char = activeChar.textContent;
+      const popup = window.open('','_blank');
+      popup.document.write(`<html><head><title>Worksheet - ${char}</title><style>body{font-family:Arial;padding:24px} .big{font-size:140px;color:#eee;text-align:center} .trace{border-bottom:2px dashed #ccc;padding:16px;margin:12px 0}</style></head><body><h2>Worksheet: ${char}</h2><p>Trace the letter/number below then color the picture.</p><div class="big">${char}</div><div class="trace">Trace lines here: ________</div><p>Find the missing ${char}: <strong>_ ${char} _</strong></p><p style="margin-top:40px;color:#666;font-size:12px">Instructions for parents: Encourage sounding out the letter and practicing tracing. Use the matching game on the app to reinforce.</p></body></html>`);
+      popup.document.close();
+      popup.print();
+    });
+
+    // --- Parent dashboard ---
+    const dashboardModal = document.getElementById('dashboardModal');
+    document.getElementById('parentDashboardBtn').addEventListener('click', ()=>{ dashboardModal.style.display='flex'; dashboardModal.setAttribute('aria-hidden','false'); renderDashboard(); });
+    document.getElementById('closeDashboard').addEventListener('click', ()=>{ dashboardModal.style.display='none'; dashboardModal.setAttribute('aria-hidden','true'); });
+
+    function renderDashboard(){
+      const lessonProgressList = document.getElementById('lessonProgressList');
+      const rec = document.getElementById('recommendations');
+      lessonProgressList.innerHTML=''; rec.innerHTML='';
+      const completed = Object.keys(state.completed);
+      if(completed.length===0) lessonProgressList.innerHTML = '<div style="color:var(--muted)">No lessons completed yet</div>';
+      completed.slice(0,20).forEach(k=>{
+        const d = document.createElement('div'); d.style.display='flex'; d.style.justifyContent='space-between'; d.style.padding='6px 0'; d.innerHTML = `<div>${k}</div><div style="color:var(--muted);font-size:12px">${new Date(state.completed[k].time).toLocaleString()}</div>`; lessonProgressList.appendChild(d);
+      });
+      // recommendations sample based on missing letters/numbers
+      const totalNeeded = letters.concat(numbers,hindiSwars);
+      const missing = totalNeeded.filter(x=>!state.completed[x]).slice(0,5);
+      missing.forEach(m=>{ const li = document.createElement('li'); li.textContent = `Try lesson: ${m}`; rec.appendChild(li); });
+      document.getElementById('pdSummary').textContent = `Lessons completed: ${completed.length}. Badges: ${state.badges.join(', ') || '—'}`;
+      document.getElementById('topBadge').textContent = (state.badges[0]||'☆');
+    }
+
+    // --- Feedback / set goal (simple prompts) ---
+    document.getElementById('sendFeedback').addEventListener('click', ()=>{
+      const f = prompt('Please enter feedback for the app or a suggestion:');
+      if(f) alert('Thanks — feedback submitted.');
+    });
+    document.getElementById('setGoal').addEventListener('click', ()=>{
+      const g = prompt('Set daily goal (minutes):','10');
+      if(g) { state.dailyGoal = g; saveState(); alert('Daily goal set — we will remind you'); }
+    });
+
+    // --- Language toggle ---
+    const langBtn = document.getElementById('langToggle');
+    let currentLang = 'en';
+    langBtn.addEventListener('click', ()=>{
+      currentLang = currentLang === 'en' ? 'hi' : 'en';
+      langBtn.setAttribute('aria-pressed', currentLang==='hi');
+      // demo translations for header
+      if(currentLang==='hi'){
+        document.getElementById('welcomeTitle').textContent = 'अंग्रेज़ी वर्णमाला';
+        document.getElementById('welcomeSubtitle').textContent = 'इंटरऐक्टिव पाठ, लिखना और खेल';
+      } else {
+        document.getElementById('welcomeTitle').textContent = 'English Alphabet';
+        document.getElementById('welcomeSubtitle').textContent = 'Interactive lessons, tracing & games';
+      }
+    });
+
+    // initial open
+    openLesson('A','letter');
+    renderDashboard();
+
+    // Accessibility: keyboard shortcuts
+    window.addEventListener('keydown',(e)=>{
+      if(e.key==='m'){ playAudioBtn.click(); }
+      if(e.key==='p'){ completeLessonBtn.click(); }
+      if(e.key==='d'){ document.getElementById('downloadPrintable').click(); }
+    });
+
+  </script>
+</body>
+</html>

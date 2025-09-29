@@ -1,0 +1,146 @@
+
+Edit lectures.html and add embeded youtube links given below with description
+
+BCS-011: Computer Basics and PC Software
+Course category
+BCA: Semester-I
+
+Block 1 : Basics of Computer Hardware
+Unit-1 : Computer their Origin and Applications File
+
+Video Lecture: History of Computers -https://youtu.be/ro9kFrlUwlM
+
+Video Lecture: Introduction of Computer System and Operating System - https://youtu.be/G-Lz5atk2IY
+
+Video Lecture on Introduction to Computer System - https://youtu.be/qGhrli5oa_4
+
+
+
+Unit-2 : Functioning of a Computer File
+
+Video Lecture: Functioning of a Computer - https://youtu.be/fYbcYHB96bE
+
+Video Lecture on Central Processing Unit (CPU) - https://youtu.be/M44zAE-SReQ
+
+Video Lecture on Introduction to Memory and IO Devices- https://youtu.be/2OD2XQh56Yk
+
+
+Unit-3 : Memory System File
+
+Video Lecture: Memory System - I - https://youtu.be/uOs1F1yIUms
+
+Video Lecture: Memory System - II - https://youtu.be/jS6f8ncRWps
+
+Video Lecture on Memory Organisation - https://youtu.be/lbt7xEk0r3A
+
+Video Lecture on Main Memory of a PC - https://youtu.be/M1XLolB51Jo
+
+Video Lecture on Secondary Memory and its Uses - https://youtu.be/RLvxpmAGNzI
+
+Unit-4 : Input Output Devices File
+
+Video Lecture on Introduction to Input and Output Devices - https://youtu.be/wx2SjU5Tf3U
+
+Video Lecture on Input Devices - https://youtu.be/1k-Csoq2aZ4
+
+Video Lecture on Output Devices - https://youtu.be/05oITUGEvkQ
+
+
+Unit-5 : My Personal Computer File
+
+Video Lecture: My Personal Computer - I - https://youtu.be/l0xyECSgXn8
+
+Video Lecture: My Personal Computer - II - https://youtu.be/0h8gKW3VcgQ
+
+
+
+Block 2 : Basics of Computer Software
+
+Unit-1  Software Evolution 
+
+Video Lecture: Software Evolution - I - https://youtu.be/S2X_7jneufk
+
+Video Lecture on Introduction to Software - https://youtu.be/JL9WRLGYoBE
+
+Video Lectures on Software Vulnerability and Viruses - https://youtu.be/ayvaR3YP24g
+
+Video Lecture on Antiviral S/W Worm and Trojan Horses - https://youtu.be/d-6LsPrDiOs
+
+Unit-2 : Operating System
+
+Video Lecture Introduction to Operating System - https://youtu.be/EsN16PXcLUs
+
+Unit-3 : Concept in Programming Language
+Video Lecture on Algorithms and Flowcharts- https://youtu.be/UD7O8WoxVgU
+
+Unit-4 : Computer Applications
+
+Video Lecture on Application Software - https://youtu.be/NN9hSDi76VU
+Video Lecture on Entity Relationship Diagram- https://youtu.be/cllP6_XwkRE
+Video Lecture on Introduction to Database Management System- https://youtu.be/ax3QXU3QceY
+
+
+Block 3  Internet Technologies
+
+Unit-1 : Networking and Internet
+
+Video Lecture on Fundamentals of Data Communications-1 (Introduction, Data and Signal) - https://youtu.be/vMT524hXcwc
+Video Lecture on Fundamentals of Data Communications-2 ( Physical Connection, Data Transmission Modes) - https://youtu.be/mEOUqillwzw
+Video Lecture on Fundamentals of Data Communications-3 ( Modem, Speed of Data Transmission, Modes of Data Transmission) - https://youtu.be/aF_zi6iXWSo
+Video Lecture on Network Devices - https://youtu.be/OwvEMzY07cw
+Video Lecture on Network Architecture and Topologies- https://youtu.be/lcUHLE5vyyA
+
+Unit-2 : Web Applications-I
+Video Lecture on Introduction to Internet - https://youtu.be/jDN2dAWB3zY
+Video Lecture on Components of Internet - https://youtu.be/PH8gi5GUwt8
+Video Lecture on Internet Addressing- https://youtu.be/JnriMdzKZNc
+Video Lecture on Web Browsers - https://youtu.be/k52Mvq9eDBk
+Video Lecture on Principles of Internet Search Engines - https://youtu.be/OkAG5C3rEB4
+Video Lecture on Search Patterns - https://youtu.be/AI0DA4HXN2Y
+Video Lecture on Using E-Mail- https://youtu.be/Y-foXm8vLgg
+Video Lecture on Using Messenger - https://youtu.be/vo1rKytx4Y4
+
+Unit-3 : Web Applications-II
+Video Lecture on New Possibilities due to Internet - https://youtu.be/x7NY6ayTOjo
+Video Lecture on Some More Applications of Internet-https://youtu.be/jbjAZ-5o_vQ
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

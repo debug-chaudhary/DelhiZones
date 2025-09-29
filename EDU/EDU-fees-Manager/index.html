@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu-Manager | School & Tuition Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-link {
+            transition: all 0.2s ease-in-out;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background-color: #3b82f6;
+            color: white;
+            transform: translateX(4px);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div id="app" class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="bg-blue-600 text-white w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out z-30">
+            <div class="px-4 flex items-center space-x-2">
+                <i data-lucide="book-marked" class="h-8 w-8"></i>
+                <h1 class="text-2xl font-bold">Edu-Manager</h1>
+            </div>
+            <nav id="nav-menu" class="px-4">
+                <!-- Navigation links will be populated by JS -->
+            </nav>
+            <div class="px-4 absolute bottom-4 w-full left-0">
+                 <div class="flex items-center justify-center p-2 rounded-lg bg-blue-700">
+                    <label for="userToggle" class="mr-2 text-sm font-medium">Student</label>
+                    <div class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" id="userToggle" class="sr-only peer">
+                        <div class="w-11 h-6 bg-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
+                    </div>
+                    <label for="userToggle" class="ml-2 text-sm font-medium">Admin</label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="flex justify-between items-center p-4 bg-white border-b">
+                <button id="menu-button" class="md:hidden">
+                    <i data-lucide="menu" class="h-6 w-6"></i>
+                </button>
+                <h2 id="page-title" class="text-2xl font-semibold">Dashboard</h2>
+                <div class="flex items-center space-x-4">
+                    <i data-lucide="bell" class="h-6 w-6 text-gray-500 cursor-pointer"></i>
+                    <div id="user-profile" class="flex items-center space-x-2">
+                        <img src="https://placehold.co/40x40/E2E8F0/4A5568?text=U" alt="User Avatar" class="rounded-full w-10 h-10 border-2 border-gray-200">
+                        <div>
+                            <p id="user-name" class="font-semibold text-sm">User Name</p>
+                            <p id="user-role" class="text-xs text-gray-500">Role</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="main-content" class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                <!-- Content will be populated by JS -->
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            const userToggle = document.getElementById('userToggle');
+            const navMenu = document.getElementById('nav-menu');
+            const mainContent = document.getElementById('main-content');
+            const pageTitle = document.getElementById('page-title');
+            const userName = document.getElementById('user-name');
+            const userRole = document.getElementById('user-role');
+            const menuButton = document.getElementById('menu-button');
+            const sidebar = document.getElementById('sidebar');
+
+            // --- MOCK DATA ---
+            const studentData = {
+                name: "Alex Doe",
+                role: "Student",
+                dashboard: {
+                    welcome: "Welcome back, Alex!",
+                    stats: [
+                        { label: "Enrolled Courses", value: 3, icon: "book-open" },
+                        { label: "Pending Fees", value: "$250.00", icon: "banknote" },
+                        { label: "Attendance", value: "92%", icon: "check-circle" },
+                        { label: "Upcoming Classes", value: 2, icon: "calendar" }
+                    ]
+                },
+                courses: [
+                    { id: 1, title: "Advanced Mathematics", progress: 75, instructor: "Dr. Alan Turing", schedule: "Mon, Wed, Fri - 10:00 AM" },
+                    { id: 2, title: "Quantum Physics", progress: 50, instructor: "Dr. Marie Curie", schedule: "Tue, Thu - 2:00 PM" },
+                    { id: 3, title: "History of Art", progress: 90, instructor: "Dr. Vincent Van Gogh", schedule: "Fri - 4:00 PM" }
+                ],
+                fees: {
+                    total: 1500,
+                    paid: 1250,
+                    pending: 250,
+                    history: [
+                        { id: "TXN728", date: "2024-08-01", amount: 750, status: "Paid" },
+                        { id: "TXN729", date: "2024-09-01", amount: 500, status: "Paid" },
+                        { id: "TXN730", date: "2024-10-01", amount: 250, status: "Pending" }
+                    ]
+                },
+                profile: {
+                    id: "STU1024",
+                    email: "alex.doe@example.com",
+                    phone: "+1 234 567 890",
+                    address: "123 Science Lane, Innovation City"
+                }
+            };
+
+            const adminData = {
+                name: "Dr. Evelyn Reed",
+                role: "Administrator",
+                dashboard: {
+                    welcome: "Administrator Overview",
+                    stats: [
+                        { label: "Total Students", value: 152, icon: "users" },
+                        { label: "Fees Collected (Month)", value: "$18,500", icon: "trending-up" },
+                        { label: "Fees Pending", value: "$4,200", icon: "alert-circle" },
+                        { label: "Active Courses", value: 12, icon: "book-copy" }
+                    ]
+                },
+                students: [
+                    { id: "STU1024", name: "Alex Doe", course: "Quantum Physics", fees: "Pending", report: "View" },
+                    { id: "STU1025", name: "Ben Carson", course: "Advanced Mathematics", fees: "Paid", report: "View" },
+                    { id: "STU1026", name: "Cathy Dean", course: "History of Art", fees: "Paid", report: "View" },
+                    { id: "STU1027", name: "David Evans", course: "Computer Science", fees: "Overdue", report: "View" },
+                     { id: "STU1028", name: "Eva Green", course: "Literature", fees: "Paid", report: "View" },
+                ],
+                 fees: {
+                    history: [
+                        { id: "TXN728", student: "Alex Doe", date: "2024-08-01", amount: 750, status: "Paid" },
+                        { id: "TXN729", student: "Alex Doe", date: "2024-09-01", amount: 500, status: "Paid" },
+                        { id: "TXN731", student: "Ben Carson", date: "2024-09-02", amount: 1200, status: "Paid" },
+                        { id: "TXN732", student: "David Evans", date: "2024-09-01", amount: 600, status: "Pending" }
+                    ]
+                },
+            };
+
+            const navLinks = {
+                student: [
+                    { name: "Dashboard", icon: "layout-dashboard", view: "dashboard" },
+                    { name: "My Courses", icon: "book-open-check", view: "courses" },
+                    { name: "Fee Details", icon: "receipt", view: "fees" },
+                    { name: "My Profile", icon: "user", view: "profile" }
+                ],
+                admin: [
+                    { name: "Dashboard", icon: "layout-dashboard", view: "dashboard" },
+                    { name: "Students", icon: "users-2", view: "students" },
+                    { name: "Fee Records", icon: "dollar-sign", view: "fees" },
+                    { name: "Courses", icon: "book-plus", view: "courses" }
+                ]
+            };
+
+            // --- UI RENDERING FUNCTIONS ---
+            
+            function renderNav(role) {
+                const links = navLinks[role];
+                navMenu.innerHTML = links.map(link => `
+                    <a href="#" data-view="${link.view}" class="sidebar-link flex items-center space-x-3 py-2 px-3 rounded-md font-medium">
+                        <i data-lucide="${link.icon}" class="h-5 w-5"></i>
+                        <span>${link.name}</span>
+                    </a>
+                `).join('');
+                lucide.createIcons();
+                // Add event listeners to new links
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const view = e.currentTarget.dataset.view;
+                        switchView(role, view);
+                        // For mobile view, close sidebar on link click
+                        if(window.innerWidth < 768) {
+                           sidebar.classList.add('-translate-x-full');
+                        }
+                    });
+                });
+                // Set first link as active
+                document.querySelector('.sidebar-link').classList.add('active');
+            }
+
+            function renderHeader(role) {
+                const user = role === 'student' ? studentData : adminData;
+                userName.textContent = user.name;
+                userRole.textContent = user.role;
+            }
+
+            function renderStatCard({ label, value, icon }) {
+                return `
+                    <div class="bg-white p-6 rounded-xl shadow-md flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500">${label}</p>
+                            <p class="text-2xl font-bold">${value}</p>
+                        </div>
+                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full">
+                            <i data-lucide="${icon}" class="h-6 w-6"></i>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function renderStudentDashboard() {
+                const data = studentData.dashboard;
+                return `
+                    <h3 class="text-xl font-semibold mb-4">${data.welcome}</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        ${data.stats.map(renderStatCard).join('')}
+                    </div>
+                    <div class="mt-8 bg-white p-6 rounded-xl shadow-md">
+                         <h3 class="text-lg font-semibold mb-4">Your Courses Progress</h3>
+                         <div class="space-y-4">
+                            ${studentData.courses.map(course => `
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="font-medium">${course.title}</p>
+                                        <p class="text-sm text-gray-600">${course.progress}%</p>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: ${course.progress}%"></div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                         </div>
+                    </div>
+                `;
+            }
+
+            function renderStudentCourses() {
+                return `
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${studentData.courses.map(course => `
+                             <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                                <h4 class="text-xl font-bold text-blue-600">${course.title}</h4>
+                                <p class="text-sm text-gray-500 mt-1">Instructor: ${course.instructor}</p>
+                                <p class="text-sm text-gray-500 mt-1">Schedule: ${course.schedule}</p>
+                                <div class="mt-4">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-sm font-medium">Progress</p>
+                                        <p class="text-sm font-medium">${course.progress}%</p>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: ${course.progress}%"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-6 flex space-x-2">
+                                    <button class="w-full bg-blue-500 text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-600 transition-colors">View Syllabus</button>
+                                    <button class="w-full bg-gray-200 text-gray-700 py-2 rounded-lg text-sm font-semibold hover:bg-gray-300 transition-colors">Join Class</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            function renderStudentFees() {
+                const { total, paid, pending, history } = studentData.fees;
+                return `
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-1 space-y-4">
+                            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                                <p class="text-gray-500">Total Fees</p>
+                                <p class="text-3xl font-bold">$${total.toFixed(2)}</p>
+                            </div>
+                             <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                                <p class="text-green-500">Fees Paid</p>
+                                <p class="text-3xl font-bold text-green-500">$${paid.toFixed(2)}</p>
+                            </div>
+                             <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                                <p class="text-red-500">Pending Dues</p>
+                                <p class="text-3xl font-bold text-red-500">$${pending.toFixed(2)}</p>
+                                <button class="mt-4 bg-red-500 text-white py-2 px-6 rounded-lg font-semibold hover:bg-red-600 transition-colors">Pay Now</button>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-md">
+                            <h4 class="text-lg font-semibold mb-4">Transaction History</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left">
+                                    <thead>
+                                        <tr class="bg-gray-50 border-b">
+                                            <th class="p-3 text-sm font-semibold">Transaction ID</th>
+                                            <th class="p-3 text-sm font-semibold">Date</th>
+                                            <th class="p-3 text-sm font-semibold">Amount</th>
+                                            <th class="p-3 text-sm font-semibold">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${history.map(item => `
+                                            <tr class="border-b">
+                                                <td class="p-3">${item.id}</td>
+                                                <td class="p-3">${item.date}</td>
+                                                <td class="p-3">$${item.amount.toFixed(2)}</td>
+                                                <td class="p-3">
+                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full ${
+                                                        item.status === 'Paid' ? 'bg-green-100 text-green-700' :
+                                                        item.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' :
+                                                        'bg-red-100 text-red-700'
+                                                    }">${item.status}</span>
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function renderStudentProfile() {
+                const { id, email, phone, address } = studentData.profile;
+                return `
+                    <div class="bg-white p-8 rounded-xl shadow-md max-w-2xl mx-auto">
+                        <div class="flex flex-col items-center">
+                            <img src="https://placehold.co/100x100/3B82F6/FFFFFF?text=A" alt="Profile" class="rounded-full w-24 h-24 border-4 border-blue-200">
+                            <h3 class="text-2xl font-bold mt-4">${studentData.name}</h3>
+                            <p class="text-gray-500">${id}</p>
+                        </div>
+                        <div class="mt-8 border-t pt-6">
+                            <h4 class="text-lg font-semibold mb-4">Contact Information</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <i data-lucide="mail" class="w-5 h-5 mr-3 text-gray-400"></i>
+                                    <span>${email}</span>
+                                </div>
+                                 <div class="flex items-center">
+                                    <i data-lucide="phone" class="w-5 h-5 mr-3 text-gray-400"></i>
+                                    <span>${phone}</span>
+                                </div>
+                                 <div class="flex items-center">
+                                    <i data-lucide="map-pin" class="w-5 h-5 mr-3 text-gray-400"></i>
+                                    <span>${address}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-right">
+                             <button class="bg-blue-500 text-white py-2 px-6 rounded-lg font-semibold hover:bg-blue-600 transition-colors">Edit Profile</button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            function renderAdminDashboard() {
+                const data = adminData.dashboard;
+                return `
+                    <h3 class="text-xl font-semibold mb-4">${data.welcome}</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        ${data.stats.map(renderStatCard).join('')}
+                    </div>
+                     <div class="mt-8 bg-white p-6 rounded-xl shadow-md">
+                         <h3 class="text-lg font-semibold mb-4">Recent Fee Transactions</h3>
+                         ${renderFeeTable(adminData.fees.history, true)}
+                    </div>
+                `;
+            }
+
+            function renderAdminStudents() {
+                 return `
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-lg font-semibold">All Students</h4>
+                            <button class="flex items-center bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+                               <i data-lucide="user-plus" class="w-4 h-4 mr-2"></i> Add Student
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead>
+                                    <tr class="bg-gray-50 border-b">
+                                        <th class="p-3 text-sm font-semibold">Student ID</th>
+                                        <th class="p-3 text-sm font-semibold">Name</th>
+                                        <th class="p-3 text-sm font-semibold">Course</th>
+                                        <th class="p-3 text-sm font-semibold">Fee Status</th>
+                                        <th class="p-3 text-sm font-semibold">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${adminData.students.map(student => `
+                                        <tr class="border-b">
+                                            <td class="p-3">${student.id}</td>
+                                            <td class="p-3 font-medium">${student.name}</td>
+                                            <td class="p-3">${student.course}</td>
+                                            <td class="p-3">
+                                                 <span class="px-2 py-1 text-xs font-semibold rounded-full ${
+                                                    student.fees === 'Paid' ? 'bg-green-100 text-green-700' :
+                                                    student.fees === 'Pending' ? 'bg-yellow-100 text-yellow-700' :
+                                                    'bg-red-100 text-red-700'
+                                                }">${student.fees}</span>
+                                            </td>
+                                            <td class="p-3">
+                                                <button class="text-blue-600 hover:underline text-sm font-medium">View Report</button>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function renderFeeTable(history, includeStudent = false) {
+                 return `
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="bg-gray-50 border-b">
+                                    <th class="p-3 text-sm font-semibold">Transaction ID</th>
+                                    ${includeStudent ? '<th class="p-3 text-sm font-semibold">Student</th>' : ''}
+                                    <th class="p-3 text-sm font-semibold">Date</th>
+                                    <th class="p-3 text-sm font-semibold">Amount</th>
+                                    <th class="p-3 text-sm font-semibold">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${history.map(item => `
+                                    <tr class="border-b">
+                                        <td class="p-3">${item.id}</td>
+                                        ${includeStudent ? `<td class="p-3 font-medium">${item.student}</td>` : ''}
+                                        <td class="p-3">${item.date}</td>
+                                        <td class="p-3">$${item.amount.toFixed(2)}</td>
+                                        <td class="p-3">
+                                            <span class="px-2 py-1 text-xs font-semibold rounded-full ${
+                                                item.status === 'Paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+                                            }">${item.status}</span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                 `;
+            }
+
+            function renderAdminFees() {
+                 return `
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                         <h4 class="text-lg font-semibold mb-4">All Fee Transactions</h4>
+                         ${renderFeeTable(adminData.fees.history, true)}
+                    </div>
+                 `;
+            }
+
+            function renderAdminCourses() {
+                 return `
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                         <i data-lucide="construct" class="w-16 h-16 mx-auto text-gray-300"></i>
+                         <h3 class="mt-4 text-xl font-semibold">Course Management</h3>
+                         <p class="text-gray-500 mt-2">This feature is under construction. Check back soon!</p>
+                    </div>
+                 `;
+            }
+
+
+            // --- VIEW SWITCHING LOGIC ---
+
+            function switchView(role, view) {
+                let content = '';
+                let title = '';
+
+                if (role === 'student') {
+                    switch (view) {
+                        case 'dashboard':
+                            title = 'Dashboard';
+                            content = renderStudentDashboard();
+                            break;
+                        case 'courses':
+                            title = 'My Courses';
+                            content = renderStudentCourses();
+                            break;
+                        case 'fees':
+                            title = 'Fee Details';
+                            content = renderStudentFees();
+                            break;
+                        case 'profile':
+                            title = 'My Profile';
+                            content = renderStudentProfile();
+                            break;
+                        default:
+                            title = 'Dashboard';
+                            content = renderStudentDashboard();
+                    }
+                } else { // admin
+                    switch (view) {
+                         case 'dashboard':
+                            title = 'Admin Dashboard';
+                            content = renderAdminDashboard();
+                            break;
+                        case 'students':
+                            title = 'Student Management';
+                            content = renderAdminStudents();
+                            break;
+                        case 'fees':
+                            title = 'Fee Records';
+                            content = renderAdminFees();
+                            break;
+                        case 'courses':
+                            title = 'Course Management';
+                            content = renderAdminCourses();
+                            break;
+                        default:
+                           title = 'Admin Dashboard';
+                           content = renderAdminDashboard();
+                    }
+                }
+
+                pageTitle.textContent = title;
+                mainContent.innerHTML = `<div class="fade-in">${content}</div>`;
+                lucide.createIcons();
+                
+                // Update active link
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.classList.remove('active');
+                    if(link.dataset.view === view) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            function initializeApp(role) {
+                renderNav(role);
+                renderHeader(role);
+                switchView(role, 'dashboard');
+            }
+
+            // --- EVENT LISTENERS ---
+
+            userToggle.addEventListener('change', (e) => {
+                const role = e.target.checked ? 'admin' : 'student';
+                initializeApp(role);
+            });
+
+            menuButton.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+            });
+            
+            // --- INITIAL LOAD ---
+            initializeApp('student'); // Start with student view
+        });
+    </script>
+</body>
+</html>
+
