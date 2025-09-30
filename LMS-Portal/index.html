@@ -3,535 +3,558 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IGNOU BCA Study Materials</title>
+    <title>IGNOU BCA Learning Hub - Delhizones.com</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            color: white;
-            margin-bottom: 30px;
-            padding: 20px;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .main-content {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        .accordion-content {
+            max-height: 0;
             overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
         }
-
-        .nav-tabs {
-            display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
+        .accordion-button[aria-expanded="true"] .accordion-icon {
+            transform: rotate(90deg);
         }
-
-        .nav-tab {
-            flex: 1;
-            padding: 15px 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #666;
-            transition: all 0.3s ease;
+        .accordion-icon {
+            transition: transform 0.3s ease-in-out;
         }
-
-        .nav-tab.active {
-            background: #667eea;
-            color: white;
-        }
-
-        .nav-tab:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        .content-area {
-            padding: 30px;
-            min-height: 500px;
-        }
-
-        .semester-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .semester-card {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .semester-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .semester-card h3 {
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-        }
-
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .subject-card {
-            background: #fff;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .subject-card:hover {
-            border-color: #667eea;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
-        }
-
-        .subject-code {
-            font-weight: bold;
-            color: #667eea;
-            font-size: 0.9rem;
-        }
-
-        .subject-name {
-            margin-top: 5px;
-            font-weight: 600;
-        }
-
-        .toc-container {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .toc-item {
-            padding: 10px 15px;
-            margin: 5px 0;
-            background: white;
-            border-radius: 5px;
-            cursor: pointer;
-            border-left: 4px solid #667eea;
-            transition: all 0.3s ease;
-        }
-
-        .toc-item:hover {
-            background: #667eea;
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .content-viewer {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .breadcrumb {
-            background: #f8f9fa;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .back-btn {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            transition: background 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: #5a6268;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .nav-tabs {
-                flex-direction: column;
-            }
-            
-            .semester-grid,
-            .subjects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            header h1 {
-                font-size: 2rem;
-            }
+        #fileViewerModal {
+            z-index: 100;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>📚 IGNOU BCA Study Materials</h1>
-            <p>Access your semester-wise ebooks and study materials</p>
-        </header>
+<body class="text-gray-800">
 
-        <div class="main-content">
-            <div class="nav-tabs">
-                <button class="nav-tab active" onclick="showHome()">🏠 Home</button>
-                <button class="nav-tab" onclick="showSubjects()">📖 Subjects</button>
-                <button class="nav-tab" onclick="showContent()">📄 Content</button>
-            </div>
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center gap-2" aria-label="Delhizones Homepage">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                        <g clip-path="url(#clip0_105_2_header)">
+                            <circle cx="16" cy="16" r="15.5" fill="white" stroke="#2563EB"></circle>
+                            <circle cx="16" cy="16" r="12" fill="#2563EB"></circle>
+                            <path d="M10.5 11.5L16 20.5L21.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z" fill="white"></path>
+                            <path d="M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z" fill="white"></path>
+                        </g>
+                        <defs><clipPath id="clip0_105_2_header"><rect width="32" height="32" fill="white"></rect></clipPath></defs>
+                    </svg>
+                    <span class="text-2xl font-bold text-gray-900">Delhi<span class="text-blue-600">zones</span></span>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="/#services" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Services</a>
+                    <a href="/posts/" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Posts</a>
+                    <a href="/#support" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Support Us</a>
+                    <a href="/contact.html" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Contact</a>
+                </nav>
 
-            <div class="content-area">
-                <!-- Home View -->
-                <div id="home-view">
-                    <h2 style="margin-bottom: 20px; color: #333;">Select Your Semester</h2>
-                    <div class="semester-grid">
-                        <div class="semester-card" onclick="selectSemester(1)">
-                            <h3>Semester 1</h3>
-                            <p>Foundation Courses</p>
-                            <small>6 Subjects</small>
-                        </div>
-                        <div class="semester-card" onclick="selectSemester(2)">
-                            <h3>Semester 2</h3>
-                            <p>Core Programming</p>
-                            <small>6 Subjects</small>
-                        </div>
-                        <div class="semester-card" onclick="selectSemester(3)">
-                            <h3>Semester 3</h3>
-                            <p>Data Structures & Web</p>
-                            <small>6 Subjects</small>
-                        </div>
-                        <div class="semester-card" onclick="selectSemester(4)">
-                            <h3>Semester 4</h3>
-                            <p>Database & Networks</p>
-                            <small>6 Subjects</small>
-                        </div>
-                        <div class="semester-card" onclick="selectSemester(5)">
-                            <h3>Semester 5</h3>
-                            <p>Software Engineering</p>
-                            <small>6 Subjects</small>
-                        </div>
-                        <div class="semester-card" onclick="selectSemester(6)">
-                            <h3>Semester 6</h3>
-                            <p>Project & Electives</p>
-                            <small>4 Subjects + Project</small>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Subjects View -->
-                <div id="subjects-view" class="hidden">
-                    <button class="back-btn" onclick="showHome()">← Back to Semesters</button>
-                    <div class="breadcrumb">Home > <span id="current-semester">Semester</span></div>
-                    
-                    <h2 style="margin-bottom: 20px; color: #333;">Select Subject</h2>
-                    <div class="subjects-grid" id="subjects-container">
-                        <!-- Subjects will be loaded here -->
-                    </div>
-                </div>
-
-                <!-- Content View -->
-                <div id="content-view" class="hidden">
-                    <button class="back-btn" onclick="showSubjects()">← Back to Subjects</button>
-                    <div class="breadcrumb">Home > <span id="breadcrumb-semester">Semester</span> > <span id="breadcrumb-subject">Subject</span></div>
-                    
-                    <h2 style="margin-bottom: 20px; color: #333;">Table of Contents</h2>
-                    <div class="toc-container" id="toc-container">
-                        <!-- Table of contents will be loaded here -->
-                    </div>
-
-                    <div class="content-viewer" id="content-viewer" style="display: none;">
-                        <h3 id="content-title"></h3>
-                        <div id="content-text"></div>
-                    </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i id="menu-open-icon" data-lucide="menu" class="w-6 h-6"></i>
+                        <i id="menu-close-icon" data-lucide="x" class="w-6 h-6 hidden"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
+        
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+             <a href="/#services" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Services</a>
+             <a href="/posts/" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Posts</a>
+             <a href="/#support" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Support Us</a>
+             <a href="/contact.html" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Contact</a>
+        </div>
+    </header>
 
-    <script>
-        // Sample data structure for IGNOU BCA subjects
-        const semesterData = {
-            1: {
-                name: "Semester 1",
-                subjects: [
-                    { code: "BCS-011", name: "Computer Basics and PC Software", units: 4 },
-                    { code: "BCS-012", name: "Basic Mathematics", units: 4 },
-                    { code: "BEGAE-182", name: "English Communication", units: 4 },
-                    { code: "BEGF-137", name: "Language Through Literature", units: 4 },
-                    { code: "FHS-001", name: "Foundation Course in Humanities and Social Sciences", units: 4 },
-                    { code: "ECO-001", name: "Business Organisation", units: 4 }
-                ]
-            },
-            2: {
-                name: "Semester 2",
-                subjects: [
-                    { code: "BCS-021", name: "C Language Programming", units: 4 },
-                    { code: "BCS-022", name: "Assembly Language Programming", units: 3 },
-                    { code: "BCS-023", name: "Introduction to Database Management Systems", units: 3 },
-                    { code: "MTE-001", name: "Calculus", units: 4 },
-                    { code: "MTE-002", name: "Linear Algebra", units: 3 },
-                    { code: "BCS-024", name: "Discrete Mathematics", units: 3 }
-                ]
-            },
-            3: {
-                name: "Semester 3",
-                subjects: [
-                    { code: "BCS-031", name: "Programming in C++", units: 4 },
-                    { code: "BCS-032", name: "Object Oriented Programming using C++", units: 3 },
-                    { code: "BCS-040", name: "Statistical Techniques", units: 4 },
-                    { code: "BCS-041", name: "Fundamentals of Computer Networks", units: 4 },
-                    { code: "BCS-042", name: "Introduction to Algorithm Design", units: 2 },
-                    { code: "MCSL-016", name: "Internet Concepts and Web Design", units: 3 }
-                ]
-            },
-            4: {
-                name: "Semester 4",
-                subjects: [
-                    { code: "BCS-051", name: "Introduction to Software Engineering", units: 3 },
-                    { code: "BCS-052", name: "Network Programming and Administration", units: 4 },
-                    { code: "BCS-053", name: "Web Programming", units: 3 },
-                    { code: "BCS-054", name: "Computer Oriented Numerical Techniques", units: 4 },
-                    { code: "BCS-055", name: "Business Communication", units: 2 },
-                    { code: "MCSL-017", name: "C and Assembly Language Programming", units: 4 }
-                ]
-            },
-            5: {
-                name: "Semester 5",
-                subjects: [
-                    { code: "BCS-061", name: "TCP/IP Programming", units: 2 },
-                    { code: "BCS-062", name: "E-Commerce", units: 4 },
-                    { code: "MCSL-045", name: "UNIX and DBMS Programming", units: 3 },
-                    { code: "BCSL-043", name: "Java Programming", units: 3 },
-                    { code: "BCSL-044", name: "Statistical Computing", units: 3 },
-                    { code: "BCSL-045", name: "Algorithm Design and Analysis", units: 3 }
-                ]
-            },
-            6: {
-                name: "Semester 6",
-                subjects: [
-                    { code: "BCSP-064", name: "Project", units: 8 },
-                    { code: "BCS-063", name: "Introduction to System Software", units: 3 },
-                    { code: "BCSL-063", name: "System Software Lab", units: 2 },
-                    { code: "MCSL-054", name: "Advanced Internet Technologies", units: 3 }
-                ]
-            }
-        };
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-white">
+            <div class="container mx-auto px-6 py-16 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                    IGNOU BCA Learning Hub
+                </h1>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+                    Your complete resource portal for the Bachelor of Computer Applications program. Access all study materials, lab manuals, and assignments by semester.
+                </p>
+            </div>
+        </section>
 
-        // Sample table of contents data
-        const tocData = {
-            "BCS-011": [
-                { title: "Unit 1: Introduction to Computer Systems", page: 1 },
-                { title: "Unit 2: Computer Hardware", page: 15 },
-                { title: "Unit 3: Software Concepts", page: 30 },
-                { title: "Unit 4: Operating Systems", page: 45 }
-            ],
-            "BCS-021": [
-                { title: "Unit 1: Introduction to C Programming", page: 1 },
-                { title: "Unit 2: Data Types and Operators", page: 20 },
-                { title: "Unit 3: Control Structures", page: 40 },
-                { title: "Unit 4: Functions", page: 60 },
-                { title: "Unit 5: Arrays and Strings", page: 80 },
-                { title: "Unit 6: Pointers", page: 100 }
-            ],
-            "BCS-031": [
-                { title: "Unit 1: Introduction to C++", page: 1 },
-                { title: "Unit 2: Classes and Objects", page: 25 },
-                { title: "Unit 3: Inheritance", page: 50 },
-                { title: "Unit 4: Polymorphism", page: 75 }
-            ]
-        };
-
-        let currentSemester = null;
-        let currentSubject = null;
-
-        function showHome() {
-            document.getElementById('home-view').classList.remove('hidden');
-            document.getElementById('subjects-view').classList.add('hidden');
-            document.getElementById('content-view').classList.add('hidden');
-            
-            // Update active tab
-            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.nav-tab')[0].classList.add('active');
-        }
-
-        function showSubjects() {
-            if (!currentSemester) {
-                showHome();
-                return;
-            }
-            
-            document.getElementById('home-view').classList.add('hidden');
-            document.getElementById('subjects-view').classList.remove('hidden');
-            document.getElementById('content-view').classList.add('hidden');
-            
-            // Update active tab
-            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.nav-tab')[1].classList.add('active');
-        }
-
-        function showContent() {
-            if (!currentSubject) {
-                showSubjects();
-                return;
-            }
-            
-            document.getElementById('home-view').classList.add('hidden');
-            document.getElementById('subjects-view').classList.add('hidden');
-            document.getElementById('content-view').classList.remove('hidden');
-            
-            // Update active tab
-            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.nav-tab')[2].classList.add('active');
-        }
-
-        function selectSemester(semesterNum) {
-            currentSemester = semesterNum;
-            const semester = semesterData[semesterNum];
-            
-            // Update UI
-            document.getElementById('current-semester').textContent = semester.name;
-            document.getElementById('breadcrumb-semester').textContent = semester.name;
-            
-            // Load subjects
-            const container = document.getElementById('subjects-container');
-            container.innerHTML = '';
-            
-            semester.subjects.forEach(subject => {
-                const subjectDiv = document.createElement('div');
-                subjectDiv.className = 'subject-card';
-                subjectDiv.onclick = () => selectSubject(subject);
-                
-                subjectDiv.innerHTML = `
-                    <div class="subject-code">${subject.code}</div>
-                    <div class="subject-name">${subject.name}</div>
-                    <small>Units: ${subject.units}</small>
-                `;
-                
-                container.appendChild(subjectDiv);
-            });
-            
-            showSubjects();
-        }
-
-        function selectSubject(subject) {
-            currentSubject = subject;
-            
-            // Update breadcrumb
-            document.getElementById('breadcrumb-subject').textContent = `${subject.code} - ${subject.name}`;
-            
-            // Load table of contents
-            loadTableOfContents(subject.code);
-            
-            showContent();
-        }
-
-        function loadTableOfContents(subjectCode) {
-            const container = document.getElementById('toc-container');
-            container.innerHTML = '';
-            
-            const toc = tocData[subjectCode];
-            if (!toc) {
-                container.innerHTML = '<p>Table of contents not available for this subject. Please upload the PDF to extract content.</p>';
-                return;
-            }
-            
-            toc.forEach((item, index) => {
-                const tocDiv = document.createElement('div');
-                tocDiv.className = 'toc-item';
-                tocDiv.onclick = () => loadContent(item, index);
-                
-                tocDiv.innerHTML = `
-                    <strong>${item.title}</strong>
-                    <small style="float: right;">Page ${item.page}</small>
-                `;
-                
-                container.appendChild(tocDiv);
-            });
-        }
-
-        function loadContent(tocItem, index) {
-            const viewer = document.getElementById('content-viewer');
-            const title = document.getElementById('content-title');
-            const content = document.getElementById('content-text');
-            
-            title.textContent = tocItem.title;
-            content.innerHTML = `
-                <div class="loading">
-                    <p>📖 Loading content from page ${tocItem.page}...</p>
-                    <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
-                        This is where the extracted PDF content would appear.<br>
-                        You need to implement the Python backend to extract and serve the content.
-                    </p>
-                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; text-align: left;">
-                        <h4>Sample Content Structure:</h4>
-                        <p><strong>Unit ${index + 1}: ${tocItem.title}</strong></p>
-                        <p>This unit covers the fundamental concepts of...</p>
-                        <ul style="margin-left: 20px;">
-                            <li>Key concepts and definitions</li>
-                            <li>Practical examples and illustrations</li>
-                            <li>Exercises and self-assessment questions</li>
-                        </ul>
-                        <p><em>Note: Actual content will be extracted from your PDF files using Python.</em></p>
+        <!-- Curriculum Section -->
+        <section id="curriculum" class="py-12">
+            <div class="container mx-auto px-6">
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-md">
+                    <div class="relative mb-6">
+                        <input type="text" id="searchInput" onkeyup="filterLMS()" placeholder="Search subjects or topics..." class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-lucide="search" class="text-gray-400 w-5 h-5"></i>
+                        </div>
+                    </div>
+                    
+                    <div id="lms-container" class="space-y-4">
+                        <!-- JS will dynamically generate the accordion here -->
                     </div>
                 </div>
-            `;
-            
-            viewer.style.display = 'block';
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for File Viewer -->
+    <div id="fileViewerModal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-2xl w-full h-full max-w-6xl flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 id="modalFileName" class="text-lg font-semibold text-gray-800 truncate pr-4">File Viewer</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-800 transition-colors flex-shrink-0">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="flex-grow p-1 md:p-2 bg-gray-200"><iframe id="fileViewerFrame" class="w-full h-full bg-white" frameborder="0"></iframe></div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-16">
+        <div class="container mx-auto px-6 py-12">
+            <div class="text-center">
+                 <h2 class="text-3xl font-bold text-white">Get In Touch</h2>
+                 <p class="mt-3 text-gray-400">Feel free to reach out via email.</p>
+                 <a href="mailto:delhizones@gmail.com" class="mt-6 inline-block text-lg font-semibold text-blue-400 hover:text-blue-300 transition-colors">delhizones@gmail.com</a>
+            </div>
+             <div class="mt-10 flex justify-center gap-x-8 gap-y-4 flex-wrap">
+                <a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a>
+                <a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                <a href="/contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+            </div>
+            <div class="text-center text-gray-500 border-t border-gray-800 mt-10 pt-6">
+                <p>&copy; 2024 Delhizones.com. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const filePaths = [
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-1.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-2.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-3.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-4.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-1.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-2.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-3.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-4.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-1.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-2.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-3.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-4.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-1.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-2.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-3.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-4.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-1.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-2.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-3.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-4.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-5.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-1.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-2.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-3.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-4.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-1.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-2.pdf",
+            "ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-3.pdf",
+            "ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-1.pdf",
+            "ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-2.pdf",
+            "ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-3.pdf",
+            "ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-4.pdf",
+            "ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-5.pdf",
+            "ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-6.pdf",
+            "ignou-bca-resources/1st-Semester/BEGLA-136 English at the Workplace/Block-1 Exploring the Job Market/Block-1 Exploring the Job Market_allChapters.pdf",
+            "ignou-bca-resources/1st-Semester/BEGLA-136 English at the Workplace/Block-2 Preparing for Job Interviews/Block-2 PREPARING FOR JOB INTERVIEWS_allChapters.pdf",
+            "ignou-bca-resources/1st-Semester/BEGLA-136 English at the Workplace/Block-3 Skills for the Workplace-I/Block-3 SKILLS FOR THE WORKPLACE-I_AllChapters.pdf",
+            "ignou-bca-resources/1st-Semester/BEGLA-136 English at the Workplace/Block-4 Skills for the Workplace-II/Block-4 Block-4 Skills for the Workplace-II_AllChapters.pdf",
+            "ignou-bca-resources/1st-Semester/BEVAE-181 Environmental Studies/Block-1 An Introduction to Environment and Environmental Studies/Block-1 An introduction to environment and environmental studies.pdf",
+            "ignou-bca-resources/1st-Semester/BEVAE-181 Environmental Studies/Block-2 Natural Resources/Block-2 Natural resources.pdf",
+            "ignou-bca-resources/1st-Semester/BEVAE-181 Environmental Studies/Block-3 Environmental Issues and Concerns/Block-3 Environmental issues and concerns.pdf",
+            "ignou-bca-resources/1st-Semester/BEVAE-181 Environmental Studies/Block-4 Protecting Our Environment Policies and Practices/Block-4 Protecting Our Environment Policies and Practices.pdf",
+            "ignou-bca-resources/1st-Semester/assignments/BCA-1 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/2nd-Semester/BCSL-021 C Language Programming Lab/Lab Course/Section-1.pdf",
+            "ignou-bca-resources/2nd-Semester/BCSL-022-Assembly Language Programming Lab/Lab Course/SECTION-1.pdf",
+            "ignou-bca-resources/2nd-Semester/BCSL-022-Assembly Language Programming Lab/Lab Course/SECTION-2.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-1.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-2.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-3.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-4.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 5.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 6.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 7.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 8.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit - 10.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit - 11.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit - 12.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit- 9.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/UNIT-3.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/UNIT-4.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/Unit-1.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/unit-2.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-1.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-2.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-3.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-4.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-1.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-2.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-3.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-4.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-5.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-1.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-2.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-3.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-4.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-1 Elementary Logic/Unit - 1.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-1 Elementary Logic/Unit - 2.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-1 Elementary Logic/Unit - 3.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/UNIT-1.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/UNIT-3.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/Unit - 4.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/Unit 2.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-1.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-2.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-3.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-4.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-5.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-10.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-6.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-7.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-8.pdf",
+            "ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-9.pdf",
+            "ignou-bca-resources/2nd-Semester/assignments/BCA-2 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit- 4.pdf",
+            "ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit-1.pdf",
+            "ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit-2.pdf",
+            "ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit-3.pdf",
+            "ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 2 Inheritance and Polymorphism in C++/Unit-1.pdf",
+            "ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 2 Inheritance and Polymorphism in C++/Unit-2.pdf",
+            "ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 2 Inheritance and Polymorphism in C++/Unit-3.pdf",
+            "ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-1.pdf",
+            "ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-2.pdf",
+            "ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-3.pdf",
+            "ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-4.pdf",
+            "ignou-bca-resources/3rd-Semester/BCSL-032 C++ Programming Lab/Lab Manual/SECTION1 C++ Lab.pdf",
+            "ignou-bca-resources/3rd-Semester/BCSL-033 Data and File Structures Lab/Lab Manual/Section-1.pdf",
+            "ignou-bca-resources/3rd-Semester/BCSL-034 DBMS Lab/Lab Manual/Section 1.pdf",
+            "ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-1.pdf",
+            "ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-2.pdf",
+            "ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-3.pdf",
+            "ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-4.pdf",
+            "ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit 1.pdf",
+            "ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit 2.pdf",
+            "ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit-3.pdf",
+            "ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit-4.pdf",
+            "ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-3 Application Development Development of a Hospital Management System/Development of HMS.pdf",
+            "ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-4 Study Centre Management System A Case Study/Block-4.pdf",
+            "ignou-bca-resources/3rd-Semester/assignments/BCA-3 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-1 Statistics and Probability/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-1 Statistics and Probability/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-1 Statistics and Probability/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-4.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-5.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-6.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-7.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-10.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-11.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-8.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-9.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-4 Sampling/Unit-12.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-4 Sampling/Unit-13.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-4 Sampling/Unit-14.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-4.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-4.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-4.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-4.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-1 Introduction to Algorithm/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-1 Introduction to Algorithm/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-1 Introduction to Algorithm/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-2 Design Techniques/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-2 Design Techniques/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-2 Design Techniques/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/BCSL-043 Java Programming Lab/Lab Manual/Old/BCSL-043 Java Programming Lab.pdf",
+            "ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-1.pdf",
+            "ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-2.pdf",
+            "ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-3.pdf",
+            "ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-4.pdf",
+            "ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-5.pdf",
+            "ignou-bca-resources/4th-Semester/BCSL-045 Algorithm Design Lab/Lab Manual/Lab Manual.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-4.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-4.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-4.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-4.pdf",
+            "ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-1.pdf",
+            "ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-2.pdf",
+            "ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-3.pdf",
+            "ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-4.pdf",
+            "ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-5.pdf",
+            "ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-6.pdf",
+            "ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-1.pdf",
+            "ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-2.pdf",
+            "ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-3.pdf",
+            "ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-4.pdf",
+            "ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-5.pdf",
+            "ignou-bca-resources/4th-Semester/assignments/BCA-4 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-1.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-2.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-3.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-4.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-2 Fundamentals of TCPIP Programming/Unit-1.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-2 Fundamentals of TCPIP Programming/Unit-2.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-2 Fundamentals of TCPIP Programming/Unit-3.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-1.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-2.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-3.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-4.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-1.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-2.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-3.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-4.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-1.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-2.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-3.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-4.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-1.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-2.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-3.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-4.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-4 Cross Cultural Communication/Unit-1.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-4 Cross Cultural Communication/Unit-2.pdf",
+            "ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-4 Cross Cultural Communication/Unit-3.pdf",
+            "ignou-bca-resources/5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-1.pdf",
+            "ignou-bca-resources/5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-2.pdf",
+            "ignou-bca-resources/5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-3.pdf",
+            "ignou-bca-resources/5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-4.pdf",
+            "ignou-bca-resources/5th-Semester/BCSL-057 Web Programming Lab/Lab manual/Lab Manual.pdf",
+            "ignou-bca-resources/5th-Semester/assignments/BCA-5 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/6th-Semester/BCS-062/Block-1.pdf",
+            "ignou-bca-resources/6th-Semester/BCS-062/Block-2.pdf",
+            "ignou-bca-resources/6th-Semester/BCSL-063/LabManual.pdf",
+            "ignou-bca-resources/6th-Semester/MCS-022/Block-1.pdf",
+            "ignou-bca-resources/6th-Semester/MCS-022/Block-2.pdf",
+            "ignou-bca-resources/6th-Semester/MCS-022/Block-3.pdf",
+            "ignou-bca-resources/6th-Semester/MCS-022/Block-4.pdf",
+            "ignou-bca-resources/6th-Semester/assignments/BCA-6 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/6th-Semester/bcsp-064_project_guidelines.pdf",
+            "ignou-bca-resources/downloads/assignments/january2025/BCA-1 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/downloads/assignments/january2025/BCA-2 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/downloads/assignments/january2025/BCA-3 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/downloads/assignments/january2025/BCA-4 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/downloads/assignments/january2025/BCA-5 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/downloads/assignments/january2025/BCA-6 July_2025 to June 2026.pdf",
+            "ignou-bca-resources/downloads/assignments/january2025/bcsp-064_project_guidelines.pdf",
+            "ignou-bca-resources/downloads/syllabus/bcaprogguide.pdf",
+            "ignou-bca-resources/resources/study-links.html",
+            "ignou-bca-resources/resources/study-planner.html",
+            "ignou-bca-resources/resources/youtube-lectures.html"
+        ];
+        
+        // Function to parse the file paths and build a nested object
+        function buildLMSStructure(paths) {
+            const structure = {};
+            paths.forEach(path => {
+                const parts = path.split('/').slice(1); // Skip 'ignou-bca-resources'
+                let currentLevel = structure;
+                parts.forEach((part, index) => {
+                    if (index === parts.length - 1) {
+                        if (!currentLevel._files) {
+                            currentLevel._files = [];
+                        }
+                        currentLevel._files.push({ name: part, path: path });
+                    } else {
+                        if (!currentLevel[part]) {
+                            currentLevel[part] = {};
+                        }
+                        currentLevel = currentLevel[part];
+                    }
+                });
+            });
+            return structure;
         }
 
-        // Initialize the application
-        showHome();
+        // Function to generate the HTML for the accordion
+        function createAccordionHTML(data, level = 0) {
+            let html = '';
+            const sortedKeys = Object.keys(data).filter(key => key !== '_files').sort();
+            
+            sortedKeys.forEach(key => {
+                const isExpandable = Object.keys(data[key]).length > 0;
+                const padding = `pl-${4 + level * 4}`;
+
+                html += `<div class="border-b border-gray-200" data-level="${level}" data-search-text="${key.toLowerCase()}">`;
+                
+                if(isExpandable){
+                    html += `
+                        <button class="accordion-button w-full text-left p-4 ${padding} flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors" aria-expanded="false">
+                            <span class="font-semibold text-gray-700">${key}</span>
+                            <i data-lucide="chevron-right" class="accordion-icon w-5 h-5 text-gray-500"></i>
+                        </button>
+                        <div class="accordion-content bg-white">
+                            ${createAccordionHTML(data[key], level + 1)}
+                        </div>
+                    `;
+                }
+                html += `</div>`;
+            });
+            
+            if (data._files) {
+                data._files.forEach(file => {
+                    const padding = `pl-${4 + level * 4}`;
+                    html += `
+                        <div class="flex justify-between items-center p-4 ${padding} border-b border-gray-200 last:border-b-0 hover:bg-blue-50" data-level="${level}" data-search-text="${file.name.toLowerCase()}">
+                            <span class="text-gray-800 flex items-center">
+                               <i data-lucide="file-text" class="w-5 h-5 mr-3 text-blue-600 flex-shrink-0"></i>
+                               ${file.name}
+                            </span>
+                            <button onclick="viewFile('${file.path}', '${file.name}')" class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                <i data-lucide="eye" class="w-4 h-4 md:mr-2"></i>
+                                <span class="hidden md:inline">View</span>
+                            </button>
+                        </div>
+                    `;
+                });
+            }
+            
+            return html;
+        }
+
+        function filterLMS() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const items = document.querySelectorAll('#lms-container [data-search-text]');
+
+            items.forEach(item => {
+                const text = item.getAttribute('data-search-text');
+                if (text.includes(filter)) {
+                    item.style.display = '';
+                    // Show parents
+                    let parent = item.closest('[data-level]');
+                    while(parent) {
+                        parent.style.display = '';
+                         const button = parent.querySelector('.accordion-button');
+                         if(button && filter) button.setAttribute('aria-expanded', 'true');
+                        parent = parent.parentElement.closest('[data-level]');
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+             // Handle accordion content visibility after filtering
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                const content = button.nextElementSibling;
+                if(button.getAttribute('aria-expanded') === 'true' && filter) {
+                     content.style.maxHeight = content.scrollHeight + 'px';
+                } else if (!filter) {
+                    button.setAttribute('aria-expanded', 'false');
+                    content.style.maxHeight = '0px';
+                }
+            });
+        }
+
+
+        // Modal Logic
+        const modal = document.getElementById('fileViewerModal');
+        const iframe = document.getElementById('fileViewerFrame');
+        const modalFileName = document.getElementById('modalFileName');
+
+        function viewFile(filePath, fileName) {
+            iframe.src = filePath;
+            modalFileName.textContent = fileName;
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            iframe.src = 'about:blank';
+            modal.classList.add('hidden');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            const lmsData = buildLMSStructure(filePaths);
+            const container = document.getElementById('lms-container');
+            container.innerHTML = createAccordionHTML(lmsData);
+            
+            lucide.createIcons();
+
+            container.addEventListener('click', (e) => {
+                const button = e.target.closest('.accordion-button');
+                if (button) {
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    const content = button.nextElementSibling;
+                    if (!isExpanded) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    } else {
+                        content.style.maxHeight = '0px';
+                    }
+                }
+            });
+            
+            // Mobile Menu Logic
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-open-icon');
+            const closeIcon = document.getElementById('menu-close-icon');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                openIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+
+             window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        });
     </script>
+
 </body>
 </html>
