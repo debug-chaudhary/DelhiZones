@@ -3,875 +3,628 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IGNOU BCA Resources Hub</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>IGNOU BCA Learning Hub - Delhizones.com</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        /* --- General Styling & Variables --- */
-        :root {
-            --primary-color: #0056b3;
-            --secondary-color: #007bff;
-            --background-color: #f4f7fc;
-            --text-color: #333;
-            --card-bg-color: #ffffff;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            --border-radius: 12px;
-            --transition-speed: 0.3s;
-        }
-
-        /* --- Dark Mode Palette --- */
-        body.dark-mode {
-            --primary-color: #4a90e2;
-            --secondary-color: #50e3c2;
-            --background-color: #1a1a2e;
-            --text-color: #e0e0e0;
-            --card-bg-color: #2c2c54;
-            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-        }
-        
-        /* --- Reader View Specific Styles --- */
-        .reader-view { padding: 30px; background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .reader-view h2 { color: var(--primary-color); }
-        .reader-view .back-btn { background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
-        .toc-item { padding: 10px; margin: 5px 0; background: #f8f9fa; border-left: 4px solid var(--primary-color); cursor: pointer; transition: all 0.2s; }
-        .toc-item:hover { background: var(--primary-color); color: white; }
-        .content-viewer { margin-top: 20px; padding: 20px; border: 1px solid #eee; border-radius: 8px; max-height: 600px; overflow-y: auto; }
-
-        /* --- Base & Typography --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            transition: background-color var(--transition-speed), color var(--transition-speed);
+            font-family: 'Inter', sans-serif;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
         }
-
-        h1, h2, h3, h4 {
-            line-height: 1.3;
-            color: var(--primary-color);
-            font-weight: 600;
+        .accordion-button[aria-expanded="true"] .accordion-icon {
+            transform: rotate(90deg);
         }
-
-        p {
-            margin-bottom: 1rem;
+        .accordion-icon {
+            transition: transform 0.3s ease-in-out;
         }
-
-        a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            transition: color var(--transition-speed);
-        }
-
-        a:hover {
-            color: var(--primary-color);
-            text-decoration: underline;
-        }
-
-        ul {
-            list-style: none;
-        }
-        
-        section {
-            padding: 60px 0;
-        }
-        
-        section:nth-of-type(even) {
-             background-color: var(--card-bg-color);
-        }
-
-
-        /* --- Header --- */
-        .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: #fff;
-            padding: 40px 0;
-            text-align: center;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-        
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* --- Navigation Bar --- */
-        .navbar {
-            background-color: var(--card-bg-color);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-menu {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .nav-menu li {
-            margin: 0 20px;
-        }
-        
-        .nav-menu a {
-            font-weight: 500;
-            font-size: 1rem;
-            color: var(--text-color);
-        }
-
-        .nav-menu a:hover {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-        
-        .nav-menu i {
-            margin-right: 8px;
-        }
-        
-        /* --- Theme Toggle Button --- */
-        .theme-toggle {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background-color: var(--card-bg-color);
-            color: var(--text-color);
-            border: 1px solid var(--primary-color);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: var(--card-shadow);
-            z-index: 1001;
-            transition: transform 0.2s, background-color 0.3s;
-        }
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        /* --- Search Bar --- */
-        .search-bar-wrapper {
-            position: relative;
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .search-bar-input {
-            width: 100%;
-            padding: 15px 60px 15px 20px;
-            font-size: 1rem;
-            border-radius: 30px;
-            border: 2px solid #ddd;
-            background-color: var(--card-bg-color);
-            color: var(--text-color);
-            transition: border-color var(--transition-speed);
-        }
-
-        .search-bar-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-        
-        .search-bar-btn {
-            position: absolute;
-            right: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color var(--transition-speed);
-        }
-
-        .search-bar-btn:hover {
-            background: var(--secondary-color);
-        }
-        
-        .search-bar-results {
-            position: absolute;
-            width: calc(100% - 40px);
-            background: var(--card-bg-color);
-            border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
-            margin-top: 5px;
-            max-height: 300px;
-            overflow-y: auto;
+        #fileViewerModal {
             z-index: 100;
         }
-
-        .search-bar-results a {
-            display: block;
-            padding: 12px 20px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .search-bar-results a:last-child {
-            border-bottom: none;
-        }
-        
-        /* --- Hero Section --- */
-        #home {
-            text-align: center;
-        }
-
-        .quick-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .stat {
-            background: var(--card-bg-color);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
-            width: 250px;
-            margin: 10px;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-
-        .stat:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-        
-        .stat i {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-        .stat h3 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            color: var(--text-color);
-        }
-
-        /* --- Semesters Section --- */
-        .semester-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .semester-card {
-            background: var(--card-bg-color);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: var(--card-shadow);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-
-        .semester-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .semester-card h3 {
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-        }
-        
-        .semester-card ul li {
-            margin-bottom: 12px;
-        }
-        
-        .semester-card ul li a::before {
-            content: '\f105'; /* Font Awesome chevron-right */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            margin-right: 10px;
-            color: var(--primary-color);
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            background: var(--primary-color);
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: background-color var(--transition-speed);
-        }
-        .btn:hover {
-             background: var(--secondary-color);
-             color: #fff;
-             text-decoration: none;
-        }
-        
-        /* --- Downloads Section --- */
-        .download-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            text-align: center;
-        }
-
-        .download-card {
-             background: var(--card-bg-color);
-             padding: 30px;
-             border-radius: var(--border-radius);
-             box-shadow: var(--card-shadow);
-        }
-        
-        .download-card i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .btn-download {
-            display: inline-block;
-            margin-top: 20px;
-            background: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 10px 25px;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all var(--transition-speed);
-        }
-
-        .btn-download:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-            text-decoration: none;
-        }
-
-        /* --- Videos Section --- */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .video-card {
-             background: var(--card-bg-color);
-             padding: 20px;
-             border-radius: var(--border-radius);
-             box-shadow: var(--card-shadow);
-        }
-        
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            margin: 15px 0;
-            border-radius: 10px;
-        }
-        
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* --- Footer --- */
-        .footer {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 40px;
-        }
-        body.dark-mode .footer {
-            background-color: #1c1c3c;
-        }
-        
-        .footer a {
-            color: #50e3c2;
-        }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 768px) {
-            .nav-menu {
-                flex-direction: column;
-                align-items: center;
-            }
-            .nav-menu li {
-                margin: 10px 0;
-            }
-            .semester-grid, .download-grid, .video-grid {
-                grid-template-columns: 1fr;
-            }
-            .header h1 {
-                font-size: 2rem;
-            }
-            .theme-toggle {
-                top: auto;
-                bottom: 20px;
-            }
-        }
     </style>
+    <script>
+        // Set theme on initial load to prevent flashing
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+        // Tell Tailwind to use class-based dark mode
+        tailwind.config = {
+          darkMode: 'class',
+        }
+      </script>
 </head>
-<body>
-    <header class="header">
-        <div class="container">
-            <h1><i class="fas fa-graduation-cap"></i> IGNOU BCA Resources Hub</h1>
-            <p>Complete Study Materials for Bachelor of Computer Applications</p>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm dark:shadow-gray-800 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center gap-2" aria-label="Delhizones Homepage">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                        <g clip-path="url(#clip0_105_2_header)">
+                            <circle cx="16" cy="16" r="15.5" fill="white" stroke="#2563EB"></circle>
+                            <circle cx="16" cy="16" r="12" fill="#2563EB"></circle>
+                            <path d="M10.5 11.5L16 20.5L21.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z" fill="white"></path>
+                            <path d="M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z" fill="white"></path>
+                        </g>
+                        <defs><clipPath id="clip0_105_2_header"><rect width="32" height="32" fill="white"></rect></clipPath></defs>
+                    </svg>
+                    <span class="text-2xl font-bold text-gray-900 dark:text-white">Delhi<span class="text-blue-600">zones</span></span>
+                </a>
+                
+                <div class="flex items-center">
+                    <nav class="hidden md:flex items-center space-x-6 mr-4">
+                        <a href="/#services" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 font-medium">Services</a>
+                        <a href="/posts/" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 font-medium">Posts</a>
+                        <a href="/#support" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 font-medium">Support Us</a>
+                        <a href="/contact.html" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 font-medium">Contact</a>
+                    </nav>
+
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" class="mr-4 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none">
+                        <i id="theme-toggle-dark-icon" class="w-6 h-6 hidden" data-lucide="moon"></i>
+                        <i id="theme-toggle-light-icon" class="w-6 h-6 hidden" data-lucide="sun"></i>
+                    </button>
+
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none">
+                            <i id="menu-open-icon" data-lucide="menu" class="w-6 h-6"></i>
+                            <i id="menu-close-icon" data-lucide="x" class="w-6 h-6 hidden"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+             <a href="/#services" class="block py-3 px-6 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 transition duration-300">Services</a>
+             <a href="/posts/" class="block py-3 px-6 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 transition duration-300">Posts</a>
+             <a href="/#support" class="block py-3 px-6 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 transition duration-300">Support Us</a>
+             <a href="/contact.html" class="block py-3 px-6 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 transition duration-300">Contact</a>
         </div>
     </header>
 
-    <nav class="navbar">
-        <div class="container">
-            <ul class="nav-menu">
-                <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="#semesters"><i class="fas fa-book"></i> Semesters</a></li>
-                <li><a href="#downloads"><i class="fas fa-download"></i> Downloads</a></li>
-                <li><a href="#videos"><i class="fas fa-video"></i> Video Lectures</a></li>
-                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Dark Mode Toggle -->
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <!-- Stylish Search Bar -->
-    <div class="search-bar-wrapper">
-        <input type="text" id="mainSearch" class="search-bar-input" placeholder="Search subjects, topics, or materials...">
-        <button id="mainSearchBtn" class="search-bar-btn" aria-label="Search"><i class="fas fa-search"></i></button>
-        <div id="mainSearchResults" class="search-bar-results"></div>
-    </div>
-
-    <main class="main-content">
-           <div id="spa-content">
-           <!-- Initial content will be loaded here -->
-           </div>
-           <div id="reader-view-container" style="display:none;">
-                <!-- The dynamic reader view will be injected here -->
-           </div>
-           <section id="home" class="hero" style="display:none;">
-            <div class="container">
-                <h2>Welcome to Your BCA Study Portal</h2>
-                <p>Access organized course materials, assignments, eBooks, and video lectures for all semesters.</p>
-                <div class="quick-stats">
-                    <div class="stat">
-                        <i class="fas fa-book-open"></i>
-                        <h3>6 Semesters</h3>
-                        <p>Complete Coverage</p>
-                    </div>
-                    <div class="stat">
-                        <i class="fas fa-file-pdf"></i>
-                        <h3>Study Materials</h3>
-                        <p>PDF & eBooks</p>
-                    </div>
-                    <div class="stat">
-                        <i class="fas fa-video"></i>
-                        <h3>Video Lectures</h3>
-                        <p>YouTube Integration</p>
-                    </div>
-                </div>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-6 py-16 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+                    IGNOU BCA Learning Hub
+                </h1>
+                <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    Your complete resource portal for the Bachelor of Computer Applications program. Access all study materials, lab manuals, and assignments by semester.
+                </p>
             </div>
         </section>
 
-        <section id="semesters" class="semesters">
-            <div class="container">
-                <h2>Semester-wise Content</h2>
-                <div class="semester-grid">
-                    <div class="semester-card">
-                        <h3><i class="fas fa-calendar-alt"></i> Semester 1</h3>
-                        <ul>
-                            <li><a href="semester1/bcs11.html">BCS-011: Computer Basics and PC Software</a></li>
-                            <li><a href="semester1/bcs12.html">BCS-012: Mathematics</a></li>
-                            <li><a href="semester1/bcsl13.html">BCSL-013: Computer Basics and PC Software Lab</a></li>
-                            <li><a href="semester1/eco1.html">ECO-01: Business Organization</a></li>
-                            <li><a href="semester1/feg2.html">FEG-02: Foundation Course in English 2</a></li>
-                        </ul>
-                        <a href="semester1/index.html" class="btn">View All Subjects</a>
-                    </div>
-                    <div class="semester-card">
-                        <h3><i class="fas fa-calendar-alt"></i> Semester 2</h3>
-                        <ul>
-                            <li><a href="semester2/mcs11.html">MCS-011: Problem Solving and Programming</a></li>
-                            <li><a href="semester2/mcs12.html">MCS-012: Computer Organization and Assembly Language Programming</a></li>
-                            <li><a href="semester2/mcs13.html">MCS-013: Discrete Mathematics</a></li>
-                            <li><a href="semester2/mcs15.html">MCS-015: Communication Skills</a></li>
-                            <li><a href="semester2/eco2.html">ECO-02: Accountancy-1</a></li>
-                            <li><a href="semester2/bcsl21.html">BCSL-021: C Language Programming Lab</a></li>
-                            <li><a href="semester2/bcsl22.html">BCSL-022: Assembly Language Programming Lab</a></li>
-                        </ul>
-                        <a href="semester2/index.html" class="btn">View All Subjects</a>
-                    </div>
-                    <div class="semester-card">
-                        <h3><i class="fas fa-calendar-alt"></i> Semester 3</h3>
-                        <ul>
-                            <li><a href="semester3/mcs14.html">MCS-014: System Analysis and Design</a></li>
-                            <li><a href="semester3/mcs21.html">MCS-021: Data and File Structures</a></li>
-                            <li><a href="semester3/mcs23.html">MCS-023: Introduction to Database Management Systems</a></li>
-                            <li><a href="semester3/bcs31.html">BCS-031: Programming in C++</a></li>
-                            <li><a href="semester3/bcsl32.html">BCSL-032: C++ Programming Lab</a></li>
-                            <li><a href="semester3/bcsl33.html">BCSL-033: Data and File Structures Lab</a></li>
-                            <li><a href="semester3/bcsl34.html">BCSL-034: DBMS Lab</a></li>
-                        </ul>
-                        <a href="semester3/index.html" class="btn">View All Subjects</a>
-                    </div>
-                    <div class="semester-card">
-                        <h3><i class="fas fa-calendar-alt"></i> Semester 4</h3>
-                        <ul>
-                            <li><a href="semester4/mcsl16.html">MCSL-016: Internet Concepts and Web Design</a></li>
-                            <li><a href="semester4/mcs24.html">MCS-024: Object Oriented Tech. and Java Programming</a></li>
-                            <li><a href="semester4/bcs40.html">BCS-040: Statistical Techniques</a></li>
-                            <li><a href="semester4/bcs41.html">BCS-041: Fundamentals of Computer Networks</a></li>
-                            <li><a href="semester4/bcs42.html">BCS-042: Introduction to Algorithm Design</a></li>
-                            <li><a href="semester4/bcsl43.html">BCSL-043: Java Programming Lab</a></li>
-                            <li><a href="semester4/bcsl44.html">BCSL-044: Statistical Techniques Lab</a></li>
-                            <li><a href="semester4/bcsl45.html">BCSL-045: Algorithms Design Lab</a></li>
-                        </ul>
-                        <a href="semester4/index.html" class="btn">View All Subjects</a>
-                    </div>
-                    <div class="semester-card">
-                        <h3><i class="fas fa-calendar-alt"></i> Semester 5</h3>
-                        <ul>
-                            <li><a href="semester5/bcs51.html">BCS-051: Introduction to Software Engineering</a></li>
-                            <li><a href="semester5/bcs52.html">BCS-052: Network Programming and Administration</a></li>
-                            <li><a href="semester5/bcs53.html">BCS-053: Web Programming</a></li>
-                            <li><a href="semester5/bcs54.html">BCS-054: Computer Oriented Numerical Techniques</a></li>
-                            <li><a href="semester5/bcs55.html">BCS-055: Business Communication</a></li>
-                            <li><a href="semester5/bcsl56.html">BCSL-056: Networking Programming Administration Lab</a></li>
-                            <li><a href="semester5/bcsl57.html">BCSL-057: Web Programming Lab</a></li>
-                            <li><a href="semester5/bcsl58.html">BCSL-058: Computer Oriented Numerical Techniques Lab</a></li>
-                        </ul>
-                        <a href="semester5/index.html" class="btn">View All Subjects</a>
-                    </div>
-                    <div class="semester-card">
-                        <h3><i class="fas fa-calendar-alt"></i> Semester 6</h3>
-                        <ul>
-                            <li><a href="#downloads">BCS-062: E-Commerce</a></li>
-                            <li><a href="#downloads">BCSL-063: Operating System Concepts and Networking Management Lab</a></li>
-                            <li><a href="#downloads">MCS-022: Operating System Concepts and Networking Management</a></li>
-                        </ul>
-                        <a href="semester6/index.html" class="btn">View All Subjects</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="downloads" class="downloads">
-            <div class="container">
-                <h2><i class="fas fa-download"></i> Download Center</h2>
-                <div class="download-grid">
-                    <div class="download-card">
-                        <i class="fas fa-file-pdf"></i>
-                        <h3>Complete Syllabus</h3>
-                        <p>Official IGNOU BCA syllabus for all semesters</p>
-                        <a href="#" class="btn-download">Download</a>
-                    </div>
-                    <div class="download-card">
-                        <i class="fas fa-book"></i>
-                        <h3>eBooks Collection</h3>
-                        <p>Digital textbooks and reference materials</p>
-                        <a href="#" class="btn-download">Browse</a>
-                    </div>
-                    <div class="download-card">
-                        <i class="fas fa-clipboard-list"></i>
-                        <h3>Previous Papers</h3>
-                        <p>Past exam papers and solutions</p>
-                        <a href="#" class="btn-download">Download</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="videos" class="videos">
-            <div class="container">
-                <h2><i class="fas fa-video"></i> Video Lectures</h2>
-                <p>Curated YouTube lectures for better understanding</p>
-                
-                <div class="video-grid">
-                    <div class="video-card">
-                        <h4>Computer Fundamentals - Introduction</h4>
-                        <div class="video-wrapper">
-                            <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBlnK6fEyqRhX6r2uhhlubuF5QextdCSM" 
-                                    frameborder="0" 
-                                    allowfullscreen></iframe>
+        <!-- Curriculum Section -->
+        <section id="curriculum" class="py-12">
+            <div class="container mx-auto px-6">
+                <div class="bg-white dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-md dark:shadow-2xl">
+                    <div class="relative mb-6">
+                        <input type="text" id="searchInput" onkeyup="filterLMS()" placeholder="Search subjects or topics..." class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-lucide="search" class="text-gray-400 w-5 h-5"></i>
                         </div>
-                        <p>Basic concepts of computer systems and architecture</p>
                     </div>
                     
-                    <div class="video-card">
-                        <h4>C Programming Basics</h4>
-                        <div class="video-wrapper">
-                            <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLBlnK6fEyqRggNE5qfaI6SSEC5Q_Fv0us" 
-                                    frameborder="0" 
-                                    allowfullscreen></iframe>
-                        </div>
-                        <p>Introduction to C programming language</p>
+                    <div id="lms-container" class="space-y-2">
+                        <!-- JS will dynamically generate the accordion here -->
                     </div>
                 </div>
-                
-                <a href="#videos" class="btn">View All Lectures</a>
             </div>
         </section>
     </main>
 
-    <footer id="contact" class="footer">
-        <div class="container">
-            <p>&copy; 2025 IGNOU BCA Resources Hub. Educational content for academic purposes.</p>
-            <p>📧 Contact: engrohitv@gmail.com | 🌐 GitHub: 
-            <a href="https://github.com/debug-chaudhary" target="_blank" rel="noopener noreferrer">@debug-chaudhary</a>
-            </p>
+    <!-- Modal for File Viewer -->
+    <div id="fileViewerModal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-2xl w-full h-full max-w-6xl flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b dark:border-gray-700">
+                <h3 id="modalFileName" class="text-lg font-semibold text-gray-800 dark:text-gray-100 truncate pr-4">File Viewer</h3>
+                <button onclick="closeModal()" class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors flex-shrink-0">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="flex-grow p-1 md:p-2 bg-gray-200 dark:bg-gray-900"><iframe id="fileViewerFrame" class="w-full h-full bg-white" frameborder="0"></iframe></div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 dark:bg-black text-white mt-16">
+        <div class="container mx-auto px-6 py-12">
+            <div class="text-center">
+                 <h2 class="text-3xl font-bold text-white">Get In Touch</h2>
+                 <p class="mt-3 text-gray-400">Feel free to reach out via email.</p>
+                 <a href="mailto:delhizones@gmail.com" class="mt-6 inline-block text-lg font-semibold text-blue-400 hover:text-blue-300 transition-colors">delhizones@gmail.com</a>
+            </div>
+             <div class="mt-10 flex justify-center gap-x-8 gap-y-4 flex-wrap">
+                <a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a>
+                <a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                <a href="/contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+            </div>
+            <div class="text-center text-gray-500 border-t border-gray-800 mt-10 pt-6">
+                <p>&copy; 2024 Delhizones.com. All Rights Reserved.</p>
+            </div>
         </div>
     </footer>
 
     <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                // --- Theme Toggler ---
-                const themeToggle = document.getElementById('themeToggle');
-                const themeIcon = themeToggle.querySelector('i');
-                const currentTheme = localStorage.getItem('theme');
-                if (currentTheme === 'dark') {
-                    document.body.classList.add('dark-mode');
-                    themeIcon.classList.remove('fa-moon');
-                    themeIcon.classList.add('fa-sun');
-                }
-                themeToggle.addEventListener('click', () => {
-                    document.body.classList.toggle('dark-mode');
-                    let theme = 'light';
-                    if (document.body.classList.contains('dark-mode')) {
-                        theme = 'dark';
-                        themeIcon.classList.remove('fa-moon');
-                        themeIcon.classList.add('fa-sun');
-                    } else {
-                        themeIcon.classList.remove('fa-sun');
-                        themeIcon.classList.add('fa-moon');
-                    }
-                    localStorage.setItem('theme', theme);
-                });
-
-                // --- Search Functionality ---
-                const searchInput = document.getElementById('mainSearch');
-                const searchResultsContainer = document.getElementById('mainSearchResults');
-                const searchableItems = [];
-
-                document.querySelectorAll('.semester-card a').forEach(link => {
-                    if(link.textContent && !link.classList.contains('btn')) {
-                         searchableItems.push({
-                            text: link.textContent.trim(),
-                            href: link.getAttribute('href')
-                         });
-                    }
-                });
-
-                const displayResults = (results) => {
-                    searchResultsContainer.innerHTML = '';
-                    if (results.length === 0) {
-                        searchResultsContainer.style.display = 'none';
-                        return;
-                    }
-                    results.forEach(item => {
-                        const link = document.createElement('a');
-                        link.href = item.href;
-                        link.textContent = item.text;
-                        searchResultsContainer.appendChild(link);
-                    });
-                    searchResultsContainer.style.display = 'block';
-                };
-
-                searchInput.addEventListener('keyup', () => {
-                    const query = searchInput.value.toLowerCase().trim();
-                    if (query.length < 2) {
-                        searchResultsContainer.style.display = 'none';
-                        return;
-                    }
-                    const filteredItems = searchableItems.filter(item => 
-                        item.text.toLowerCase().includes(query)
-                    );
-                    displayResults(filteredItems);
-                });
-
-                document.addEventListener('click', (e) => {
-                    if (!searchResultsContainer.contains(e.target) && e.target !== searchInput) {
-                        searchResultsContainer.style.display = 'none';
-                    }
-                });
-
-                // --- SPA & Reader View Logic ---
-                const mainContent = document.querySelector('.main-content');
-                const spaContent = document.getElementById('spa-content');
-                const readerViewContainer = document.getElementById('reader-view-container');
-
-                function showMainContent() {
-                    spaContent.style.display = 'block';
-                    readerViewContainer.style.display = 'none';
-                    // Restore initial content if needed
-                    if (spaContent.innerHTML.trim() === '') {
-                        spaContent.innerHTML = document.getElementById('home').innerHTML;
-                    }
-                }
-
-                async function showReaderView(subjectCode, subjectName) {
-                    spaContent.style.display = 'none';
-                    readerViewContainer.style.display = 'block';
-                    readerViewContainer.innerHTML = `<div class="reader-view">
-                        <button class="back-btn" onclick="window.history.back()">← Back</button>
-                        <h2>${subjectCode}: ${subjectName}</h2>
-                        <div id="toc-container"><p>Loading Table of Contents...</p></div>
-                        <div id="content-viewer" class="content-viewer" style="display:none;"></div>
-                    </div>`;
-
-                    try {
-                        const response = await fetch(`/api/toc/${subjectCode}`);
-                        if (!response.ok) throw new Error('Failed to load TOC');
-                        const toc = await response.json();
-                        
-                        const tocContainer = document.getElementById('toc-container');
-                        if (toc && toc.length > 0) {
-                            tocContainer.innerHTML = '<h3>Table of Contents</h3>';
-                            toc.forEach(item => {
-                                const tocDiv = document.createElement('div');
-                                tocDiv.className = 'toc-item';
-                                tocDiv.textContent = `${item.title} (Page: ${item.page})`;
-                                tocDiv.onclick = () => loadReaderContent(subjectCode, item.page, item.title);
-                                tocContainer.appendChild(tocDiv);
-                            });
-                        } else {
-                            tocContainer.innerHTML = '<p>Table of Contents not available for this subject.</p>';
+        const filePaths = [
+            "1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-1.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-2.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-3.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-4.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-1.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-2.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-3.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-4.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-1.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-2.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-3.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-4.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-1.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-2.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-3.pdf",
+            "1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-4.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-1.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-2.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-3.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-4.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-5.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-1.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-2.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-3.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-4.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-1.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-2.pdf",
+            "1st-Semester/BCS-111 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-3.pdf",
+            "1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-1.pdf",
+            "1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-2.pdf",
+            "1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-3.pdf",
+            "1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-4.pdf",
+            "1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-5.pdf",
+            "1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-6.pdf",
+            "1st-Semester/BEGLA-136 English at the Workplace/Block-1 Exploring the Job Market/Block-1 Exploring the Job Market_allChapters.pdf",
+            "1st-Semester/BEGLA-136 English at the Workplace/Block-2 Preparing for Job Interviews/Block-2 PREPARING FOR JOB INTERVIEWS_allChapters.pdf",
+            "1st-Semester/BEGLA-136 English at the Workplace/Block-3 Skills for the Workplace-I/Block-3 SKILLS FOR THE WORKPLACE-I_AllChapters.pdf",
+            "1st-Semester/BEGLA-136 English at the Workplace/Block-4 Skills for the Workplace-II/Block-4 Block-4 Skills for the Workplace-II_AllChapters.pdf",
+            "1st-Semester/BEVAE-181 Environmental Studies/Block-1 An Introduction to Environment and Environmental Studies/Block-1 An introduction to environment and environmental studies.pdf",
+            "1st-Semester/BEVAE-181 Environmental Studies/Block-2 Natural Resources/Block-2 Natural resources.pdf",
+            "1st-Semester/BEVAE-181 Environmental Studies/Block-3 Environmental Issues and Concerns/Block-3 Environmental issues and concerns.pdf",
+            "1st-Semester/BEVAE-181 Environmental Studies/Block-4 Protecting Our Environment Policies and Practices/Block-4 Protecting Our Environment Policies and Practices.pdf",
+            "1st-Semester/assignments/BCA-1 July_2025 to June 2026.pdf",
+            "2nd-Semester/BCSL-021 C Language Programming Lab/Lab Course/Section-1.pdf",
+            "2nd-Semester/BCSL-022-Assembly Language Programming Lab/Lab Course/SECTION-1.pdf",
+            "2nd-Semester/BCSL-022-Assembly Language Programming Lab/Lab Course/SECTION-2.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-1.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-2.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-3.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-4.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 5.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 6.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 7.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 8.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit - 10.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit - 11.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit - 12.pdf",
+            "2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit- 9.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/UNIT-3.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/UNIT-4.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/Unit-1.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/unit-2.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-1.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-2.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-3.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-4.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-1.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-2.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-3.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-4.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-5.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-1.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-2.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-3.pdf",
+            "2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-4.pdf",
+            "2nd-Semester/MCS-013 Discrete Mathematics/Block-1 Elementary Logic/Unit - 1.pdf",
+            "2nd-Semester/MCS-013 Discrete Mathematics/Block-1 Elementary Logic/Unit - 2.pdf",
+            "2nd-Semester/MCS-013 Discrete Mathematics/Block-1 Elementary Logic/Unit - 3.pdf",
+            "2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/UNIT-1.pdf",
+            "2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/UNIT-3.pdf",
+            "2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/Unit - 4.pdf",
+            "2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/Unit 2.pdf",
+            "2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-1.pdf",
+            "2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-2.pdf",
+            "2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-3.pdf",
+            "2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-4.pdf",
+            "2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-5.pdf",
+            "2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-10.pdf",
+            "2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-6.pdf",
+            "2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-7.pdf",
+            "2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-8.pdf",
+            "2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-9.pdf",
+            "2nd-Semester/assignments/BCA-2 July_2025 to June 2026.pdf",
+            "3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit- 4.pdf",
+            "3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit-1.pdf",
+            "3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit-2.pdf",
+            "3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit-3.pdf",
+            "3rd-Semester/BCS-031 Programming in C++/Block 2 Inheritance and Polymorphism in C++/Unit-1.pdf",
+            "3rd-Semester/BCS-031 Programming in C++/Block 2 Inheritance and Polymorphism in C++/Unit-2.pdf",
+            "3rd-Semester/BCS-031 Programming in C++/Block 2 Inheritance and Polymorphism in C++/Unit-3.pdf",
+            "3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-1.pdf",
+            "3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-2.pdf",
+            "3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-3.pdf",
+            "3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-4.pdf",
+            "3rd-Semester/BCSL-032 C++ Programming Lab/Lab Manual/SECTION1 C++ Lab.pdf",
+            "3rd-Semester/BCSL-033 Data and File Structures Lab/Lab Manual/Section-1.pdf",
+            "3rd-Semester/BCSL-034 DBMS Lab/Lab Manual/Section 1.pdf",
+            "3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-1.pdf",
+            "3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-2.pdf",
+            "3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-3.pdf",
+            "3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-4.pdf",
+            "3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit 1.pdf",
+            "3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit 2.pdf",
+            "3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit-3.pdf",
+            "3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit-4.pdf",
+            "3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-3 Application Development Development of a Hospital Management System/Development of HMS.pdf",
+            "3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-4 Study Centre Management System A Case Study/Block-4.pdf",
+            "3rd-Semester/assignments/BCA-3 July_2025 to June 2026.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-1 Statistics and Probability/Unit-1.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-1 Statistics and Probability/Unit-2.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-1 Statistics and Probability/Unit-3.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-4.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-5.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-6.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-7.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-10.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-11.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-8.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-9.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-4 Sampling/Unit-12.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-4 Sampling/Unit-13.pdf",
+            "4th-Semester/BCS-040 Statistical Techniques/Block-4 Sampling/Unit-14.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-1.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-2.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-3.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-4.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-1.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-2.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-3.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-4.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-1.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-2.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-3.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-4.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-1.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-2.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-3.pdf",
+            "4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-4.pdf",
+            "4th-Semester/BCS-042 Introduction to Algorithm Design/Block-1 Introduction to Algorithm/Unit-1.pdf",
+            "4th-Semester/BCS-042 Introduction to Algorithm Design/Block-1 Introduction to Algorithm/Unit-2.pdf",
+            "4th-Semester/BCS-042 Introduction to Algorithm Design/Block-1 Introduction to Algorithm/Unit-3.pdf",
+            "4th-Semester/BCS-042 Introduction to Algorithm Design/Block-2 Design Techniques/Unit-1.pdf",
+            "4th-Semester/BCS-042 Introduction to Algorithm Design/Block-2 Design Techniques/Unit-2.pdf",
+            "4th-Semester/BCS-042 Introduction to Algorithm Design/Block-2 Design Techniques/Unit-3.pdf",
+            "4th-Semester/BCSL-043 Java Programming Lab/Lab Manual/Old/BCSL-043 Java Programming Lab.pdf",
+            "4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Practical - Unit-1 Figures/Practical Unit-1 Figures.xls",
+            "4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Practical - Unit-1 Figures/Practical Unit-1 Figures.xlsx",
+            "4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-1.pdf",
+            "4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-2.pdf",
+            "4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-3.pdf",
+            "4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-4 Control Charts and Timeseries/Section-4 Control Charts and Timeseries.xls",
+            "4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-4 Control Charts and Timeseries/Section-4 Control Charts and Timeseries.xlsx",
+            "4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-4.pdf",
+            "4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-5.pdf",
+            "4th-Semester/BCSL-045 Algorithm Design Lab/Lab Manual/Lab Manual.pdf",
+            "4th-Semester/BCSL-045 Algorithm Design Lab/Lab Manual/Thumbs.db",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-1.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-2.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-3.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-4.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-1.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-2.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-3.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-4.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-1.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-2.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-3.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-4.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-1.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-2.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-3.pdf",
+            "4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-4.pdf",
+            "4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-1.pdf",
+            "4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-2.pdf",
+            "4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-3.pdf",
+            "4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-4.pdf",
+            "4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-5.pdf",
+            "4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-6.pdf",
+            "4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-1.pdf",
+            "4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-2.pdf",
+            "4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-3.pdf",
+            "4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-4.pdf",
+            "4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-5.pdf",
+            "4th-Semester/assignments/BCA-4 July_2025 to June 2026.pdf",
+            "5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-1.pdf",
+            "5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-2.pdf",
+            "5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-3.pdf",
+            "5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-4.pdf",
+            "5th-Semester/BCS-052 Network Programming and Administration/Block-2 Fundamentals of TCPIP Programming/Unit-1.pdf",
+            "5th-Semester/BCS-052 Network Programming and Administration/Block-2 Fundamentals of TCPIP Programming/Unit-2.pdf",
+            "5th-Semester/BCS-052 Network Programming and Administration/Block-2 Fundamentals of TCPIP Programming/Unit-3.pdf",
+            "5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-1.pdf",
+            "5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-2.pdf",
+            "5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-3.pdf",
+            "5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-4.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-1.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-2.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-3.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-4.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-1.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-2.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-3.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-4.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-1.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-2.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-3.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-4.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-4 Cross Cultural Communication/Unit-1.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-4 Cross Cultural Communication/Unit-2.pdf",
+            "5th-Semester/BCS-055 Business Communication/Block-4 Cross Cultural Communication/Unit-3.pdf",
+            "5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-1.pdf",
+            "5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-2.pdf",
+            "5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-3.pdf",
+            "5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-4.pdf",
+            "5th-Semester/BCSL-057 Web Programming Lab/Lab manual/Lab Manual.pdf",
+            "5th-Semester/assignments/BCA-5 July_2025 to June 2026.pdf",
+            "6th-Semester/BCS-062/Block-1.pdf",
+            "6th-Semester/BCS-062/Block-2.pdf",
+            "6th-Semester/BCSL-063/LabManual.pdf",
+            "6th-Semester/MCS-022/Block-1.pdf",
+            "6th-Semester/MCS-022/Block-2.pdf",
+            "6th-Semester/MCS-022/Block-3.pdf",
+            "6th-Semester/MCS-022/Block-4.pdf",
+            "6th-Semester/assignments/BCA-6 July_2025 to June 2026.pdf",
+            "6th-Semester/bcsp-064_project_guidelines.pdf"
+        ];
+        
+        // Function to parse the file paths and build a nested object
+        function buildLMSStructure(paths) {
+            const structure = {};
+            paths.forEach(path => {
+                const parts = path.split('/'); 
+                let currentLevel = structure;
+                parts.forEach((part, index) => {
+                    if (index === parts.length - 1) {
+                        if (!currentLevel._files) {
+                            currentLevel._files = [];
                         }
-                    } catch (error) {
-                        console.error('Error fetching TOC:', error);
-                        document.getElementById('toc-container').innerHTML = '<p>Error loading Table of Contents. Please ensure the backend is running and the PDF exists.</p>';
-                    }
-                }
-
-                async function loadReaderContent(subjectCode, page, title) {
-                    const contentViewer = document.getElementById('content-viewer');
-                    contentViewer.style.display = 'block';
-                    contentViewer.innerHTML = `<p>Loading content for "${title}" from page ${page}...</p>`;
-
-                    try {
-                        const response = await fetch(`/api/content/${subjectCode}/${page}`);
-                        if (!response.ok) throw new Error('Failed to load content');
-                        const data = await response.json();
-
-                        // Sanitize and format the text
-                        const formattedContent = data.content
-                            .replace(/&/g, '&amp;')
-                            .replace(/</g, '&lt;')
-                            .replace(/>/g, '&gt;')
-                            .replace(/\n/g, '<br>');
-
-                        contentViewer.innerHTML = `<h3>${title}</h3><p>${formattedContent}</p>`;
-                        contentViewer.scrollTop = 0;
-                    } catch (error) {
-                        console.error('Error fetching content:', error);
-                        contentViewer.innerHTML = '<p>Error loading content. Please check the backend server.</p>';
-                    }
-                }
-
-                function isInternalLink(href) {
-                    if (!href) return false;
-                    if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return false;
-                    if (href.startsWith('#')) return false;
-                    return true;
-                }
-
-                function isSubjectLink(link) {
-                    // Identify links that should open the reader view
-                    // Example: semester1/bcs11.html
-                    const href = link.getAttribute('href');
-                    const match = href.match(/semester\d+\/(bcs|mcs|mcsl|bcsl|begae|mte)-\d+\.html/i);
-                    if (match) {
-                        const subjectCode = match[1].toUpperCase() + '-' + match[2];
-                        const subjectName = link.textContent.split(': ')[1] || 'Subject';
-                        return {
-                            isSubject: true,
-                            code: subjectCode,
-                            name: subjectName
-                        };
-                    }
-                    return { isSubject: false };
-                }
-
-                function loadPage(url, pushState = true) {
-                    if (!spaContent) return;
-                    fetch(url)
-                        .then(response => {
-                            if (!response.ok) throw new Error('Page not found');
-                            return response.text();
-                        })
-                        .then(html => {
-                            // Extract only the content inside <body>
-                            const tempDiv = document.createElement('div');
-                            tempDiv.innerHTML = html;
-                            let bodyContent = tempDiv.querySelector('body');
-                            spaContent.innerHTML = bodyContent ? bodyContent.innerHTML : html;
-                            if (pushState) {
-                                history.pushState({url: url}, '', url);
-                            }
-                            window.scrollTo({top: 0, behavior: 'smooth'});
-                        })
-                        .catch(() => {
-                            spaContent.innerHTML = '<div style="padding:40px;text-align:center;color:red;">Page not found.</div>';
-                        });
-                }
-                document.body.addEventListener('click', function(e) {
-                    const link = e.target.closest('a');
-                    if (!link) return;
-
-                    const subjectInfo = isSubjectLink(link);
-                    if (subjectInfo.isSubject) {
-                        e.preventDefault();
-                        history.pushState({ view: 'reader', code: subjectInfo.code, name: subjectInfo.name }, '', `?subject=${subjectInfo.code}`);
-                        showReaderView(subjectInfo.code, subjectInfo.name);
-                    } else if (isInternalLink(link.getAttribute('href'))) {
-                        e.preventDefault();
-                        history.pushState({ view: 'spa', url: link.getAttribute('href') }, '', link.getAttribute('href'));
-                        loadPage(link.getAttribute('href'), false); // pushState is already done
-                    }
-                });
-
-                window.addEventListener('popstate', function(e) {
-                    if (e.state) {
-                        if (e.state.view === 'reader') {
-                            showReaderView(e.state.code, e.state.name);
-                        } else if (e.state.view === 'spa') {
-                            loadPage(e.state.url, false);
-                        }
+                        currentLevel._files.push({ name: part, path: path });
                     } else {
-                        showMainContent();
+                        if (!currentLevel[part]) {
+                            currentLevel[part] = {};
+                        }
+                        currentLevel = currentLevel[part];
                     }
                 });
-
-                // Initial load: show home section
-                document.getElementById('spa-content').innerHTML = document.getElementById('home').innerHTML;
             });
+            return structure;
+        }
+
+        // Function to generate the HTML for the accordion
+        function createAccordionHTML(data, level = 0) {
+            let html = '';
+            const sortedKeys = Object.keys(data).filter(key => key !== '_files').sort();
+            
+            sortedKeys.forEach(key => {
+                const isExpandable = Object.keys(data[key]).length > 0;
+                const padding = `pl-${4 + level * 4}`;
+
+                html += `<div class="border-b border-gray-200 dark:border-gray-700" data-level="${level}" data-search-text="${key.toLowerCase()}">`;
+                
+                if(isExpandable){
+                    html += `
+                        <button class="accordion-button w-full text-left p-4 ${padding} flex justify-between items-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-expanded="false">
+                            <span class="font-semibold text-gray-700 dark:text-gray-200">${key}</span>
+                            <i data-lucide="chevron-right" class="accordion-icon w-5 h-5 text-gray-500 dark:text-gray-400"></i>
+                        </button>
+                        <div class="accordion-content bg-white dark:bg-gray-800/50">
+                            ${createAccordionHTML(data[key], level + 1)}
+                        </div>
+                    `;
+                }
+                html += `</div>`;
+            });
+            
+            if (data._files) {
+                data._files.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric: true})).forEach(file => {
+                    const padding = `pl-${8 + level * 4}`;
+                    const fileExtension = file.name.split('.').pop().toLowerCase();
+                    let icon = 'file-text';
+                    let iconColor = 'text-blue-600 dark:text-blue-400';
+                    if (['xls', 'xlsx'].includes(fileExtension)) {
+                        icon = 'file-spreadsheet';
+                        iconColor = 'text-green-600 dark:text-green-400';
+                    } else if (fileExtension === 'html') {
+                        icon = 'code';
+                        iconColor = 'text-orange-600 dark:text-orange-400';
+                    }
+
+                    html += `
+                        <div class="flex justify-between items-center p-3 ${padding} border-b border-gray-200 dark:border-gray-700 last:border-b-0 hover:bg-blue-50 dark:hover:bg-gray-700/50" data-level="${level}" data-search-text="${file.name.toLowerCase()}">
+                            <span class="text-gray-800 dark:text-gray-200 flex items-center">
+                               <i data-lucide="${icon}" class="w-5 h-5 mr-3 ${iconColor} flex-shrink-0"></i>
+                               ${file.name}
+                            </span>
+                            <button onclick="viewFile('${file.path}', '${file.name}')" class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                <i data-lucide="eye" class="w-4 h-4 md:mr-2"></i>
+                                <span class="hidden md:inline">View</span>
+                            </button>
+                        </div>
+                    `;
+                });
+            }
+            
+            return html;
+        }
+
+        function filterLMS() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const items = document.querySelectorAll('#lms-container [data-search-text]');
+
+            items.forEach(item => {
+                const text = item.getAttribute('data-search-text');
+                if (text.includes(filter)) {
+                    item.style.display = '';
+                    // Show parents
+                    let parent = item.closest('[data-level]');
+                    while(parent) {
+                        parent.style.display = '';
+                         const button = parent.querySelector('.accordion-button');
+                         if(button && filter) button.setAttribute('aria-expanded', 'true');
+                        parent = parent.parentElement.closest('[data-level]');
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+             // Handle accordion content visibility after filtering
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                const content = button.nextElementSibling;
+                if(button.getAttribute('aria-expanded') === 'true' && filter) {
+                     content.style.maxHeight = content.scrollHeight + 'px';
+                } else if (!filter) {
+                    button.setAttribute('aria-expanded', 'false');
+                    content.style.maxHeight = '0px';
+                }
+            });
+        }
+
+
+        // Modal Logic
+        const modal = document.getElementById('fileViewerModal');
+        const iframe = document.getElementById('fileViewerFrame');
+        const modalFileName = document.getElementById('modalFileName');
+
+        function viewFile(filePath, fileName) {
+            iframe.src = filePath;
+            modalFileName.textContent = fileName;
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            iframe.src = 'about:blank';
+            modal.classList.add('hidden');
+        }
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Set initial icon
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            lightIcon.classList.remove('hidden');
+        } else {
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            // toggle icons
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            // if set via local storage previously
+            if (localStorage.getItem('theme')) {
+                if (localStorage.getItem('theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+            // if NOT set via local storage previously
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+        });
+
+
+        // Initialize
+        function initializeApp() {
+            if (typeof lucide === 'undefined') {
+                setTimeout(initializeApp, 100);
+                return;
+            }
+
+            const lmsData = buildLMSStructure(filePaths);
+            const container = document.getElementById('lms-container');
+            container.innerHTML = createAccordionHTML(lmsData);
+            
+            lucide.createIcons();
+
+            container.addEventListener('click', (e) => {
+                const button = e.target.closest('.accordion-button');
+                if (button) {
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    const content = button.nextElementSibling;
+                    if (!isExpanded) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    } else {
+                        content.style.maxHeight = '0px';
+                    }
+                }
+            });
+            
+            // Mobile Menu Logic
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-open-icon');
+            const closeIcon = document.getElementById('menu-close-icon');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                openIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+
+             window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', initializeApp);
     </script>
+
 </body>
 </html>
