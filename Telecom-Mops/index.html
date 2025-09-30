@@ -161,10 +161,7 @@
             <div class="flex-grow p-1 md:p-2 bg-gray-200 relative">
                 <iframe id="fileViewerFrame" src="" frameborder="0" class="w-full h-full bg-white"></iframe>
                 <div id="viewerError" class="absolute inset-0 bg-white items-center justify-center hidden flex-col text-center p-8">
-                     <i data-lucide="file-warning" class="w-16 h-16 mx-auto text-amber-500"></i>
-                     <h4 class="mt-4 text-xl font-semibold text-gray-800">Preview Not Available</h4>
-                     <p class="mt-2 text-gray-600">This file type cannot be previewed directly in the browser.</p>
-                     <p class="mt-1 text-sm text-gray-500">Please download the file to view it.</p>
+                     <!-- This content will be dynamically updated by JavaScript -->
                 </div>
             </div>
         </div>
@@ -196,25 +193,23 @@
     <script>
         // Cleaned, deduplicated, and sorted file list
         const files = [
-            "5_6060011941974245854.pdf",
-            "5_6060011941974245854.pptx",
-            "Baseband Commands for FME & CEM.docx",
-            "Cambium Trianing Slide 2.pptx",
-            "Cambium Trianing Slide 3.pptx",
+            "Baseband Commands for FME & CEM.pdf",
+            "Cambium Trianing Slide 2 [Repaired].pdf",
             "Ceragon - 1500R vender.pdf",
             "Clutter PIC and Coverage Reading.pdf",
-            "Critical alert - Fatality - fall from height v1.pptx",
+            "Critical alert - Fatality - fall from height v1.pdf",
             "DeliveryChallan.pdf",
             "Ericsson Care - Fact sheet Driving safety.pdf",
             "Ericsson Care - Fact sheet Slips, trips and falls.pdf",
-            "Ericsson OHS Training 2019.pptx",
-            "FRESCOM Login Process on New Server.pptx",
+            "Ericsson OHS Training 2019.pdf",
+            "FRESCOM Login Process on New Server.pdf",
             "GIRT Access.pdf",
             "GIRT Reporting 20180419.pdf",
             "Golden-Safety-Rule-3-04-24.mp4",
             "How to report incident in Gensuite Apr 2021.pdf",
+            "In-Depth Configuration Topics – Radio.pdf",
             "Lesson_Learned_Safety_Alert_Major_Incident_Bharti_MS_Working_on.pdf",
-            "List.pdf",
+            "Monsoon Safety Guidelines_MS Bharti (Field Operations).pdf",
             "MOP for AMS 24 H Threshold Crossing for Ericsson TX.pdf",
             "MOP for AM_DOWNSHIFT alarm clearance for Huawei TX.pdf",
             "MOP for BID Missing for Ericsson TX.pdf",
@@ -298,22 +293,22 @@
             "MOP_of_Temperature_sensor_abnormal198092071.pdf",
             "MOP_of_Temperature_sensor_abnormal198092071_Alarm_ZTE_ver1.pdf",
             "MOP_of_VSWR_of_antenna_feeder_ab.pdf",
-            "MOP_of_VSWR_of_antenna_feeder_abnormal198096865_Alarm_ZTE_ver1.pdf",
-            "Monsoon Safety Guidelines_MS Bharti (Field Operations).pdf",
-            "PPT Defensive Driving - Motorcycle.pptx",
+            "MOP_of_VSWR_of_antenna_feeder_abnormal198098465_Alarm_ZTE_ver1.pdf",
+            "PPT Defensive Driving - Motorcycle.pdf",
+            "QnA.1.pdf",
+            "QnA.pdf",
             "RFSToolv4_2.18_UserGuide_2.12.pdf",
             "Rbs6000-Fault-List.pdf",
-            "Rigger checkpoint - Marathi.docx",
+            "Rigger checkpoint - Marathi.pdf",
             "Rigger checkpoint-Bengali.pdf",
-            "Rigger checkpoint-English.pptx",
+            "Rigger checkpoint-English.pdf",
             "SOP on how to login to i360 test environment.pdf",
-            "The Invitation - Anti-Corruption Training PPT.pptx",
-            "VID-20250101-WA0003 (1).mp4",
+            "The Invitation - Anti-Corruption Training PPT.pdf",
             "WFM Click schedule,CMT,AHT & FEAT_16_10_2019.pdf",
             "WO Status in WFM.pdf",
             "Zero Tolerance Safety Rules_Driving safety.pdf",
             "golden-safety-rule-video.mp4",
-            "nokia softwear links.docx"
+            "nokia softwear links.pdf"
         ];
 
         function getFileIcon(filename) {
@@ -395,6 +390,7 @@
         function viewFile(fileName) {
             const extension = fileName.split('.').pop().toLowerCase();
             let finalUrl = '';
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
             
             // Reset UI state
             iframe.classList.remove('hidden');
@@ -403,6 +399,27 @@
 
             if (extension === 'pdf' || extension === 'mp4') {
                 finalUrl = fileName; // Direct link for native types
+            } else if ((extension === 'docx' || extension === 'pptx') && isLocal) {
+                // Special handling for Office docs on local server
+                iframe.classList.add('hidden');
+                viewerError.classList.remove('hidden');
+                viewerError.classList.add('flex');
+                
+                viewerError.innerHTML = `
+                    <i data-lucide="server-off" class="w-16 h-16 mx-auto text-blue-500"></i>
+                    <h4 class="mt-4 text-xl font-semibold text-gray-800">Local Preview Unavailable</h4>
+                    <p class="mt-2 text-gray-600">Live preview for Office documents requires a live web server. This feature is disabled in your local environment.</p>
+                    <a href="${fileName}" download class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                        Download File
+                    </a>
+                `;
+                
+                modalFileName.textContent = fileName;
+                modal.classList.remove('hidden');
+                lucide.createIcons();
+                return;
+
             } else if (extension === 'docx' || extension === 'pptx') {
                 // IMPORTANT: This viewer requires the files to be publicly accessible on the internet.
                 const fileUrl = window.location.origin + window.location.pathname.replace('index.html', '') + fileName;
@@ -413,6 +430,16 @@
                 viewerError.classList.remove('hidden');
                 viewerError.classList.add('flex');
                 
+                viewerError.innerHTML = `
+                    <i data-lucide="file-warning" class="w-16 h-16 mx-auto text-amber-500"></i>
+                    <h4 class="mt-4 text-xl font-semibold text-gray-800">Preview Not Available</h4>
+                    <p class="mt-2 text-gray-600">This file type cannot be previewed directly in the browser.</p>
+                    <a href="${fileName}" download class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                        <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                        Download File
+                    </a>
+                `;
+
                 modalFileName.textContent = fileName;
                 modal.classList.remove('hidden');
                 lucide.createIcons();
@@ -471,4 +498,6 @@
 
 </body>
 </html>
+
+
 
