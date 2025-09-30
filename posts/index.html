@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delhizones.com - Your Digital Hub</title>
+    <title>Latest Posts - Delhizones.com</title>
     
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -22,204 +25,233 @@
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc; /* Tailwind gray-50 */
         }
-        .coming-soon-card {
-            background-color: #f1f5f9; /* Tailwind slate-100 */
-            cursor: not-allowed;
-        }
-        .coming-soon-card .text-container {
-            opacity: 0.6;
-        }
-         .coming-soon-card .coming-soon-badge {
-            display: inline-block;
-        }
-        .coming-soon-badge {
-            display: none;
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
         }
     </style>
 </head>
 <body class="text-gray-800">
 
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gray-900">
-                Delhi<span class="text-blue-600">zones</span>.com
-            </a>
-            <nav class="hidden md:flex space-x-6">
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
-                <a href="#services" class="text-gray-600 hover:text-blue-600 transition duration-300">Services</a>
-                <a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300">About</a>
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact</a>
-            </nav>
-            <!-- Mobile Menu Button (Optional - for future expansion) -->
-            <button class="md:hidden text-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-            </button>
+    <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center gap-2" aria-label="Delhizones Homepage">
+                    <!-- New Logo SVG -->
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                        <g clip-path="url(#clip0_105_2_header)">
+                            <circle cx="16" cy="16" r="15.5" fill="white" stroke="#2563EB"></circle>
+                            <circle cx="16" cy="16" r="12" fill="#2563EB"></circle>
+                            <path d="M10.5 11.5L16 20.5L21.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z" fill="white"></path>
+                            <path d="M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z" fill="white"></path>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_105_2_header">
+                                <rect width="32" height="32" fill="white"></rect>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <span class="text-2xl font-bold text-gray-900">
+                        Delhi<span class="text-blue-600">zones</span>
+                    </span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="/#services" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Services</a>
+                    <a href="/posts/" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Posts</a>
+                    <a href="/#support" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Support Us</a>
+                    <a href="/contact.html" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Contact</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i id="menu-open-icon" data-lucide="menu" class="w-6 h-6"></i>
+                        <i id="menu-close-icon" data-lucide="x" class="w-6 h-6 hidden"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+             <a href="/#services" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Services</a>
+             <a href="/posts/" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Posts</a>
+             <a href="/#support" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Support Us</a>
+             <a href="/contact.html" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Contact</a>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="bg-white">
-            <div class="container mx-auto px-6 py-20 md:py-32 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
-                    Your All-in-One Digital Hub
-                </h1>
-                <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                    Discover a collection of powerful tools, educational resources, and community platforms, all in one place.
-                </p>
-                <div class="mt-8">
-                    <a href="#services" class="bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300">
-                        Explore Our Services
-                    </a>
-                </div>
+    <main class="bg-white">
+        <div class="container mx-auto px-6 py-16">
+            <!-- Page Header -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900">Latest Articles & Updates</h1>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Your source for insightful articles on technology, current affairs, politics, and more.</p>
             </div>
-        </section>
 
-        <!-- Services Section -->
-        <section id="services" class="py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Our Platforms & Tools</h2>
-                    <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Click any card below to navigate to the respective section.</p>
-                </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Main Posts Feed -->
+                <div class="lg:col-span-8">
+                    <div class="space-y-12">
+                        <!-- Post Item 1: Technology -->
+                        <article class="group">
+                             <div class="overflow-hidden rounded-lg shadow-md">
+                                <a href="#">
+                                    <img src="https://placehold.co/800x450/3B82F6/FFFFFF?text=Tech+Innovation" alt="Placeholder image for a technology article" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-300">
+                                </a>
+                            </div>
+                            <div class="mt-6">
+                                <div class="mb-3">
+                                    <a href="#" class="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded-full hover:bg-blue-200 transition-colors">Technology</a>
+                                </div>
+                                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3 leading-tight">
+                                    <a href="#" class="hover:text-blue-600 transition-colors">The Future of AI: Trends to Watch in the Coming Year</a>
+                                </h2>
+                                <p class="text-gray-600 mb-4 text-lg leading-relaxed">
+                                    Artificial intelligence is evolving at an unprecedented pace. From generative models to advancements in machine learning, we explore the key trends that will shape our world.
+                                </p>
+                                <div class="text-sm text-gray-500">
+                                    <span>By Delhizones Staff</span> &middot; <span>September 30, 2025</span>
+                                </div>
+                            </div>
+                        </article>
 
-                <!-- Grid of Service Cards -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        <!-- Post Item 2: Politics -->
+                         <article class="group">
+                             <div class="overflow-hidden rounded-lg shadow-md">
+                                <a href="#">
+                                    <img src="https://placehold.co/800x450/10B981/FFFFFF?text=Political+Analysis" alt="Placeholder image for a political article" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-300">
+                                </a>
+                            </div>
+                            <div class="mt-6">
+                                <div class="mb-3">
+                                    <a href="#" class="inline-block bg-green-100 text-green-700 text-sm font-semibold px-3 py-1 rounded-full hover:bg-green-200 transition-colors">Politics</a>
+                                </div>
+                                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3 leading-tight">
+                                    <a href="#" class="hover:text-blue-600 transition-colors">Global Economic Policies: A Comparative Analysis</a>
+                                </h2>
+                                <p class="text-gray-600 mb-4 text-lg leading-relaxed">
+                                   As nations navigate a post-pandemic world, economic strategies are diverging. This article breaks down the key policy shifts in major global economies and their potential impacts.
+                                </p>
+                                <div class="text-sm text-gray-500">
+                                    <span>By Delhizones Staff</span> &middot; <span>September 28, 2025</span>
+                                </div>
+                            </div>
+                        </article>
 
-                    <!-- EDU Card -->
-                    <a href="/EDU/" class="group block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
-                           <i data-lucide="book-open"></i>
-                        </div>
-                        <div class="mt-4 text-container">
-                            <h3 class="text-xl font-semibold text-gray-900">Educational Zone</h3>
-                            <p class="mt-2 text-gray-600">Kids learning apps, educational managers, and resources for growth.</p>
-                        </div>
-                    </a>
-                    
-                    <!-- Posts Card -->
-                    <a href="/posts/" class="group block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 text-green-600">
-                           <i data-lucide="newspaper"></i>
-                        </div>
-                        <div class="mt-4 text-container">
-                            <h3 class="text-xl font-semibold text-gray-900">Daily Updates</h3>
-                            <p class="mt-2 text-gray-600">Stay informed with the latest news, articles, and site announcements.</p>
-                        </div>
-                    </a>
-
-                    <!-- Search Card -->
-                    <a href="/Search/" class="group block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 text-indigo-600">
-                           <i data-lucide="tower-control"></i>
-                        </div>
-                        <div class="mt-4 text-container">
-                            <h3 class="text-xl font-semibold text-gray-900">Telecom BTS Search</h3>
-                            <p class="mt-2 text-gray-600">A dedicated application for searching and analyzing Telecom BTS data.</p>
-                        </div>
-                    </a>
-
-                    <!-- Telecom-Mops Card -->
-                    <a href="/Telecom-Mops/" class="group block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-purple-100 text-purple-600">
-                           <i data-lucide="file-text"></i>
-                        </div>
-                        <div class="mt-4 text-container">
-                            <h3 class="text-xl font-semibold text-gray-900">Telecom MOPs</h3>
-                            <p class="mt-2 text-gray-600">A library of learning materials, MOPs, and technical PDFs.</p>
-                        </div>
-                    </a>
-
-                    <!-- Web-Tool Card -->
-                    <a href="/Web-Tool/" class="group block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 text-orange-600">
-                           <i data-lucide="wrench"></i>
-                        </div>
-                        <div class="mt-4 text-container">
-                            <h3 class="text-xl font-semibold text-gray-900">Web Tools</h3>
-                            <p class="mt-2 text-gray-600">Useful online tools like Excel search, file structurer, and more.</p>
-                        </div>
-                    </a>
-
-                    <!-- Work Card -->
-                    <a href="/Work/" class="group block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-sky-100 text-sky-600">
-                           <i data-lucide="hard-hat"></i>
-                        </div>
-                        <div class="mt-4 text-container">
-                            <h3 class="text-xl font-semibold text-gray-900">Work Platform</h3>
-                            <p class="mt-2 text-gray-600">A collaborative platform for engineers to post and track work updates.</p>
-                        </div>
-                    </a>
-
-                    <!-- Emergency-GF Card (Coming Soon) -->
-                    <div class="group block p-6 rounded-xl shadow-md coming-soon-card">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-slate-200 text-slate-500">
-                           <i data-lucide="shield-half"></i>
-                        </div>
-                        <div class="mt-4 text-container">
-                            <h3 class="text-xl font-semibold text-gray-900 flex items-center">
-                                Emergency Group Fund
-                                <span class="coming-soon-badge ml-2 text-xs font-medium bg-gray-200 text-gray-600 px-2 py-1 rounded-full">Coming Soon</span>
-                            </h3>
-                            <p class="mt-2 text-gray-600">A new initiative for community support during emergencies.</p>
-                        </div>
-                    </div>
-
-                    <!-- Portfolio Card (Coming Soon) -->
-                    <div class="group block p-6 rounded-xl shadow-md coming-soon-card">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-slate-200 text-slate-500">
-                           <i data-lucide="briefcase"></i>
-                        </div>
-                        <div class="mt-4 text-container">
-                             <h3 class="text-xl font-semibold text-gray-900 flex items-center">
-                                Our Portfolio
-                                <span class="coming-soon-badge ml-2 text-xs font-medium bg-gray-200 text-gray-600 px-2 py-1 rounded-full">Coming Soon</span>
-                            </h3>
-                            <p class="mt-2 text-gray-600">A showcase of our projects and accomplishments.</p>
-                        </div>
+                        <!-- Post Item 3: Current Affairs -->
+                        <article class="group">
+                             <div class="overflow-hidden rounded-lg shadow-md">
+                                <a href="#">
+                                    <img src="https://placehold.co/800x450/F59E0B/FFFFFF?text=Current+Affairs" alt="Placeholder image for a current affairs article" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-300">
+                                </a>
+                            </div>
+                            <div class="mt-6">
+                                <div class="mb-3">
+                                    <a href="#" class="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-3 py-1 rounded-full hover:bg-amber-200 transition-colors">Current Affairs</a>
+                                </div>
+                                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3 leading-tight">
+                                    <a href="#" class="hover:text-blue-600 transition-colors">The Push for Sustainable Urban Development in India</a>
+                                </h2>
+                                <p class="text-gray-600 mb-4 text-lg leading-relaxed">
+                                    With rapid urbanization, Indian cities face immense environmental challenges. We look at the latest initiatives and smart city projects aimed at creating a sustainable future.
+                                </p>
+                                <div class="text-sm text-gray-500">
+                                    <span>By Delhizones Staff</span> &middot; <span>September 25, 2025</span>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- About Section -->
-        <section id="about" class="bg-white py-16 md:py-24">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold text-gray-900">About Delhizones.com</h2>
-                <p class="mt-4 max-w-3xl mx-auto text-gray-600">
-                    Delhizones.com is a multifaceted platform designed to provide value across various domains. From educational content and professional tools for the telecom industry to daily news and community-driven initiatives, our mission is to build a comprehensive digital ecosystem that serves and empowers our users.
-                </p>
-            </div>
-        </section>
+                <!-- Sidebar -->
+                <aside class="lg:col-span-4">
+                    <div class="sticky top-28 space-y-8">
+                        <!-- Categories Widget -->
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Categories</h3>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="flex justify-between items-center text-gray-700 hover:text-blue-600 transition-colors"><span class="font-medium">Technology</span><span class="text-gray-500">1</span></a></li>
+                                <li><a href="#" class="flex justify-between items-center text-gray-700 hover:text-blue-600 transition-colors"><span class="font-medium">Politics</span><span class="text-gray-500">1</span></a></li>
+                                <li><a href="#" class="flex justify-between items-center text-gray-700 hover:text-blue-600 transition-colors"><span class="font-medium">Current Affairs</span><span class="text-gray-500">1</span></a></li>
+                                <li><a href="#" class="flex justify-between items-center text-gray-700 hover:text-blue-600 transition-colors"><span class="font-medium">Telecom</span><span class="text-gray-500">0</span></a></li>
+                            </ul>
+                        </div>
 
+                        <!-- Recent Posts Widget -->
+                         <div class="bg-gray-100 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Recent Posts</h3>
+                            <ul class="space-y-4">
+                                <li>
+                                    <a href="#" class="font-semibold text-gray-800 hover:text-blue-600 transition-colors">The Future of AI: Trends to Watch</a>
+                                    <p class="text-sm text-gray-500 mt-1">September 30, 2025</p>
+                                </li>
+                                 <li>
+                                    <a href="#" class="font-semibold text-gray-800 hover:text-blue-600 transition-colors">Global Economic Policies: A Comparative Analysis</a>
+                                    <p class="text-sm text-gray-500 mt-1">September 28, 2025</p>
+                                </li>
+                                 <li>
+                                    <a href="#" class="font-semibold text-gray-800 hover:text-blue-600 transition-colors">Sustainable Urban Development in India</a>
+                                    <p class="text-sm text-gray-500 mt-1">September 25, 2025</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white">
-        <div class="container mx-auto px-6 py-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-center md:text-left">&copy; 2024 Delhizones.com. All Rights Reserved.</p>
-                <div class="flex mt-4 md:mt-0 space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <i data-lucide="twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <i data-lucide="facebook"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <i data-lucide="linkedin"></i>
-                    </a>
-                </div>
+        <div class="container mx-auto px-6 py-12">
+            <div class="text-center">
+                 <h2 class="text-3xl font-bold text-white">Get In Touch</h2>
+                 <p class="mt-3 text-gray-400">Feel free to reach out via email.</p>
+                 <a href="mailto:delhizones@gmail.com" class="mt-6 inline-block text-lg font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+                    delhizones@gmail.com
+                 </a>
+            </div>
+             <div class="mt-10 flex justify-center gap-x-8 gap-y-4 flex-wrap">
+                <a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a>
+                <a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                <a href="/contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+            </div>
+            <div class="text-center text-gray-500 border-t border-gray-800 mt-10 pt-6">
+                <p>&copy; 2024 Delhizones.com. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize Lucide icons
+        // Initialize Lucide Icons
         lucide.createIcons();
+
+        // Mobile Menu Logic
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const openIcon = document.getElementById('menu-open-icon');
+        const closeIcon = document.getElementById('menu-close-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            openIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+        
+        const menuLinks = mobileMenu.getElementsByTagName('a');
+        for(let i = 0; i < menuLinks.length; i++) {
+            menuLinks[i].addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                openIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        }
     </script>
 
 </body>
