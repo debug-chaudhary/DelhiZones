@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Map - Delhizones.com</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .tree { font-family: 'Fira Code', monospace; }
+        .tree-item { cursor: pointer; }
+        .tree-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
+        .tree-item[aria-expanded="true"] > .tree-content { max-height: 1000px; /* Adjust as needed */ }
+        .tree-item[aria-expanded="true"] > div > .tree-icon { transform: rotate(90deg); }
+        .tree-icon { transition: transform 0.2s ease-in-out; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+             <a href="/" class="flex items-center gap-2" aria-label="Delhizones Homepage">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0"><g clip-path="url(#clip0_105_2_header)"><circle cx="16" cy="16" r="15.5" fill="white" stroke="#2563EB"></circle><circle cx="16" cy="16" r="12" fill="#2563EB"></circle><path d="M10.5 11.5L16 20.5L21.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z" fill="white"></path><path d="M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z" fill="white"></path></g><defs><clipPath id="clip0_105_2_header"><rect width="32" height="32" fill="white"></rect></clipPath></defs></svg>
+                <span class="text-2xl font-bold text-gray-900">Delhi<span class="text-blue-600">zones</span></span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="/" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container mx-auto px-6 py-16">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900">Site Map</h1>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">A complete overview of all pages and resources available on Delhizones.com.</p>
+            </div>
+            
+            <div id="sitemap-container" class="bg-white p-6 md:p-8 rounded-lg shadow-md tree text-gray-700">
+                <!-- Site map will be generated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-16">
+        <div class="container mx-auto px-6 py-12 text-center">
+            <p>&copy; 2024 Delhizones.com. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gitLsTreeOutput = `
+100644 blob b058964a7de05a52b997fddbcbcf746c7517cfcb    EDU/EDU-fees-Manager/index.html
+100644 blob 11dfad5f4df3e365155e421f38863819d5c04e37    EDU/Kids/index.html
+100644 blob bfe9cb6a23168d54bfa1926c1d78bd7af1a3bebe    EDU/Kids/index_1.html
+100644 blob 591db19c03723d98fcc836c6af355480e36b6aab    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-1.pdf
+100644 blob 7522ea51cdeb9a8f123ce3d19070452e12f68dbd    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-2.pdf
+100644 blob 3674576d581e85223d31ec2f375c2ee904230790    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-3.pdf
+100644 blob 2702e69102ac18be67a26d8dbf0cde04b138fddd    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-1 Algebra-I/Block-1_Unit-4.pdf
+100644 blob f5a6cf6c4c97f2a03a3bea50bed5b1beae2e8f83    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-1.pdf
+100644 blob 5ecd874c6b9743cb8d5070fc22ee7fdacf0a79fb    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-2.pdf
+100644 blob f3a6a38a8503bcfa16f079cc72f1b25398c5cbf2    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-3.pdf
+100644 blob 651274d3effed7eef3fa007e281c06737f5604d5    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-2 Algebra-II/Block-2_Unit-4.pdf
+100644 blob eaa79b1f050dce3cf08a59db4f821133a78d1e72    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-1.pdf
+100644 blob a42ab11ac05b951d2e7baede0b6d6bfe87001f65    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-2.pdf
+100644 blob db25f6ef034c3d4b37caebe00e4120103584b8a2    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-3.pdf
+100644 blob 3f99cb1429b84f42413b4099fc5a4e78c0c9e49b    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-3 Calculus/Block-3_Unit-4.pdf
+100644 blob 1bf8fb3853956aaba2a9543ce07b989e9db4ea8f    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-1.pdf
+100644 blob a74501d2cb469c6c65273d414271f82099b3424a    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-2.pdf
+100644 blob 476c7240c9f81f70566035a2cc456e405316b18a    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-3.pdf
+100644 blob 6bcdb3266279fe6b691502d6175e47f8d4da65ac    EDU/ignou-bca-resources/1st-Semester/BCS-012 Mathematics/Block-4 Vectors and Three-Dimensional Geometry/Block-4_Unit-4.pdf
+100644 blob a125c721a5f319ca5509dcc2587ecacef3febe4d    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-1.pdf
+100644 blob da8b4aa5517a483556f23749ed5f5fd16ad36ce4    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-2.pdf
+100644 blob e757dfde4ddaa821ae940df407f1938dae55a2bf    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-3.pdf
+100644 blob c76710e4be4d70c3539f354f50357d4f4d61d431    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-4.pdf
+100644 blob fd1bf11dc6bd9d334e996e97958d639edd2e4380    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-5.pdf
+100644 blob 149932d6ef89a19f11bb72f32e7d94a8120e84ab    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-1.pdf
+100644 blob fa2a843b26645f6daa7c759c5e1e0465b75be388    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-2.pdf
+100644 blob 3b8a0e9b8a724b9bd6112d6a24e5cd383eb101a2    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-3.pdf
+100644 blob 9591796242d1cf4ea4cce104804abaf336c8b344    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-4.pdf
+100644 blob 1011a47d93f0876cd2a5afab079caba66a2061ce    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-1.pdf
+100644 blob 34160ca9bfff7680717eb27a706c86bd04b7e4a7    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-2.pdf
+100644 blob 7481187d5b860dcb9a41bda822729353f279ebff    EDU/ignou-bca-resources/1st-Semester/BCS-111 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-3.pdf
+100644 blob 82d49692342e531477f0f92336fc174e54a8681f    EDU/ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-1.pdf
+100644 blob 66151a078842ba47d39c17e916c34bf7be2d7510    EDU/ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-2.pdf
+100644 blob c22ba674eacc3aed6a968b1cf1f8d144442f9fc6    EDU/ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-3.pdf
+100644 blob 24aa155c2c7a7eb6a4757290f52854b804e97d17    EDU/ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-4.pdf
+100644 blob 7caee6c834393de5cf958187132a413f10d49adb    EDU/ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-5.pdf
+100644 blob 9d627589664045188d962d15d1ac212e70285dbb    EDU/ignou-bca-resources/1st-Semester/BCSL-013 Computer Basics and PC Software Lab/Block-1 Lab Course/Unit-6.pdf
+100644 blob 3a3ffac553db18145acb83358ad1e5a3ff7da913    EDU/ignou-bca-resources/1st-Semester/BEGLA-136 English at the Workplace/Block-1 Exploring the Job Market/Block-1 Exploring the Job Market_allChapters.pdf
+100644 blob 1630acec5855b6632b32c2e5158b89eda0f68183    EDU/ignou-bca-resources/1st-Semester/BEGLA-136 English at the Workplace/Block-2 Preparing for Job Interviews/Block-2 PREPARING FOR JOB INTERVIEWS_allChapters.pdf
+100644 blob cd54a1f0364cd237f09a9eaa4bdd55db89e69006    EDU/ignou-bca-resources/1st-Semester/BEGLA-136 English at the Workplace/Block-3 Skills for the Workplace-I/Block-3 SKILLS FOR THE WORKPLACE-I_AllChapters.pdf
+100644 blob d4df204519fc06fff400fd75559a6a2c17fedab9    EDU/ignou-bca-resources/1st-Semester/BEGLA-136 English at the Workplace/Block-4 Skills for the Workplace-II/Block-4 Block-4 Skills for the Workplace-II_AllChapters.pdf
+100644 blob 4167c41b4f1221aaa9be797a4213d403ba3d1ee6    EDU/ignou-bca-resources/1st-Semester/BEVAE-181 Environmental Studies/Block-1 An Introduction to Environment and Environmental Studies/Block-1 An introduction to environment and environmental studies.pdf
+100644 blob 55f7dca852f76e9fed3d55caf90afe4cf972d9fc    EDU/ignou-bca-resources/1st-Semester/BEVAE-181 Environmental Studies/Block-2 Natural Resources/Block-2 Natural resources.pdf
+100644 blob a9efc5810dc80aaf280514cbe3602b05f8c64542    EDU/ignou-bca-resources/1st-Semester/BEVAE-181 Environmental Studies/Block-3 Environmental Issues and Concerns/Block-3 Environmental issues and concerns.pdf
+100644 blob cd7cd85114bb574ec688b6565ce957d3d5b5b289    EDU/ignou-bca-resources/1st-Semester/BEVAE-181 Environmental Studies/Block-4 Protecting Our Environment Policies and Practices/Block-4 Protecting Our Environment Policies and Practices.pdf
+100644 blob e9598f8e8d89abf95c2f51a09ee7da581d06b739    EDU/ignou-bca-resources/1st-Semester/assignments/BCA-1 July_2025 to June 2026.pdf
+100644 blob b7ad6d6d8ccb76ebfb42478301358c1ca903fbaa    EDU/ignou-bca-resources/2nd-Semester/BCSL-021 C Language Programming Lab/Lab Course/Section-1.pdf
+100644 blob f75e23ea8f3c76d17c9a0a015f0eb9ee22e54c48    EDU/ignou-bca-resources/2nd-Semester/BCSL-022-Assembly Language Programming Lab/Lab Course/SECTION-1.pdf
+100644 blob 0a835963f751867967ed1b49f0643bd7774ab1ec    EDU/ignou-bca-resources/2nd-Semester/BCSL-022-Assembly Language Programming Lab/Lab Course/SECTION-2.pdf
+100644 blob 23a09f45bf81f5d7b71318f4d0348cebe0baf2b9    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-1.pdf
+100644 blob 37a869820e02c3cb413713951259371d77ea3020    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-2.pdf
+100644 blob 1f597b6525b6a0d0f1053bc96c77efbe9858488f    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-3.pdf
+100644 blob 863dfb14e6435ec7b25e9534aa9d479e50e69b82    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-1 An Introduction to C/Unit-4.pdf
+100644 blob 9405de56b9d31b4ea683d7683fe1cec0a7a49cda    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 5.pdf
+100644 blob 9a0c13b09991a362aa053213229b56c9cdef04fc    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 6.pdf
+100644 blob 3c78d97a0e261008f895ef6bc6891a4ffec0f3dd    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 7.pdf
+100644 blob da94b78bf6347497e3b578e8a5f68c3054359a53    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-2 Control Statements Arrays and Functions/Unit - 8.pdf
+100644 blob 26f51313b2a8695da7d43a39269837296cca20cc    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit - 10.pdf
+100644 blob 092de59659aa3fcfaa9a7f275c1860d20677cfb9    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit - 11.pdf
+100644 blob 00ed7a47e63f9143356432e344a872b37bc8152a    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit - 12.pdf
+100644 blob a2c0765bb22c88490148d28aad9ecb47620e0ff6    EDU/ignou-bca-resources/2nd-Semester/MCS-011 Problem Solving and Programming/Block-3 Structures Pointers and File Handling/Unit- 9.pdf
+100644 blob 138aa86f5229252c360cd62d029ceb9c2d14d11b    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/UNIT-3.pdf
+100644 blob 7c4332b3f06b70e3460dda9353dc53505303d746    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/UNIT-4.pdf
+100644 blob 851f0e4c50a6a359454ba35bd4082c496fb51c16    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/Unit-1.pdf
+100644 blob c4f94943b207bf49499a843b15c43503efb6453b    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-1 Introduction to Digital Circuits/unit-2.pdf
+100644 blob b51941d66b666db95709d3f4aa64f3bad5f3cb3a    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-1.pdf
+100644 blob ae4f0c7490ff0d5cfd66670a0a812700e857c49b    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-2.pdf
+100644 blob ca2a32af4b99588a7209bbe43f6190b47ac0e49b    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-3.pdf
+100644 blob 8d08ee52463c1eca3d7386e51efa933d0860fdf9    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-2 Basic Computor Organisation/UNIT-4.pdf
+100644 blob ba2c48c6c0195b9bcdaaf3329fd96e412359cee1    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-1.pdf
+100644 blob 3b6984b4e48d64521d8007a94a50ae40386f477e    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-2.pdf
+100644 blob abfb99cd292cd15b6715c558080022232cdd7b79    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-3.pdf
+100644 blob 151df31bf206d2d01618e6bf525d138441d1d3ac    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-4.pdf
+100644 blob b6f8cacc910f31c601cec949c1b0666ba097fd23    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-3 The Central Processing Unit/UNIT-5.pdf
+100644 blob 85b992bb45efc8864b7340ec8cc1112baf356ecf    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-1.pdf
+100644 blob 96805d68f6092aa239131c23235a78d2db977755    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-2.pdf
+100644 blob cb8b6399556f7353586cc88e9c821eb4ebee0cd5    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-3.pdf
+100644 blob 6fc8291342a60e6e7bf5e0a829c5a4958d8bcc52    EDU/ignou-bca-resources/2nd-Semester/MCS-012 Computer Organisation and Assembly Language Programming/Block-4 Assembly language Programing/UNIT-4.pdf
+100644 blob ea30d1fb7b05317a2b09902b19a80778eaa09fe8    EDU/ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-1 Elementary Logic/Unit - 1.pdf
+100644 blob 3dde4a5a968ab3b9d9b0d9a60259ed57b0a00198    EDU/ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-1 Elementary Logic/Unit - 2.pdf
+100644 blob 6993f64bb01c258d2cd20c263b69d36c26ee15fc    EDU/ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-1 Elementary Logic/Unit - 3.pdf
+100644 blob 4c45c738a778ec304e94a3d0fb94d807e4821976    EDU/ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/UNIT-1.pdf
+100644 blob dee88dce64a72fd38c37cdfd42531878ab519d9d    EDU/ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/UNIT-3.pdf
+100644 blob b48bee3a81fcdd3453da3afb9d1c9991b8d2b4c1    EDU/ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/Unit - 4.pdf
+100644 blob 3c07bdc32c3e2675c7ce49df18320ccec0cd7fb1    EDU/ignou-bca-resources/2nd-Semester/MCS-013 Discrete Mathematics/Block-2 Basic Combinatorics/Unit 2.pdf
+100644 blob 5b3e0c1edd817c5556cdd582b61ff06c5d629702    EDU/ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-1.pdf
+100644 blob 30874f6fd4addb421010bebae1b138345081bd27    EDU/ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-2.pdf
+100644 blob 71e1323e377d53d00607748df68389e0c9992185    EDU/ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-3.pdf
+100644 blob 04761684fcb27b6672897922e6a7cb312c1b43bc    EDU/ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-4.pdf
+100644 blob daadd1622276d68a1fd98bd426f7d5e8e3484d5e    EDU/ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-1 Skills Needed at the Work Place I/Unit-5.pdf
+100644 blob 885b8bda36ee45c3a1ddec2c6727e4316de08967    EDU/ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-10.pdf
+100644 blob 56611f948422522d6e7b3b373ed630a83fb3c079    EDU/ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-6.pdf
+100644 blob 8ffa9e604561250aceb57a7f9316e7566ea82bb8    EDU/ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-7.pdf
+100644 blob 2bbe8c7e063e96acb50524d1f0b5da207093eb53    EDU/ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-8.pdf
+100644 blob 858bf72bbf57e87b9969012c52bf4266385a3f83    EDU/ignou-bca-resources/2nd-Semester/MCS-015 Communication Skills/Block-2 Skills Needed at the Work Place II/Unit-9.pdf
+100644 blob f6043846a7ec295c5133637c1d5dcbe6a78f3bc5    EDU/ignou-bca-resources/2nd-Semester/assignments/BCA-2 July_2025 to June 2026.pdf
+100644 blob 1a7dfbe7c7552bdab7dc1f58ab27cee0de013607    EDU/ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit- 4.pdf
+100644 blob ac0fde108942c64091683313272f65a38a2f1980    EDU/ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit-1.pdf
+100644 blob 6493e3e42a4700f709da49e3fea9016867e86542    EDU/ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit-2.pdf
+100644 blob e88baa1e9ddad2cdf5cb50fa2c83c87fb5c5d783    EDU/ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 1 Basics of Object Oriented Programming & C++/Unit-3.pdf
+100644 blob 3aa45297dd7947d64db1c984f92e26eb91dae515    EDU/ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 2 Inheritance and Polymorphism in C++/Unit-1.pdf
+100644 blob 09cc646f59572d372f5f41395d0601dbf4f2d49c    EDU/ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 2 Inheritance and Polymorphism in C++/Unit-2.pdf
+100644 blob 1581f2ff2938d82ced13b89b231b387ddf822d6f    EDU/ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 2 Inheritance and Polymorphism in C++/Unit-3.pdf
+100644 blob 13953672c3d40c6dacb7b538a9af604ec6346c32    EDU/ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-1.pdf
+100644 blob 6011585310a12ed5d218992d26e272abba9c08e3    EDU/ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-2.pdf
+100644 blob e93822ef0fb1388f7ab08ee273c86317bad853b3    EDU/ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-3.pdf
+100644 blob c1cbac78f6685f3ec0a7bbbf994944962196a3ad    EDU/ignou-bca-resources/3rd-Semester/BCS-031 Programming in C++/Block 3 Advanced Features of C++/Unit-4.pdf
+100644 blob 48156d0f3d9f3d9c7f156806a08268d91cc3d752    EDU/ignou-bca-resources/3rd-Semester/BCSL-032 C++ Programming Lab/Lab Manual/SECTION1 C++ Lab.pdf
+100644 blob 07fa301aaa1dcbb233c82677c7543c09ac0747f2    EDU/ignou-bca-resources/3rd-Semester/BCSL-033 Data and File Structures Lab/Lab Manual/Section-1.pdf
+100644 blob 13f9d39420f181540941d1d07898978747218d3a    EDU/ignou-bca-resources/3rd-Semester/BCSL-034 DBMS Lab/Lab Manual/Section 1.pdf
+100644 blob 9ecb94b3ca9df00548075737bd27b0f4e3cd8de8    EDU/ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-1.pdf
+100644 blob cd16a83a444093364481502277e4377ec3b0d6c3    EDU/ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-2.pdf
+100644 blob f5b8d98a69e975baeab72498174ab6d6296102a5    EDU/ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-3.pdf
+100644 blob 6ccdb20f45b3d15c0d497534e001a7ac8c9efc8c    EDU/ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-1 The Database Management System Concepts/Unit-4.pdf
+100644 blob 5db79d114f056c8e13ec3e0a4f8ba8665cd2f0a6    EDU/ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit 1.pdf
+100644 blob d7e24689cc9797a0bf1bf9bfe70d4dcd837bf666    EDU/ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit 2.pdf
+100644 blob c701f026bee1c60bfd1c7b284beb038eff97da51    EDU/ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit-3.pdf
+100644 blob ca9595f07eefe7388c65358cff1a5881563caad4    EDU/ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-2 Structured Query Language and Transaction Management/Unit-4.pdf
+100644 blob 5bef1a4d3d82079b97433bc0eb5159dcae333ce7    EDU/ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-3 Application Development Development of a Hospital Management System/Development of HMS.pdf
+100644 blob e147430acd8701dc502715ea2a6097941b885f59    EDU/ignou-bca-resources/3rd-Semester/MCS-023 Introduction to Database Management Systems/Block-4 Study Centre Management System A Case Study/Block-4.pdf
+100644 blob 3d5f3cc541c5889ec7246d1c7e857dc71e1755c6    EDU/ignou-bca-resources/3rd-Semester/assignments/BCA-3 July_2025 to June 2026.pdf
+100644 blob 97fb5d483281f6c383107928ad45ae53705e481e    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-1 Statistics and Probability/Unit-1.pdf
+100644 blob cf9cf89de47859209daf8e6490d20f62822b5aba    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-1 Statistics and Probability/Unit-2.pdf
+100644 blob 30e2beffc480bb30dea634a19a727a1c1168b319    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-1 Statistics and Probability/Unit-3.pdf
+100644 blob 0de3f4c10e0a8a6a352209882f5c49839c67097c    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-4.pdf
+100644 blob 45f12367d199399db07eda157bbccfd4cd383bda    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-5.pdf
+100644 blob 9d2db5a2dd24b90fa7516bcf5f39443c986acde6    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-6.pdf
+100644 blob d3190dcd92ebb5458956ca2f0d5cb4e05214e789    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-2 Statistical Inferences/Unit-7.pdf
+100644 blob 08d9aa0a6e52f5404970b41032cb3a6cd8988efa    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-10.pdf
+100644 blob b25978fa475cab6402e7dbf6c1dffb264b1b0ffb    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-11.pdf
+100644 blob 3d7cbf2e0d099769799d34f9764f58addd944864    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-8.pdf
+100644 blob 09be096ff4a2036f82d3c898db25c4adb647977a    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-3 Applied Statistical Methods/Unit-9.pdf
+100644 blob 068b96aa485b46dbb2fe802084bc5bf057eb8c4a    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-4 Sampling/Unit-12.pdf
+100644 blob 0b6c464ddd0bb027a70074e326e0c127bf8bb9e7    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-4 Sampling/Unit-13.pdf
+100644 blob 17948b2b1e9b32bd1896cdb35f0713336e458920    EDU/ignou-bca-resources/4th-Semester/BCS-040 Statistical Techniques/Block-4 Sampling/Unit-14.pdf
+100644 blob 3edc51ff0f9bcdd95abe5da9be6ec592bd71e7f3    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-1.pdf
+100644 blob 80eaecbe8a12fc22b51a612a3c71745d2ee07de5    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-2.pdf
+100644 blob e6ba269feee101b4f41e8d72ce05d66c5dd5c370    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-3.pdf
+100644 blob e919f5657bd07d8f145527dff5cfc86fe7842e19    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-1 Concepts of Communication and Networking/Unit-4.pdf
+100644 blob 5488f306dda1bc73abbd4681de645189e1beee62    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-1.pdf
+100644 blob 1026dbba0920f6614fba015471d1f7a2054b8920    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-2.pdf
+100644 blob 8402dc4a10d8ae048743a4fefea0452f56356cbf    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-3.pdf
+100644 blob 803e92674bc442fd176fb569f29964af2611a872    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-2 Networks and Devices/Unit-4.pdf
+100644 blob 9fabf544c4b3c5bedea46551a2c1a24047618475    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-1.pdf
+100644 blob db32e7ca8eaa8918cf746420e46351c244ddc29c    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-2.pdf
+100644 blob ea191f8c12ffb48cef1e9bcb45d569b07f75a02c    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-3.pdf
+100644 blob 657ad330939e328fa09086e000c1e1f4d42cccde    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-3 Network Transport and Application Layer/Unit-4.pdf
+100644 blob 80d566914eff67914c1c9a51e172689db98131bd    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-1.pdf
+100644 blob 76918a1220ecd3cccd371b8ce26d41b917490d7d    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-2.pdf
+100644 blob 90ce3cca434ae7606107dd1f3521d6040c39454d    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-3.pdf
+100644 blob 6ee0c17c4387f883291794db7c36c4737a0a629b    EDU/ignou-bca-resources/4th-Semester/BCS-041 Fundamentals of Computer Networks/Block-4 Network Design Security/Unit-4.pdf
+100644 blob b5c7cfb7ada6f129d34a255e7d9f7301d42e45fe    EDU/ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-1 Introduction to Algorithm/Unit-1.pdf
+100644 blob fb777a16970e05850dd179f411b4bde0a3427f34    EDU/ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-1 Introduction to Algorithm/Unit-2.pdf
+100644 blob fdc4e9c8a90be72fc3d600f70fc861fb0b1118b9    EDU/ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-1 Introduction to Algorithm/Unit-3.pdf
+100644 blob 3785c859946ff106e2ed25824c7759d95996efe8    EDU/ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-2 Design Techniques/Unit-1.pdf
+100644 blob 02b4e565d7aa15281b2f8638976f487000c1a4ec    EDU/ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-2 Design Techniques/Unit-2.pdf
+100644 blob f62dbf82fc308d450937066a06ca9a9911efa63f    EDU/ignou-bca-resources/4th-Semester/BCS-042 Introduction to Algorithm Design/Block-2 Design Techniques/Unit-3.pdf
+100644 blob 366a2faecb738800ac5cb41fc4acbee4f6edb849    EDU/ignou-bca-resources/4th-Semester/BCSL-043 Java Programming Lab/Lab Manual/Old/BCSL-043 Java Programming Lab.pdf
+100644 blob 364a6292ba987863e2dfc32dac4c27ab846b40f1    EDU/ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Practical - Unit-1 Figures/Practical Unit-1 Figures.xls
+100644 blob 06e4e408d99ae56a238167af568b89816353e610    EDU/ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Practical - Unit-1 Figures/Practical Unit-1 Figures.xlsx
+100644 blob f9e890965827c5257e4706708d50880657a3f428    EDU/ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-1.pdf
+100644 blob 39340095cceb79ef2c3cb1e2c9597652bfd6dce6    EDU/ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-2.pdf
+100644 blob 328e33eb72b171b6960f9c70a77c5f00a4bad989    EDU/ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-3.pdf
+100644 blob 87a9ea79c8d6eff1332d41143baad7ab50e2ca95    EDU/ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-4 Control Charts and Timeseries/Section-4 Control Charts and Timeseries.xls
+100644 blob c885aeffc6aa78e373b72d07fbcce7a7ff85d7df    EDU/ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-4 Control Charts and Timeseries/Section-4 Control Charts and Timeseries.xlsx
+100644 blob 4c29b6a2637238982e62d9eaabf6d60a1a7d802b    EDU/ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-4.pdf
+100644 blob 04cb29fdec2edc345cedfae41dd095b89bd32e4d    EDU/ignou-bca-resources/4th-Semester/BCSL-044 Statistical Techniques Lab/Block-1 Lab/Section-5.pdf
+100644 blob 6eab5388bf4137b93d7c362b3ba380a9218206ea    EDU/ignou-bca-resources/4th-Semester/BCSL-045 Algorithm Design Lab/Lab Manual/Lab Manual.pdf
+100644 blob be80f53eaacfb0f2a61f08940487cd809d7202a3    EDU/ignou-bca-resources/4th-Semester/BCSL-045 Algorithm Design Lab/Lab Manual/Thumbs.db
+100644 blob 6ee0e68efe789e7b0745e5bb6fa100eab8782049    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-1.pdf
+100644 blob dbd75bf712769524f9a06459bf469c201380481b    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-2.pdf
+100644 blob 259f1ed0b8b50ec2a128b6bc9ff95fb68ef6a4d8    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-3.pdf
+100644 blob 8ab9bb2239a302b665204a7bd432bcfc231577e8    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-1 Object Oriented Technology and Java/Unit-4.pdf
+100644 blob f2f4c6356d69a64081df17e9b0b9a6c2c9b6cae3    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-1.pdf
+100644 blob 8ecd8cc6016f99c301cedf6504bc28c4cb04cb03    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-2.pdf
+100644 blob 8ef1709be3c32085814594dd90ce553c7e14ad23    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-3.pdf
+100644 blob 7f06e3ef8a2ed549ef6faafa895c98c672cef310    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-2 Object Oriented Concepts and Exceptions Handling/Unit-4.pdf
+100644 blob 6dc066467b276be6ac29fb5422cf9181937bc870    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-1.pdf
+100644 blob dcd9a528d9d1680b0b671dd610a9fff4f9fd5559    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-2.pdf
+100644 blob df9e9b5bed787ab1a857ee47d6371b56b047c7f0    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-3.pdf
+100644 blob 066c35327f1dbfad71c2ef67bf01f59a4ee06a64    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-3 Multithreading IO and String Handling/Unit-4.pdf
+100644 blob a9d5f8183a53a2170eb5a15237a6515a6c211428    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-1.pdf
+100644 blob a4f94c6e9400ce0bd46a922a50161042f9e35dda    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-2.pdf
+100644 blob bf837c72bf69b2072bdfbad45f7f34d3efdc36b4    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-3.pdf
+100644 blob 4dade35adbc6e449ad524f113da88c18d69de7c0    EDU/ignou-bca-resources/4th-Semester/MCS-024 Object Oriented Technology and Java Programming/Block-4 Applets Programming and Advanced Java Concepts/Unit-4.pdf
+100644 blob 274dde88c546e475e5d73a97fdeac471c5e040a1    EDU/ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-1.pdf
+100644 blob f4490c00564887a3958125ede032d2279e54f535    EDU/ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-2.pdf
+100644 blob 01686586cba925f3509382bc2e5ddf0fdd01240c    EDU/ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-3.pdf
+100644 blob a5d8f659f4f9e45a3ac5aa63a15c2346b2cfd3a9    EDU/ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-4.pdf
+100644 blob 3de9eeedc1599ff752625bc67493ea77c55132b5    EDU/ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-5.pdf
+100644 blob cedd5b3804dd22aeb78bf2b775ab759c7acd6acb    EDU/ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-1 Scripting Languages/Unit-6.pdf
+100644 blob 8a1ed0e1fd87d655597bf13b62a29790cdf1f6a6    EDU/ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-1.pdf
+100644 blob a92324fa055d0871d120a9f7bb1c2677c157dbe0    EDU/ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-2.pdf
+100644 blob 508bbc628e91adb0edb45603c5b960bbfe87ee85    EDU/ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-3.pdf
+100644 blob eb86c87b65a44604441bb882f4743b55b3f6293e    EDU/ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-4.pdf
+100644 blob 5fbb49add90d2bb0b0de9db92a6c31493f7e8dd8    EDU/ignou-bca-resources/4th-Semester/MCSL-016 Internet Concepts and Web Design/Block-2 Lab Manual/SECTION-5.pdf
+100644 blob cd9694704cf06f0d3cc4d4cbb2ddad98f14feca8    EDU/ignou-bca-resources/4th-Semester/assignments/BCA-4 July_2025 to June 2026.pdf
+100644 blob 3d29d9525d84d3b6650e5013ea92c486363aecca    EDU/ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-1.pdf
+100644 blob 6f3ef30d1ccff43dd9c6420bed532f784368d7de    EDU/ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-2.pdf
+100644 blob efb349f33fdf78aaa4c0a8e4719c109b78595c2d    EDU/ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-3.pdf
+100644 blob 5e591f249585dddfac07a70f49db38f11889e2bf    EDU/ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-1 TCPIP Protocols/Unit-4.pdf
+100644 blob 5eddc9632e79c63be7407c7bd9d551b293e2208b    EDU/ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-2 Fundamentals of TCPIP Programming/Unit-1.pdf
+100644 blob c9e6ed7735885ff9f0aa394a8af60d18f0d40764    EDU/ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-2 Fundamentals of TCPIP Programming/Unit-2.pdf
+100644 blob 2fa5397b2d4305eb47cf36f667d3d3bcc38dbe21    EDU/ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-2 Fundamentals of TCPIP Programming/Unit-3.pdf
+100644 blob 9d1519e3ff038a65dae72f18662bc767900eb158    EDU/ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-1.pdf
+100644 blob d51c51520273b65d6cd5fa4d03d3211ca2ad92ae    EDU/ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-2.pdf
+100644 blob 39321742fac4c902b58d36b6794088d70d667ec2    EDU/ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-3.pdf
+100644 blob 118ef537d84e423769b5fbc547096b7493ffb572    EDU/ignou-bca-resources/5th-Semester/BCS-052 Network Programming and Administration/Block-3 Network Administration with Linux/Unit-4.pdf
+100644 blob c0d3e4274d6dd60a8367b89d9286e5c526c57a26    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-1.pdf
+100644 blob a4b6fb92760fb81ad17b3580d0fb30f15ebef605    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-2.pdf
+100644 blob 1326d5d020588b9ce0758b18769ac664e9b9f458    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-3.pdf
+100644 blob 837526469346ed43b2175efe466fe6d12c693a9c    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-1 Business Social Skills and the Recruitment Process/Unit-4.pdf
+100644 blob 134e5c04191453b09a19ddc0dbc579682588f4b2    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-1.pdf
+100644 blob bb46512a6124d6c3e3a94bdb89501a4fc235e72d    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-2.pdf
+100644 blob c23d83da30c6357853e07281f42e0f3fdf5c549e    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-3.pdf
+100644 blob 40875e4614f66584029e307992bc0d062ff29cb3    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-2 Interviews/Unit-4.pdf
+100644 blob 259b92fae43614fdcfd7c2732a90f57ad4846100    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-1.pdf
+100644 blob 2203908e5549390d38dbe37beb654069f0948dfe    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-2.pdf
+100644 blob c9e3361736cdfaae3d56779eb1686b62fe7dc304    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-3.pdf
+100644 blob 701c5684c4161fd9cf72bfecfe6b39ec54bba9ac    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-3 Business Writing/Unit-4.pdf
+100644 blob f906f444dc95e3662a3ba48eb0f663334edafb3c    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-4 Cross Cultural Communication/Unit-1.pdf
+100644 blob 69415bea39d453c417dc276d3589043c4686e191    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-4 Cross Cultural Communication/Unit-2.pdf
+100644 blob 8723d3d965fca9c0ee32a64a8f4546bfc61e3ae9    EDU/ignou-bca-resources/5th-Semester/BCS-055 Business Communication/Block-4 Cross Cultural Communication/Unit-3.pdf
+100644 blob 503e5733a47352a0dbb235ca13a0437b3284c9f8    EDU/ignou-bca-resources/5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-1.pdf
+100644 blob ff265b8986dcfeb0e612d87fa85b663b9eac8733    EDU/ignou-bca-resources/5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-2.pdf
+100644 blob a2cd0115803a9e80650d7f3187b16e4e20c50f5f    EDU/ignou-bca-resources/5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-3.pdf
+100644 blob 5fcef75f2c58982f3830a40cc476ab8aebb87486    EDU/ignou-bca-resources/5th-Semester/BCSL-056 Network Programming and Administration Lab/Block-1 Networking Lab/Section-4.pdf
+100644 blob 3b756d455eeb1eed0582fec252fdc24cb6903cb2    EDU/ignou-bca-resources/5th-Semester/BCSL-057 Web Programming Lab/Lab manual/Lab Manual.pdf
+100644 blob f9eb651d1bb88c9423baf7e490c0456adb54d998    EDU/ignou-bca-resources/5th-Semester/assignments/BCA-5 July_2025 to June 2026.pdf
+100644 blob 37767a47776f0d8406a90e698304b218dcf1f8d5    EDU/ignou-bca-resources/6th-Semester/BCS-062/Block-1.pdf
+100644 blob c90071c72dae02db5adda2f6b8b920b55f65c0a5    EDU/ignou-bca-resources/6th-Semester/BCS-062/Block-2.pdf
+100644 blob 8575d8cd91a76547dd63f4bd1b81a3fb68f062da    EDU/ignou-bca-resources/6th-Semester/BCSL-063/LabManual.pdf
+100644 blob 4a3b1ff065c4b4098a65308bcda0017e145743b3    EDU/ignou-bca-resources/6th-Semester/MCS-022/Block-1.pdf
+100644 blob 58fea80cdfbd407dc108716bfa7978f5dd44f8ec    EDU/ignou-bca-resources/6th-Semester/MCS-022/Block-2.pdf
+100644 blob 9fd981ce521727228d19c868948afc5856b72ab5    EDU/ignou-bca-resources/6th-Semester/MCS-022/Block-3.pdf
+100644 blob bb9b757ac5ee7695355700997539326093bedb46    EDU/ignou-bca-resources/6th-Semester/MCS-022/Block-4.pdf
+100644 blob c6decf0da55755bc14fbd64dff13de47391cf87e    EDU/ignou-bca-resources/6th-Semester/assignments/BCA-6 July_2025 to June 2026.pdf
+100644 blob 8e3c3217435782b7cd2c44de659e1807a2abf922    EDU/ignou-bca-resources/6th-Semester/bcsp-064_project_guidelines.pdf
+100644 blob 3052a9612779c1bc5a647d557ffaf7bcd7221d22    EDU/ignou-bca-resources/LICENSE
+100644 blob a6b0171fba73ea089c455546b20be66f832e7a64    EDU/ignou-bca-resources/README.md
+100644 blob 9702513168e9db48141d8a83a5cb031a8bda7a4d    EDU/ignou-bca-resources/downloads/assignments/BCS-011.pdf
+100644 blob e9598f8e8d89abf95c2f51a09ee7da581d06b739    EDU/ignou-bca-resources/downloads/assignments/january2025/BCA-1 July_2025 to June 2026.pdf
+100644 blob f6043846a7ec295c5133637c1d5dcbe6a78f3bc5    EDU/ignou-bca-resources/downloads/assignments/january2025/BCA-2 July_2025 to June 2026.pdf
+100644 blob 3d5f3cc541c5889ec7246d1c7e857dc71e1755c6    EDU/ignou-bca-resources/downloads/assignments/january2025/BCA-3 July_2025 to June 2026.pdf
+100644 blob cd9694704cf06f0d3cc4d4cbb2ddad98f14feca8    EDU/ignou-bca-resources/downloads/assignments/january2025/BCA-4 July_2025 to June 2026.pdf
+100644 blob f9eb651d1bb88c9423baf7e490c0456adb54d998    EDU/ignou-bca-resources/downloads/assignments/january2025/BCA-5 July_2025 to June 2026.pdf
+100644 blob c6decf0da55755bc14fbd64dff13de47391cf87e    EDU/ignou-bca-resources/downloads/assignments/january2025/BCA-6 July_2025 to June 2026.pdf
+100644 blob 8e3c3217435782b7cd2c44de659e1807a2abf922    EDU/ignou-bca-resources/downloads/assignments/january2025/bcsp-064_project_guidelines.pdf
+100644 blob a125c721a5f319ca5509dcc2587ecacef3febe4d    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 1  Basics of Computer Hardware/Unit-1 Computer their Origin and Applications.pdf
+100644 blob da8b4aa5517a483556f23749ed5f5fd16ad36ce4    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 1  Basics of Computer Hardware/Unit-2  Functioning of a Computer.pdf
+100644 blob e757dfde4ddaa821ae940df407f1938dae55a2bf    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 1  Basics of Computer Hardware/Unit-3  Memory System.pdf
+100644 blob c76710e4be4d70c3539f354f50357d4f4d61d431    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 1  Basics of Computer Hardware/Unit-4  Input Output Devices.pdf
+100644 blob fd1bf11dc6bd9d334e996e97958d639edd2e4380    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 1  Basics of Computer Hardware/Unit-5  My Personal Computer.pdf
+100644 blob 149932d6ef89a19f11bb72f32e7d94a8120e84ab    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 2  Basics of Computer Software/Unit-1  Software Evolution.pdf
+100644 blob fa2a843b26645f6daa7c759c5e1e0465b75be388    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 2  Basics of Computer Software/Unit-2  Operating System.pdf
+100644 blob 3b8a0e9b8a724b9bd6112d6a24e5cd383eb101a2    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 2  Basics of Computer Software/Unit-3  Concept in Programming Language.pdf
+100644 blob 7a3896c54df0daf6ad1886fa650026b0fa8f0502    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 2  Basics of Computer Software/Unit-4  Computer Applications.pdf
+100644 blob 1011a47d93f0876cd2a5afab079caba66a2061ce    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 3  Internet Technologies/Unit-1  Networking and Internet.pdf
+100644 blob 34160ca9bfff7680717eb27a706c86bd04b7e4a7    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 3  Internet Technologies/Unit-2 Web Applications-I.pdf
+100644 blob 7481187d5b860dcb9a41bda822729353f279ebff    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 3  Internet Technologies/Unit-3  Web Applications-II.pdf
+100644 blob 48f24b8304688fb6bf76f8b801c03300fb7e9a51    EDU/ignou-bca-resources/downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/index.html
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester1/basic-mathematics.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester1/computer-fundamentals.pdf
+100644 blob 1c74d50a3b38954d612ca0d8ac4b334af0910333    EDU/ignou-bca-resources/downloads/ebooks/semester1/youtube lecture.txt
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester3/cpp-programming-lab.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester3/data-and-file-structures.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester3/data-file-structures-lab.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester3/dbms-lab.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester3/introduction-to-dbms.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester3/programming-in-cpp.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester3/system-analysis-and-design.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester4/algorithms-design-lab.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester4/fundamentals-of-computer-networks.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester4/internet-concepts-and-web-design.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester4/introduction-to-algorithm-design.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester4/java-programming-lab.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester4/object-oriented-tech-java-prog.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester4/statistical-techniques-lab.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester4/statistical-techniques.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester5/business-communication.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester5/computer-oriented-numerical-techniques-lab.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester5/computer-oriented-numerical-techniques.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester5/introduction-to-software-engineering.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester5/network-programming-and-administration.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester5/networking-programming-administration-lab.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester5/web-programming-lab.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester5/web-programming.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester6/e-commerce.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester6/os-concepts-networking-management-lab.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/ebooks/semester6/os-concepts-networking-management.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/syllabus/bca-complete-syllabus.pdf
+100644 blob 8020deecd03167853cc3a241a7bbe9e7327ae59b    EDU/ignou-bca-resources/downloads/syllabus/bcaprogguide.pdf
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    EDU/ignou-bca-resources/downloads/syllabus/semester-wise-syllabus.pdf
+100644 blob d6ea39890b448094d3830a156e1a8f383081c853    EDU/ignou-bca-resources/resources/study-planner.html
+100644 blob 743e4eb7aac101482afffa8feaa7fd07f4c09d36    EDU/ignou-bca-resources/resources/youtube-lectures.html
+100644 blob bef9a8b897819782395897e75da2f2aabd673fb0    EDU/ignou-bca-resources/text2speech.html
+100644 blob 13c074156baea9fb620be64c97b392ea1141276f    Emergency-GF/Fund-manager-temp..html
+100644 blob 7d9ce7d2e277389a7c4d67f29a13c11251e5e012    Emergency-GF/fund-manager.html
+100644 blob 6d5ff3472b937098ffd8e270c8b11cb55700f5ed    Emergency-GF/index.html
+100644 blob 19733b77f432ece761ee3d90271d8a1cb8b545f5    Portfolio/index.html
+100644 blob 93e4dc36fa7f5eaab3f12b0876fa7c42a289784d    Search/about.html
+100644 blob 235f8a1125d7a1d8f0157333c5434ef3f23a4b1f    Search/contact.html
+100644 blob 804b8564b686b2c6bb915a2dfdadac5a28854bf0    Search/database/posts.json
+100644 blob bb830b81e024eef35058b13fe8d58d501a2c48d1    Search/index.html
+100644 blob 6c5148d694d16fdeaeb3f8305d835c84b70c3b9f    Search/privacy.html
+100644 blob d292e65e502b6cd9a997ab8be2f7f7d1a049cd84    Search/sdb.json
+100644 blob 705fb9a7f9eda70f62603efbeec7b47260c7099e    Search/terms.html
+100644 blob 8bb5f76dd0418a238613b582e140cdca03ec933f    Telecom-Mops/Baseband Commands for FME & CEM.pdf
+100644 blob bbe5d978e4161dde3292821c9dff63d5ee8f9cc7    Telecom-Mops/Cambium Trianing Slide 2 [Repaired].pdf
+100644 blob f838dd1e776008b1aad86fc9aa78c985e29d6564    Telecom-Mops/Ceragon - 1500R vender.pdf
+100644 blob 1ba67e09d5a1edde7ee291db2327120d352e7bfd    Telecom-Mops/Clutter PIC and Coverage Reading.pdf
+100644 blob 26d2f82c84ff538e8138e61f41a03e88bed03691    Telecom-Mops/Critical alert - Fatality - fall from height v1.pdf
+100644 blob 7731918aa4b95ef99f072b8b48b2ad2486436476    Telecom-Mops/DeliveryChallan.pdf
+100644 blob 47126f7a14a83bc2509df2c4c49975ef5ce53206    Telecom-Mops/Ericsson Care - Fact sheet Driving safety.pdf
+100644 blob 40d9d6d2eb71326ce0fb50f81d93075d81bc74f9    Telecom-Mops/Ericsson Care - Fact sheet Slips, trips and falls.pdf
+100644 blob 4c249ff4150795d5880dfeddd7bd9023243e4ca1    Telecom-Mops/Ericsson OHS Training 2019.pdf
+100644 blob 58542b03b25a5ca3afbf36dd13ea4660ddfa3dcf    Telecom-Mops/FRESCOM Login Process on New Server.pdf
+100644 blob 1d1625139bbcb5c3288c52ec4ed7d443e1fd50a5    Telecom-Mops/GIRT Access.pdf
+100644 blob c536d2919b4ad791c506f4ce3ad7d2edceecb900    Telecom-Mops/GIRT Reporting 20180419.pdf
+100644 blob 71fcf38cfb92246a8bbbf9969bc7c19bbb1dd695    Telecom-Mops/Golden-Safety-Rule-3-04-24.mp4
+100644 blob 6ca6d13971e5e19c5e07d7f9295821f6df31af60    Telecom-Mops/How to report incident in Gensuite Apr 2021.pdf
+100644 blob ea80924feb95961e6d672a57f11d48df1cf5b3d6    "Telecom-Mops/In-Depth Configuration Topics – Radio.pdf"
+100644 blob 5e713f3d4d8bca2aed08869c6c920ceae5b9f258    Telecom-Mops/Lesson_Learned_Safety_Alert_Major_Incident_Bharti_MS_Working_on.pdf
+100644 blob 21542277430d495b94540902d64063f7c4630160    Telecom-Mops/MOP for AMS 24 H Threshold Crossing for Ericsson TX.pdf
+100644 blob 6c3fb11d387ebeea11bc19560dae95f744be2632    Telecom-Mops/MOP for AM_DOWNSHIFT alarm clearance for Huawei TX.pdf
+100644 blob bba51921d2c9c5cf45241cd42f4dfe6bbe8e3f06    Telecom-Mops/MOP for BID Missing for Ericsson TX.pdf
+100644 blob 41a38027449432d752918421a1a8d32a36c863a5    Telecom-Mops/MOP for DROPRATIO_OVER Alarm for Huawei TX.pdf
+100644 blob 24e0cce0f36ff1abf75946bb0cdafa2e4f494dbe    Telecom-Mops/MOP for Degraded functionality in LAG for Ceragon TX.pdf
+100644 blob 81c7814848a67c343dc246f9209168aa41efb4e7    Telecom-Mops/MOP for E1DS1 excessive BER on port for Ceragon TX.pdf
+100644 blob 92e2567842355e23dcd7320e49c42163eeea9b1d    Telecom-Mops/MOP for ETH_LOS Alarm Troubleshooting for Huawei TX.pdf
+100644 blob 68d37a15881eb94df8d5f15988f1a9bdd7b0d17c    Telecom-Mops/MOP for Excessive BER alarm clearance for Ericsson TX.pdf
+100644 blob 31a6e756090dbcab5bbae618d7c038b665e4e2c3    Telecom-Mops/MOP for HARD_BAD Alarm Clearance for Huawei TX.pdf
+100644 blob 9da852e9ba7c1955cf6ac7a4c70573ba200ba28e    Telecom-Mops/MOP for Huawei BIP_EXC Alarm Clearance for Huawei TX.pdf
+100644 blob e77f6fee174f8441a383fec7219686bd2e04cd4a    Telecom-Mops/MOP for Huawei IN_PWR_ABN alarm clearance for Huawei TX.pdf
+100644 blob 272718d025a9aef9766523700a15ef2f9da4f8b4    Telecom-Mops/MOP for Huawei LAG Member Down Alarm clearance for Huawei TX.pdf
+100644 blob 417fd4d28d5a62a5e2c5b26cfe64e2053d9c3727    Telecom-Mops/MOP for Huawei MW_LOF Alarm Troubleshooting for Huawei TX.pdf
+100644 blob 6301abf243bca7933336c7fe4de8f2b784123180    Telecom-Mops/MOP for Huawei PLA Member Down Alarm clearance for Huawei TX.pdf
+100644 blob fc3cb5551bf37b15890d4a6a29034df758d96202    Telecom-Mops/MOP for LAG Degraded for Ceragon TX.pdf
+100644 blob d07d92e6e5c49135b86eebe2fef8511ccaf8ebfc    Telecom-Mops/MOP for MW_BER_EXCESSIVE ALARM RECTIFCATION for Huawei TX.pdf
+100644 blob d8c5154c1676e3f910679443698f1a4e9a1defca    Telecom-Mops/MOP for MW_BER_SD Alarm Troubleshooting for Huawei TX.pdf
+100644 blob be85781e2ea1e4c9f0464f0cc7b203e2aee9fb5f    Telecom-Mops/MOP for NE_COMMU_BREAK Alarm Troubleshooting for Huawei TX.pdf
+100644 blob ee8a7f365af265b3bbc71a9422705cb1c33c3f7b    Telecom-Mops/MOP for RADIO_RSL_LOW alarm clearance  for Huawei TX.pdf
+100644 blob e06f4db9df1d3715c7bafbb5e8d5982385b06d13    Telecom-Mops/MOP for SFP RX power Low_High for Ericsson TX.pdf
+100644 blob d59d37ce7c807c67d5a46fb6262b3effc01fa379    Telecom-Mops/MOP for SFP TX Bias Low at LTU2_155 for Ericsson TX.pdf
+100644 blob 2831bd2f0b771298f4cfd66f740eb32eb1592879    Telecom-Mops/MOP for SFP TX Power Low at LTU2_155 for Ericsson TX.pdf
+100644 blob 39f4073a0bd451339954522545d3f0a77e169c65    Telecom-Mops/MOP for Signal Degrade on TDM-LIC VC12VC11 for Ceragon TX.pdf
+100644 blob bacf2c9c587294cd156a4b34bb7c42c84a05f2c6    Telecom-Mops/MOP for XPIC LOSS Alarm Clearance for Ericsson TX.pdf
+100644 blob 411a12f2a7d1d658ba08d644695fd8750f72af40    Telecom-Mops/MOP of AM_DOWNSHIFT_Alarm_on_Huawei site - ver1.pdf
+100644 blob 22528986fa2511e4a01136edfabc15b8d16c7e0f    Telecom-Mops/MOP of Auto-negotiation mismatch Alarm  - Nokia ver1.pdf
+100644 blob 2dc7ac89910f48bc24f3d4e5a5bef84146bf97c0    Telecom-Mops/MOP of BBU Cipri interface error on Huawei site - ver1.pdf
+100644 blob bcb8f13b7d95a0efbea546207471172b22da489a    Telecom-Mops/MOP of Device power down(198092295) Alarm - ZTE ver1.pdf
+100644 blob 59cd3d54bf9f44be198e1bd0dd0f452e7e741183    Telecom-Mops/MOP of ETH_LOS_Alarm_on_Huawei Site - ver1.pdf
+100644 blob 2d9fd8d987ca620231feb81936762958e712159a    Telecom-Mops/MOP of External Clock Reference on Huawei Site - ver1.pdf
+100644 blob f1fde82aeaeb59abbf1299e37c550a0c655433ec    Telecom-Mops/MOP of FCE fan failure(198092069) - ZTE ver1.pdf
+100644 blob 9b9cdd7f38bcf8d5b686e16a1e2984602c709892    Telecom-Mops/MOP of GNSS antenna feeder link fault(198096836) - ZTE ver1.pdf
+100644 blob bb9107a7c955be699c4526f706e39282e21348ae    Telecom-Mops/MOP of GPS Antenna Fault on Huawei Site - ver1.pdf
+100644 blob 31e4fde8347e5aa50020d8267cfa9324dcadd1e9    Telecom-Mops/MOP of GPS Time Sync Ref Alarm - Ericsson ver1.pdf
+100644 blob 9b958e06a8dc26dbcdc84a20b8cef0f1915db952    Telecom-Mops/MOP of High BER of ethernet port(198097684) Alarm - ZTE ver1.pdf
+100644 blob a00494fe4d124482bc79991420d639ebdb432b52    Telecom-Mops/MOP of Internal fault(198098467) Alarm - ZTE ver1.pdf
+100644 blob 94024875d23ed2659a83798989107fb5b9db4d34    Telecom-Mops/MOP of Lag Member Down Alarm on Huawei Site - ver1.pdf
+100644 blob 86a9ccfae88cfb93b0e581c240c5f0e05e5f1f4c    Telecom-Mops/MOP of NTP server reachability fault - Ericsson ver1.pdf
+100644 blob 86a9ccfae88cfb93b0e581c240c5f0e05e5f1f4c    Telecom-Mops/MOP of NTP server reachability fault - Ericsson.pdf
+100644 blob 8d5a9199e8a653611783b1da542a710cd5852af9    Telecom-Mops/MOP of Optical BER Alarm at TD  FD technology - Nokia ver1.pdf
+100644 blob a4a86996c94c346276088b24f2e81d2e1cee3982    Telecom-Mops/MOP of PLA down Alarm on Huawei Site - ver1.pdf
+100644 blob 05acd53ed017717cc059f4d171c10d6581dee013    Telecom-Mops/MOP of PM - ver1.pdf
+100644 blob 1c79a94cc8a1fb6d2ccd57dbb4a11def69b009ec    Telecom-Mops/MOP of Port Mode Mismatch Alarm on Huawei Site - ver1.pdf
+100644 blob cf186e2a321b51e6e2c341260a4d4c6ca917dbc0    Telecom-Mops/MOP of RF Module Failure Alarm - Nokia ver1.pdf
+100644 blob 7f27ca63b81a5c74cd1a7160661d1e91a5be3750    Telecom-Mops/MOP of RF Reflected Power High Alarm - Ericsson ver1.pdf
+100644 blob 4ae480f67bbf93d2347a2ca7c025688650eeb47d    Telecom-Mops/MOP of RRU Power Abnormal Alarm(198098472) Alarm - ZTE ver1.pdf
+100644 blob 1b30ecdec9cf852c9492ca75b29fd928d5f3987f    Telecom-Mops/MOP of RSSI Alarm - Nokia ver1.pdf
+100644 blob 0b951914c5b63576870c68aec00fa759193fcb01    Telecom-Mops/MOP of RX Path imbalance - Ericsson ver1.pdf
+100644 blob e486921f4fac80c1debb8214144343a058336772    Telecom-Mops/MOP of RX cable Disconnect Alarm - Ericsson ver1.pdf
+100644 blob 18cb24b6159038869b5812f5c3c6a10b7534a09f    Telecom-Mops/MOP of Radio Link failure on Huawei Site - ver1.pdf
+100644 blob e21649892b8f466a96a09f8c07c37c04d53b4b01    Telecom-Mops/MOP of SCTP Retransmission - Nokia ver1.pdf
+100644 blob 4248076cd82e5ea4183130af05e2155f69c99771    Telecom-Mops/MOP of SFP Stability Problem Alarm - Ericsson ver1.pdf
+100644 blob ad1ad093f93705d354bf837eee31a4c696d084d8    Telecom-Mops/MOP of SRIO link outage Alarm - Nokia ver1.pdf
+100644 blob f688d7308ab6e61f1c173343346716727ec85089    Telecom-Mops/MOP of Sync Issue - Nokia ver1.pdf
+100644 blob fd8361607965664a6ffaaae0b5cb1e46ba1d708d    Telecom-Mops/MOP of TWAMP Analysis - Nokia ver1.pdf
+100644 blob 511cbd2d77a1e437f5b3adf5be700d9a62310fb6    Telecom-Mops/MOP of The RRU link is broken(198097605)Alarm - ZTE ver1.pdf
+100644 blob 59136f6201d7452bdece9ca027354256a0f87664    Telecom-Mops/MOP of Tx Out of Order Alarm  - Nokia ver1.pdf
+100644 blob d5c99fb71a0689ba41482bb9058932758f2c2801    Telecom-Mops/MOP of VSWR Alarm - Nokia ver1.pdf
+100644 blob 3c91b17b220b9ad673beb734aa0e3ea88cf5f6bc    Telecom-Mops/MOP of VSWR Alarm on Huawei Site - ver1.pdf
+100644 blob 0ae94fc67c21e5a6081b293a81f739df1f10685c    Telecom-Mops/MOP of VSWR Output power supervision lost- Ericsson ver1.pdf
+100644 blob e1ea1aed5b39bb238429abdaa20b42f0c3f34f9d    Telecom-Mops/MOP of VSWR limits exceeded Alarm - Ericsson ver1.pdf
+100644 blob 5e0854f9d3012e31079662dfeb82e061f18c3c90    Telecom-Mops/MOP_for_B1_ES_24_h_threshold_crossing_Alarm_Clearance_for_Ericsson.pdf
+100644 blob 2808b6d665f1edb997a4353164c8acc012a63843    Telecom-Mops/MOP_for_Jitter_buffer_overrun_alarm_on_TDM_service_for_Ceragon_TX.pdf
+100644 blob c063f8fb6d94b581b784ffe06e5779220513725f    Telecom-Mops/MOP_for_MS_AISAIS_L_on_Radio_Interface_detected_for_Ceragon_TX.pdf
+100644 blob 730788789050beb9b1cff8552f5fc3908a52b7a2    Telecom-Mops/MOP_for_Radio_Excessive_BER_Alarm_Fault_management_for_Ceragon_TX.pdf
+100644 blob 273ae864d58bd7206593a1395e5fafcd9b25d5d2    Telecom-Mops/MOP_for_Radio_signal_degrade_Alarm_Fault_management_for_Ceragon.pdf
+100644 blob d48fb15a120f8356db2bb9ddef4f96f22b47f9b2    Telecom-Mops/MOP_for_Remote_Defect_Indication_RDI_received_on_TDM_LIC_VC12VC11.pdf
+100644 blob f03154a3b0e0034332dec0862cd53bb11bd5e3fe    Telecom-Mops/MOP_for_SES_24_h_Threshold_crossing_alarm_clearance_for_Ericsson.pdf
+100644 blob 58552407bf232d7823e68523ba0aff724499364c    Telecom-Mops/MOP_for_Stm1_port_1_Excessive_BER_on_TDM_LIC_STM1_for_Ceragon_TX.pdf
+100644 blob 8a83a0d77a0a1eb4d4bbbd8ad168b5470d126a43    Telecom-Mops/MOP_for_Traffic_System_Failure_alarm_clearance_for_Ericsson_TX.pdf
+100644 blob 7df493511d37c2a9d66f99c738ac492385a90aa7    Telecom-Mops/MOP_of_BBU_Board_Maintenance_Link_Failure_on_Huawei_Site_ver1.pdf
+100644 blob fb32aae5eaa0fa8c422842bba8f6e78a13416611    Telecom-Mops/MOP_of_Board_communication_link.pdf
+100644 blob fb32aae5eaa0fa8c422842bba8f6e78a13416611    Telecom-Mops/MOP_of_Board_communication_link_interrupted198097060_ZTE_ver1.pdf
+100644 blob 686c32a9e39e80a7303e265039e941891bd00475    Telecom-Mops/MOP_of_GNSS_receiver_satellite_searching.pdf
+100644 blob 686c32a9e39e80a7303e265039e941891bd00475    Telecom-Mops/MOP_of_GNSS_receiver_satellite_searching_fault198096837_ZTE_ver1.pdf
+100644 blob 284f247a0250bd410f99b5a58b1ae9ef9ccd3b9d    Telecom-Mops/MOP_of_Inter_Board_CANBUS_Communication_Failure_on_Huawei_Site_ver1.pdf
+100644 blob 87f2f93f449c263fd39515c96ffafbd99defc986    Telecom-Mops/MOP_of_Loss_of_Activestandby_communication.pdf
+100644 blob 87f2f93f449c263fd39515c96ffafbd99defc986    Telecom-Mops/MOP_of_Loss_of_Activestandby_communication_link199005122_ZTE_ver1.pdf
+100644 blob 8d5a9199e8a653611783b1da542a710cd5852af9    Telecom-Mops/MOP_of_Optical_BER_Alarm_at_TD_FD_technology_Nokia_ver11.pdf
+100644 blob b245665defc52cb256233a99ce427898d0180fbc    Telecom-Mops/MOP_of_Optical_port_receiving_link.pdf
+100644 blob b245665defc52cb256233a99ce427898d0180fbc    Telecom-Mops/MOP_of_Optical_port_receiving_link_failure198098319_Alarm_ZTE_ver1.pdf
+100644 blob db32cb6fc40c6eb17ca617d8c44268df1f4904a2    Telecom-Mops/MOP_of_RF_Unit_RX_Channel_RTWPRSSI_Unbalanced_on_Huawei_Site_ver1.pdf
+100644 blob d16386c667f22fb39a90138b655e6321d0cc40a8    Telecom-Mops/MOP_of_Temperature_sensor_abnormal198092071.pdf
+100644 blob d16386c667f22fb39a90138b655e6321d0cc40a8    Telecom-Mops/MOP_of_Temperature_sensor_abnormal198092071_Alarm_ZTE_ver1.pdf
+100644 blob 7ffb1b4983c0387e7c837c138cdeddb4d30a5e4f    Telecom-Mops/MOP_of_VSWR_of_antenna_feeder_ab.pdf
+100644 blob 7ffb1b4983c0387e7c837c138cdeddb4d30a5e4f    Telecom-Mops/MOP_of_VSWR_of_antenna_feeder_abnormal198098465_Alarm_ZTE_ver1.pdf
+100644 blob a601e40ab580f965ad75ed63958274d1e05898de    Telecom-Mops/Monsoon Safety Guidelines_MS Bharti (Field Operations).pdf
+100644 blob 6c705691d888e1a63d9cbb67bbf64fdeb33c2c5f    Telecom-Mops/PPT Defensive Driving - Motorcycle.pdf
+100644 blob af2a742f3e931a86edfd07f3c554c4d72f46b499    Telecom-Mops/QnA.1.pdf
+100644 blob c0f2e751f8f2d1005447ff8906d156f87bb00724    Telecom-Mops/QnA.pdf
+100644 blob 4ca30e9c92766278893f8ef470af29d6da69d2c5    Telecom-Mops/RFSToolv4_2.18_UserGuide_2.12.pdf
+100644 blob 9e61d24ef8335cf92de0f4a20b1ddbdba4e40a0e    Telecom-Mops/Rbs6000-Fault-List.pdf
+100644 blob f16e00eefdadf0cd46665e2590cec4cfb227d38b    Telecom-Mops/Rigger checkpoint - Marathi.pdf
+100644 blob fcd2b51fb3e94612daf006947140560c68cf9ce4    Telecom-Mops/Rigger checkpoint-Bengali.pdf
+100644 blob 2dc185481361c0be43c98ae283e2a5d059399f47    Telecom-Mops/Rigger checkpoint-English.pdf
+100644 blob c41782556475198e48f9de7027c9024feb2b0007    Telecom-Mops/SOP on how to login to i360 test environment.pdf
+100644 blob 6d3eec4104b9452b54dc3d5550506d67846ec2cf    Telecom-Mops/The Invitation - Anti-Corruption Training PPT.pdf
+100644 blob ee7311a4cf2c95bcfb111969b40f767855fdc4ad    Telecom-Mops/WFM Click schedule,CMT,AHT & FEAT_16_10_2019.pdf
+100644 blob 343f77d85e18dac29f30c9edb2e3848c49167c32    Telecom-Mops/WO Status in WFM.pdf
+100644 blob f764980f7b1da84507513508ca4325254d09cac6    Telecom-Mops/Zero Tolerance Safety Rules_Driving safety.pdf
+100644 blob 4cf97062079a260abb2956db1c9368d6f015de19    Telecom-Mops/golden-safety-rule-video.mp4
+100644 blob 55b3c164ae60ff2bc80440a14d3b4060e3f8c0b0    Telecom-Mops/index.html
+100644 blob a2d0ca204c4f8244f6c6ae107138f6fb6a7a7895    Telecom-Mops/nokia softwear links.pdf
+100644 blob b93fe37cfe77f2080605b271f22a82c896684866    Web-Tool/Excel-search-pro/index.html
+100644 blob ca7fc95c4666d722b4ca70e8cfd3ba1078bc329a    Web-Tool/Excel-search-pro/script.js
+100644 blob 43549435765f3b0384951328f0be7edf50b14fde    Web-Tool/Excel-search-pro/style.css
+100644 blob 95285cd775b3dff75bba303c6ad3107c682582e4    Web-Tool/File-Structure-Creator/index.html
+100644 blob 8fd9666339029c06dc54e65fc19bef7fb79ae124    Web-Tool/Prompt-Genrator/index.html
+100644 blob 99d3eb54ab2b9285b8f0e03203649d15ae3ba652    Web-Tool/top20AI/Top20AI.html
+100644 blob 3d525342702c663b1b23d621cb74d4aa3029dad1    Web-Tool/ebook-Reader/index.html
+100644 blob fe11c8d9b5da3196aee26660bf1a8d171c242da6    Web-Tool/index.html
+100644 blob 6cc46fb037fd9734104fbeaf37c559829b5a1c49    Work/admin.css
+100644 blob a05d89181247c86f20fdf12dcf1fcba7ec137b62    Work/admin.html
+100644 blob eaa3b1950b394f34c5a3dd6b64fad6be8d75a602    Work/admin.js
+100644 blob 1fe091cbd8b48683533e5979607a8e0cfe9fb605    Work/auth.css
+100644 blob f4de865f07cc0f6d2ce820bc31f6f616291bb2f5    Work/auth.js
+100644 blob 3157f65ed41f424fc4cfea21aca582fa82500fe3    Work/chat.js
+100644 blob 4178c70bc75a3db593b7ade3a32ed507249c2eda    Work/index.html
+100644 blob 307bcd16aa30ac678a77f85746034db9dd98525f    Work/login.html
+100644 blob 5015d815d69f338370c580e64936127ec1828f50    Work/script.js
+100644 blob c857fce36a963aa9dcfb83a22682bcc005d451e1    Work/styles.css
+100644 blob 2b8343fc9c97b9a5a71bc010cc6b974bf7bccdd2    about.html
+100644 blob ea8988ee5c422f1e52832f1b91eea582f516c8b3    contact.html
+100644 blob 2d05887593aeb58b37cfb28441bcdfe328c546dd    privacy.html
+100644 blob 90617caa95301777081ea4f9653a9b3d89c072c6    terms.html
+`;
+
+            const sitemapContainer = document.getElementById('sitemap-container');
+            const filePaths = gitLsTreeOutput.trim().split('\n').map(line => line.split(/\s+/).pop());
+
+            function buildTree(paths) {
+                const tree = {};
+                paths.forEach(path => {
+                    let currentLevel = tree;
+                    const parts = path.split('/');
+                    parts.forEach((part, index) => {
+                        if (!currentLevel[part]) {
+                            currentLevel[part] = {};
+                        }
+                        if (index === parts.length - 1) {
+                            currentLevel[part]._isFile = true;
+                            currentLevel[part]._path = path;
+                        }
+                        currentLevel = currentLevel[part];
+                    });
+                });
+                return tree;
+            }
+
+            function createHtmlTree(node) {
+                let html = '<ul class="pl-6">';
+                const sortedKeys = Object.keys(node).sort((a, b) => {
+                    const aIsFile = node[a]._isFile;
+                    const bIsFile = node[b]._isFile;
+                    if (aIsFile && !bIsFile) return 1;
+                    if (!aIsFile && bIsFile) return -1;
+                    return a.localeCompare(b);
+                });
+
+                for (const key of sortedKeys) {
+                    if (key.startsWith('_')) continue;
+                    
+                    const isFile = node[key]._isFile;
+                    const hasChildren = Object.keys(node[key]).some(k => !k.startsWith('_'));
+                    const path = node[key]._path;
+
+                    if (isFile && !hasChildren) {
+                        html += `
+                            <li class="my-1">
+                                <a href="/${path}" class="flex items-center text-blue-600 hover:underline">
+                                    <i data-lucide="file-text" class="w-4 h-4 mr-2 flex-shrink-0"></i>
+                                    <span>${key}</span>
+                                </a>
+                            </li>`;
+                    } else {
+                        html += `
+                            <li class="tree-item my-1" aria-expanded="false">
+                                <div class="flex items-center">
+                                    <i data-lucide="chevron-right" class="tree-icon w-4 h-4 mr-1 text-gray-500 flex-shrink-0"></i>
+                                    <i data-lucide="folder" class="w-4 h-4 mr-2 text-yellow-500 flex-shrink-0"></i>
+                                    <span class="font-semibold">${key}</span>
+                                </div>
+                                <div class="tree-content">
+                                    ${createHtmlTree(node[key])}
+                                </div>
+                            </li>`;
+                    }
+                }
+                html += '</ul>';
+                return html;
+            }
+
+            const fileTree = buildTree(filePaths);
+            sitemapContainer.innerHTML = createHtmlTree(fileTree);
+            lucide.createIcons();
+
+            sitemapContainer.addEventListener('click', (e) => {
+                const itemHeader = e.target.closest('.tree-item > div');
+                if (itemHeader) {
+                    const treeItem = itemHeader.parentElement;
+                    const isExpanded = treeItem.getAttribute('aria-expanded') === 'true';
+                    treeItem.setAttribute('aria-expanded', !isExpanded);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
