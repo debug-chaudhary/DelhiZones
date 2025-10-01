@@ -405,7 +405,66 @@
             "6th-Semester/MCS-022/Block-3.pdf",
             "6th-Semester/MCS-022/Block-4.pdf",
             "6th-Semester/assignments/BCA-6 July_2025 to June 2026.pdf",
-            "6th-Semester/bcsp-064_project_guidelines.pdf"
+            "6th-Semester/bcsp-064_project_guidelines.pdf",
+            "LICENSE",
+            "README.md",
+            "downloads/assignments/BCS-011.pdf",
+            "downloads/assignments/january2025/BCA-1 July_2025 to June 2026.pdf",
+            "downloads/assignments/january2025/BCA-2 July_2025 to June 2026.pdf",
+            "downloads/assignments/january2025/BCA-3 July_2025 to June 2026.pdf",
+            "downloads/assignments/january2025/BCA-4 July_2025 to June 2026.pdf",
+            "downloads/assignments/january2025/BCA-5 July_2025 to June 2026.pdf",
+            "downloads/assignments/january2025/BCA-6 July_2025 to June 2026.pdf",
+            "downloads/assignments/january2025/bcsp-064_project_guidelines.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-1 Computer their Origin and Applications.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-2 Functioning of a Computer.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-3 Memory System.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-4 Input Output Devices.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 1 Basics of Computer Hardware/Unit-5 My Personal Computer.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-1 Software Evolution.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-2 Operating System.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-3 Concept in Programming Language.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 2 Basics of Computer Software/Unit-4 Computer Applications.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-1 Networking and Internet.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-2 Web Applications-I.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/Block 3 Internet Technologies/Unit-3 Web Applications-II.pdf",
+            "downloads/ebooks/semester1/BCS-011 Computer Basics and PC Software/index.html",
+            "downloads/ebooks/semester1/basic-mathematics.pdf",
+            "downloads/ebooks/semester1/computer-fundamentals.pdf",
+            "downloads/ebooks/semester1/youtube lecture.txt",
+            "downloads/ebooks/semester3/cpp-programming-lab.pdf",
+            "downloads/ebooks/semester3/data-and-file-structures.pdf",
+            "downloads/ebooks/semester3/data-file-structures-lab.pdf",
+            "downloads/ebooks/semester3/dbms-lab.pdf",
+            "downloads/ebooks/semester3/introduction-to-dbms.pdf",
+            "downloads/ebooks/semester3/programming-in-cpp.pdf",
+            "downloads/ebooks/semester3/system-analysis-and-design.pdf",
+            "downloads/ebooks/semester4/algorithms-design-lab.pdf",
+            "downloads/ebooks/semester4/fundamentals-of-computer-networks.pdf",
+            "downloads/ebooks/semester4/internet-concepts-and-web-design.pdf",
+            "downloads/ebooks/semester4/introduction-to-algorithm-design.pdf",
+            "downloads/ebooks/semester4/java-programming-lab.pdf",
+            "downloads/ebooks/semester4/object-oriented-tech-java-prog.pdf",
+            "downloads/ebooks/semester4/statistical-techniques-lab.pdf",
+            "downloads/ebooks/semester4/statistical-techniques.pdf",
+            "downloads/ebooks/semester5/business-communication.pdf",
+            "downloads/ebooks/semester5/computer-oriented-numerical-techniques-lab.pdf",
+            "downloads/ebooks/semester5/computer-oriented-numerical-techniques.pdf",
+            "downloads/ebooks/semester5/introduction-to-software-engineering.pdf",
+            "downloads/ebooks/semester5/network-programming-and-administration.pdf",
+            "downloads/ebooks/semester5/networking-programming-administration-lab.pdf",
+            "downloads/ebooks/semester5/web-programming-lab.pdf",
+            "downloads/ebooks/semester5/web-programming.pdf",
+            "downloads/ebooks/semester6/e-commerce.pdf",
+            "downloads/ebooks/semester6/os-concepts-networking-management-lab.pdf",
+            "downloads/ebooks/semester6/os-concepts-networking-management.pdf",
+            "downloads/syllabus/bca-complete-syllabus.pdf",
+            "downloads/syllabus/bcaprogguide.pdf",
+            "downloads/syllabus/semester-wise-syllabus.pdf",
+            "resources/study-links.html",
+            "resources/study-planner.html",
+            "resources/youtube-lectures.html",
+            "text2speech.html"
         ];
         
         // Function to parse the file paths and build a nested object
@@ -538,58 +597,46 @@
             modal.classList.add('hidden');
         }
 
-        // Theme Toggle Logic
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const darkIcon = document.getElementById('theme-toggle-dark-icon');
-        const lightIcon = document.getElementById('theme-toggle-light-icon');
-
-        // Set initial icon
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            lightIcon.classList.remove('hidden');
-        } else {
-            darkIcon.classList.remove('hidden');
-        }
-
-        themeToggleBtn.addEventListener('click', function() {
-            // toggle icons
-            darkIcon.classList.toggle('hidden');
-            lightIcon.classList.toggle('hidden');
-
-            // if set via local storage previously
-            if (localStorage.getItem('theme')) {
-                if (localStorage.getItem('theme') === 'light') {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('theme', 'light');
-                }
-            // if NOT set via local storage previously
-            } else {
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('theme', 'dark');
-                }
-            }
-        });
-
-
         // Initialize
         function initializeApp() {
+            // Check for lucide and retry if not loaded
             if (typeof lucide === 'undefined') {
                 setTimeout(initializeApp, 100);
                 return;
             }
 
+            // --- Start: Theme Switcher Logic ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const darkIcon = document.getElementById('theme-toggle-dark-icon');
+            const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+            const applyTheme = () => {
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                if (isDarkMode) {
+                    lightIcon.classList.remove('hidden');
+                    darkIcon.classList.add('hidden');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    darkIcon.classList.remove('hidden');
+                    lightIcon.classList.add('hidden');
+                    localStorage.setItem('theme', 'light');
+                }
+            };
+
+            applyTheme();
+
+            themeToggleBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                applyTheme();
+            });
+            // --- End: Theme Switcher Logic ---
+
+
+            // --- LMS Logic ---
             const lmsData = buildLMSStructure(filePaths);
             const container = document.getElementById('lms-container');
             container.innerHTML = createAccordionHTML(lmsData);
             
-            lucide.createIcons();
-
             container.addEventListener('click', (e) => {
                 const button = e.target.closest('.accordion-button');
                 if (button) {
@@ -621,6 +668,9 @@
                     closeModal();
                 }
             });
+
+            // Final Lucide Call
+            lucide.createIcons();
         }
         
         document.addEventListener('DOMContentLoaded', initializeApp);
@@ -628,3 +678,4 @@
 
 </body>
 </html>
+
