@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4th Semester Resources - IGNOU BCA Hub</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- PDF.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        #fileViewerModal {
+            z-index: 100;
+        }
+    </style>
+    <script>
+        // Set theme on initial load to prevent flashing
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+        // Tell Tailwind to use class-based dark mode
+        tailwind.config = {
+          darkMode: 'class',
+        }
+      </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm dark:shadow-gray-800 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center gap-2" aria-label="Delhizones Homepage">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                        <g clip-path="url(#clip0_105_2_header)">
+                            <circle cx="16" cy="16" r="15.5" fill="white" stroke="#2563EB"></circle>
+                            <circle cx="16" cy="16" r="12" fill="#2563EB"></circle>
+                            <path d="M10.5 11.5L16 20.5L21.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z" fill="white"></path>
+                            <path d="M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z" fill="white"></path>
+                        </g>
+                        <defs><clipPath id="clip0_105_2_header"><rect width="32" height="32" fill="white"></rect></clipPath></defs>
+                    </svg>
+                    <span class="text-2xl font-bold text-gray-900 dark:text-white">Delhi<span class="text-blue-600">zones</span></span>
+                </a>
+                
+                <div class="flex items-center">
+                    <nav class="hidden md:flex items-center space-x-6 mr-4">
+                         <a href="../" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 font-medium">LMS Home</a>
+                        <a href="/posts/" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 font-medium">Posts</a>
+                        <a href="/contact.html" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 font-medium">Contact</a>
+                    </nav>
+
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" class="mr-4 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none">
+                        <i id="theme-toggle-dark-icon" class="w-6 h-6 hidden" data-lucide="moon"></i>
+                        <i id="theme-toggle-light-icon" class="w-6 h-6 hidden" data-lucide="sun"></i>
+                    </button>
+
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none">
+                            <i id="menu-open-icon" data-lucide="menu" class="w-6 h-6"></i>
+                            <i id="menu-close-icon" data-lucide="x" class="w-6 h-6 hidden"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+             <a href="../" class="block py-3 px-6 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 transition duration-300">LMS Home</a>
+             <a href="/posts/" class="block py-3 px-6 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 transition duration-300">Posts</a>
+             <a href="/contact.html" class="block py-3 px-6 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 transition duration-300">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-6 py-16 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+                    4th Semester Resources
+                </h1>
+                <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    Explore computer networks, algorithms, Java, and statistical techniques.
+                </p>
+            </div>
+        </section>
+
+        <!-- Curriculum Section -->
+        <section id="curriculum" class="py-12">
+            <div class="container mx-auto px-6">
+                <div class="bg-white dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-md dark:shadow-2xl">
+                    <div class="relative mb-6">
+                        <input type="text" id="searchInput" onkeyup="filterLMS()" placeholder="Search subjects or topics..." class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-lucide="search" class="text-gray-400 w-5 h-5"></i>
+                        </div>
+                    </div>
+                    
+                    <div id="lms-container" class="space-y-4">
+                        <!-- JS will dynamically generate the list here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for File Viewer -->
+    <div id="fileViewerModal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-2xl w-full h-full max-w-6xl flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b dark:border-gray-700">
+                <h3 id="modalFileName" class="text-lg font-semibold text-gray-800 dark:text-gray-100 truncate pr-4">File Viewer</h3>
+                <div class="flex items-center gap-2">
+                    <div id="tts-controls" class="hidden items-center gap-1 border-r pr-2 mr-1 dark:border-gray-600">
+                        <button id="read-aloud-btn" title="Read Aloud" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors">
+                            <i data-lucide="play-circle" class="w-5 h-5"></i>
+                        </button>
+                        <button id="pause-resume-btn" title="Pause" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors hidden">
+                            <i data-lucide="pause-circle" class="w-5 h-5"></i>
+                        </button>
+                        <button id="stop-btn" title="Stop" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors hidden">
+                            <i data-lucide="stop-circle" class="w-5 h-5"></i>
+                        </button>
+                        <div class="flex items-center gap-1 text-sm ml-2">
+                            <label for="tts-page-input" class="sr-only">Start Page</label>
+                            <span>Page</span>
+                            <input type="number" id="tts-page-input" class="w-14 text-center bg-gray-100 dark:bg-gray-700 rounded border border-gray-300 dark:border-gray-600" min="1" value="1">
+                            <span>of</span>
+                            <span id="tts-total-pages">1</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm ml-4">
+                            <i data-lucide="gauge-circle" class="w-5 h-5 text-gray-600 dark:text-gray-300"></i>
+                            <input type="range" id="tts-speed-control" min="0.5" max="2" step="0.1" value="1" class="w-20">
+                            <span id="tts-speed-label" class="w-10 text-center font-mono">1.0x</span>
+                        </div>
+                    </div>
+                     <button id="translate-btn" title="Translate to Hindi" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors hidden">
+                        <i data-lucide="languages" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="closeModal()" class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors flex-shrink-0">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="modal-content-area" class="flex-grow p-1 md:p-2 bg-gray-200 dark:bg-gray-900 relative">
+                <div id="modal-loader" class="absolute inset-0 bg-white dark:bg-gray-800 flex-col items-center justify-center hidden z-10">
+                    <i data-lucide="loader-2" class="w-12 h-12 animate-spin text-blue-600"></i>
+                    <p class="mt-4 text-lg">Preparing Audio...</p>
+                </div>
+                <iframe id="fileViewerFrame" class="w-full h-full bg-white" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 dark:bg-black text-white mt-16">
+        <div class="container mx-auto px-6 py-12">
+            <div class="text-center">
+                 <h2 class="text-3xl font-bold text-white">Get In Touch</h2>
+                 <p class="mt-3 text-gray-400">Feel free to reach out via email.</p>
+                 <a href="mailto:delhizones@gmail.com" class="mt-6 inline-block text-lg font-semibold text-blue-400 hover:text-blue-300 transition-colors">delhizones@gmail.com</a>
+            </div>
+             <div class="mt-10 flex justify-center gap-x-8 gap-y-4 flex-wrap">
+                <a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a>
+                <a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                <a href="/contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+            </div>
+            <div class="text-center text-gray-500 border-t border-gray-800 mt-10 pt-6">
+                <p>&copy; 2024 Delhizones.com. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // File paths are relative to the '4th-Semester' directory
+        const filePaths = [
+            "BCS-040-Statistical-Techniques/Block-1-Statistics-and-Probability/Unit-1.pdf",
+            "BCS-040-Statistical-Techniques/Block-1-Statistics-and-Probability/Unit-2.pdf",
+            "BCS-040-Statistical-Techniques/Block-1-Statistics-and-Probability/Unit-3.pdf",
+            "BCS-040-Statistical-Techniques/Block-2-Statistical-Inferences/Unit-4.pdf",
+            "BCS-040-Statistical-Techniques/Block-2-Statistical-Inferences/Unit-5.pdf",
+            "BCS-040-Statistical-Techniques/Block-2-Statistical-Inferences/Unit-6.pdf",
+            "BCS-040-Statistical-Techniques/Block-2-Statistical-Inferences/Unit-7.pdf",
+            "BCS-040-Statistical-Techniques/Block-3-Applied-Statistical-Methods/Unit-10.pdf",
+            "BCS-040-Statistical-Techniques/Block-3-Applied-Statistical-Methods/Unit-11.pdf",
+            "BCS-040-Statistical-Techniques/Block-3-Applied-Statistical-Methods/Unit-8.pdf",
+            "BCS-040-Statistical-Techniques/Block-3-Applied-Statistical-Methods/Unit-9.pdf",
+            "BCS-040-Statistical-Techniques/Block-4-Sampling/Unit-12.pdf",
+            "BCS-040-Statistical-Techniques/Block-4-Sampling/Unit-13.pdf",
+            "BCS-040-Statistical-Techniques/Block-4-Sampling/Unit-14.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-1-Concepts-of-Communication-and-Networking/Unit-1.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-1-Concepts-of-Communication-and-Networking/Unit-2.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-1-Concepts-of-Communication-and-Networking/Unit-3.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-1-Concepts-of-Communication-and-Networking/Unit-4.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-2-Networks-and-Devices/Unit-1.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-2-Networks-and-Devices/Unit-2.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-2-Networks-and-Devices/Unit-3.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-2-Networks-and-Devices/Unit-4.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-3-Network-Transport-and-Application-Layer/Unit-1.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-3-Network-Transport-and-Application-Layer/Unit-2.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-3-Network-Transport-and-Application-Layer/Unit-3.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-3-Network-Transport-and-Application-Layer/Unit-4.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-4-Network-Design-Security/Unit-1.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-4-Network-Design-Security/Unit-2.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-4-Network-Design-Security/Unit-3.pdf",
+            "BCS-041-Fundamentals-of-Computer-Networks/Block-4-Network-Design-Security/Unit-4.pdf",
+            "BCS-042-Introduction-to-Algorithm-Design/Block-1-Introduction-to-Algorithm/Unit-1.pdf",
+            "BCS-042-Introduction-to-Algorithm-Design/Block-1-Introduction-to-Algorithm/Unit-2.pdf",
+            "BCS-042-Introduction-to-Algorithm-Design/Block-1-Introduction-to-Algorithm/Unit-3.pdf",
+            "BCS-042-Introduction-to-Algorithm-Design/Block-2-Design-Techniques/Unit-1.pdf",
+            "BCS-042-Introduction-to-Algorithm-Design/Block-2-Design-Techniques/Unit-2.pdf",
+            "BCS-042-Introduction-to-Algorithm-Design/Block-2-Design-Techniques/Unit-3.pdf",
+            "BCSL-043-Java-Programming-Lab/Lab-Manual/Old/BCSL-043-Java-Programming-Lab.pdf",
+            "BCSL-044-Statistical-Techniques-Lab/Block-1-Lab/Practical---Unit-1-Figures/Practical-Unit-1-Figures.xls",
+            "BCSL-044-Statistical-Techniques-Lab/Block-1-Lab/Practical---Unit-1-Figures/Practical-Unit-1-Figures.xlsx",
+            "BCSL-044-Statistical-Techniques-Lab/Block-1-Lab/Section-1.pdf",
+            "BCSL-044-Statistical-Techniques-Lab/Block-1-Lab/Section-2.pdf",
+            "BCSL-044-Statistical-Techniques-Lab/Block-1-Lab/Section-3.pdf",
+            "BCSL-044-Statistical-Techniques-Lab/Block-1-Lab/Section-4-Control-Charts-and-Timeseries/Section-4-Control-Charts-and-Timeseries.xls",
+            "BCSL-044-Statistical-Techniques-Lab/Block-1-Lab/Section-4-Control-Charts-and-Timeseries/Section-4-Control-Charts-and-Timeseries.xlsx",
+            "BCSL-044-Statistical-Techniques-Lab/Block-1-Lab/Section-4.pdf",
+            "BCSL-044-Statistical-Techniques-Lab/Block-1-Lab/Section-5.pdf",
+            "BCSL-045-Algorithm-Design-Lab/Lab-Manual/Lab-Manual.pdf",
+            "BCSL-045-Algorithm-Design-Lab/Lab-Manual/Thumbs.db",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-1-Object-Oriented-Technology-and-Java/Unit-1.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-1-Object-Oriented-Technology-and-Java/Unit-2.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-1-Object-Oriented-Technology-and-Java/Unit-3.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-1-Object-Oriented-Technology-and-Java/Unit-4.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-2-Object-Oriented-Concepts-and-Exceptions-Handling/Unit-1.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-2-Object-Oriented-Concepts-and-Exceptions-Handling/Unit-2.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-2-Object-Oriented-Concepts-and-Exceptions-Handling/Unit-3.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-2-Object-Oriented-Concepts-and-Exceptions-Handling/Unit-4.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-3-Multithreading-IO-and-String-Handling/Unit-1.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-3-Multithreading-IO-and-String-Handling/Unit-2.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-3-Multithreading-IO-and-String-Handling/Unit-3.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-3-Multithreading-IO-and-String-Handling/Unit-4.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-4-Applets-Programming-and-Advanced-Java-Concepts/Unit-1.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-4-Applets-Programming-and-Advanced-Java-Concepts/Unit-2.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-4-Applets-Programming-and-Advanced-Java-Concepts/Unit-3.pdf",
+            "MCS-024-Object-Oriented-Technology-and-Java-Programming/Block-4-Applets-Programming-and-Advanced-Java-Concepts/Unit-4.pdf",
+            "MCSL-016-Internet-Concepts-and-Web-Design/Block-1-Scripting-Languages/Unit-1.pdf",
+            "MCSL-016-Internet-Concepts-and-Web-Design/Block-1-Scripting-Languages/Unit-2.pdf",
+            "MCSL-016-Internet-Concepts-and-Web-Design/Block-1-Scripting-Languages/Unit-3.pdf",
+            "MCSL-016-Internet-Concepts-and-Web-Design/Block-1-Scripting-Languages/Unit-4.pdf",
+            "MCSL-016-Internet-Concepts-and-Web-Design/Block-1-Scripting-Languages/Unit-5.pdf",
+            "MCSL-016-Internet-Concepts-and-Web-Design/Block-1-Scripting-Languages/Unit-6.pdf",
+            "MCSL-016-Internet-Concepts-and-Web-Design/Block-2-Lab-Manual/SECTION-1.pdf",
+            "MCSL-016-Internet-Concepts-and-Web-Design/Block-2-Lab-Manual/SECTION-2.pdf",
+            "MCSL-016-Internet-Concepts-and-Web-Design/Block-2-Lab-Manual/SECTION-3.pdf",
+            "MCSL-016-Internet-Concepts-and-Web-Design/Block-2-Lab-Manual/SECTION-4.pdf",
+            "MCSL-016-Internet-Concepts-and-Web-Design/Block-2-Lab-Manual/SECTION-5.pdf",
+            "assignments/BCA-4-July_2025-to-June-2026.pdf"
+        ];
+        
+        let pdfPageTexts = [];
+        let indianVoice = null;
+
+        function loadAndSetVoices() {
+            const voices = speechSynthesis.getVoices();
+            indianVoice = voices.find(voice => voice.lang === 'en-IN');
+            if (!indianVoice) {
+                indianVoice = voices.find(voice => voice.lang.startsWith('en-'));
+            }
+        }
+
+        loadAndSetVoices();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadAndSetVoices;
+        }
+        
+        // Function to parse the file paths and build a nested object
+        function buildLMSStructure(paths) {
+            const structure = {};
+            paths.forEach(path => {
+                const parts = path.split('/'); 
+                let currentLevel = structure;
+                parts.forEach((part, index) => {
+                    const cleanPart = part.replace(/-/g, ' ');
+                    if (index === parts.length - 1) {
+                        if (!currentLevel._files) {
+                            currentLevel._files = [];
+                        }
+                        currentLevel._files.push({ name: cleanPart.replace(/_/g, ' '), path: path });
+                    } else {
+                        if (!currentLevel[cleanPart]) {
+                            currentLevel[cleanPart] = {};
+                        }
+                        currentLevel = currentLevel[cleanPart];
+                    }
+                });
+            });
+            return structure;
+        }
+
+        // Function to generate the HTML for the list
+        function createListHTML(data, level = 0) {
+            let html = '';
+            const sortedKeys = Object.keys(data).filter(key => key !== '_files').sort((a, b) => {
+                 return a.localeCompare(b, undefined, {numeric: true});
+            });
+            
+            sortedKeys.forEach(key => {
+                const isExpandable = Object.keys(data[key]).length > 0;
+                
+                let headingClass = 'text-2xl font-bold mt-8 mb-4 border-b-2 pb-2 border-blue-600 dark:border-blue-400 text-gray-800 dark:text-gray-100';
+                if (level === 1) {
+                    headingClass = 'text-xl font-semibold mt-6 mb-3 text-gray-700 dark:text-gray-200';
+                } else if (level > 1) {
+                    headingClass = 'text-lg font-medium mt-4 mb-2 text-gray-600 dark:text-gray-300';
+                }
+
+                html += `<div data-level="${level}" data-search-text="${key.toLowerCase()}">`;
+                html += `<h${level + 2} class="${headingClass}">${key}</h${level+2}>`;
+                if(isExpandable){
+                    html += `<div class="ml-4">${createListHTML(data[key], level + 1)}</div>`;
+                }
+                html += `</div>`;
+            });
+            
+            if (data._files) {
+                data._files.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric: true})).forEach(file => {
+                    const fileExtension = file.name.split('.').pop().toLowerCase();
+                    let icon = 'file-text';
+                    let iconColor = 'text-blue-600 dark:text-blue-400';
+                    if (['xls', 'xlsx'].includes(fileExtension)) {
+                        icon = 'file-spreadsheet';
+                        iconColor = 'text-green-600 dark:text-green-400';
+                    }
+
+                    html += `
+                        <div class="flex justify-between items-center p-3 border-b border-gray-200 dark:border-gray-700 last:border-b-0 hover:bg-blue-50 dark:hover:bg-gray-700/50 rounded-md" data-level="${level}" data-search-text="${file.name.toLowerCase()}">
+                            <span class="text-gray-800 dark:text-gray-200 flex items-center min-w-0">
+                               <i data-lucide="${icon}" class="w-5 h-5 mr-3 ${iconColor} flex-shrink-0"></i>
+                               <span class="flex-grow truncate">${file.name}</span>
+                            </span>
+                            <button onclick="viewFile('${file.path}', '${file.name}')" class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors flex-shrink-0 ml-4">
+                                <i data-lucide="eye" class="w-4 h-4 md:mr-2"></i>
+                                <span class="hidden md:inline">View</span>
+                            </button>
+                        </div>
+                    `;
+                });
+            }
+            
+            return html;
+        }
+
+        function filterLMS() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const items = document.querySelectorAll('#lms-container [data-search-text]');
+
+            items.forEach(item => {
+                const text = item.getAttribute('data-search-text');
+                const isVisible = text.includes(filter);
+                item.style.display = isVisible ? '' : 'none';
+
+                if(isVisible) {
+                    let parent = item.closest('[data-level]');
+                    while(parent) {
+                        parent.style.display = '';
+                        parent = parent.parentElement.closest('[data-level]');
+                    }
+                }
+            });
+        }
+
+        // --- TTS and Modal Logic ---
+        const modal = document.getElementById('fileViewerModal');
+        const iframe = document.getElementById('fileViewerFrame');
+        const modalFileName = document.getElementById('modalFileName');
+        const ttsControls = document.getElementById('tts-controls');
+        const modalLoader = document.getElementById('modal-loader');
+        const translateBtn = document.getElementById('translate-btn');
+        
+        async function extractTextFromPdf(url) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js`;
+            
+            let pagesText = [];
+            try {
+                const pdf = await pdfjsLib.getDocument(url).promise;
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const content = await page.getTextContent();
+                    const pageText = content.items.map(item => item.str).join(' ');
+                    pagesText.push(pageText);
+                }
+            } catch (error) {
+                console.error('Error extracting text from PDF:', error);
+                return null;
+            }
+            return pagesText;
+        }
+
+        async function viewFile(filePath, fileName) {
+            const extension = filePath.split('.').pop().toLowerCase();
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            
+            modalFileName.textContent = fileName;
+            modal.classList.remove('hidden');
+            
+            speechSynthesis.cancel();
+            ttsControls.classList.add('hidden');
+            translateBtn.classList.add('hidden');
+            
+            if (extension === 'pdf') {
+                modalLoader.style.display = 'flex';
+                iframe.style.visibility = 'hidden';
+                iframe.src = filePath;
+
+                const absoluteUrl = new URL(filePath, window.location.href).href;
+                
+                if (!isLocal) {
+                    translateBtn.classList.remove('hidden');
+                    translateBtn.dataset.pdfUrl = absoluteUrl;
+                }
+
+                pdfPageTexts = await extractTextFromPdf(absoluteUrl);
+
+                modalLoader.style.display = 'none';
+                iframe.style.visibility = 'visible';
+                
+                if ('speechSynthesis' in window && pdfPageTexts && pdfPageTexts.length > 0) {
+                    const totalPages = pdfPageTexts.length;
+                    document.getElementById('tts-total-pages').textContent = totalPages;
+                    const pageInput = document.getElementById('tts-page-input');
+                    pageInput.max = totalPages;
+                    pageInput.value = 1;
+
+                    ttsControls.classList.remove('hidden');
+                    ttsControls.style.display = 'flex';
+                    resetTtsButtons();
+                }
+            } else {
+                iframe.src = filePath;
+            }
+        }
+
+        function closeModal() {
+            speechSynthesis.cancel();
+            iframe.src = 'about:blank';
+            modal.classList.add('hidden');
+            document.getElementById('tts-page-input').value = 1;
+        }
+        
+        // --- TTS Button Controls ---
+        const readBtn = document.getElementById('read-aloud-btn');
+        const pauseResumeBtn = document.getElementById('pause-resume-btn');
+        const stopBtn = document.getElementById('stop-btn');
+
+        function resetTtsButtons() {
+            readBtn.classList.remove('hidden');
+            pauseResumeBtn.classList.add('hidden');
+            stopBtn.classList.add('hidden');
+            pauseResumeBtn.innerHTML = '<i data-lucide="pause-circle" class="w-5 h-5"></i>';
+            lucide.createIcons();
+        }
+
+        readBtn.addEventListener('click', () => {
+            if (speechSynthesis.speaking || !pdfPageTexts || pdfPageTexts.length === 0) return;
+
+            speechSynthesis.cancel();
+
+            const pageInput = document.getElementById('tts-page-input');
+            const speed = parseFloat(document.getElementById('tts-speed-control').value) || 1;
+            let startPage = parseInt(pageInput.value, 10);
+
+            if (isNaN(startPage) || startPage < 1) startPage = 1;
+            if (startPage > pdfPageTexts.length) startPage = pdfPageTexts.length;
+            pageInput.value = startPage;
+
+            for (let i = startPage - 1; i < pdfPageTexts.length; i++) {
+                const utterance = new SpeechSynthesisUtterance(pdfPageTexts[i]);
+                if (indianVoice) {
+                    utterance.voice = indianVoice;
+                }
+                utterance.rate = speed;
+                const currentPage = i + 1;
+                utterance.onstart = () => { pageInput.value = currentPage; };
+                if (currentPage === pdfPageTexts.length) utterance.onend = resetTtsButtons;
+                utterance.onerror = () => { console.error('Speech synthesis error on page ' + currentPage); resetTtsButtons(); };
+                speechSynthesis.speak(utterance);
+            }
+            
+            readBtn.classList.add('hidden');
+            pauseResumeBtn.classList.remove('hidden');
+            stopBtn.classList.remove('hidden');
+        });
+
+        pauseResumeBtn.addEventListener('click', () => {
+            if (speechSynthesis.paused) {
+                speechSynthesis.resume();
+                pauseResumeBtn.innerHTML = '<i data-lucide="pause-circle" class="w-5 h-5"></i>';
+            } else {
+                speechSynthesis.pause();
+                pauseResumeBtn.innerHTML = '<i data-lucide="play-circle" class="w-5 h-5"></i>';
+            }
+            lucide.createIcons();
+        });
+
+        stopBtn.addEventListener('click', () => {
+            speechSynthesis.cancel();
+            resetTtsButtons();
+            document.getElementById('tts-page-input').value = 1;
+        });
+
+        // Initialize
+        function initializeApp() {
+            if (typeof lucide === 'undefined') {
+                setTimeout(initializeApp, 100);
+                return;
+            }
+
+            // --- Theme Switcher Logic ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const darkIcon = document.getElementById('theme-toggle-dark-icon');
+            const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+            const applyTheme = () => {
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                if (isDarkMode) {
+                    lightIcon.classList.remove('hidden');
+                    darkIcon.classList.add('hidden');
+                } else {
+                    darkIcon.classList.remove('hidden');
+                    lightIcon.classList.add('hidden');
+                }
+            };
+            
+            themeToggleBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+                applyTheme();
+            });
+            
+            applyTheme();
+
+            // --- LMS List Generation ---
+            const lmsData = buildLMSStructure(filePaths);
+            const container = document.getElementById('lms-container');
+            container.innerHTML = createListHTML(lmsData);
+            
+            // --- Mobile Menu Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-open-icon');
+            const closeIcon = document.getElementById('menu-close-icon');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                openIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+
+             window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+            
+            // --- TTS Speed Control ---
+            const ttsSpeedControl = document.getElementById('tts-speed-control');
+            const ttsSpeedLabel = document.getElementById('tts-speed-label');
+
+            const savedSpeed = localStorage.getItem('ttsSpeed') || '1';
+            ttsSpeedControl.value = savedSpeed;
+            ttsSpeedLabel.textContent = `${parseFloat(savedSpeed).toFixed(1)}x`;
+
+            ttsSpeedControl.addEventListener('input', () => {
+                const speed = ttsSpeedControl.value;
+                ttsSpeedLabel.textContent = `${parseFloat(speed).toFixed(1)}x`;
+                localStorage.setItem('ttsSpeed', speed);
+                // If speech is already in progress, cancel and restart with new speed
+                if (speechSynthesis.speaking) {
+                    speechSynthesis.cancel();
+                    readBtn.click();
+                }
+            });
+
+            // Translate button logic
+            translateBtn.addEventListener('click', () => {
+                const pdfUrl = translateBtn.dataset.pdfUrl;
+                if (pdfUrl) {
+                    const translateUrl = `https://translate.google.com/translate?sl=en&tl=hi&u=${encodeURIComponent(pdfUrl)}`;
+                    window.open(translateUrl, '_blank');
+                }
+            });
+
+            lucide.createIcons();
+        }
+        
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+
+</body>
+</html>
+
