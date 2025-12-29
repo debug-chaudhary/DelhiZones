@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RapidReadouts - Quick Knowledge, Delivered Fast</title>
+    <meta name="description" content="RapidReadouts: Your go-to source for quick, insightful summaries and tech updates. Subscribe for knowledge in minutes.">
+    
+    <!-- Favicon (using YouTube-style play button) -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF0000'%3e%3cpath d='M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z'/%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- YouTube Subscribe Button -->
+    <script src="https://apis.google.com/js/platform.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f0f0f; /* YouTube Dark Mode Background */
+            color: #ffffff;
+        }
+        h1, h2, h3, .brand-font {
+            font-family: 'Oswald', sans-serif;
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #FF0000, #ff5e5e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(255, 0, 0, 0.3);
+        }
+        .play-button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .group:hover .play-button {
+            background-color: #ff0000;
+            border-color: #ff0000;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 bg-black/90 backdrop-blur-md border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 text-red-600">
+                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold tracking-tight brand-font">Rapid<span class="text-red-600">Readouts</span></span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#latest" class="text-gray-300 hover:text-white transition-colors">Latest</a>
+                <a href="#popular" class="text-gray-300 hover:text-white transition-colors">Popular</a>
+                <a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a>
+                <a href="/" class="text-sm font-medium px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 transition-colors">Back to Delhizones</a>
+            </nav>
+            <a href="https://www.youtube.com/@RapidReadouts?sub_confirmation=1" target="_blank" class="bg-red-600 hover:bg-red-700 text-white text-sm font-bold py-2 px-6 rounded-full transition-all flex items-center gap-2">
+                <i data-lucide="youtube" class="w-4 h-4"></i> Subscribe
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-red-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full bg-red-900/30 text-red-400 text-xs font-bold tracking-wider uppercase mb-6 border border-red-900/50">
+                Knowledge in Minutes
+            </span>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                Learn Faster with <br>
+                <span class="text-gradient">Rapid Readouts</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                We break down complex topics, tech news, and educational content into bite-sized videos. Stay smart, stay updated, without wasting time.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://www.youtube.com/@RapidReadouts" target="_blank" class="px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all duration-300 flex items-center justify-center gap-2">
+                    <i data-lucide="play" class="w-5 h-5 fill-current"></i> Watch Channel
+                </a>
+                <a href="#latest" class="px-8 py-4 bg-gray-800 text-white font-bold rounded-full hover:bg-gray-700 border border-gray-700 transition-all duration-300">
+                    Explore Videos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="border-y border-gray-800 bg-black/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <h3 class="text-3xl font-bold text-white mb-1">100+</h3>
+                    <p class="text-sm text-gray-500 uppercase tracking-wide">Videos</p>
+                </div>
+                <div>
+                    <h3 class="text-3xl font-bold text-white mb-1">Top</h3>
+                    <p class="text-sm text-gray-500 uppercase tracking-wide">Quality Content</p>
+                </div>
+                 <div>
+                    <h3 class="text-3xl font-bold text-white mb-1">Tech</h3>
+                    <p class="text-sm text-gray-500 uppercase tracking-wide">& Education</p>
+                </div>
+                <div>
+                    <h3 class="text-3xl font-bold text-white mb-1">24/7</h3>
+                    <p class="text-sm text-gray-500 uppercase tracking-wide">Access</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Videos Section -->
+    <section id="latest" class="py-20 bg-[#0f0f0f]">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">Latest Uploads</h2>
+                    <p class="text-gray-400">Fresh content delivered straight to your screen.</p>
+                </div>
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="https://www.youtube.com/@RapidReadouts/videos" target="_blank" class="items-center text-red-500 hover:text-red-400 font-medium transition-colors flex">
+                        View All <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                    <div class="g-ytsubscribe" data-channel="@RapidReadouts" data-layout="default" data-count="default"></div>
+                    <a href="https://www.youtube.com/@RapidReadouts" target="_blank" class="px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md font-medium transition-colors">Open Channel</a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Video Card 1 -->
+                <a href="https://www.youtube.com/@RapidReadouts" target="_blank" class="group block bg-gray-900 rounded-xl overflow-hidden border border-gray-800 transition-all duration-300 card-hover">
+                    <div class="relative aspect-video bg-gray-800 overflow-hidden">
+                        <img src="https://placehold.co/600x338/202020/FFFFFF?text=Tech+News+Update" alt="Video Thumbnail" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-black/60 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20 play-button">
+                                <i data-lucide="play" class="w-5 h-5 text-white fill-white ml-1"></i>
+                            </div>
+                        </div>
+                        <span class="absolute bottom-2 right-2 bg-black/80 text-xs font-bold px-2 py-1 rounded text-white">5:23</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-red-500 transition-colors">The Future of AI: What You Need to Know Now</h3>
+                        <div class="flex items-center text-sm text-gray-500 gap-3">
+                            <span>2 days ago</span>
+                            <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                            <span>Tech Analysis</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Video Card 2 -->
+                <a href="https://www.youtube.com/@RapidReadouts" target="_blank" class="group block bg-gray-900 rounded-xl overflow-hidden border border-gray-800 transition-all duration-300 card-hover">
+                    <div class="relative aspect-video bg-gray-800 overflow-hidden">
+                        <img src="https://placehold.co/600x338/202020/FFFFFF?text=Coding+Tutorial" alt="Video Thumbnail" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
+                         <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-black/60 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20 play-button">
+                                <i data-lucide="play" class="w-5 h-5 text-white fill-white ml-1"></i>
+                            </div>
+                        </div>
+                        <span class="absolute bottom-2 right-2 bg-black/80 text-xs font-bold px-2 py-1 rounded text-white">12:45</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-red-500 transition-colors">Mastering Python for Data Science in 2025</h3>
+                        <div class="flex items-center text-sm text-gray-500 gap-3">
+                            <span>1 week ago</span>
+                            <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                            <span>Tutorial</span>
+                        </div>
+                    </div>
+                </a>
+
+                 <!-- Video Card 3 -->
+                <a href="https://www.youtube.com/@RapidReadouts" target="_blank" class="group block bg-gray-900 rounded-xl overflow-hidden border border-gray-800 transition-all duration-300 card-hover">
+                    <div class="relative aspect-video bg-gray-800 overflow-hidden">
+                        <img src="https://placehold.co/600x338/202020/FFFFFF?text=Product+Review" alt="Video Thumbnail" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
+                         <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-black/60 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20 play-button">
+                                <i data-lucide="play" class="w-5 h-5 text-white fill-white ml-1"></i>
+                            </div>
+                        </div>
+                        <span class="absolute bottom-2 right-2 bg-black/80 text-xs font-bold px-2 py-1 rounded text-white">8:10</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-red-500 transition-colors">Best Budget Laptops for Students - 2025 Review</h3>
+                        <div class="flex items-center text-sm text-gray-500 gap-3">
+                            <span>2 weeks ago</span>
+                            <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                            <span>Reviews</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                <a href="https://www.youtube.com/@RapidReadouts/videos" target="_blank" class="inline-flex items-center text-red-500 hover:text-red-400 font-medium transition-colors">
+                    View All Videos <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Subscribe Section -->
+    <section id="about" class="py-20 bg-gradient-to-b from-[#0f0f0f] to-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12">Why Subscribe to RapidReadouts?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="p-6 bg-black/40 rounded-2xl border border-gray-800">
+                        <div class="w-14 h-14 bg-red-900/30 text-red-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="clock" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Time-Efficient</h3>
+                        <p class="text-gray-400 text-sm">We value your time. Our videos are concise, direct, and packed with information.</p>
+                    </div>
+                    <div class="p-6 bg-black/40 rounded-2xl border border-gray-800">
+                        <div class="w-14 h-14 bg-blue-900/30 text-blue-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="lightbulb" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Expert Insights</h3>
+                        <p class="text-gray-400 text-sm">Get deep dives and analysis on trending topics, not just surface-level news.</p>
+                    </div>
+                    <div class="p-6 bg-black/40 rounded-2xl border border-gray-800">
+                        <div class="w-14 h-14 bg-purple-900/30 text-purple-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="users" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Community</h3>
+                        <p class="text-gray-400 text-sm">Join a growing community of learners and tech enthusiasts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex items-center justify-center gap-2 mb-6">
+                 <span class="text-2xl font-bold tracking-tight text-white brand-font">Rapid<span class="text-red-600">Readouts</span></span>
+            </div>
+            <p class="mb-8">Part of the Delhizones.com Digital Ecosystem.</p>
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="#" class="hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                <a href="#" class="hover:text-white transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+            </div>
+            <div class="text-sm">
+                &copy; 2024 RapidReadouts. All Rights Reserved. <a href="/" class="text-gray-500 hover:text-white ml-2">Back to Main Site</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
