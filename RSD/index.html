@@ -16,6 +16,18 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Image Modal (full display) -->
+    <div id="imageModal" class="hidden fixed inset-0 bg-black/80 items-center justify-center p-6" style="z-index:9999;" role="dialog" aria-modal="true">
+        <button id="imageModalClose" aria-label="Close image" class="absolute top-6 right-6 text-white text-3xl leading-none opacity-90">&times;</button>
+        <button id="modalPrev" aria-label="Previous image" class="absolute left-6 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 rounded-full p-3">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="modalNext" aria-label="Next image" class="absolute right-6 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 rounded-full p-3">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+        <img id="imageModalImg" src="" alt="" class="max-h-[90vh] max-w-full rounded-md shadow-2xl object-contain" />
+    </div>
+
     <script>
         // Robust Tailwind Configuration Loading
         function configureTailwind() {
@@ -206,10 +218,7 @@
     </header>
 
     <!-- Image Modal (full display) -->
-    <div id="imageModal" class="hidden fixed inset-0 bg-black/80 z-60 items-center justify-center p-6">
-        <button id="imageModalClose" class="absolute top-6 right-6 text-white text-3xl leading-none opacity-90">&times;</button>
-        <img id="imageModalImg" src="" alt="" class="max-h-[90vh] max-w-full rounded-md shadow-2xl object-contain" />
-    </div>
+    <!-- (moved to end of document to ensure it appears above all content) -->
 
     <!-- Features Section -->
     <section id="features" class="py-24 bg-white">
@@ -532,21 +541,41 @@
             menu.classList.toggle('hidden');
         }
 
-        // Product thumbnail click -> open full display modal
+        // Product thumbnail click -> open full display modal with navigation
         (function () {
             const main = document.getElementById('mainProductImage');
-            const thumbs = document.querySelectorAll('.product-thumb');
+            const thumbs = Array.from(document.querySelectorAll('.product-thumb'));
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('imageModalImg');
             const modalClose = document.getElementById('imageModalClose');
+            const btnPrev = document.getElementById('modalPrev');
+            const btnNext = document.getElementById('modalNext');
             if (!main || thumbs.length === 0 || !modal || !modalImg) return;
 
-            function openModal(src, alt) {
+            const sources = thumbs.map(t => t.getAttribute('data-large') || t.src);
+            // ensure main image is included (if different)
+            if (main.src && !sources.includes(main.src)) sources.unshift(main.src);
+
+            let currentIndex = 0;
+
+            function showImageByIndex(index) {
+                currentIndex = (index + sources.length) % sources.length;
+                const src = sources[currentIndex];
                 modalImg.src = src;
-                modalImg.alt = alt || '';
+                main.src = src;
+                // preload neighbors
+                const prev = new Image(); prev.src = sources[(currentIndex - 1 + sources.length) % sources.length];
+                const next = new Image(); next.src = sources[(currentIndex + 1) % sources.length];
+            }
+
+            function openModalAt(src) {
+                const idx = sources.indexOf(src);
+                showImageByIndex(idx >= 0 ? idx : 0);
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
                 document.body.style.overflow = 'hidden';
+                // focus for keyboard nav
+                btnNext?.focus();
             }
 
             function closeModal() {
@@ -558,12 +587,7 @@
 
             thumbs.forEach(thumb => {
                 const large = thumb.getAttribute('data-large') || thumb.src;
-                thumb.addEventListener('click', () => {
-                    // update main image and open full display
-                    main.src = large;
-                    main.alt = thumb.alt || main.alt;
-                    openModal(large, thumb.alt);
-                });
+                thumb.addEventListener('click', () => openModalAt(large));
                 thumb.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
@@ -572,18 +596,27 @@
                 });
             });
 
-            // clicking main image opens modal (full display)
-            main.addEventListener('click', () => {
-                openModal(main.src, main.alt);
-            });
+            // clicking main image opens modal at its current src
+            main.addEventListener('click', () => openModalAt(main.src));
+
+            // navigation
+            function showPrev() { showImageByIndex(currentIndex - 1); }
+            function showNext() { showImageByIndex(currentIndex + 1); }
+            btnPrev && btnPrev.addEventListener('click', showPrev);
+            btnNext && btnNext.addEventListener('click', showNext);
 
             // close handlers
             modal.addEventListener('click', (e) => {
                 if (e.target === modal || e.target === modalClose) closeModal();
             });
             modalClose.addEventListener('click', closeModal);
+
+            // keyboard navigation
             window.addEventListener('keydown', (e) => {
+                if (modal.classList.contains('hidden')) return;
                 if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowLeft') showPrev();
+                if (e.key === 'ArrowRight') showNext();
             });
         })();
     </script>
