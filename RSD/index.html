@@ -205,6 +205,12 @@
         </div>
     </header>
 
+    <!-- Image Modal (full display) -->
+    <div id="imageModal" class="hidden fixed inset-0 bg-black/80 z-60 items-center justify-center p-6">
+        <button id="imageModalClose" class="absolute top-6 right-6 text-white text-3xl leading-none opacity-90">&times;</button>
+        <img id="imageModalImg" src="" alt="" class="max-h-[90vh] max-w-full rounded-md shadow-2xl object-contain" />
+    </div>
+
     <!-- Features Section -->
     <section id="features" class="py-24 bg-white">
         <div class="container mx-auto px-6">
@@ -353,7 +359,7 @@
                         <li class="flex items-center gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> 18" to 24" length</li>
                         <li class="flex items-center gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> PTMT/Brass Nut option</li>
                     </ul>
-                    <button class="w-full py-3 rounded-xl border-2 border-slate-200 font-bold text-slate-600 hover:border-slate-900 hover:text-slate-900 transition">Contact Dealer</button>
+                    <a href="#contact" class="w-full inline-block text-center py-3 rounded-xl border-2 border-slate-200 font-bold text-slate-600 hover:border-slate-900 hover:text-slate-900 transition">Contact Dealer</a>
                 </div>
 
                 <!-- Pair (Highlight) -->
@@ -387,7 +393,7 @@
                         <li class="flex items-center gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> 4 Units included</li>
                         <li class="flex items-center gap-2 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Maximum Savings</li>
                     </ul>
-                    <button class="w-full py-3 rounded-xl border-2 border-slate-200 font-bold text-slate-600 hover:border-slate-900 hover:text-slate-900 transition">Contact Dealer</button>
+                    <a href="#contact" class="w-full inline-block text-center py-3 rounded-xl border-2 border-slate-200 font-bold text-slate-600 hover:border-slate-900 hover:text-slate-900 transition">Contact Dealer</a>
                 </div>
             </div>
         </div>
@@ -433,8 +439,8 @@
                     <!-- Logo Area -->
                     <div class="flex justify-between items-start mb-8 relative z-10">
                         <div>
-                            <h3 class="text-2xl font-display font-bold tracking-wide">DELUXE</h3>
-                            <p class="text-brand-300 text-xs uppercase tracking-widest">Sanitation & Plumbing</p>
+                            <h3 class="text-2xl font-display font-bold tracking-wide">R S Enterprises</h3>
+                            <p class="text-brand-300 text-xs uppercase tracking-widest">RS Enterprises Sanitation & Plumbing</p>
                         </div>
                         <div class="bg-white/10 p-2 rounded-lg backdrop-blur-sm">
                              <i data-lucide="droplets" class="w-8 h-8 text-brand-400"></i>
@@ -487,7 +493,9 @@
                     <!-- Card Actions -->
                     <div class="mt-8 pt-6 border-t border-white/10 flex gap-3 relative z-10">
                         <a href="tel:+919991669963" class="flex-1 bg-white text-slate-900 py-2.5 rounded-lg text-sm font-bold text-center hover:bg-brand-50 transition">Call Now</a>
-                        <a href="tel:+919518063835" class="flex-1 bg-white text-slate-900 py-2.5 rounded-lg text-sm font-bold text-center hover:bg-brand-50 transition">Call / WhatsApp</a>
+                        <a href="https://wa.me/919991669963" target="_blank" rel="noopener noreferrer" class="flex-1 bg-green-600 text-white py-2.5 rounded-lg text-sm font-bold text-center hover:bg-green-700 transition flex items-center justify-center gap-2" aria-label="Chat on WhatsApp +91 9991669963">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp
+                        </a>
                     </div>
                 </div>
             </div>
@@ -524,17 +532,37 @@
             menu.classList.toggle('hidden');
         }
 
-        // Product thumbnail click / keyboard swap
+        // Product thumbnail click -> open full display modal
         (function () {
             const main = document.getElementById('mainProductImage');
             const thumbs = document.querySelectorAll('.product-thumb');
-            if (!main || thumbs.length === 0) return;
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('imageModalImg');
+            const modalClose = document.getElementById('imageModalClose');
+            if (!main || thumbs.length === 0 || !modal || !modalImg) return;
+
+            function openModal(src, alt) {
+                modalImg.src = src;
+                modalImg.alt = alt || '';
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                modalImg.src = '';
+                document.body.style.overflow = '';
+            }
 
             thumbs.forEach(thumb => {
                 const large = thumb.getAttribute('data-large') || thumb.src;
                 thumb.addEventListener('click', () => {
+                    // update main image and open full display
                     main.src = large;
                     main.alt = thumb.alt || main.alt;
+                    openModal(large, thumb.alt);
                 });
                 thumb.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -542,6 +570,20 @@
                         thumb.click();
                     }
                 });
+            });
+
+            // clicking main image opens modal (full display)
+            main.addEventListener('click', () => {
+                openModal(main.src, main.alt);
+            });
+
+            // close handlers
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target === modalClose) closeModal();
+            });
+            modalClose.addEventListener('click', closeModal);
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
             });
         })();
     </script>
