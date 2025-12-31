@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nursery - UKG Learning World | Delhizones</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3e%3ctext y='28' font-size='28'%3e🧸%3c/text%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comic': ['"Comic Neue"', 'cursive'],
+                        'sans': ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        'kid-blue': '#4facfe',
+                        'kid-pink': '#ff9a9e',
+                        'kid-yellow': '#f6d365',
+                        'kid-green': '#84fab0',
+                        'kid-purple': '#a18cd1',
+                        'kid-orange': '#ffc3a0',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Comic Neue', cursive; }
+        h1, h2, h3, h4, .btn-font { font-family: 'Fredoka', sans-serif; }
+        
+        .blob-card {
+            border-radius: 30px;
+            transition: transform 0.3s ease;
+        }
+        .blob-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #fffbf0; }
+        ::-webkit-scrollbar-thumb { background: #f6d365; border-radius: 5px; }
+    </style>
+</head>
+<body class="bg-orange-50 text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-orange shadow-sm rounded-b-3xl">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="/EDU/Kids/" class="flex items-center gap-2 text-slate-600 hover:text-kid-blue transition-colors font-bold text-lg">
+                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
+                Back
+            </a>
+            
+            <span class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-kid-pink to-kid-orange tracking-wide">
+                Tiny<span class="text-kid-blue">Tots</span> World
+            </span>
+
+            <div class="hidden md:flex gap-4">
+                <a href="#english" class="px-4 py-1 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 font-bold text-sm">English</a>
+                <a href="#hindi" class="px-4 py-1 rounded-full bg-orange-100 text-orange-600 hover:bg-orange-200 font-bold text-sm">Hindi</a>
+                <a href="#math" class="px-4 py-1 rounded-full bg-red-100 text-red-600 hover:bg-red-200 font-bold text-sm">Math</a>
+            </div>
+            
+            <!-- Mobile Menu Btn -->
+             <button class="md:hidden text-slate-800">
+                <i data-lucide="grid" class="w-8 h-8"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="pt-32 pb-16 px-4 text-center relative overflow-hidden bg-white">
+        <div class="absolute top-10 left-10 text-6xl animate-float opacity-30">🌞</div>
+        <div class="absolute bottom-10 right-10 text-6xl animate-float opacity-30" style="animation-delay: 2s">🦋</div>
+        
+        <h1 class="text-4xl md:text-6xl font-black text-slate-800 mb-4">
+            Let's Learn & Play!
+        </h1>
+        <p class="text-xl text-slate-500 font-bold mb-8">Nursery • LKG • UKG</p>
+        
+        <div class="inline-flex gap-4 p-2 bg-yellow-50 rounded-full border-2 border-kid-yellow">
+            <div class="px-6 py-2 bg-kid-yellow text-white rounded-full font-bold shadow-md">Study Time 📚</div>
+            <div class="px-6 py-2 text-slate-500 font-bold">Game Time 🎮</div>
+        </div>
+    </header>
+
+    <!-- Content Sections -->
+    <main class="container mx-auto px-4 py-10 space-y-20">
+
+        <!-- English Section -->
+        <section id="english" class="scroll-mt-28">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-blue-100 p-3 rounded-2xl border-2 border-blue-200">
+                    <span class="text-4xl">🔤</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-blue-500">English</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-400 blob-card group cursor-pointer hover:bg-blue-50" onclick="window.location.href='alphabate.html'">
+                    <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-blue-600">The Alphabet</h3>
+                    <p class="text-slate-500 text-sm mb-4">Learn A to Z with sounds!</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl">🅰️</span>
+                        <i data-lucide="play-circle" class="w-8 h-8 text-blue-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-400 blob-card group cursor-pointer hover:bg-blue-50" onclick="alert('Phonics coming soon!')">
+                    <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-blue-600">Phonics</h3>
+                    <p class="text-slate-500 text-sm mb-4">Sounds of letters (A for Apple).</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl">🔊</span>
+                        <i data-lucide="play-circle" class="w-8 h-8 text-blue-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-400 blob-card group cursor-pointer hover:bg-blue-50" onclick="alert('Sight Words coming soon!')">
+                    <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-blue-600">Sight Words</h3>
+                    <p class="text-slate-500 text-sm mb-4">Simple words like The, And, Is.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl">👀</span>
+                        <i data-lucide="play-circle" class="w-8 h-8 text-blue-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-400 blob-card group cursor-pointer hover:bg-blue-50" onclick="alert('Rhymes coming soon!')">
+                    <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-blue-600">Rhymes</h3>
+                    <p class="text-slate-500 text-sm mb-4">Twinkle Twinkle & more!</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl">🎶</span>
+                        <i data-lucide="play-circle" class="w-8 h-8 text-blue-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hindi Section -->
+        <section id="hindi" class="scroll-mt-28">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-orange-100 p-3 rounded-2xl border-2 border-orange-200">
+                    <span class="text-4xl">🕉️</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-orange-500">Hindi (हिंदी)</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-orange-400 blob-card group cursor-pointer hover:bg-orange-50" onclick="alert('Hindi Swar coming soon!')">
+                    <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-orange-600">Swar (स्वर)</h3>
+                    <p class="text-slate-500 text-sm mb-4">Learn अ to अः</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl">अ</span>
+                        <i data-lucide="play-circle" class="w-8 h-8 text-orange-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-orange-400 blob-card group cursor-pointer hover:bg-orange-50" onclick="alert('Hindi Vyanjan coming soon!')">
+                    <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-orange-600">Vyanjan (व्यंजन)</h3>
+                    <p class="text-slate-500 text-sm mb-4">Learn क to ज्ञ</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl">क</span>
+                        <i data-lucide="play-circle" class="w-8 h-8 text-orange-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+
+                 <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-orange-400 blob-card group cursor-pointer hover:bg-orange-50" onclick="alert('Hindi Poems coming soon!')">
+                    <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-orange-600">Kavita (बाल गीत)</h3>
+                    <p class="text-slate-500 text-sm mb-4">Machli Jal Ki Rani Hai...</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl">🐟</span>
+                        <i data-lucide="play-circle" class="w-8 h-8 text-orange-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Math Section -->
+        <section id="math" class="scroll-mt-28">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-red-100 p-3 rounded-2xl border-2 border-red-200">
+                    <span class="text-4xl">🔢</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-red-500">Math</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="alert('Counting coming soon!')">
+                    <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-red-600">Counting 1-100</h3>
+                    <p class="text-slate-500 text-sm mb-4">Learn numbers easily.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl">💯</span>
+                         <i data-lucide="play-circle" class="w-8 h-8 text-red-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="alert('Shapes coming soon!')">
+                    <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-red-600">Shapes</h3>
+                    <p class="text-slate-500 text-sm mb-4">Circle, Square, Triangle.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl">🔺</span>
+                         <i data-lucide="play-circle" class="w-8 h-8 text-red-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+
+                 <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="alert('Comparisons coming soon!')">
+                    <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-red-600">Comparisons</h3>
+                    <p class="text-slate-500 text-sm mb-4">Big vs Small, Tall vs Short.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl">🐘</span>
+                         <i data-lucide="play-circle" class="w-8 h-8 text-red-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+
+                 <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="alert('Addition coming soon!')">
+                    <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-red-600">Basic Addition</h3>
+                    <p class="text-slate-500 text-sm mb-4">Simple sums like 1 + 1.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-4xl">➕</span>
+                         <i data-lucide="play-circle" class="w-8 h-8 text-red-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Drawing Section -->
+         <section id="drawing" class="scroll-mt-28">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-purple-100 p-3 rounded-2xl border-2 border-purple-200">
+                    <span class="text-4xl">🎨</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-purple-500">Drawing & Art</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 <div class="bg-white p-8 rounded-3xl shadow-lg border-b-8 border-purple-400 blob-card group cursor-pointer hover:bg-purple-50 flex items-center justify-between" onclick="alert('Coloring pages coming soon!')">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-700 mb-2 group-hover:text-purple-600">Coloring Pages</h3>
+                        <p class="text-slate-500">Printable sheets for coloring fun!</p>
+                        <button class="mt-4 px-6 py-2 bg-purple-100 text-purple-600 rounded-full font-bold hover:bg-purple-200">Download PDF</button>
+                    </div>
+                    <span class="text-6xl">🖍️</span>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-lg border-b-8 border-purple-400 blob-card group cursor-pointer hover:bg-purple-50 flex items-center justify-between" onclick="alert('Drawing tutorials coming soon!')">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-700 mb-2 group-hover:text-purple-600">Drawing Tutorials</h3>
+                        <p class="text-slate-500">How to draw simple animals.</p>
+                        <button class="mt-4 px-6 py-2 bg-purple-100 text-purple-600 rounded-full font-bold hover:bg-purple-200">Watch Videos</button>
+                    </div>
+                     <span class="text-6xl">🖌️</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t-4 border-slate-100 py-10 mt-10">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-slate-400 font-bold">Keep Smiling & Learning! 🌟</p>
+            <p class="text-xs text-slate-300 mt-2">&copy; 2025 Delhizones.com</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

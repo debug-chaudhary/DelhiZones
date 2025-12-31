@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn ABC - Kids Zone</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3e%3ctext y='28' font-size='28'%3e🅰️%3c/text%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comic': ['"Comic Neue"', 'cursive'],
+                        'sans': ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        'kid-blue': '#4facfe',
+                        'kid-pink': '#ff9a9e',
+                        'kid-yellow': '#f6d365',
+                        'kid-green': '#84fab0',
+                        'kid-purple': '#a18cd1',
+                        'kid-orange': '#ffc3a0',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Confetti JS for rewards -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body { font-family: 'Comic Neue', cursive; }
+        h1, h2, h3, h4, .letter-font { font-family: 'Fredoka', sans-serif; }
+        
+        .letter-card {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        .letter-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .letter-card:active {
+            transform: scale(0.95);
+        }
+        
+        .speaking {
+            border-color: #4facfe !important;
+            background-color: #f0f9ff !important;
+            transform: scale(1.1) !important;
+            z-index: 10;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        
+        /* Pulse for instructions */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 172, 254, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(79, 172, 254, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 172, 254, 0); }
+        }
+        .pulse-instruction { animation: pulse-ring 2s infinite; }
+    </style>
+</head>
+<body class="bg-blue-50 text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-blue shadow-sm rounded-b-3xl">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="/EDU/Kids/nursery-ukg/index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-blue transition-colors font-bold text-lg">
+                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
+                Back
+            </a>
+            
+            <span class="text-2xl font-black text-kid-blue tracking-wide">
+                Alphabet <span class="text-kid-pink">Adventure</span>
+            </span>
+
+            <button onclick="playAll()" class="hidden md:flex items-center gap-2 px-4 py-2 bg-kid-yellow text-slate-800 rounded-full font-bold hover:bg-yellow-400 transition-colors shadow-md">
+                <i data-lucide="play" class="w-5 h-5"></i> Auto Play
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pt-28 pb-10">
+        
+        <!-- Header Section -->
+        <div class="text-center mb-12 relative">
+            <div class="absolute top-0 left-10 text-6xl animate-float opacity-30 hidden md:block">🍎</div>
+            <div class="absolute top-0 right-10 text-6xl animate-float opacity-30 hidden md:block" style="animation-delay: 2s">🦓</div>
+
+            <h1 class="text-5xl md:text-6xl font-black text-slate-800 mb-4">
+                Let's Learn ABC!
+            </h1>
+            <p class="text-xl text-slate-500 font-bold">Tap on a card to hear the sound 🔊</p>
+        </div>
+
+        <!-- Alphabet Grid -->
+        <div id="alphabet-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+            <!-- Cards will be generated by JS -->
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="mt-16 flex justify-center gap-6">
+            <button onclick="playSong()" class="px-8 py-4 bg-kid-purple text-white rounded-full font-bold text-xl shadow-lg hover:bg-purple-500 transition-transform hover:-translate-y-1 flex items-center gap-3">
+                <span class="text-2xl">🎵</span> ABC Song
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-slate-400 font-bold">
+        <p>Keep practicing every day! 🌟</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const alphabetData = [
+            { letter: 'A', word: 'Apple', emoji: '🍎', color: 'bg-red-100', border: 'border-red-300', text: 'text-red-600' },
+            { letter: 'B', word: 'Ball', emoji: '⚽', color: 'bg-blue-100', border: 'border-blue-300', text: 'text-blue-600' },
+            { letter: 'C', word: 'Cat', emoji: '🐱', color: 'bg-yellow-100', border: 'border-yellow-300', text: 'text-yellow-600' },
+            { letter: 'D', word: 'Dog', emoji: '🐶', color: 'bg-orange-100', border: 'border-orange-300', text: 'text-orange-600' },
+            { letter: 'E', word: 'Elephant', emoji: '🐘', color: 'bg-gray-200', border: 'border-gray-400', text: 'text-gray-700' },
+            { letter: 'F', word: 'Fish', emoji: '🐟', color: 'bg-cyan-100', border: 'border-cyan-300', text: 'text-cyan-600' },
+            { letter: 'G', word: 'Grapes', emoji: '🍇', color: 'bg-purple-100', border: 'border-purple-300', text: 'text-purple-600' },
+            { letter: 'H', word: 'House', emoji: '🏠', color: 'bg-green-100', border: 'border-green-300', text: 'text-green-600' },
+            { letter: 'I', word: 'Ice Cream', emoji: '🍦', color: 'bg-pink-100', border: 'border-pink-300', text: 'text-pink-600' },
+            { letter: 'J', word: 'Juice', emoji: '🧃', color: 'bg-orange-100', border: 'border-orange-300', text: 'text-orange-600' },
+            { letter: 'K', word: 'Kite', emoji: '🪁', color: 'bg-blue-100', border: 'border-blue-300', text: 'text-blue-600' },
+            { letter: 'L', word: 'Lion', emoji: '🦁', color: 'bg-yellow-100', border: 'border-yellow-300', text: 'text-yellow-600' },
+            { letter: 'M', word: 'Monkey', emoji: '🐵', color: 'bg-amber-100', border: 'border-amber-300', text: 'text-amber-700' },
+            { letter: 'N', word: 'Nest', emoji: '🪺', color: 'bg-stone-100', border: 'border-stone-300', text: 'text-stone-600' },
+            { letter: 'O', word: 'Orange', emoji: '🍊', color: 'bg-orange-100', border: 'border-orange-300', text: 'text-orange-600' },
+            { letter: 'P', word: 'Parrot', emoji: '🦜', color: 'bg-green-100', border: 'border-green-300', text: 'text-green-600' },
+            { letter: 'Q', word: 'Queen', emoji: '👑', color: 'bg-purple-100', border: 'border-purple-300', text: 'text-purple-600' },
+            { letter: 'R', word: 'Rabbit', emoji: '🐇', color: 'bg-pink-100', border: 'border-pink-300', text: 'text-pink-600' },
+            { letter: 'S', word: 'Sun', emoji: '☀️', color: 'bg-yellow-100', border: 'border-yellow-300', text: 'text-yellow-600' },
+            { letter: 'T', word: 'Tiger', emoji: '🐯', color: 'bg-orange-100', border: 'border-orange-300', text: 'text-orange-600' },
+            { letter: 'U', word: 'Umbrella', emoji: '☂️', color: 'bg-blue-100', border: 'border-blue-300', text: 'text-blue-600' },
+            { letter: 'V', word: 'Van', emoji: '🚐', color: 'bg-gray-100', border: 'border-gray-300', text: 'text-gray-600' },
+            { letter: 'W', word: 'Watch', emoji: '⌚', color: 'bg-teal-100', border: 'border-teal-300', text: 'text-teal-600' },
+            { letter: 'X', word: 'Xylophone', emoji: '🎹', color: 'bg-indigo-100', border: 'border-indigo-300', text: 'text-indigo-600' },
+            { letter: 'Y', word: 'Yak', emoji: '🐂', color: 'bg-stone-200', border: 'border-stone-400', text: 'text-stone-700' },
+            { letter: 'Z', word: 'Zebra', emoji: '🦓', color: 'bg-gray-200', border: 'border-gray-400', text: 'text-gray-800' }
+        ];
+
+        const grid = document.getElementById('alphabet-grid');
+        let currentUtterance = null;
+
+        // Generate Cards
+        alphabetData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = `letter-card ${item.color} rounded-3xl p-4 border-b-8 ${item.border} flex flex-col items-center justify-center aspect-[3/4] relative overflow-hidden group`;
+            card.id = `letter-${item.letter}`;
+            card.onclick = () => speak(item);
+            
+            card.innerHTML = `
+                <div class="text-6xl md:text-7xl font-black ${item.text} letter-font mb-2 group-hover:scale-110 transition-transform">
+                    ${item.letter}<span class="text-4xl opacity-70">${item.letter.toLowerCase()}</span>
+                </div>
+                <div class="text-6xl md:text-7xl group-hover:animate-bounce transition-all cursor-pointer select-none">
+                    ${item.emoji}
+                </div>
+                <div class="mt-4 text-xl md:text-2xl font-bold ${item.text} opacity-0 group-hover:opacity-100 transition-opacity">
+                    ${item.word}
+                </div>
+                <div class="absolute top-2 right-2 opacity-50">
+                    <i data-lucide="volume-2" class="w-6 h-6 ${item.text}"></i>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+        
+        lucide.createIcons();
+
+        // Text to Speech Function
+        function speak(item) {
+            // Cancel previous speech
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+
+            // Visual feedback
+            const card = document.getElementById(`letter-${item.letter}`);
+            document.querySelectorAll('.letter-card').forEach(c => c.classList.remove('speaking'));
+            card.classList.add('speaking');
+            
+            // Construct text
+            const text = `${item.letter} for ${item.word}`;
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.9; // Slightly slower for kids
+            utterance.pitch = 1.1; // Slightly higher pitch to sound friendly
+            
+            // Try to find a good voice (optional)
+            const voices = speechSynthesis.getVoices();
+            const preferredVoice = voices.find(voice => voice.name.includes('Google US English') || voice.name.includes('Samantha'));
+            if (preferredVoice) utterance.voice = preferredVoice;
+
+            utterance.onend = () => {
+                card.classList.remove('speaking');
+                // Confetti for fun on every click might be too much, maybe random?
+                if(Math.random() > 0.7) triggerConfetti(card);
+            };
+
+            speechSynthesis.speak(utterance);
+        }
+
+        function triggerConfetti(element) {
+            const rect = element.getBoundingClientRect();
+            const x = (rect.left + rect.width / 2) / window.innerWidth;
+            const y = (rect.top + rect.height / 2) / window.innerHeight;
+            
+            confetti({
+                particleCount: 50,
+                spread: 60,
+                origin: { x: x, y: y },
+                colors: ['#ff9a9e', '#f6d365', '#4facfe', '#84fab0'],
+                disableForReducedMotion: true
+            });
+        }
+
+        // Auto Play function
+        async function playAll() {
+            for (const item of alphabetData) {
+                // Scroll into view
+                const card = document.getElementById(`letter-${item.letter}`);
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Speak
+                speak(item);
+                
+                // Wait for speech to finish roughly (2.5 seconds per letter)
+                await new Promise(r => setTimeout(r, 2500));
+            }
+        }
+
+        // Simple ABC Song (TTS)
+        function playSong() {
+            if (speechSynthesis.speaking) speechSynthesis.cancel();
+            const text = "A B C D E F G. H I J K L M N O P. Q R S. T U V. W X. Y and Z. Now I know my A B Cs, next time won't you sing with me.";
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.85;
+            utterance.pitch = 1.2;
+            speechSynthesis.speak(utterance);
+        }
+        
+        // Ensure voices are loaded
+        window.speechSynthesis.onvoiceschanged = () => {
+            // Voices loaded
+        };
+
+    </script>
+</body>
+</html>
