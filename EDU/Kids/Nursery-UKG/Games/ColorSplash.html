@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Splash - Paint & Learn | Kids Zone</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3e%3ctext y='28' font-size='28'%3e🎨%3c/text%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comic': ['"Comic Neue"', 'cursive'],
+                        'sans': ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        'kid-blue': '#4facfe',
+                        'kid-pink': '#ff9a9e',
+                        'kid-yellow': '#f6d365',
+                        'kid-green': '#84fab0',
+                        'kid-purple': '#a18cd1',
+                        'kid-orange': '#ffc3a0',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body { font-family: 'Comic Neue', cursive; }
+        h1, h2, h3, .game-font { font-family: 'Fredoka', sans-serif; }
+        
+        .color-btn {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        .color-btn:hover { transform: scale(1.1); }
+        .color-btn.active { 
+            transform: scale(1.2); 
+            border: 4px solid white; 
+            box-shadow: 0 0 0 4px rgba(0,0,0,0.1);
+        }
+
+        .coloring-page svg {
+            width: 100%;
+            height: 100%;
+            max-height: 500px;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        }
+
+        .coloring-page path, .coloring-page circle, .coloring-page rect {
+            cursor: pointer;
+            transition: fill 0.3s ease;
+        }
+        .coloring-page path:hover, .coloring-page circle:hover, .coloring-page rect:hover {
+            opacity: 0.8;
+        }
+
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+    </style>
+</head>
+<body class="bg-purple-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-purple shadow-sm rounded-b-3xl">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-purple transition-colors font-bold text-lg">
+                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
+                Exit
+            </a>
+            
+            <span class="text-2xl font-black text-kid-purple tracking-wide">
+                Color <span class="text-kid-pink">Splash</span> 🎨
+            </span>
+
+            <div class="flex gap-2">
+                <button onclick="resetImage()" class="p-2 bg-kid-yellow text-slate-800 rounded-full hover:bg-yellow-400 transition-colors shadow-sm" title="Clear All">
+                    <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Game Area -->
+    <main class="flex-grow flex flex-col items-center justify-center pt-24 pb-10 px-4">
+        
+        <div class="text-center mb-6">
+            <h1 class="text-4xl md:text-5xl font-black text-slate-800 mb-2">Pick & Paint!</h1>
+            <p class="text-lg text-slate-500 font-bold">Choose a color and tap the picture to paint it.</p>
+        </div>
+
+        <div class="flex flex-col-reverse lg:flex-row gap-8 items-start justify-center w-full max-w-6xl">
+            
+            <!-- Palette -->
+            <div class="w-full lg:w-auto bg-white p-4 rounded-3xl shadow-xl border-4 border-slate-100 flex flex-wrap lg:flex-col gap-3 justify-center">
+                <button class="color-btn w-12 h-12 rounded-full bg-red-500" onclick="selectColor('#ef4444', 'Red')" data-color="#ef4444"></button>
+                <button class="color-btn w-12 h-12 rounded-full bg-orange-500" onclick="selectColor('#f97316', 'Orange')" data-color="#f97316"></button>
+                <button class="color-btn w-12 h-12 rounded-full bg-yellow-400" onclick="selectColor('#facc15', 'Yellow')" data-color="#facc15"></button>
+                <button class="color-btn w-12 h-12 rounded-full bg-green-500" onclick="selectColor('#22c55e', 'Green')" data-color="#22c55e"></button>
+                <button class="color-btn w-12 h-12 rounded-full bg-teal-400" onclick="selectColor('#2dd4bf', 'Teal')" data-color="#2dd4bf"></button>
+                <button class="color-btn w-12 h-12 rounded-full bg-blue-500" onclick="selectColor('#3b82f6', 'Blue')" data-color="#3b82f6"></button>
+                <button class="color-btn w-12 h-12 rounded-full bg-purple-500 active" onclick="selectColor('#a855f7', 'Purple')" data-color="#a855f7"></button>
+                <button class="color-btn w-12 h-12 rounded-full bg-pink-500" onclick="selectColor('#ec4899', 'Pink')" data-color="#ec4899"></button>
+                <button class="color-btn w-12 h-12 rounded-full bg-amber-700" onclick="selectColor('#b45309', 'Brown')" data-color="#b45309"></button>
+                <button class="color-btn w-12 h-12 rounded-full bg-slate-900" onclick="selectColor('#0f172a', 'Black')" data-color="#0f172a"></button>
+                <button class="color-btn w-12 h-12 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center" onclick="selectColor('white', 'Eraser')" data-color="white" title="Eraser">
+                    <i data-lucide="eraser" class="w-6 h-6 text-slate-400"></i>
+                </button>
+            </div>
+
+            <!-- Drawing Area -->
+            <div class="flex-grow bg-white p-4 md:p-8 rounded-3xl shadow-2xl border-8 border-kid-purple w-full flex justify-center items-center relative min-h-[400px]">
+                
+                <!-- Image Switcher -->
+                <div class="absolute top-4 right-4 flex gap-2 z-10">
+                    <button onclick="switchImage('butterfly')" class="p-2 bg-pink-100 text-pink-500 rounded-xl font-bold hover:bg-pink-200">🦋</button>
+                    <button onclick="switchImage('rocket')" class="p-2 bg-blue-100 text-blue-500 rounded-xl font-bold hover:bg-blue-200">🚀</button>
+                    <button onclick="switchImage('house')" class="p-2 bg-green-100 text-green-500 rounded-xl font-bold hover:bg-green-200">🏠</button>
+                </div>
+
+                <div id="canvas-container" class="coloring-page w-full max-w-lg">
+                    <!-- SVG Injected Here -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        let currentColor = '#a855f7'; // Default Purple
+        let currentImage = 'butterfly';
+
+        // Simple SVGs for coloring
+        const images = {
+            butterfly: `
+                <svg viewBox="0 0 200 200">
+                    <!-- Wings -->
+                    <path d="M100 100 C 60 40 10 60 30 110 C 10 140 60 160 100 130 C 140 160 190 140 170 110 C 190 60 140 40 100 100 Z" fill="white" stroke="black" stroke-width="3" />
+                    <!-- Body -->
+                    <ellipse cx="100" cy="100" rx="10" ry="40" fill="white" stroke="black" stroke-width="3" />
+                    <!-- Head -->
+                    <circle cx="100" cy="55" r="12" fill="white" stroke="black" stroke-width="3" />
+                    <!-- Antennae -->
+                    <path d="M95 45 Q 80 20 70 30" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" />
+                    <path d="M105 45 Q 120 20 130 30" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" />
+                    <!-- Wing Spots -->
+                    <circle cx="60" cy="80" r="10" fill="white" stroke="black" stroke-width="2" />
+                    <circle cx="140" cy="80" r="10" fill="white" stroke="black" stroke-width="2" />
+                    <circle cx="50" cy="120" r="8" fill="white" stroke="black" stroke-width="2" />
+                    <circle cx="150" cy="120" r="8" fill="white" stroke="black" stroke-width="2" />
+                </svg>
+            `,
+            rocket: `
+                <svg viewBox="0 0 200 200">
+                    <!-- Fins -->
+                    <path d="M60 140 L40 180 L70 160 Z" fill="white" stroke="black" stroke-width="3"/>
+                    <path d="M140 140 L160 180 L130 160 Z" fill="white" stroke="black" stroke-width="3"/>
+                    <!-- Main Body -->
+                    <path d="M100 20 Q140 80 140 140 L60 140 Q60 80 100 20 Z" fill="white" stroke="black" stroke-width="3"/>
+                    <!-- Window -->
+                    <circle cx="100" cy="80" r="20" fill="white" stroke="black" stroke-width="3"/>
+                    <circle cx="100" cy="80" r="15" fill="white" stroke="black" stroke-width="2"/>
+                    <!-- Flame -->
+                    <path d="M80 160 Q100 200 120 160 L100 150 Z" fill="white" stroke="black" stroke-width="3"/>
+                </svg>
+            `,
+            house: `
+                <svg viewBox="0 0 200 200">
+                    <!-- Roof -->
+                    <path d="M20 80 L100 10 L180 80 Z" fill="white" stroke="black" stroke-width="3"/>
+                    <!-- Base -->
+                    <rect x="40" y="80" width="120" height="100" fill="white" stroke="black" stroke-width="3"/>
+                    <!-- Door -->
+                    <rect x="85" y="130" width="30" height="50" fill="white" stroke="black" stroke-width="3"/>
+                    <circle cx="108" cy="155" r="2" fill="black" />
+                    <!-- Window -->
+                    <rect x="55" y="100" width="20" height="20" fill="white" stroke="black" stroke-width="2"/>
+                    <rect x="125" y="100" width="20" height="20" fill="white" stroke="black" stroke-width="2"/>
+                    <!-- Chimney -->
+                    <rect x="130" y="30" width="20" height="30" fill="white" stroke="black" stroke-width="3"/>
+                </svg>
+            `
+        };
+
+        function loadGame() {
+            const container = document.getElementById('canvas-container');
+            container.innerHTML = images[currentImage];
+            
+            // Add click listeners to all fillable elements
+            const elements = container.querySelectorAll('path, circle, rect, ellipse');
+            elements.forEach(el => {
+                if (el.getAttribute('fill') !== 'none') { // Don't fill strokes/lines that are just lines
+                    el.addEventListener('click', (e) => {
+                        e.target.setAttribute('fill', currentColor);
+                        playPopSound();
+                    });
+                }
+            });
+        }
+
+        function switchImage(key) {
+            currentImage = key;
+            loadGame();
+            speak(`Let's paint a ${key}!`);
+        }
+
+        function selectColor(color, name) {
+            currentColor = color;
+            
+            // Visual Update
+            document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.querySelector(`button[data-color="${color}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            speak(name);
+        }
+
+        function resetImage() {
+            loadGame();
+            speak("Clean slate!");
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1.0;
+                utterance.pitch = 1.1;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function playPopSound() {
+            // Simple visual pop/confetti
+            confetti({
+                particleCount: 15,
+                spread: 30,
+                origin: { y: 0.6 },
+                colors: [currentColor],
+                disableForReducedMotion: true,
+                shapes: ['circle'],
+                startVelocity: 15
+            });
+        }
+
+        // Init
+        loadGame();
+        
+    </script>
+</body>
+</html>

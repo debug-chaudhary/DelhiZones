@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Hunt - Find the Words | Kids Zone</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3e%3ctext y='28' font-size='28'%3e🔎%3c/text%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comic': ['"Comic Neue"', 'cursive'],
+                        'sans': ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        'kid-blue': '#4facfe',
+                        'kid-pink': '#ff9a9e',
+                        'kid-yellow': '#f6d365',
+                        'kid-green': '#84fab0',
+                        'kid-purple': '#a18cd1',
+                        'kid-orange': '#ffc3a0',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body { font-family: 'Comic Neue', cursive; }
+        h1, h2, h3, .game-font { font-family: 'Fredoka', sans-serif; }
+        
+        .letter-cell {
+            transition: all 0.2s;
+            cursor: pointer;
+            aspect-ratio: 1/1;
+        }
+        .letter-cell:hover {
+            transform: scale(1.1);
+            background-color: #fefce8;
+        }
+        .letter-cell.selected {
+            background-color: #f6d365;
+            color: white;
+            border-color: #d97706;
+            transform: scale(1.05);
+        }
+        .letter-cell.found {
+            background-color: #84fab0;
+            color: white;
+            border-color: #10b981;
+            animation: pop 0.3s ease-out;
+        }
+
+        .word-item {
+            transition: all 0.3s;
+        }
+        .word-item.found {
+            text-decoration: line-through;
+            opacity: 0.5;
+            transform: scale(0.9);
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-yellow-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-yellow shadow-sm rounded-b-3xl">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-yellow transition-colors font-bold text-lg">
+                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
+                Exit
+            </a>
+            
+            <span class="text-2xl font-black text-kid-yellow tracking-wide">
+                Word <span class="text-slate-800">Hunt</span> 🔎
+            </span>
+
+            <button onclick="newGame()" class="p-2 bg-kid-blue text-white rounded-full hover:bg-blue-400 transition-colors shadow-sm" title="New Game">
+                <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Game Area -->
+    <main class="flex-grow flex flex-col items-center justify-center pt-24 pb-10 px-4">
+        
+        <div class="text-center mb-6">
+            <h1 class="text-4xl md:text-5xl font-black text-slate-800 mb-2">Find the Words!</h1>
+            <p class="text-lg text-slate-500 font-bold">Tap the first and last letter of the word.</p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8 items-start max-w-4xl w-full">
+            
+            <!-- Word List -->
+            <div class="w-full lg:w-1/3 bg-white p-6 rounded-3xl shadow-lg border-b-8 border-kid-orange">
+                <h3 class="text-2xl font-black text-kid-orange mb-4 flex items-center gap-2">
+                    <i data-lucide="list" class="w-6 h-6"></i> Words
+                </h3>
+                <div id="word-list" class="flex flex-wrap lg:flex-col gap-3">
+                    <!-- Words injected here -->
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div class="w-full lg:w-2/3 bg-white p-4 rounded-3xl shadow-xl border-8 border-kid-yellow">
+                <div id="grid-container" class="grid grid-cols-6 gap-2 select-none">
+                    <!-- Grid cells injected here -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Win Modal -->
+        <div id="win-modal" class="fixed inset-0 bg-black/60 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="bg-white rounded-3xl p-8 text-center max-w-sm w-full shadow-2xl border-4 border-kid-green transform scale-95 transition-transform duration-300">
+                <div class="text-6xl mb-4 animate-bounce">🌟</div>
+                <h2 class="text-3xl font-black text-kid-green mb-2">Amazing!</h2>
+                <p class="text-slate-600 font-bold text-lg mb-6">You found all the words!</p>
+                <button onclick="newGame()" class="w-full py-3 bg-kid-yellow text-slate-800 rounded-xl font-bold shadow-lg hover:bg-yellow-400 transition-transform hover:-translate-y-1">Play Again</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        const wordsPool = ['CAT', 'DOG', 'SUN', 'BAT', 'HAT', 'BOX', 'ANT', 'BUS', 'CAR', 'EGG', 'FOX', 'JAM', 'KEY', 'MAP', 'PEN', 'PIG', 'TOP', 'VAN'];
+        const gridSize = 6;
+        let grid = [];
+        let currentWords = [];
+        let selectedCells = [];
+        let foundWordsCount = 0;
+
+        function newGame() {
+            // Reset state
+            grid = Array(gridSize).fill().map(() => Array(gridSize).fill(''));
+            currentWords = [];
+            selectedCells = [];
+            foundWordsCount = 0;
+            document.getElementById('win-modal').classList.add('hidden');
+
+            // Pick 5 random words
+            const shuffled = [...wordsPool].sort(() => 0.5 - Math.random());
+            const wordsToPlace = shuffled.slice(0, 5);
+
+            // Place words
+            wordsToPlace.forEach(word => {
+                let placed = false;
+                while (!placed) {
+                    const direction = Math.random() > 0.5 ? 'H' : 'V'; // Horizontal or Vertical
+                    const row = Math.floor(Math.random() * gridSize);
+                    const col = Math.floor(Math.random() * gridSize);
+
+                    if (canPlaceWord(word, row, col, direction)) {
+                        placeWord(word, row, col, direction);
+                        currentWords.push({ word, found: false });
+                        placed = true;
+                    }
+                }
+            });
+
+            // Fill empty spaces
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            for (let r = 0; r < gridSize; r++) {
+                for (let c = 0; c < gridSize; c++) {
+                    if (grid[r][c] === '') {
+                        grid[r][c] = letters[Math.floor(Math.random() * letters.length)];
+                    }
+                }
+            }
+
+            renderBoard();
+            renderWordList();
+        }
+
+        function canPlaceWord(word, row, col, dir) {
+            if (dir === 'H') {
+                if (col + word.length > gridSize) return false;
+                for (let i = 0; i < word.length; i++) {
+                    if (grid[row][col + i] !== '' && grid[row][col + i] !== word[i]) return false;
+                }
+            } else {
+                if (row + word.length > gridSize) return false;
+                for (let i = 0; i < word.length; i++) {
+                    if (grid[row + i][col] !== '' && grid[row + i][col] !== word[i]) return false;
+                }
+            }
+            return true;
+        }
+
+        function placeWord(word, row, col, dir) {
+            for (let i = 0; i < word.length; i++) {
+                if (dir === 'H') grid[row][col + i] = word[i];
+                else grid[row + i][col] = word[i];
+            }
+        }
+
+        function renderBoard() {
+            const container = document.getElementById('grid-container');
+            container.innerHTML = '';
+            for (let r = 0; r < gridSize; r++) {
+                for (let c = 0; c < gridSize; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'letter-cell bg-white border-2 border-slate-100 rounded-lg flex items-center justify-center text-2xl font-bold text-slate-700 shadow-sm';
+                    cell.textContent = grid[r][c];
+                    cell.dataset.r = r;
+                    cell.dataset.c = c;
+                    cell.onclick = () => handleCellClick(r, c, cell);
+                    container.appendChild(cell);
+                }
+            }
+        }
+
+        function renderWordList() {
+            const list = document.getElementById('word-list');
+            list.innerHTML = '';
+            currentWords.forEach(obj => {
+                const item = document.createElement('div');
+                item.className = `word-item px-4 py-2 bg-yellow-100 rounded-xl font-bold text-slate-700 border border-yellow-200 text-center shadow-sm w-full lg:w-auto ${obj.found ? 'found bg-green-100 text-green-700 border-green-200' : ''}`;
+                item.textContent = obj.word;
+                item.id = `word-${obj.word}`;
+                list.appendChild(item);
+            });
+        }
+
+        function handleCellClick(r, c, cellElement) {
+            // Toggle selection
+            if (cellElement.classList.contains('found')) return;
+
+            // Simple logic: Select Start -> Select End
+            if (selectedCells.length === 0) {
+                // First selection
+                selectedCells.push({ r, c, el: cellElement });
+                cellElement.classList.add('selected');
+                speak(grid[r][c]); // Read letter
+            } else if (selectedCells.length === 1) {
+                // Second selection (End point)
+                const start = selectedCells[0];
+                
+                // If clicking same cell, deselect
+                if (start.r === r && start.c === c) {
+                    start.el.classList.remove('selected');
+                    selectedCells = [];
+                    return;
+                }
+
+                // Check valid line (Horizontal or Vertical)
+                if (start.r === r || start.c === c) {
+                    checkSelection(start, { r, c });
+                } else {
+                    // Invalid diagonal/random, reset first
+                    start.el.classList.remove('selected');
+                    selectedCells = [];
+                    // Start new selection here? Or just fail. Let's just fail feedback.
+                    // cellElement.classList.add('animate-shake'); 
+                }
+            }
+        }
+
+        function checkSelection(start, end) {
+            let word = "";
+            let cellsToHighlight = [];
+
+            // Horizontal
+            if (start.r === end.r) {
+                const minC = Math.min(start.c, end.c);
+                const maxC = Math.max(start.c, end.c);
+                for (let i = minC; i <= maxC; i++) {
+                    word += grid[start.r][i];
+                    const cell = document.querySelector(`.letter-cell[data-r="${start.r}"][data-c="${i}"]`);
+                    cellsToHighlight.push(cell);
+                }
+            } 
+            // Vertical
+            else {
+                const minR = Math.min(start.r, end.r);
+                const maxR = Math.max(start.r, end.r);
+                for (let i = minR; i <= maxR; i++) {
+                    word += grid[i][start.c];
+                    const cell = document.querySelector(`.letter-cell[data-r="${i}"][data-c="${start.c}"]`);
+                    cellsToHighlight.push(cell);
+                }
+            }
+
+            // Check if word exists (forward or backward)
+            const reversedWord = word.split('').reverse().join('');
+            const foundObj = currentWords.find(w => !w.found && (w.word === word || w.word === reversedWord));
+
+            if (foundObj) {
+                foundObj.found = true;
+                cellsToHighlight.forEach(el => {
+                    el.classList.remove('selected');
+                    el.classList.add('found');
+                });
+                
+                // Update list
+                const listItem = document.getElementById(`word-${foundObj.word}`);
+                listItem.classList.add('found', 'bg-green-100', 'text-green-700', 'border-green-200');
+                
+                speak(foundObj.word);
+                foundWordsCount++;
+
+                if (foundWordsCount === currentWords.length) {
+                    setTimeout(() => {
+                        document.getElementById('win-modal').classList.remove('hidden');
+                        triggerConfetti();
+                        speak("You found all the words! Amazing!");
+                    }, 500);
+                }
+            } else {
+                // Incorrect
+                speak("Try again");
+                selectedCells[0].el.classList.remove('selected');
+            }
+            selectedCells = [];
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1.1;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#f6d365', '#84fab0', '#4facfe'],
+            });
+        }
+
+        // Start
+        newGame();
+    </script>
+</body>
+</html>

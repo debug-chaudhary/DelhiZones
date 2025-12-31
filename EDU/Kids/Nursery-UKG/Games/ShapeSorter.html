@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Sorter - Match the Shapes | Kids Zone</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3e%3ctext y='28' font-size='28'%3e🔷%3c/text%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comic': ['"Comic Neue"', 'cursive'],
+                        'sans': ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        'kid-blue': '#4facfe',
+                        'kid-pink': '#ff9a9e',
+                        'kid-yellow': '#f6d365',
+                        'kid-green': '#84fab0',
+                        'kid-purple': '#a18cd1',
+                        'kid-orange': '#ffc3a0',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body { font-family: 'Comic Neue', cursive; }
+        h1, h2, h3, .game-font { font-family: 'Fredoka', sans-serif; }
+        
+        .shape-container {
+            touch-action: none; /* Prevent scrolling while dragging */
+        }
+
+        .draggable-shape {
+            cursor: grab;
+            transition: transform 0.1s;
+            z-index: 10;
+        }
+        .draggable-shape:active {
+            cursor: grabbing;
+            transform: scale(1.1);
+        }
+        .draggable-shape.placed {
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .drop-zone {
+            transition: all 0.3s;
+        }
+        .drop-zone.hovered {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.2));
+        }
+
+        .pop-animation {
+            animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-green-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-green shadow-sm rounded-b-3xl">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-green transition-colors font-bold text-lg">
+                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
+                Exit
+            </a>
+            
+            <span class="text-2xl font-black text-kid-green tracking-wide">
+                Shape <span class="text-slate-800">Sorter</span> 🔷
+            </span>
+
+            <button onclick="resetGame()" class="p-2 bg-kid-blue text-white rounded-full hover:bg-blue-400 transition-colors shadow-sm" title="Restart">
+                <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Game Area -->
+    <main class="flex-grow flex flex-col items-center justify-center pt-24 pb-10 px-4">
+        
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-black text-slate-800 mb-2">Match the Shapes!</h1>
+            <p class="text-lg text-slate-500 font-bold">Drag the colorful shapes to their outlines.</p>
+        </div>
+
+        <div class="w-full max-w-4xl bg-white rounded-3xl shadow-xl border-8 border-kid-green p-4 md:p-8 relative min-h-[500px] flex flex-col md:flex-row gap-8 items-center justify-between shape-container">
+            
+            <!-- Draggable Shapes Area (Source) -->
+            <div id="source-area" class="w-full md:w-1/3 flex flex-wrap md:flex-col justify-center items-center gap-6 p-4 bg-green-50 rounded-2xl border-2 border-dashed border-green-200 min-h-[150px]">
+                <!-- Shapes injected here -->
+            </div>
+
+            <!-- Arrow Indicator -->
+            <div class="hidden md:block text-kid-green animate-pulse">
+                <i data-lucide="arrow-right" class="w-12 h-12"></i>
+            </div>
+             <div class="md:hidden text-kid-green animate-pulse">
+                <i data-lucide="arrow-down" class="w-8 h-8"></i>
+            </div>
+
+            <!-- Drop Zones Area (Target) -->
+            <div id="target-area" class="w-full md:w-1/2 grid grid-cols-2 gap-6 p-4">
+                <!-- Drop zones injected here -->
+            </div>
+
+        </div>
+
+        <!-- Win Modal -->
+        <div id="win-modal" class="fixed inset-0 bg-black/60 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="bg-white rounded-3xl p-8 text-center max-w-sm w-full shadow-2xl border-4 border-kid-yellow transform scale-95 transition-transform duration-300">
+                <div class="text-6xl mb-4 animate-bounce">🌟</div>
+                <h2 class="text-3xl font-black text-kid-yellow mb-2">Superb!</h2>
+                <p class="text-slate-600 font-bold text-lg mb-6">You sorted all the shapes!</p>
+                <button onclick="resetGame()" class="w-full py-3 bg-kid-green text-white rounded-xl font-bold shadow-lg hover:bg-green-500 transition-transform hover:-translate-y-1">Play Again</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        const shapes = [
+            { id: 'circle', name: 'Circle', color: '#ff6b6b', svg: '<circle cx="50" cy="50" r="40" fill="currentColor"/>' },
+            { id: 'square', name: 'Square', color: '#4facfe', svg: '<rect x="15" y="15" width="70" height="70" rx="10" fill="currentColor"/>' },
+            { id: 'triangle', name: 'Triangle', color: '#f6d365', svg: '<path d="M50 15 L85 80 L15 80 Z" fill="currentColor" stroke-linejoin="round" stroke-width="8" stroke="currentColor"/>' },
+            { id: 'star', name: 'Star', color: '#a18cd1', svg: '<path d="M50 10 L61 35 L88 35 L66 50 L75 75 L50 60 L25 75 L34 50 L12 35 L39 35 Z" fill="currentColor" stroke-linejoin="round" stroke-width="4" stroke="currentColor"/>' }
+        ];
+
+        let placedCount = 0;
+        let draggedElement = null;
+        let originalPos = { x: 0, y: 0 };
+        let offset = { x: 0, y: 0 };
+
+        function initGame() {
+            const sourceArea = document.getElementById('source-area');
+            const targetArea = document.getElementById('target-area');
+            
+            sourceArea.innerHTML = '';
+            targetArea.innerHTML = '';
+            placedCount = 0;
+            document.getElementById('win-modal').classList.add('hidden');
+
+            // Shuffle shapes for variety
+            const shuffledShapes = [...shapes].sort(() => Math.random() - 0.5);
+
+            shuffledShapes.forEach(shape => {
+                // Create Draggable Shape
+                const dragItem = document.createElement('div');
+                dragItem.className = 'draggable-shape w-24 h-24 relative';
+                dragItem.id = `drag-${shape.id}`;
+                dragItem.innerHTML = `<svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md" style="color: ${shape.color};">${shape.svg}</svg>`;
+                
+                // Add Touch/Mouse Listeners
+                addDragListeners(dragItem);
+                
+                sourceArea.appendChild(dragItem);
+
+                // Create Drop Zone
+                const dropZone = document.createElement('div');
+                dropZone.className = 'drop-zone w-32 h-32 border-4 border-dashed border-slate-300 rounded-2xl flex items-center justify-center bg-slate-50 relative';
+                dropZone.dataset.shape = shape.id;
+                
+                // Silhouette
+                dropZone.innerHTML = `
+                    <div class="opacity-20 text-slate-400 w-20 h-20 pointer-events-none">
+                        <svg viewBox="0 0 100 100" class="w-full h-full" style="color: #94a3b8;">${shape.svg}</svg>
+                    </div>
+                `;
+                
+                targetArea.appendChild(dropZone);
+            });
+        }
+
+        function addDragListeners(el) {
+            el.addEventListener('mousedown', startDrag);
+            el.addEventListener('touchstart', startDrag, { passive: false });
+        }
+
+        function startDrag(e) {
+            e.preventDefault();
+            draggedElement = e.target.closest('.draggable-shape');
+            if (!draggedElement || draggedElement.classList.contains('placed')) return;
+
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            
+            const rect = draggedElement.getBoundingClientRect();
+            
+            // Calculate offset from top-left of element
+            offset.x = clientX - rect.left;
+            offset.y = clientY - rect.top;
+            
+            // Save original position to revert if needed (relative to viewport for simplicity in this logic, but better to reset style)
+            originalPos = { 
+                parent: draggedElement.parentElement,
+                nextSibling: draggedElement.nextElementSibling 
+            };
+
+            // Move to body to allow free dragging across containers without z-index/overflow issues
+            draggedElement.style.position = 'fixed';
+            draggedElement.style.width = rect.width + 'px';
+            draggedElement.style.height = rect.height + 'px';
+            draggedElement.style.left = rect.left + 'px';
+            draggedElement.style.top = rect.top + 'px';
+            draggedElement.style.zIndex = 1000;
+            document.body.appendChild(draggedElement);
+
+            document.addEventListener('mousemove', moveDrag);
+            document.addEventListener('touchmove', moveDrag, { passive: false });
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchend', endDrag);
+        }
+
+        function moveDrag(e) {
+            if (!draggedElement) return;
+            e.preventDefault();
+
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            draggedElement.style.left = (clientX - offset.x) + 'px';
+            draggedElement.style.top = (clientY - offset.y) + 'px';
+            
+            // Highlight drop zones
+            checkHover(clientX, clientY);
+        }
+
+        function checkHover(x, y) {
+            document.querySelectorAll('.drop-zone').forEach(zone => zone.classList.remove('hovered'));
+            
+            // Hide dragged element momentarily to find element underneath
+            draggedElement.style.visibility = 'hidden';
+            let elemBelow = document.elementFromPoint(x, y);
+            draggedElement.style.visibility = 'visible';
+
+            let dropZone = elemBelow ? elemBelow.closest('.drop-zone') : null;
+            if (dropZone && !dropZone.hasChildNodes('.draggable-shape')) { // Simplified check
+                dropZone.classList.add('hovered');
+            }
+        }
+
+        function endDrag(e) {
+            if (!draggedElement) return;
+
+            document.removeEventListener('mousemove', moveDrag);
+            document.removeEventListener('touchmove', moveDrag);
+            document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchend', endDrag);
+
+            // Determine drop target
+            const rect = draggedElement.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            draggedElement.style.visibility = 'hidden';
+            let elemBelow = document.elementFromPoint(centerX, centerY);
+            draggedElement.style.visibility = 'visible';
+
+            let dropZone = elemBelow ? elemBelow.closest('.drop-zone') : null;
+            let shapeId = draggedElement.id.replace('drag-', '');
+
+            // Check if dropped on correct zone
+            if (dropZone && dropZone.dataset.shape === shapeId && dropZone.children.length <= 1) { // 1 child is the silhouette SVG
+                successDrop(dropZone);
+            } else {
+                revertDrag();
+            }
+            
+            document.querySelectorAll('.drop-zone').forEach(zone => zone.classList.remove('hovered'));
+            draggedElement = null;
+        }
+
+        function successDrop(dropZone) {
+            // Reset styles for static placement
+            draggedElement.style.position = 'static'; // Changed to static/relative flow inside dropzone
+            draggedElement.style.left = 'auto';
+            draggedElement.style.top = 'auto';
+            draggedElement.style.zIndex = 'auto';
+            draggedElement.style.width = '100%'; 
+            draggedElement.style.height = '100%';
+            
+            // Remove silhouette (optional, or just overlay)
+            dropZone.innerHTML = ''; 
+            dropZone.appendChild(draggedElement);
+            dropZone.classList.add('bg-green-100', 'border-green-300');
+            
+            draggedElement.classList.add('placed', 'pop-animation');
+            
+            speak(shapeIdToName(draggedElement.id.replace('drag-', '')));
+            
+            placedCount++;
+            if (placedCount === shapes.length) {
+                setTimeout(() => {
+                    document.getElementById('win-modal').classList.remove('hidden');
+                    triggerConfetti();
+                    speak("Yay! You did it!");
+                }, 500);
+            }
+        }
+
+        function revertDrag() {
+            // Animate back? For now, just snap back to source list
+            draggedElement.style.position = 'static';
+            draggedElement.style.left = 'auto';
+            draggedElement.style.top = 'auto';
+            draggedElement.style.width = '6rem'; // w-24
+            draggedElement.style.height = '6rem'; // h-24
+            draggedElement.style.zIndex = 'auto';
+
+            // Insert back to original position
+            if (originalPos.nextSibling) {
+                originalPos.parent.insertBefore(draggedElement, originalPos.nextSibling);
+            } else {
+                originalPos.parent.appendChild(draggedElement);
+            }
+            
+            speak("Try again");
+        }
+        
+        function shapeIdToName(id) {
+            return id.charAt(0).toUpperCase() + id.slice(1);
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1.1;
+                utterance.pitch = 1.2;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#43e97b', '#38f9d7', '#f6d365'],
+            });
+        }
+
+        function resetGame() {
+            initGame();
+        }
+
+        // Initialize
+        initGame();
+
+    </script>
+</body>
+</html>

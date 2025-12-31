@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Sounds - Listen & Guess | Kids Zone</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3e%3ctext y='28' font-size='28'%3e🦁%3c/text%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comic': ['"Comic Neue"', 'cursive'],
+                        'sans': ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        'kid-blue': '#4facfe',
+                        'kid-pink': '#ff9a9e',
+                        'kid-yellow': '#f6d365',
+                        'kid-green': '#84fab0',
+                        'kid-purple': '#a18cd1',
+                        'kid-orange': '#ffc3a0',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body { font-family: 'Comic Neue', cursive; }
+        h1, h2, h3, .game-font { font-family: 'Fredoka', sans-serif; }
+        
+        .animal-card {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        .animal-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+        }
+        .animal-card:active {
+            transform: scale(0.95);
+        }
+
+        .correct {
+            background-color: #d1fae5 !important;
+            border-color: #10b981 !important;
+            transform: scale(1.1) !important;
+        }
+
+        .wrong {
+            background-color: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+
+        .sound-wave {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 40px;
+        }
+        .bar {
+            width: 6px;
+            background: #ff9a9e;
+            border-radius: 4px;
+            animation: wave 1s ease-in-out infinite;
+        }
+        .bar:nth-child(2) { animation-delay: 0.1s; height: 60%; }
+        .bar:nth-child(3) { animation-delay: 0.2s; height: 80%; }
+        .bar:nth-child(4) { animation-delay: 0.3s; height: 50%; }
+        .bar:nth-child(5) { animation-delay: 0.4s; height: 90%; }
+        
+        @keyframes wave {
+            0%, 100% { height: 20%; }
+            50% { height: 100%; }
+        }
+    </style>
+</head>
+<body class="bg-orange-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-orange shadow-sm rounded-b-3xl">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-orange transition-colors font-bold text-lg">
+                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
+                Exit
+            </a>
+            
+            <span class="text-2xl font-black text-kid-orange tracking-wide">
+                Animal <span class="text-kid-yellow">Sounds</span> 🦁
+            </span>
+
+            <div class="bg-orange-100 px-4 py-1 rounded-full text-orange-600 font-bold hidden sm:block">
+                Score: <span id="score">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Game Area -->
+    <main class="flex-grow flex flex-col items-center justify-center pt-24 pb-10 px-4">
+        
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-black text-slate-800 mb-2">Guess the Animal!</h1>
+            <p class="text-lg text-slate-500 font-bold">Listen to the sound and tap the correct picture.</p>
+        </div>
+
+        <div class="w-full max-w-4xl bg-white rounded-3xl shadow-xl border-8 border-kid-orange p-6 md:p-10 relative text-center">
+            
+            <!-- Sound Button -->
+            <button id="play-sound-btn" onclick="playCurrentSound()" class="w-24 h-24 bg-kid-yellow rounded-full shadow-lg hover:bg-yellow-400 transition-transform hover:scale-105 active:scale-95 flex items-center justify-center mx-auto mb-10 border-4 border-yellow-200 relative group">
+                <i data-lucide="volume-2" class="w-10 h-10 text-white group-hover:hidden"></i>
+                <i data-lucide="play" class="w-10 h-10 text-white hidden group-hover:block ml-1"></i>
+                <span class="absolute -bottom-8 text-sm font-bold text-slate-400 w-32">Tap to Listen</span>
+            </button>
+
+            <!-- Visualizer (Hidden by default) -->
+            <div id="visualizer" class="hidden sound-wave mb-10 h-12">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+
+            <!-- Animal Options -->
+            <div id="options-grid" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Injected by JS -->
+            </div>
+
+            <!-- Feedback Message -->
+            <div id="feedback" class="mt-8 text-2xl font-black h-8 transition-opacity duration-300 opacity-0">
+                Correct! 🎉
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-slate-400 font-bold">
+        <p>Roar! Meow! Woof! 🐾</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Using simulated sounds (TTS descriptions) for simplicity without external audio files
+        // In a real app, replace 'text' with 'audioFile: "path/to/sound.mp3"'
+        const animals = [
+            { name: 'Lion', emoji: '🦁', sound: 'Roaaaaar!', color: 'bg-yellow-50', border: 'border-yellow-200' },
+            { name: 'Cat', emoji: '🐱', sound: 'Meow Meow', color: 'bg-orange-50', border: 'border-orange-200' },
+            { name: 'Dog', emoji: '🐶', sound: 'Woof Woof', color: 'bg-stone-50', border: 'border-stone-200' },
+            { name: 'Cow', emoji: '🐮', sound: 'Mooooooo', color: 'bg-green-50', border: 'border-green-200' },
+            { name: 'Duck', emoji: '🦆', sound: 'Quack Quack', color: 'bg-blue-50', border: 'border-blue-200' },
+            { name: 'Pig', emoji: '🐷', sound: 'Oink Oink', color: 'bg-pink-50', border: 'border-pink-200' },
+            { name: 'Bee', emoji: '🐝', sound: 'Bzzzzzzzz', color: 'bg-amber-50', border: 'border-amber-200' },
+            { name: 'Owl', emoji: '🦉', sound: 'Hoot Hoot', color: 'bg-slate-50', border: 'border-slate-200' }
+        ];
+
+        let currentRound = [];
+        let targetAnimal = null;
+        let score = 0;
+        let canGuess = false;
+
+        function startNewRound() {
+            // Pick 4 random animals
+            const shuffled = [...animals].sort(() => 0.5 - Math.random());
+            currentRound = shuffled.slice(0, 4);
+            
+            // Pick one as target
+            targetAnimal = currentRound[Math.floor(Math.random() * currentRound.length)];
+            
+            // Render Options
+            const grid = document.getElementById('options-grid');
+            grid.innerHTML = '';
+            
+            currentRound.forEach(animal => {
+                const card = document.createElement('div');
+                card.className = `animal-card ${animal.color} border-b-8 ${animal.border} rounded-3xl p-6 flex flex-col items-center justify-center aspect-square select-none`;
+                card.onclick = () => checkAnswer(animal, card);
+                
+                card.innerHTML = `
+                    <div class="text-6xl mb-2">${animal.emoji}</div>
+                    <div class="text-lg font-bold text-slate-600">${animal.name}</div>
+                `;
+                grid.appendChild(card);
+            });
+
+            document.getElementById('feedback').style.opacity = '0';
+            canGuess = true;
+            
+            // Auto play sound after a delay
+            setTimeout(playCurrentSound, 500);
+        }
+
+        function playCurrentSound() {
+            const btn = document.getElementById('play-sound-btn');
+            const visualizer = document.getElementById('visualizer');
+            
+            // Visual cues
+            btn.classList.add('scale-95');
+            setTimeout(() => btn.classList.remove('scale-95'), 200);
+            
+            visualizer.classList.remove('hidden');
+
+            // Simulate sound using TTS
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                // We play the sound text (e.g., "Roar") but try to make it sound distinctive
+                // Ideally this would be an HTML5 Audio() play()
+                const utterance = new SpeechSynthesisUtterance(targetAnimal.sound);
+                utterance.rate = 0.8;
+                utterance.pitch = Math.random() * 0.5 + 0.8; // Randomize pitch slightly
+                
+                utterance.onend = () => {
+                    visualizer.classList.add('hidden');
+                };
+                
+                speechSynthesis.speak(utterance);
+            } else {
+                 visualizer.classList.add('hidden');
+            }
+        }
+
+        function checkAnswer(selectedAnimal, cardElement) {
+            if (!canGuess) return;
+
+            if (selectedAnimal.name === targetAnimal.name) {
+                // Correct
+                canGuess = false;
+                cardElement.classList.add('correct');
+                score += 10;
+                document.getElementById('score').innerText = score;
+                
+                showFeedback("Correct! 🎉", "text-green-500");
+                triggerConfetti();
+                
+                // Speak name
+                speak(targetAnimal.name);
+
+                setTimeout(startNewRound, 2000);
+            } else {
+                // Wrong
+                cardElement.classList.add('wrong');
+                showFeedback("Try Again! ❌", "text-red-500");
+                speak("Oops");
+                setTimeout(() => cardElement.classList.remove('wrong'), 500);
+            }
+        }
+
+        function showFeedback(text, colorClass) {
+            const el = document.getElementById('feedback');
+            el.innerText = text;
+            el.className = `mt-8 text-2xl font-black h-8 transition-opacity duration-300 opacity-100 ${colorClass}`;
+        }
+
+        function speak(text) {
+             if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                window.speechSynthesis.speak(utterance);
+             }
+        }
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ffc3a0', '#f6d365', '#4facfe'],
+            });
+        }
+
+        // Init
+        startNewRound();
+
+    </script>
+</body>
+</html>

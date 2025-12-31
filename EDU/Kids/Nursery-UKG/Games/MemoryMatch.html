@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Match - Brain Game | Kids Zone</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3e%3ctext y='28' font-size='28'%3e🧠%3c/text%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comic': ['"Comic Neue"', 'cursive'],
+                        'sans': ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        'kid-blue': '#4facfe',
+                        'kid-pink': '#ff9a9e',
+                        'kid-yellow': '#f6d365',
+                        'kid-green': '#84fab0',
+                        'kid-purple': '#a18cd1',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body { font-family: 'Comic Neue', cursive; }
+        h1, h2, h3, .game-font { font-family: 'Fredoka', sans-serif; }
+        
+        .game-grid {
+            perspective: 1000px;
+        }
+
+        .memory-card {
+            width: 100%;
+            aspect-ratio: 3/4;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            cursor: pointer;
+        }
+
+        .memory-card:active {
+            transform: scale(0.97);
+            transition: transform 0.1s;
+        }
+
+        .memory-card.flip {
+            transform: rotateY(180deg);
+        }
+
+        .front-face, .back-face {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            position: absolute;
+            border-radius: 1rem;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 4px solid white;
+        }
+
+        .front-face {
+            transform: rotateY(180deg);
+            background-color: white;
+            font-size: 3.5rem;
+        }
+
+        .back-face {
+            background-color: #4facfe;
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.2) 10px,
+                rgba(255, 255, 255, 0.2) 20px
+            );
+            color: white;
+        }
+        
+        .matched .front-face {
+            background-color: #d1fae5; /* Light green */
+            border-color: #84fab0;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .pop-anim { animation: pop 0.3s ease-out; }
+
+    </style>
+</head>
+<body class="bg-blue-50 text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-blue shadow-sm rounded-b-3xl">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-blue transition-colors font-bold text-lg">
+                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
+                Exit Game
+            </a>
+            
+            <span class="text-2xl font-black text-kid-blue tracking-wide">
+                Memory <span class="text-kid-purple">Match</span>
+            </span>
+
+            <div class="flex items-center gap-4">
+                <div class="hidden md:block bg-blue-100 px-4 py-1 rounded-full text-blue-600 font-bold">
+                    Moves: <span id="moves">0</span>
+                </div>
+                <button onclick="resetGame()" class="p-2 bg-kid-yellow text-slate-800 rounded-full hover:bg-yellow-400 transition-colors shadow-sm" title="Restart">
+                    <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pt-28 pb-10 flex flex-col items-center justify-center min-h-screen">
+        
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-black text-slate-800 mb-2">Find the Pairs!</h1>
+            <p class="text-xl text-slate-500 font-bold">Flip cards to find matching pictures</p>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-grid grid grid-cols-4 gap-3 md:gap-4 max-w-lg w-full mx-auto" id="memory-board">
+            <!-- Cards injected by JS -->
+        </div>
+
+        <!-- Win Message Modal (Hidden by default) -->
+        <div id="win-modal" class="fixed inset-0 bg-black/50 z-[60] hidden flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl p-8 text-center max-w-sm w-full shadow-2xl border-4 border-kid-green transform scale-95 transition-transform duration-300" id="win-card">
+                <div class="text-6xl mb-4 animate-bounce">🏆</div>
+                <h2 class="text-3xl font-black text-kid-green mb-2">You Won!</h2>
+                <p class="text-slate-600 font-bold text-lg mb-6">Great job finding all pairs!</p>
+                <div class="text-slate-500 mb-8">Total Moves: <span id="final-moves" class="font-bold text-slate-800">0</span></div>
+                <button onclick="resetGame()" class="w-full py-3 bg-kid-blue text-white rounded-xl font-bold shadow-lg hover:bg-blue-500 transition-transform hover:-translate-y-1">Play Again</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        const cardsArray = [
+            { name: 'lion', icon: '🦁' },
+            { name: 'monkey', icon: '🐵' },
+            { name: 'dog', icon: '🐶' },
+            { name: 'cat', icon: '🐱' },
+            { name: 'panda', icon: '🐼' },
+            { name: 'frog', icon: '🐸' },
+            { name: 'lion', icon: '🦁' },
+            { name: 'monkey', icon: '🐵' },
+            { name: 'dog', icon: '🐶' },
+            { name: 'cat', icon: '🐱' },
+            { name: 'panda', icon: '🐼' },
+            { name: 'frog', icon: '🐸' }
+        ];
+
+        const board = document.getElementById('memory-board');
+        const movesDisplay = document.getElementById('moves');
+        const winModal = document.getElementById('win-modal');
+        const finalMovesDisplay = document.getElementById('final-moves');
+
+        let moves = 0;
+        let hasFlippedCard = false;
+        let lockBoard = false;
+        let firstCard, secondCard;
+        let matchCount = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createBoard() {
+            board.innerHTML = '';
+            const shuffledCards = shuffle([...cardsArray]); // Create a copy and shuffle
+            
+            shuffledCards.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('memory-card');
+                card.dataset.name = item.name;
+
+                card.innerHTML = `
+                    <div class="front-face">${item.icon}</div>
+                    <div class="back-face flex items-center justify-center">
+                        <i data-lucide="star" class="w-8 h-8 text-white/50"></i>
+                    </div>
+                `;
+
+                card.addEventListener('click', flipCard);
+                board.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function flipCard() {
+            if (lockBoard) return;
+            if (this === firstCard) return;
+
+            this.classList.add('flip');
+
+            if (!hasFlippedCard) {
+                // First click
+                hasFlippedCard = true;
+                firstCard = this;
+                return;
+            }
+
+            // Second click
+            secondCard = this;
+            incrementMoves();
+            checkForMatch();
+        }
+
+        function checkForMatch() {
+            let isMatch = firstCard.dataset.name === secondCard.dataset.name;
+
+            isMatch ? disableCards() : unflipCards();
+        }
+
+        function disableCards() {
+            firstCard.classList.add('matched');
+            secondCard.classList.add('matched');
+            
+            // Add pop animation
+            firstCard.classList.add('pop-anim');
+            secondCard.classList.add('pop-anim');
+
+            // Play sound effect (TTS)
+            speak("Match!");
+
+            matchCount++;
+            if (matchCount === cardsArray.length / 2) {
+                setTimeout(gameWon, 500);
+            }
+
+            resetBoard();
+        }
+
+        function unflipCards() {
+            lockBoard = true;
+
+            setTimeout(() => {
+                firstCard.classList.remove('flip');
+                secondCard.classList.remove('flip');
+                resetBoard();
+            }, 1000);
+        }
+
+        function resetBoard() {
+            [hasFlippedCard, lockBoard] = [false, false];
+            [firstCard, secondCard] = [null, null];
+        }
+
+        function incrementMoves() {
+            moves++;
+            movesDisplay.innerText = moves;
+        }
+
+        function gameWon() {
+            finalMovesDisplay.innerText = moves;
+            winModal.classList.remove('hidden');
+            triggerConfetti();
+            speak("You Won! Great Job!");
+        }
+
+        function resetGame() {
+            winModal.classList.add('hidden');
+            moves = 0;
+            matchCount = 0;
+            movesDisplay.innerText = moves;
+            createBoard();
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1.2;
+                utterance.pitch = 1.5;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function triggerConfetti() {
+            const duration = 3000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 100 };
+
+            const random = (min, max) => Math.random() * (max - min) + min;
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+
+        // Initialize Game
+        createBoard();
+
+    </script>
+</body>
+</html>

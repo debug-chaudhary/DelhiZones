@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Tutorials - Learn to Draw | Kids Zone</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3e%3ctext y='28' font-size='28'%3e🎨%3c/text%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comic': ['"Comic Neue"', 'cursive'],
+                        'sans': ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        'kid-blue': '#4facfe',
+                        'kid-pink': '#ff9a9e',
+                        'kid-yellow': '#f6d365',
+                        'kid-green': '#84fab0',
+                        'kid-purple': '#a18cd1',
+                        'kid-orange': '#ffc3a0',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Comic Neue', cursive; }
+        h1, h2, h3, h4, .art-font { font-family: 'Fredoka', sans-serif; }
+        
+        .tutorial-card {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        .tutorial-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+            background-color: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+    </style>
+</head>
+<body class="bg-pink-50 text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-pink shadow-sm rounded-b-3xl">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="/EDU/Kids/nursery-ukg/index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-pink transition-colors font-bold text-lg">
+                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
+                Back
+            </a>
+            
+            <span class="text-2xl font-black text-kid-pink tracking-wide">
+                Art <span class="text-kid-purple">Class</span>
+            </span>
+
+            <div class="w-8"></div> <!-- Spacer -->
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pt-28 pb-10">
+        
+        <!-- Header -->
+        <div class="text-center mb-12 relative">
+            <div class="absolute top-0 left-10 text-6xl animate-float opacity-30 hidden md:block">✏️</div>
+            <div class="absolute top-0 right-10 text-6xl animate-float opacity-30 hidden md:block" style="animation-delay: 1.5s">🖍️</div>
+
+            <h1 class="text-4xl md:text-6xl font-black text-slate-800 mb-4">
+                Let's Draw!
+            </h1>
+            <p class="text-xl text-slate-500 font-bold">Simple steps to draw cute things 🎨</p>
+        </div>
+
+        <!-- Tutorials Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            
+            <!-- Tutorial 1: Butterfly -->
+            <div class="tutorial-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-purple-300 group">
+                <div class="video-container mb-4 shadow-inner">
+                    <iframe src="https://www.youtube.com/embed/S2hX3E7j_2s?rel=0" title="How to Draw a Butterfly" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-purple-600">Draw a Butterfly</h3>
+                        <p class="text-slate-500 text-sm">Easy Step-by-Step</p>
+                    </div>
+                    <span class="text-4xl">🦋</span>
+                </div>
+            </div>
+
+            <!-- Tutorial 2: Car -->
+            <div class="tutorial-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-300 group">
+                <div class="video-container mb-4 shadow-inner">
+                     <iframe src="https://www.youtube.com/embed/n3o_n4_u4uI?rel=0" title="How to Draw a Car" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-red-500">Draw a Car</h3>
+                        <p class="text-slate-500 text-sm">Simple lines & shapes</p>
+                    </div>
+                    <span class="text-4xl">🚗</span>
+                </div>
+            </div>
+
+            <!-- Tutorial 3: House -->
+            <div class="tutorial-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-green-300 group">
+                <div class="video-container mb-4 shadow-inner">
+                    <iframe src="https://www.youtube.com/embed/M0_s_k7_k_k?rel=0" title="How to Draw a House" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-green-500">Draw a House</h3>
+                        <p class="text-slate-500 text-sm">Using squares & triangles</p>
+                    </div>
+                    <span class="text-4xl">🏠</span>
+                </div>
+            </div>
+
+             <!-- Tutorial 4: Flower -->
+            <div class="tutorial-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-pink-300 group">
+                <div class="video-container mb-4 shadow-inner">
+                    <iframe src="https://www.youtube.com/embed/1rGf_g_g_g?rel=0" title="How to Draw a Flower" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-pink-500">Draw a Flower</h3>
+                        <p class="text-slate-500 text-sm">Beautiful & easy</p>
+                    </div>
+                    <span class="text-4xl">🌻</span>
+                </div>
+            </div>
+
+             <!-- Tutorial 5: Ice Cream -->
+            <div class="tutorial-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-300 group">
+                <div class="video-container mb-4 shadow-inner">
+                    <iframe src="https://www.youtube.com/embed/5_5_5_5_5?rel=0" title="How to Draw Ice Cream" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-500">Draw Ice Cream</h3>
+                        <p class="text-slate-500 text-sm">Yummy coloring fun</p>
+                    </div>
+                    <span class="text-4xl">🍦</span>
+                </div>
+            </div>
+
+             <!-- Tutorial 6: Fish -->
+            <div class="tutorial-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-orange-300 group">
+                <div class="video-container mb-4 shadow-inner">
+                    <iframe src="https://www.youtube.com/embed/6_6_6_6_6?rel=0" title="How to Draw a Fish" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-orange-500">Draw a Fish</h3>
+                        <p class="text-slate-500 text-sm">Underwater art</p>
+                    </div>
+                    <span class="text-4xl">🐠</span>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-slate-400 font-bold">
+        <p>Keep practicing your art! 🖌️</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

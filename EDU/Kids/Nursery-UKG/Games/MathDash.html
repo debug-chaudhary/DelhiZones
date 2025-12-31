@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Dash - Speed Math | Kids Zone</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3e%3ctext y='28' font-size='28'%3e🏎️%3c/text%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comic': ['"Comic Neue"', 'cursive'],
+                        'sans': ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        'kid-blue': '#4facfe',
+                        'kid-pink': '#ff9a9e',
+                        'kid-yellow': '#f6d365',
+                        'kid-green': '#84fab0',
+                        'kid-purple': '#a18cd1',
+                        'kid-red': '#ff6b6b',
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 0.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body { font-family: 'Comic Neue', cursive; }
+        h1, h2, h3, .game-font { font-family: 'Fredoka', sans-serif; }
+        
+        .option-btn {
+            transition: all 0.2s;
+        }
+        .option-btn:hover {
+            transform: scale(1.05);
+        }
+        .option-btn:active {
+            transform: scale(0.95);
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="bg-red-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-red shadow-sm rounded-b-3xl">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-red transition-colors font-bold text-lg">
+                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
+                Exit
+            </a>
+            
+            <span class="text-2xl font-black text-kid-red tracking-wide">
+                Math <span class="text-slate-800">Dash</span> 🏎️
+            </span>
+
+            <div class="flex items-center gap-4">
+                <div class="bg-red-100 px-4 py-1 rounded-full text-red-600 font-bold hidden sm:block">
+                    Score: <span id="score-display">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Game Area -->
+    <main class="flex-grow flex items-center justify-center pt-20 pb-10 px-4">
+        
+        <!-- Start Screen -->
+        <div id="start-screen" class="bg-white p-8 rounded-3xl shadow-xl border-4 border-kid-red text-center max-w-md w-full">
+            <div class="text-7xl mb-4 animate-bounce">🏁</div>
+            <h1 class="text-4xl font-black text-slate-800 mb-4">Ready to Race?</h1>
+            <p class="text-xl text-slate-500 mb-8 font-bold">Solve as many sums as you can in 60 seconds!</p>
+            <button onclick="startGame()" class="w-full py-4 bg-kid-green text-white rounded-2xl font-black text-2xl shadow-lg hover:bg-green-400 transition-transform hover:-translate-y-1">
+                START GAME
+            </button>
+        </div>
+
+        <!-- Game Screen (Hidden initially) -->
+        <div id="game-screen" class="hidden w-full max-w-lg">
+            <!-- Timer & Score Bar -->
+            <div class="flex justify-between items-center mb-8">
+                <div class="bg-white px-6 py-3 rounded-2xl shadow-md border-2 border-slate-100 flex items-center gap-2">
+                    <i data-lucide="timer" class="w-6 h-6 text-kid-blue"></i>
+                    <span id="timer" class="text-2xl font-black text-kid-blue">60s</span>
+                </div>
+                <div class="bg-white px-6 py-3 rounded-2xl shadow-md border-2 border-slate-100 flex items-center gap-2 sm:hidden">
+                    <i data-lucide="star" class="w-6 h-6 text-kid-yellow"></i>
+                    <span id="mobile-score" class="text-2xl font-black text-kid-yellow">0</span>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="bg-white rounded-3xl shadow-2xl p-8 mb-8 text-center border-b-8 border-kid-yellow relative overflow-hidden">
+                <div id="progress-bar" class="absolute top-0 left-0 h-2 bg-kid-green w-full transition-all duration-1000 ease-linear"></div>
+                <div class="text-slate-400 font-bold text-sm uppercase tracking-widest mb-2">Calculate Fast!</div>
+                <div id="question" class="text-6xl md:text-8xl font-black text-slate-800 mb-2 game-font">
+                    2 + 2
+                </div>
+            </div>
+
+            <!-- Options Grid -->
+            <div id="options-grid" class="grid grid-cols-2 gap-4">
+                <!-- Buttons injected by JS -->
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div id="game-over-modal" class="fixed inset-0 bg-black/60 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="bg-white rounded-3xl p-8 text-center max-w-sm w-full shadow-2xl border-4 border-kid-purple transform scale-95 transition-transform duration-300">
+                <div class="text-6xl mb-4">🏆</div>
+                <h2 class="text-3xl font-black text-kid-purple mb-2">Time's Up!</h2>
+                <div class="text-slate-500 font-bold mb-6 text-lg">Final Score</div>
+                <div class="text-6xl font-black text-slate-800 mb-8" id="final-score">0</div>
+                <div class="flex gap-4">
+                    <button onclick="location.href='index.html'" class="flex-1 py-3 bg-slate-200 text-slate-600 rounded-xl font-bold hover:bg-slate-300">Exit</button>
+                    <button onclick="startGame()" class="flex-1 py-3 bg-kid-blue text-white rounded-xl font-bold shadow-lg hover:bg-blue-400">Replay</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        let score = 0;
+        let timeLeft = 60;
+        let timerInterval;
+        let correctAnswer;
+        let isGameActive = false;
+
+        const startScreen = document.getElementById('start-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const gameOverModal = document.getElementById('game-over-modal');
+        const questionEl = document.getElementById('question');
+        const optionsGrid = document.getElementById('options-grid');
+        const timerEl = document.getElementById('timer');
+        const scoreEl = document.getElementById('score-display');
+        const mobileScoreEl = document.getElementById('mobile-score');
+        const finalScoreEl = document.getElementById('final-score');
+        const progressBar = document.getElementById('progress-bar');
+
+        function startGame() {
+            score = 0;
+            timeLeft = 60;
+            isGameActive = true;
+            updateScore();
+            
+            startScreen.classList.add('hidden');
+            gameOverModal.classList.add('hidden');
+            gameScreen.classList.remove('hidden');
+            
+            generateQuestion();
+            startTimer();
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerEl.innerText = timeLeft + 's';
+                
+                // Visual urgency
+                if(timeLeft <= 10) {
+                    timerEl.classList.add('text-red-500', 'animate-pulse');
+                    timerEl.classList.remove('text-kid-blue');
+                } else {
+                     timerEl.classList.remove('text-red-500', 'animate-pulse');
+                     timerEl.classList.add('text-kid-blue');
+                }
+
+                if (timeLeft <= 0) {
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        function generateQuestion() {
+            if (!isGameActive) return;
+
+            // Generate numbers (1-10 for easy start)
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            correctAnswer = num1 + num2;
+
+            questionEl.innerText = `${num1} + ${num2}`;
+
+            // Generate options
+            let options = [correctAnswer];
+            while (options.length < 4) {
+                const wrongAnswer = Math.floor(Math.random() * 18) + 2; // Range approx 2-20
+                if (!options.includes(wrongAnswer)) {
+                    options.push(wrongAnswer);
+                }
+            }
+            
+            // Shuffle options
+            options.sort(() => Math.random() - 0.5);
+
+            // Render buttons
+            optionsGrid.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn bg-white text-slate-700 text-3xl font-bold py-6 rounded-2xl shadow-md border-b-4 border-slate-200 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, btn);
+                optionsGrid.appendChild(btn);
+            });
+
+            // Reset progress bar animation for visual flair
+            progressBar.style.width = '100%';
+            setTimeout(() => progressBar.style.width = '0%', 50);
+        }
+
+        function checkAnswer(selected, btn) {
+            if (!isGameActive) return;
+
+            if (selected === correctAnswer) {
+                // Correct
+                btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-200');
+                btn.classList.add('bg-green-500', 'text-white', 'border-green-700');
+                
+                score += 10;
+                updateScore();
+                
+                // Small delay before next question
+                setTimeout(generateQuestion, 200);
+            } else {
+                // Incorrect
+                btn.classList.add('bg-red-500', 'text-white', 'border-red-700', 'shake');
+                navigator.vibrate(200); // Vibrate on mobile
+                // Deduct time penalty? Optional.
+            }
+        }
+
+        function updateScore() {
+            scoreEl.innerText = score;
+            mobileScoreEl.innerText = score;
+        }
+
+        function endGame() {
+            isGameActive = false;
+            clearInterval(timerInterval);
+            finalScoreEl.innerText = score;
+            gameScreen.classList.add('hidden');
+            gameOverModal.classList.remove('hidden');
+            
+            if (score > 0) {
+                triggerConfetti();
+                speak(`Time's up! You scored ${score} points!`);
+            } else {
+                 speak("Time's up! Try again!");
+            }
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1.1;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff9a9e', '#f6d365', '#4facfe'],
+            });
+        }
+    </script>
+</body>
+</html>

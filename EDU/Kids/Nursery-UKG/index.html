@@ -101,13 +101,15 @@
         
         <div class="inline-flex gap-4 p-2 bg-yellow-50 rounded-full border-2 border-kid-yellow">
             <div class="px-6 py-2 bg-kid-yellow text-white rounded-full font-bold shadow-md">Study Time 📚</div>
-            <div class="px-6 py-2 text-slate-500 font-bold">Game Time 🎮</div>
+            <!-- Updated to be a link -->
+            <a href="games/index.html" class="px-6 py-2 text-slate-500 font-bold hover:text-kid-blue transition-colors">Game Time 🎮</a>
         </div>
     </header>
 
     <!-- Content Sections -->
     <main class="container mx-auto px-4 py-10 space-y-20">
-
+        <!-- ... content remains the same ... -->
+        
         <!-- English Section -->
         <section id="english" class="scroll-mt-28">
             <div class="flex items-center gap-4 mb-8">
@@ -129,7 +131,7 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-400 blob-card group cursor-pointer hover:bg-blue-50" onclick="alert('Phonics coming soon!')">
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-400 blob-card group cursor-pointer hover:bg-blue-50" onclick="window.location.href='Phonics.html'">
                     <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-blue-600">Phonics</h3>
                     <p class="text-slate-500 text-sm mb-4">Sounds of letters (A for Apple).</p>
                     <div class="flex justify-between items-center">
@@ -139,7 +141,7 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-400 blob-card group cursor-pointer hover:bg-blue-50" onclick="alert('Sight Words coming soon!')">
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-400 blob-card group cursor-pointer hover:bg-blue-50" onclick="window.location.href='SightWords.html'">
                     <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-blue-600">Sight Words</h3>
                     <p class="text-slate-500 text-sm mb-4">Simple words like The, And, Is.</p>
                     <div class="flex justify-between items-center">
@@ -149,7 +151,7 @@
                 </div>
 
                 <!-- Card 4 -->
-                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-400 blob-card group cursor-pointer hover:bg-blue-50" onclick="alert('Rhymes coming soon!')">
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-400 blob-card group cursor-pointer hover:bg-blue-50" onclick="window.location.href='Rhymes.html'">
                     <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-blue-600">Rhymes</h3>
                     <p class="text-slate-500 text-sm mb-4">Twinkle Twinkle & more!</p>
                     <div class="flex justify-between items-center">
@@ -170,7 +172,7 @@
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-orange-400 blob-card group cursor-pointer hover:bg-orange-50" onclick="alert('Hindi Swar coming soon!')">
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-orange-400 blob-card group cursor-pointer hover:bg-orange-50" onclick="window.location.href='Swar.html'">
                     <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-orange-600">Swar (स्वर)</h3>
                     <p class="text-slate-500 text-sm mb-4">Learn अ to अः</p>
                     <div class="flex justify-between items-center">
@@ -179,7 +181,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-orange-400 blob-card group cursor-pointer hover:bg-orange-50" onclick="alert('Hindi Vyanjan coming soon!')">
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-orange-400 blob-card group cursor-pointer hover:bg-orange-50" onclick="window.location.href='Vyanjan.html'">
                     <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-orange-600">Vyanjan (व्यंजन)</h3>
                     <p class="text-slate-500 text-sm mb-4">Learn क to ज्ञ</p>
                     <div class="flex justify-between items-center">
@@ -188,7 +190,7 @@
                     </div>
                 </div>
 
-                 <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-orange-400 blob-card group cursor-pointer hover:bg-orange-50" onclick="alert('Hindi Poems coming soon!')">
+                 <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-orange-400 blob-card group cursor-pointer hover:bg-orange-50" onclick="window.location.href='Kavita.html'">
                     <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-orange-600">Kavita (बाल गीत)</h3>
                     <p class="text-slate-500 text-sm mb-4">Machli Jal Ki Rani Hai...</p>
                     <div class="flex justify-between items-center">
@@ -209,7 +211,7 @@
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="alert('Counting coming soon!')">
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="window.location.href='Counting.html'">
                     <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-red-600">Counting 1-100</h3>
                     <p class="text-slate-500 text-sm mb-4">Learn numbers easily.</p>
                     <div class="flex justify-between items-center">
@@ -218,7 +220,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="alert('Shapes coming soon!')">
+                <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="window.location.href='Shapes.html'">
                     <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-red-600">Shapes</h3>
                     <p class="text-slate-500 text-sm mb-4">Circle, Square, Triangle.</p>
                     <div class="flex justify-between items-center">
@@ -227,7 +229,7 @@
                     </div>
                 </div>
 
-                 <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="alert('Comparisons coming soon!')">
+                 <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="window.location.href='Comparisons.html'">
                     <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-red-600">Comparisons</h3>
                     <p class="text-slate-500 text-sm mb-4">Big vs Small, Tall vs Short.</p>
                     <div class="flex justify-between items-center">
@@ -236,7 +238,7 @@
                     </div>
                 </div>
 
-                 <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="alert('Addition coming soon!')">
+                 <div class="bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-400 blob-card group cursor-pointer hover:bg-red-50" onclick="window.location.href='Addition.html'">
                     <h3 class="text-xl font-bold text-slate-700 mb-2 group-hover:text-red-600">Basic Addition</h3>
                     <p class="text-slate-500 text-sm mb-4">Simple sums like 1 + 1.</p>
                     <div class="flex justify-between items-center">
@@ -257,16 +259,16 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                 <div class="bg-white p-8 rounded-3xl shadow-lg border-b-8 border-purple-400 blob-card group cursor-pointer hover:bg-purple-50 flex items-center justify-between" onclick="alert('Coloring pages coming soon!')">
+                 <div class="bg-white p-8 rounded-3xl shadow-lg border-b-8 border-purple-400 blob-card group cursor-pointer hover:bg-purple-50 flex items-center justify-between" onclick="window.location.href='Coloring.html'">
                     <div>
                         <h3 class="text-2xl font-bold text-slate-700 mb-2 group-hover:text-purple-600">Coloring Pages</h3>
-                        <p class="text-slate-500">Printable sheets for coloring fun!</p>
-                        <button class="mt-4 px-6 py-2 bg-purple-100 text-purple-600 rounded-full font-bold hover:bg-purple-200">Download PDF</button>
+                        <p class="text-slate-500">Printable sheets and magic board!</p>
+                        <button class="mt-4 px-6 py-2 bg-purple-100 text-purple-600 rounded-full font-bold hover:bg-purple-200">Start Coloring</button>
                     </div>
                     <span class="text-6xl">🖍️</span>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl shadow-lg border-b-8 border-purple-400 blob-card group cursor-pointer hover:bg-purple-50 flex items-center justify-between" onclick="alert('Drawing tutorials coming soon!')">
+                <div class="bg-white p-8 rounded-3xl shadow-lg border-b-8 border-purple-400 blob-card group cursor-pointer hover:bg-purple-50 flex items-center justify-between" onclick="window.location.href='Tutorials.html'">
                     <div>
                         <h3 class="text-2xl font-bold text-slate-700 mb-2 group-hover:text-purple-600">Drawing Tutorials</h3>
                         <p class="text-slate-500">How to draw simple animals.</p>

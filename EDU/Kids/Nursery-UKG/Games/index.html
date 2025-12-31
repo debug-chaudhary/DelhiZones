@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Zone - Play & Learn | Kids Zone</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3e%3ctext y='28' font-size='28'%3e🎮%3c/text%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comic': ['"Comic Neue"', 'cursive'],
+                        'sans': ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        'kid-blue': '#4facfe',
+                        'kid-pink': '#ff9a9e',
+                        'kid-yellow': '#f6d365',
+                        'kid-green': '#84fab0',
+                        'kid-purple': '#a18cd1',
+                        'kid-orange': '#ffc3a0',
+                        'kid-teal': '#20c997',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Comic Neue', cursive; }
+        h1, h2, h3, h4, .game-font { font-family: 'Fredoka', sans-serif; }
+        
+        .game-card {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .animate-wiggle { animation: wiggle 2s ease-in-out infinite; }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+    </style>
+</head>
+<body class="bg-indigo-50 text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-blue shadow-sm rounded-b-3xl">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="/EDU/Kids/nursery-ukg/index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-blue transition-colors font-bold text-lg">
+                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
+                Back
+            </a>
+            
+            <span class="text-2xl font-black text-kid-blue tracking-wide">
+                Game <span class="text-kid-yellow">Zone</span>
+            </span>
+
+            <div class="w-8"></div> <!-- Spacer -->
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pt-28 pb-10">
+        
+        <!-- Header -->
+        <div class="text-center mb-12 relative">
+            <div class="absolute top-0 left-10 text-6xl animate-float opacity-30 hidden md:block">🕹️</div>
+            <div class="absolute top-0 right-10 text-6xl animate-float opacity-30 hidden md:block" style="animation-delay: 1.5s">👾</div>
+
+            <h1 class="text-4xl md:text-6xl font-black text-slate-800 mb-4">
+                It's Play Time!
+            </h1>
+            <p class="text-xl text-slate-500 font-bold">Learn while you play 🎮</p>
+        </div>
+
+        <!-- Games Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            
+            <!-- Game 1: Memory Match -->
+            <div class="game-card bg-white rounded-3xl p-6 border-b-8 border-kid-blue shadow-lg group relative overflow-hidden" onclick="window.location.href='MemoryMatch.html'">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i data-lucide="brain" class="w-32 h-32 text-kid-blue"></i>
+                </div>
+                <div class="h-48 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 relative overflow-hidden group-hover:bg-blue-200 transition-colors">
+                    <span class="text-7xl animate-bounce">🧠</span>
+                </div>
+                <h3 class="text-2xl font-black text-slate-700 mb-2 group-hover:text-kid-blue">Memory Match</h3>
+                <p class="text-slate-500 font-medium mb-6">Find matching pairs of cards. Good for brain!</p>
+                <button class="w-full py-3 bg-kid-blue text-white rounded-xl font-bold shadow-md hover:bg-blue-400 transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="play" class="w-5 h-5"></i> Play Now
+                </button>
+            </div>
+
+            <!-- Game 2: Math Dash -->
+            <div class="game-card bg-white rounded-3xl p-6 border-b-8 border-kid-red shadow-lg group relative overflow-hidden" onclick="window.location.href='MathDash.html'">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i data-lucide="calculator" class="w-32 h-32 text-kid-red"></i>
+                </div>
+                <div class="h-48 bg-red-100 rounded-2xl flex items-center justify-center mb-6 relative overflow-hidden group-hover:bg-red-200 transition-colors">
+                    <span class="text-7xl animate-wiggle">🏎️</span>
+                </div>
+                <h3 class="text-2xl font-black text-slate-700 mb-2 group-hover:text-red-500">Math Dash</h3>
+                <p class="text-slate-500 font-medium mb-6">Race against time to solve simple sums.</p>
+                <button class="w-full py-3 bg-red-400 text-white rounded-xl font-bold shadow-md hover:bg-red-500 transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="play" class="w-5 h-5"></i> Play Now
+                </button>
+            </div>
+
+            <!-- Game 3: Word Hunt -->
+            <div class="game-card bg-white rounded-3xl p-6 border-b-8 border-kid-yellow shadow-lg group relative overflow-hidden" onclick="window.location.href='WordHunt.html'">
+                 <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i data-lucide="search" class="w-32 h-32 text-kid-yellow"></i>
+                </div>
+                <div class="h-48 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6 relative overflow-hidden group-hover:bg-yellow-200 transition-colors">
+                    <span class="text-7xl animate-pulse">🔎</span>
+                </div>
+                <h3 class="text-2xl font-black text-slate-700 mb-2 group-hover:text-yellow-500">Word Hunt</h3>
+                <p class="text-slate-500 font-medium mb-6">Find hidden letters and simple words.</p>
+                <button class="w-full py-3 bg-yellow-400 text-slate-800 rounded-xl font-bold shadow-md hover:bg-yellow-500 transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="play" class="w-5 h-5"></i> Play Now
+                </button>
+            </div>
+
+             <!-- Game 4: Shape Sorter -->
+             <div class="game-card bg-white rounded-3xl p-6 border-b-8 border-kid-green shadow-lg group relative overflow-hidden" onclick="window.location.href='ShapeSorter.html'">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                   <i data-lucide="shapes" class="w-32 h-32 text-kid-green"></i>
+               </div>
+               <div class="h-48 bg-green-100 rounded-2xl flex items-center justify-center mb-6 relative overflow-hidden group-hover:bg-green-200 transition-colors">
+                   <span class="text-7xl animate-float">🔷</span>
+               </div>
+               <h3 class="text-2xl font-black text-slate-700 mb-2 group-hover:text-kid-green">Shape Sorter</h3>
+               <p class="text-slate-500 font-medium mb-6">Drag and drop shapes to their places.</p>
+               <button class="w-full py-3 bg-kid-green text-white rounded-xl font-bold shadow-md hover:bg-green-400 transition-colors flex items-center justify-center gap-2">
+                   <i data-lucide="play" class="w-5 h-5"></i> Play Now
+               </button>
+           </div>
+           
+           <!-- Game 5: Color Splash -->
+           <div class="game-card bg-white rounded-3xl p-6 border-b-8 border-kid-purple shadow-lg group relative overflow-hidden" onclick="window.location.href='ColorSplash.html'">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i data-lucide="palette" class="w-32 h-32 text-kid-purple"></i>
+                </div>
+                <div class="h-48 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 relative overflow-hidden group-hover:bg-purple-200 transition-colors">
+                    <span class="text-7xl">🎨</span>
+                </div>
+                <h3 class="text-2xl font-black text-slate-700 mb-2 group-hover:text-kid-purple">Color Splash</h3>
+                <p class="text-slate-500 font-medium mb-6">Identify colors and paint objects.</p>
+                <button class="w-full py-3 bg-kid-purple text-white rounded-xl font-bold shadow-md hover:bg-purple-400 transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="play" class="w-5 h-5"></i> Play Now
+                </button>
+            </div>
+
+             <!-- Game 6: Animal Sounds (Updated Link) -->
+             <div class="game-card bg-white rounded-3xl p-6 border-b-8 border-kid-orange shadow-lg group relative overflow-hidden" onclick="window.location.href='AnimalSounds.html'">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i data-lucide="music" class="w-32 h-32 text-kid-orange"></i>
+                </div>
+                <div class="h-48 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 relative overflow-hidden group-hover:bg-orange-200 transition-colors">
+                    <span class="text-7xl">🦁</span>
+                </div>
+                <h3 class="text-2xl font-black text-slate-700 mb-2 group-hover:text-kid-orange">Animal Sounds</h3>
+                <p class="text-slate-500 font-medium mb-6">Listen and guess the animal!</p>
+                <button class="w-full py-3 bg-kid-orange text-white rounded-xl font-bold shadow-md hover:bg-orange-400 transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="play" class="w-5 h-5"></i> Play Now
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-slate-400 font-bold">
+        <p>Fun never ends here! 🏆</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
