@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor Dashboard - Delhizones</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(229, 231, 235, 0.5); }
+        .sidebar-link.active { background-color: #e0f2fe; color: #0284c7; border-right: 4px solid #0284c7; }
+        
+        /* Modal Transitions */
+        .modal { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .modal.active { opacity: 1; pointer-events: auto; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    </style>
+</head>
+<body class="text-slate-800 h-screen overflow-hidden flex">
+
+    <!-- Auth Overlay (Login) -->
+    <div id="auth-overlay" class="fixed inset-0 z-50 bg-slate-900 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
+            <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-slate-900 mb-2">Welcome Back</h1>
+            <p class="text-slate-500 mb-8">Access your personalized learning dashboard.</p>
+            
+            <div class="space-y-4">
+                <button onclick="handleLogin('student')" class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="user" class="w-5 h-5"></i> Student Login
+                </button>
+                <button onclick="handleLogin('tutor')" class="w-full py-3 px-4 bg-white border-2 border-slate-200 hover:border-blue-600 text-slate-700 hover:text-blue-600 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="presentation" class="w-5 h-5"></i> Tutor Login
+                </button>
+            </div>
+            <p class="mt-6 text-xs text-slate-400">Powered by Delhizones Ecosystem</p>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-slate-200 flex-col hidden md:flex z-10">
+        <div class="p-6 border-b border-slate-100 flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white">
+                <i data-lucide="book-open" class="w-6 h-6"></i>
+            </div>
+            <span class="font-bold text-lg tracking-tight">LMS<span class="text-blue-600">Pro</span></span>
+        </div>
+        
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+            <button onclick="switchView('dashboard')" class="sidebar-link active w-full flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 transition-all font-medium text-sm">
+                <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard
+            </button>
+            <button onclick="switchView('schedule')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 transition-all font-medium text-sm">
+                <i data-lucide="calendar" class="w-5 h-5"></i> Schedule
+            </button>
+            <button onclick="switchView('assignments')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 transition-all font-medium text-sm">
+                <i data-lucide="file-text" class="w-5 h-5"></i> Assignments
+            </button>
+            <button onclick="switchView('resources')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 transition-all font-medium text-sm">
+                <i data-lucide="library" class="w-5 h-5"></i> Resources
+            </button>
+            <button onclick="switchView('grades')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 transition-all font-medium text-sm">
+                <i data-lucide="bar-chart-2" class="w-5 h-5"></i> Progress
+            </button>
+        </nav>
+
+        <div class="p-4 border-t border-slate-100">
+            <button onclick="logout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition-all font-medium text-sm">
+                <i data-lucide="log-out" class="w-5 h-5"></i> Sign Out
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-full relative">
+        <!-- Top Header -->
+        <header class="h-16 bg-white border-b border-slate-200 flex justify-between items-center px-6">
+            <div class="md:hidden">
+                <button class="text-slate-500"><i data-lucide="menu" class="w-6 h-6"></i></button>
+            </div>
+            <h2 id="page-title" class="text-xl font-bold text-slate-800 ml-4 md:ml-0">Dashboard</h2>
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <i data-lucide="bell" class="w-5 h-5 text-slate-500 hover:text-blue-600 cursor-pointer"></i>
+                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                </div>
+                <div class="flex items-center gap-3 pl-4 border-l border-slate-200">
+                    <div class="text-right hidden sm:block">
+                        <p id="user-name-display" class="text-sm font-bold text-slate-800">User</p>
+                        <p id="user-role-display" class="text-xs text-slate-500 uppercase tracking-wider">Role</p>
+                    </div>
+                    <div class="w-10 h-10 bg-slate-200 rounded-full flex items-center justify-center text-slate-600 font-bold">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dynamic Views -->
+        <div id="content-area" class="flex-1 overflow-y-auto p-6 space-y-6">
+            <!-- Content injected via JS -->
+        </div>
+        
+    </main>
+
+    <!-- Generic Modal -->
+    <div id="generic-modal" class="modal fixed inset-0 z-40 bg-black/50 flex items-center justify-center backdrop-blur-sm p-4">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden transform transition-all">
+            <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                <h3 id="modal-title" class="font-bold text-lg">Action</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div id="modal-body" class="p-6">
+                <!-- Form Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+        import { getFirestore, collection, addDoc, query, where, onSnapshot, orderBy, updateDoc, doc, deleteDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
+
+        let firebaseConfig;
+        if (typeof __firebase_config !== 'undefined') {
+            firebaseConfig = JSON.parse(__firebase_config);
+        } else {
+            console.warn("Firebase config not found. Features relying on database will not work.");
+            // Fallback config to prevent crash in non-preview environments
+            firebaseConfig = { apiKey: "demo", authDomain: "demo.firebaseapp.com", projectId: "demo" };
+        }
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        let currentUser = null;
+        let userRole = localStorage.getItem('tutor_app_role') || null;
+        let currentView = 'dashboard';
+
+        // --- Auth Logic ---
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Auth init failed", error);
+            }
+        };
+        initAuth();
+
+        window.handleLogin = async (role) => {
+            // Since we use anonymous auth by default for simplicity in this demo,
+            // we mainly just set the role in local storage to switch views.
+            userRole = role;
+            localStorage.setItem('tutor_app_role', role);
+            
+            // Ensure we are signed in
+            if (!auth.currentUser) {
+                try {
+                    await signInAnonymously(auth);
+                } catch (e) {
+                    console.error("Login error", e);
+                    alert("Authentication error. Please try again.");
+                    return;
+                }
+            }
+            
+            document.getElementById('auth-overlay').classList.add('hidden');
+            updateUserProfile();
+            loadView('dashboard');
+        };
+
+        window.logout = () => {
+            // We don't sign out from Firebase to keep the anonymous session active if needed,
+            // just clear the role state for the UI
+            localStorage.removeItem('tutor_app_role');
+            location.reload();
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                if (userRole) {
+                    document.getElementById('auth-overlay').classList.add('hidden');
+                    updateUserProfile();
+                    loadView('dashboard');
+                }
+            } else {
+                // If somehow signed out, show overlay
+                document.getElementById('auth-overlay').classList.remove('hidden');
+            }
+        });
+
+        function updateUserProfile() {
+            document.getElementById('user-name-display').textContent = userRole === 'tutor' ? 'Prof. Teacher' : 'Student';
+            document.getElementById('user-role-display').textContent = userRole;
+            lucide.createIcons();
+        }
+
+        // --- Navigation Logic ---
+        window.switchView = (viewName) => {
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active', 'bg-blue-50', 'text-blue-600', 'border-r-4', 'border-blue-600');
+                if(link.getAttribute('onclick').includes(viewName)) {
+                    link.classList.add('active', 'bg-blue-50', 'text-blue-600', 'border-r-4', 'border-blue-600');
+                }
+            });
+            loadView(viewName);
+        };
+
+        function loadView(viewName) {
+            currentView = viewName;
+            const content = document.getElementById('content-area');
+            const title = document.getElementById('page-title');
+            
+            content.innerHTML = '<div class="flex justify-center p-10"><i data-lucide="loader-2" class="w-8 h-8 animate-spin text-blue-600"></i></div>';
+            lucide.createIcons();
+
+            switch(viewName) {
+                case 'dashboard':
+                    title.textContent = 'Dashboard';
+                    renderDashboard(content);
+                    break;
+                case 'schedule':
+                    title.textContent = 'Class Schedule';
+                    renderSchedule(content);
+                    break;
+                case 'assignments':
+                    title.textContent = 'Assignments & Homework';
+                    renderAssignments(content);
+                    break;
+                case 'resources':
+                    title.textContent = 'Learning Resources';
+                    renderResources(content);
+                    break;
+                case 'grades':
+                    title.textContent = 'Progress Tracker';
+                    renderGrades(content);
+                    break;
+            }
+        }
+
+        // --- Render Functions ---
+
+        function renderDashboard(container) {
+            const isTutor = userRole === 'tutor';
+            
+            // Stats / Quick Actions
+            let html = `
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Next Class Card -->
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-500 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h3 class="text-blue-100 text-sm font-semibold uppercase tracking-wider mb-1">Next Live Class</h3>
+                            <p class="text-2xl font-bold mb-1">Mathematics: Algebra</p>
+                            <p class="text-blue-100 text-sm mb-4">Today, 4:00 PM - 5:00 PM</p>
+                            ${isTutor 
+                                ? `<button onclick="openLinkModal('meet')" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-bold text-sm hover:bg-blue-50 transition">Start Class</button>`
+                                : `<a href="https://meet.google.com" target="_blank" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-bold text-sm hover:bg-blue-50 transition inline-flex items-center gap-2"><i data-lucide="video" class="w-4 h-4"></i> Join Now</a>`
+                            }
+                        </div>
+                        <i data-lucide="video" class="absolute right-[-20px] bottom-[-20px] w-32 h-32 text-white opacity-10"></i>
+                    </div>
+
+                    <!-- Pending Assignments -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-slate-700">Pending Tasks</h3>
+                            <span class="bg-orange-100 text-orange-600 text-xs font-bold px-2 py-1 rounded-full">3 Due</span>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 text-sm text-slate-600">
+                                <i data-lucide="clock" class="w-4 h-4 text-orange-500"></i> Physics Lab Report
+                            </li>
+                            <li class="flex items-center gap-3 text-sm text-slate-600">
+                                <i data-lucide="clock" class="w-4 h-4 text-orange-500"></i> Math Chapter 4
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Announcements -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                         <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-slate-700">Announcements</h3>
+                            <i data-lucide="bell" class="w-5 h-5 text-slate-400"></i>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-lg border border-blue-100 text-sm text-blue-800">
+                            <span class="font-bold block mb-1">Exam Schedule</span>
+                            Mid-term exams starting next Monday. Check schedule tab.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Feed (Placeholder for DB integration) -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                    <h3 class="font-bold text-lg mb-4 text-slate-800">Recent Activity</h3>
+                    <div id="activity-feed" class="space-y-4">
+                        <div class="flex items-start gap-4 pb-4 border-b border-slate-100 last:border-0">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 shrink-0">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-slate-800">Assignment Submitted</p>
+                                <p class="text-xs text-slate-500">You submitted 'History Essay' yesterday.</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start gap-4 pb-4 border-b border-slate-100 last:border-0">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 shrink-0">
+                                <i data-lucide="upload" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-slate-800">New Resource Added</p>
+                                <p class="text-xs text-slate-500">Tutor uploaded 'Chemistry Formula Sheet'.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+            lucide.createIcons();
+        }
+
+        function renderSchedule(container) {
+            // Simplified Schedule View
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+            let html = `
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="grid grid-cols-6 bg-slate-50 border-b border-slate-200 text-sm font-bold text-slate-500 text-center py-3">
+                        <div>Time</div>
+                        ${days.map(d => `<div>${d}</div>`).join('')}
+                    </div>
+                    <!-- Mock Data Rows -->
+                    <div class="grid grid-cols-6 text-sm text-center border-b border-slate-100 last:border-0">
+                        <div class="py-4 font-medium text-slate-400">04:00 PM</div>
+                        <div class="p-2"><div class="bg-blue-100 text-blue-700 py-2 rounded-lg font-medium text-xs">Math</div></div>
+                        <div class="p-2"></div>
+                        <div class="p-2"><div class="bg-green-100 text-green-700 py-2 rounded-lg font-medium text-xs">Science</div></div>
+                        <div class="p-2"></div>
+                        <div class="p-2"><div class="bg-purple-100 text-purple-700 py-2 rounded-lg font-medium text-xs">English</div></div>
+                    </div>
+                     <div class="grid grid-cols-6 text-sm text-center border-b border-slate-100 last:border-0">
+                        <div class="py-4 font-medium text-slate-400">05:00 PM</div>
+                        <div class="p-2"></div>
+                        <div class="p-2"><div class="bg-orange-100 text-orange-700 py-2 rounded-lg font-medium text-xs">History</div></div>
+                        <div class="p-2"></div>
+                        <div class="p-2"><div class="bg-blue-100 text-blue-700 py-2 rounded-lg font-medium text-xs">Math</div></div>
+                         <div class="p-2"></div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function renderAssignments(container) {
+            const isTutor = userRole === 'tutor';
+            
+            // Firestore Listener for Assignments
+            const q = query(
+                collection(db, 'artifacts', appId, 'public', 'data', 'tutor_assignments'),
+                orderBy('timestamp', 'desc')
+            );
+
+            container.innerHTML = `
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Class Assignments</h3>
+                    ${isTutor ? `<button onclick="openAssignmentModal()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 hover:bg-blue-700 transition"><i data-lucide="plus"></i> Create New</button>` : ''}
+                </div>
+                <div id="assignments-list" class="grid gap-4">
+                    <div class="text-center py-10 text-slate-400">Loading assignments...</div>
+                </div>
+            `;
+            lucide.createIcons();
+
+            onSnapshot(q, (snapshot) => {
+                const list = document.getElementById('assignments-list');
+                if (snapshot.empty) {
+                    list.innerHTML = `<div class="text-center py-10 bg-white rounded-xl border border-dashed border-slate-300 text-slate-500">No active assignments.</div>`;
+                    return;
+                }
+
+                let html = '';
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const date = data.dueDate ? new Date(data.dueDate).toLocaleDateString() : 'No due date';
+                    
+                    html += `
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 transition-colors flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-lg">${data.title}</h4>
+                                <p class="text-slate-500 text-sm mb-2">${data.description}</p>
+                                <div class="flex items-center gap-4 text-xs font-medium">
+                                    <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded">Due: ${date}</span>
+                                    <span class="bg-blue-50 text-blue-600 px-2 py-1 rounded">Grade: ${data.gradeLevel || 'All'}</span>
+                                </div>
+                            </div>
+                            <div>
+                                ${isTutor 
+                                    ? `<button onclick="deleteItem('tutor_assignments', '${doc.id}')" class="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"><i data-lucide="trash-2" class="w-5 h-5"></i></button>` 
+                                    : `<button onclick="alert('Submission feature coming soon!')" class="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg text-sm font-bold hover:bg-blue-50 transition">Submit</button>`
+                                }
+                            </div>
+                        </div>
+                    `;
+                });
+                list.innerHTML = html;
+                lucide.createIcons();
+            }, (error) => {
+                console.error("Firestore error:", error);
+                document.getElementById('assignments-list').innerHTML = `<div class="text-center py-10 text-red-400">Error loading assignments. Permissions may be restricted.</div>`;
+            });
+        }
+
+        function renderResources(container) {
+            const isTutor = userRole === 'tutor';
+            // Similar structure to assignments but for links/PDFs
+             const q = query(
+                collection(db, 'artifacts', appId, 'public', 'data', 'tutor_resources'),
+                orderBy('timestamp', 'desc')
+            );
+
+            container.innerHTML = `
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Study Material</h3>
+                    ${isTutor ? `<button onclick="openResourceModal()" class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 hover:bg-purple-700 transition"><i data-lucide="upload"></i> Upload</button>` : ''}
+                </div>
+                <div id="resources-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                     <div class="text-center col-span-full py-10 text-slate-400">Loading resources...</div>
+                </div>
+            `;
+            lucide.createIcons();
+
+            onSnapshot(q, (snapshot) => {
+                const list = document.getElementById('resources-list');
+                if (snapshot.empty) {
+                    list.innerHTML = `<div class="col-span-full text-center py-10 bg-white rounded-xl border border-dashed border-slate-300 text-slate-500">No resources available.</div>`;
+                    return;
+                }
+
+                let html = '';
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    let icon = 'file-text';
+                    let color = 'text-blue-500 bg-blue-50';
+                    if (data.type === 'video') { icon = 'video'; color = 'text-red-500 bg-red-50'; }
+                    
+                    html += `
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow relative group">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 ${color} rounded-lg flex items-center justify-center shrink-0">
+                                    <i data-lucide="${icon}" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 line-clamp-1">${data.title}</h4>
+                                    <p class="text-xs text-slate-500 mb-3">${data.type ? data.type.toUpperCase() : 'FILE'}</p>
+                                    <a href="${data.url}" target="_blank" class="text-sm text-blue-600 font-semibold hover:underline">View Material</a>
+                                </div>
+                            </div>
+                            ${isTutor ? `<button onclick="deleteItem('tutor_resources', '${doc.id}')" class="absolute top-2 right-2 p-1.5 text-slate-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"><i data-lucide="trash" class="w-4 h-4"></i></button>` : ''}
+                        </div>
+                    `;
+                });
+                list.innerHTML = html;
+                lucide.createIcons();
+            }, (error) => {
+                console.error("Firestore error:", error);
+                document.getElementById('resources-list').innerHTML = `<div class="col-span-full text-center py-10 text-red-400">Error loading resources.</div>`;
+            });
+        }
+
+        function renderGrades(container) {
+             container.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 text-center">
+                    <div class="w-20 h-20 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="star" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Performance Tracker</h3>
+                    <p class="text-slate-500 mb-6">Detailed grade reports and analytics will appear here after your first assessment.</p>
+                    
+                    <div class="w-full bg-slate-100 rounded-full h-4 mb-4 overflow-hidden">
+                        <div class="bg-blue-600 h-4 rounded-full" style="width: 75%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-slate-500 font-bold uppercase tracking-wide">
+                        <span>Attendance: 92%</span>
+                        <span>Avg Grade: A-</span>
+                    </div>
+                </div>
+             `;
+             lucide.createIcons();
+        }
+
+
+        // --- Actions & Modals ---
+        window.openAssignmentModal = () => {
+            const modal = document.getElementById('generic-modal');
+            document.getElementById('modal-title').textContent = 'Create Assignment';
+            document.getElementById('modal-body').innerHTML = `
+                <form id="createAssignmentForm" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Title</label>
+                        <input type="text" id="assignTitle" class="w-full p-2 border rounded-lg" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Description</label>
+                        <textarea id="assignDesc" class="w-full p-2 border rounded-lg" rows="3"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Due Date</label>
+                            <input type="date" id="assignDate" class="w-full p-2 border rounded-lg" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Grade</label>
+                            <select id="assignGrade" class="w-full p-2 border rounded-lg">
+                                <option value="All">All</option>
+                                <option value="10th">10th</option>
+                                <option value="12th">12th</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-2 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700">Publish</button>
+                </form>
+            `;
+            
+            document.getElementById('createAssignmentForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const title = document.getElementById('assignTitle').value;
+                const desc = document.getElementById('assignDesc').value;
+                const date = document.getElementById('assignDate').value;
+                const grade = document.getElementById('assignGrade').value;
+
+                try {
+                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'tutor_assignments'), {
+                        title, description: desc, dueDate: date, gradeLevel: grade, timestamp: serverTimestamp()
+                    });
+                    closeModal();
+                } catch(err) { console.error(err); alert("Failed to add assignment"); }
+            });
+            
+            modal.classList.add('active');
+        };
+
+        window.openResourceModal = () => {
+             const modal = document.getElementById('generic-modal');
+            document.getElementById('modal-title').textContent = 'Add Resource';
+            document.getElementById('modal-body').innerHTML = `
+                <form id="createResourceForm" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Title</label>
+                        <input type="text" id="resTitle" class="w-full p-2 border rounded-lg" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Link URL</label>
+                        <input type="url" id="resUrl" class="w-full p-2 border rounded-lg" placeholder="https://..." required>
+                    </div>
+                    <div>
+                         <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Type</label>
+                         <select id="resType" class="w-full p-2 border rounded-lg">
+                            <option value="pdf">PDF / Document</option>
+                            <option value="video">Video Link</option>
+                         </select>
+                    </div>
+                    <button type="submit" class="w-full py-2 bg-purple-600 text-white rounded-lg font-bold hover:bg-purple-700">Share Resource</button>
+                </form>
+            `;
+             document.getElementById('createResourceForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const title = document.getElementById('resTitle').value;
+                const url = document.getElementById('resUrl').value;
+                const type = document.getElementById('resType').value;
+
+                try {
+                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'tutor_resources'), {
+                        title, url, type, timestamp: serverTimestamp()
+                    });
+                    closeModal();
+                } catch(err) { console.error(err); alert("Failed to add resource"); }
+            });
+            modal.classList.add('active');
+        };
+
+        window.closeModal = () => {
+            document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+        };
+
+        window.deleteItem = async (colName, docId) => {
+            if(confirm('Are you sure you want to delete this item?')) {
+                try {
+                     await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', colName, docId));
+                } catch(e) { alert("Delete failed"); }
+            }
+        };
+        
+        window.openLinkModal = () => {
+             const link = prompt("Enter Google Meet Link:");
+             if(link) window.open(link, '_blank');
+        };
+
+        // Initialize Icons (Check for lucide load first)
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        } else {
+            // Retry if lucide not yet loaded, simple check
+            setTimeout(() => { if(typeof lucide !== 'undefined') lucide.createIcons(); }, 100);
+        }
+    </script>
+</body>
+</html>

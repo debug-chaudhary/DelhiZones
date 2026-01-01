@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delhizones Tutor - Personalized Academic Support</title>
+    <meta name="description" content="Expert one-on-one home and online tuition for all grades and subjects. Personalized academic support to help you excel.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3e%3ctext y='28' font-size='28'%3e🎓%3c/text%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'display': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        },
+                        accent: {
+                            500: '#f59e0b', // Amber for highlights
+                            600: '#d97706',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
+        
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: -1;
+            opacity: 0.4;
+        }
+        .form-input {
+            transition: all 0.3s;
+        }
+        .form-input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.2);
+        }
+        /* Modal Styles */
+        .modal {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md border-b border-slate-200 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/EDU/" class="flex items-center gap-2 group">
+                <div class="bg-brand-600 text-white p-2 rounded-lg group-hover:scale-105 transition-transform">
+                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-slate-900">
+                    Delhizones <span class="text-brand-600">Tutor</span>
+                </span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#benefits" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Why Us</a>
+                <a href="#subjects" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Subjects</a>
+                <a href="#how-it-works" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">How it Works</a>
+                
+                <!-- Auth Buttons -->
+                <div id="auth-buttons-container">
+                    <button onclick="openModal('auth-modal')" class="text-sm font-bold text-brand-600 hover:text-brand-700 mr-4">Login</button>
+                    <a href="#request-tutor" class="px-5 py-2.5 bg-brand-600 text-white text-sm font-bold rounded-full hover:bg-brand-700 transition-all shadow-lg hover:shadow-brand-500/30">
+                        Find a Tutor
+                    </a>
+                </div>
+                
+                <!-- User Menu (Hidden by default) -->
+                <div id="user-menu-container" class="hidden flex items-center gap-4">
+                    <span id="user-greeting" class="text-sm font-medium text-slate-600"></span>
+                    <button onclick="openDashboard()" class="px-5 py-2.5 bg-brand-100 text-brand-700 text-sm font-bold rounded-full hover:bg-brand-200 transition-all">
+                        Dashboard
+                    </button>
+                    <button onclick="handleLogout()" class="text-sm text-slate-500 hover:text-red-600">
+                        <i data-lucide="log-out" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-slate-600 hover:text-brand-600">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 lg:pt-48 lg:pb-32 relative overflow-hidden">
+        <!-- Background Blobs -->
+        <div class="blob bg-blue-300 w-96 h-96 top-0 left-0 translate-x-[-30%] translate-y-[-30%]"></div>
+        <div class="blob bg-purple-300 w-80 h-80 bottom-0 right-0 translate-x-[20%] translate-y-[20%]"></div>
+
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Text Content -->
+                <div class="lg:w-1/2 text-center lg:text-left animate-fade-in-up">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-bold uppercase tracking-wide mb-6">
+                        <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                        Now Available in Your City
+                    </div>
+                    <h1 class="text-5xl lg:text-6xl font-black text-slate-900 leading-tight mb-6">
+                        Unlock Your Potential with <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-purple-600">Personalized Tutoring</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        Expert one-on-one academic support at your home or online. From school grades to competitive exams, we connect you with the perfect mentor.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#request-tutor" class="px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all shadow-xl flex items-center justify-center gap-2 group">
+                            Book a Free Trial <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#subjects" class="px-8 py-4 bg-white text-slate-700 font-bold rounded-xl border border-slate-200 hover:border-brand-300 hover:bg-brand-50 transition-all flex items-center justify-center">
+                            Explore Subjects
+                        </a>
+                    </div>
+                    
+                    <div class="mt-10 flex items-center justify-center lg:justify-start gap-8 text-sm font-semibold text-slate-500">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle" class="text-green-500 w-5 h-5"></i> Verified Tutors
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle" class="text-green-500 w-5 h-5"></i> Flexible Timing
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image/Illustration Placeholder -->
+                <div class="lg:w-1/2 relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <!-- Placeholder for Hero Image -->
+                         <div class="bg-gradient-to-br from-slate-100 to-brand-50 h-[500px] flex items-center justify-center relative">
+                            <i data-lucide="book-open" class="w-32 h-32 text-brand-200 absolute top-10 right-10"></i>
+                            <div class="text-center z-10">
+                                <div class="bg-white p-4 rounded-2xl shadow-lg inline-block mb-4">
+                                    <i data-lucide="users" class="w-16 h-16 text-brand-600"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-slate-800">1-on-1 Learning</h3>
+                                <p class="text-slate-500">Focus on what matters</p>
+                            </div>
+                            <!-- Floating Badge -->
+                            <div class="absolute bottom-10 left-10 bg-white p-4 rounded-xl shadow-lg flex items-center gap-3 animate-bounce">
+                                <div class="bg-green-100 p-2 rounded-lg text-green-600">
+                                    <i data-lucide="trending-up" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase font-bold">Results</p>
+                                    <p class="font-bold text-slate-900">Grade Improvement</p>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Request Form Section -->
+    <section id="request-tutor" class="py-24 bg-white relative">
+        <div class="container mx-auto px-6">
+            <div class="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
+                <!-- Info Side -->
+                <div class="md:w-5/12 p-10 bg-brand-600 text-white relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-20 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                    
+                    <h3 class="text-3xl font-bold mb-6">Find Your Perfect Tutor Today</h3>
+                    <p class="text-brand-100 mb-8 leading-relaxed">
+                        Fill out the form and our team will match you with the best tutor for your specific needs within 24 hours.
+                    </p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3">
+                            <div class="bg-white/20 p-2 rounded-full"><i data-lucide="phone" class="w-4 h-4"></i></div>
+                            <span class="font-medium">+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="bg-white/20 p-2 rounded-full"><i data-lucide="mail" class="w-4 h-4"></i></div>
+                            <span class="font-medium">tutor@delhizones.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Form Side -->
+                <div class="md:w-7/12 p-10 bg-white">
+                    <form id="tutorRequestForm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">Student Name</label>
+                                <input type="text" id="reqName" class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 form-input" placeholder="Enter name" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">Contact Number</label>
+                                <input type="tel" id="reqPhone" class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 form-input" placeholder="Your phone" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">Grade/Class</label>
+                                <select id="reqGrade" class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 form-input">
+                                    <option value="Primary (1-5)">Primary (1-5)</option>
+                                    <option value="Middle (6-8)">Middle (6-8)</option>
+                                    <option value="Secondary (9-10)">Secondary (9-10)</option>
+                                    <option value="Senior Secondary (11-12)">Senior Secondary (11-12)</option>
+                                    <option value="College">College / University</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">Preferred Mode</label>
+                                <div class="flex gap-4 mt-2">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="mode" value="Online" checked class="accent-brand-600 w-5 h-5"> 
+                                        <span class="text-slate-600">Online</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="mode" value="Home Tutor" class="accent-brand-600 w-5 h-5"> 
+                                        <span class="text-slate-600">Home Tutor</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-8">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Subject / Requirement</label>
+                            <textarea id="reqSubject" class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 form-input h-24" placeholder="e.g. Need help with 10th Grade Math..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-colors shadow-lg flex items-center justify-center gap-2">
+                            <span>Request Callback</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-slate-500 text-sm">&copy; 2025 Delhizones Tutor. Part of the Delhizones Ecosystem.</p>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all scale-100">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-slate-800">Login / Signup</h3>
+                <button onclick="closeModal('auth-modal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            <div class="p-6">
+                <!-- Role Selection -->
+                <div class="flex gap-2 mb-6 p-1 bg-slate-100 rounded-lg">
+                    <button onclick="setAuthRole('student')" id="btn-role-student" class="flex-1 py-2 rounded-md text-sm font-bold bg-white shadow-sm text-brand-600 transition-all">Student</button>
+                    <button onclick="setAuthRole('tutor')" id="btn-role-tutor" class="flex-1 py-2 rounded-md text-sm font-bold text-slate-500 hover:text-slate-700 transition-all">Tutor</button>
+                </div>
+
+                <button onclick="handleLogin()" class="w-full py-3 bg-brand-600 text-white font-bold rounded-xl hover:bg-brand-700 transition-colors flex items-center justify-center gap-2 mb-4">
+                    <i data-lucide="log-in" class="w-5 h-5"></i>
+                    <span id="auth-btn-text">Login as Student</span>
+                </button>
+                <p class="text-center text-xs text-slate-400">By continuing, you agree to our Terms & Privacy Policy.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Modal -->
+    <div id="dashboard-modal" class="modal fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl h-[80vh] flex flex-col overflow-hidden">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <i data-lucide="layout-dashboard" class="w-5 h-5 text-brand-600"></i> Dashboard
+                    </h3>
+                    <p class="text-sm text-slate-500" id="dash-role-display">Student View</p>
+                </div>
+                <button onclick="closeModal('dashboard-modal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-6 bg-slate-50">
+                <div id="dashboard-content" class="space-y-4">
+                    <!-- Dynamic Content -->
+                    <div class="text-center py-10 text-slate-400">
+                        <i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto mb-2"></i>
+                        Loading...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { getFirestore, collection, addDoc, query, where, onSnapshot, orderBy, updateDoc, doc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+
+        // Initialize Firebase
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        let currentUser = null;
+        let currentRole = 'student'; // 'student' or 'tutor'
+
+        // Auto-login on load (Critical for Firestore rules)
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Auth init failed:", error);
+            }
+        };
+        initAuth();
+
+        // Auth Listener
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            updateUI();
+        });
+
+        // UI Functions
+        window.openModal = (id) => document.getElementById(id).classList.add('active');
+        window.closeModal = (id) => document.getElementById(id).classList.remove('active');
+        
+        window.setAuthRole = (role) => {
+            currentRole = role;
+            const btnStudent = document.getElementById('btn-role-student');
+            const btnTutor = document.getElementById('btn-role-tutor');
+            const btnText = document.getElementById('auth-btn-text');
+
+            if(role === 'student') {
+                btnStudent.classList.add('bg-white', 'shadow-sm', 'text-brand-600');
+                btnStudent.classList.remove('text-slate-500');
+                btnTutor.classList.remove('bg-white', 'shadow-sm', 'text-brand-600');
+                btnTutor.classList.add('text-slate-500');
+                btnText.textContent = 'Login as Student';
+            } else {
+                btnTutor.classList.add('bg-white', 'shadow-sm', 'text-brand-600');
+                btnTutor.classList.remove('text-slate-500');
+                btnStudent.classList.remove('bg-white', 'shadow-sm', 'text-brand-600');
+                btnStudent.classList.add('text-slate-500');
+                btnText.textContent = 'Login as Tutor';
+            }
+        };
+
+        window.handleLogin = async () => {
+            // Simply set role since we are auto-authenticated anonymously
+            localStorage.setItem('user_role', currentRole);
+            updateUI();
+            closeModal('auth-modal');
+        };
+
+        window.handleLogout = () => {
+            // Just clear role to "logout" of the UI state, but keep anonymous auth for Firestore
+            localStorage.removeItem('user_role');
+            updateUI();
+        };
+
+        function updateUI() {
+            const authBtns = document.getElementById('auth-buttons-container');
+            const userMenu = document.getElementById('user-menu-container');
+            const greeting = document.getElementById('user-greeting');
+            
+            const role = localStorage.getItem('user_role');
+
+            if (currentUser && role) {
+                authBtns.classList.add('hidden');
+                userMenu.classList.remove('hidden');
+                greeting.textContent = `Hello, ${role === 'tutor' ? 'Tutor' : 'Student'}`;
+            } else {
+                authBtns.classList.remove('hidden');
+                userMenu.classList.add('hidden');
+            }
+        }
+
+        // Form Handling (Student Request)
+        document.getElementById('tutorRequestForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                alert("Please wait for initialization...");
+                return;
+            }
+
+            const name = document.getElementById('reqName').value;
+            const phone = document.getElementById('reqPhone').value;
+            const grade = document.getElementById('reqGrade').value;
+            const mode = document.querySelector('input[name="mode"]:checked').value;
+            const subject = document.getElementById('reqSubject').value;
+
+            try {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'tuition_requests'), {
+                    userId: currentUser.uid,
+                    name,
+                    phone,
+                    grade,
+                    mode,
+                    subject,
+                    status: 'open', // open, connected
+                    timestamp: serverTimestamp()
+                });
+                alert('Request submitted! Tutors will contact you soon.');
+                document.getElementById('tutorRequestForm').reset();
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("Error submitting request. Please try again.");
+            }
+        });
+
+        // Dashboard Logic
+        window.openDashboard = () => {
+            if (!currentUser) return;
+
+            openModal('dashboard-modal');
+            const role = localStorage.getItem('user_role') || 'student';
+            const container = document.getElementById('dashboard-content');
+            document.getElementById('dash-role-display').textContent = role === 'tutor' ? 'Tutor View' : 'Student View';
+            
+            container.innerHTML = '<div class="text-center py-10"><i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto text-brand-600"></i></div>';
+            lucide.createIcons();
+
+            if (role === 'tutor') {
+                loadTutorDashboard(container);
+            } else {
+                loadStudentDashboard(container);
+            }
+        };
+
+        function loadStudentDashboard(container) {
+            // Guard: ensure auth
+            if (!currentUser) return;
+
+            const q = query(
+                collection(db, 'artifacts', appId, 'public', 'data', 'tuition_requests')
+            ); 
+
+            // Using simple query + client-side filter to avoid index requirements
+            const unsubscribe = onSnapshot(q, (snapshot) => {
+                const myRequests = [];
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    if (data.userId === currentUser.uid) {
+                        myRequests.push({ id: doc.id, ...data });
+                    }
+                });
+
+                if (myRequests.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-10 text-slate-500">
+                            <i data-lucide="clipboard-list" class="w-12 h-12 mx-auto mb-3 text-slate-300"></i>
+                            <p>No requests found. Fill the form to start!</p>
+                        </div>
+                    `;
+                    lucide.createIcons();
+                    return;
+                }
+
+                let html = '<h4 class="font-bold text-lg mb-4">My Requests</h4><div class="grid gap-4">';
+                myRequests.forEach((data) => {
+                    const statusColor = data.status === 'connected' ? 'bg-green-100 text-green-700' : 'bg-brand-100 text-brand-700';
+                    const date = data.timestamp ? new Date(data.timestamp.seconds * 1000).toLocaleDateString() : 'Just now';
+
+                    html += `
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="px-3 py-1 rounded-full text-xs font-bold uppercase ${statusColor}">${data.status}</span>
+                                <span class="text-xs text-slate-400">${date}</span>
+                            </div>
+                            <h5 class="font-bold text-slate-800">${data.subject}</h5>
+                            <p class="text-sm text-slate-600 mb-1">${data.grade} • ${data.mode}</p>
+                            ${data.tutorContact ? `<div class="mt-3 p-3 bg-green-50 rounded-lg border border-green-100 text-sm"><p class="font-bold text-green-800">Tutor Connected!</p><p>${data.tutorContact}</p></div>` : ''}
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                container.innerHTML = html;
+                lucide.createIcons();
+            }, (error) => {
+                console.error("Snapshot error:", error);
+                container.innerHTML = '<p class="text-center text-red-500">Error loading data. Please try again later.</p>';
+            });
+        }
+
+        function loadTutorDashboard(container) {
+            if (!currentUser) return;
+
+            const q = query(
+                collection(db, 'artifacts', appId, 'public', 'data', 'tuition_requests')
+            );
+
+            const unsubscribe = onSnapshot(q, (snapshot) => {
+                if (snapshot.empty) {
+                    container.innerHTML = '<p class="text-center text-slate-500">No student requests available right now.</p>';
+                    return;
+                }
+
+                let html = '<h4 class="font-bold text-lg mb-4">Student Requests</h4><div class="grid gap-4">';
+                snapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const id = docSnap.id;
+                    const isConnected = data.status === 'connected';
+                    
+                    html += `
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-brand-300 transition-colors">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <h5 class="font-bold text-slate-800">${data.name}</h5>
+                                        <span class="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-500">${data.grade}</span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 mb-2">${data.subject} (${data.mode})</p>
+                                    <p class="text-xs text-slate-400 mb-3">Posted: ${data.timestamp ? new Date(data.timestamp.seconds * 1000).toLocaleDateString() : 'Recently'}</p>
+                                </div>
+                                ${isConnected 
+                                    ? '<span class="text-green-600 font-bold text-sm flex items-center"><i data-lucide="check" class="w-4 h-4 mr-1"></i> Connected</span>'
+                                    : `<button onclick="connectStudent('${id}')" class="px-4 py-2 bg-brand-600 text-white text-sm font-bold rounded-lg hover:bg-brand-700 transition-colors">Connect</button>`
+                                }
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                container.innerHTML = html;
+                lucide.createIcons();
+            }, (error) => {
+                 console.error("Snapshot error:", error);
+                 container.innerHTML = '<p class="text-center text-red-500">Error loading data.</p>';
+            });
+        }
+
+        window.connectStudent = async (reqId) => {
+            const contactInfo = prompt("Please enter your contact details (Phone/Email) to share with the student:");
+            if (contactInfo) {
+                try {
+                    const reqRef = doc(db, 'artifacts', appId, 'public', 'data', 'tuition_requests', reqId);
+                    await updateDoc(reqRef, {
+                        status: 'connected',
+                        tutorContact: contactInfo,
+                        tutorId: currentUser.uid
+                    });
+                    alert("Connected! The student can now see your contact details.");
+                } catch (e) {
+                    console.error("Error connecting:", e);
+                    alert("Failed to connect. Please try again.");
+                }
+            }
+        };
+
+        // Initialize Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
