@@ -1,202 +1,173 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Replace the base URL below (https://example.com) with your real site URL before uploading -->
-  <url>
-    <loc>https://example.com/</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://example.com/about.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://example.com/contact.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://example.com/privacy.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://example.com/terms.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Work/</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Work/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Work/login.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Work/admin.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Web-Tool/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Web-Tool/Prompt-Genrator/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Web-Tool/ebook-Reader/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Web-Tool/Top20AI/Top20AI.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Web-Tool/Excel-search-pro/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Web-Tool/File-Structure-Creator/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Search/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Search/about.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Search/contact.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Search/privacy.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Search/terms.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://example.com/EDU/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://example.com/EDU/Tutor/tutor.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://example.com/EDU/ignou-bca-resources/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://example.com/EDU/Kids/Nursery-UKG/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://example.com/EDU/Kids/Nursery-UKG/Vyanjan.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://example.com/posts/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://example.com/posts/Complete-Web-Development-Roadmap.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://example.com/RapidReadouts/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Portfolio/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Telecom-Mops/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Emergency-GF/index.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Emergency-GF/fund-manager.html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://example.com/Emergency-GF/Fund-manager-temp..html</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-</urlset>
+<url>
+...
+</url>
+<url>
+<loc>https://delhizones.com/posts/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/portfolio/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/contact</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/about</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/telecom-mops/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/web-tool/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/search/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/work/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/emergency-gf/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/privacy</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/terms</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/site-map</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://delhizones.com/web-tool/top20ai/top20ai</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/kids/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/edu-fees-manager/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/ignou-bca-resources/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://delhizones.com/web-tool/excel-search-pro/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://delhizones.com/web-tool/file-structure-creator/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://delhizones.com/web-tool/prompt-genrator/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://delhizones.com/web-tool/ebook-reader/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/kids/nursery-ukg/alphabate</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/kids/nursery-ukg/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/kids/1st-5th/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/ignou-bca-resources/1st-semester/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/ignou-bca-resources/2nd-semester/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/ignou-bca-resources/3rd-semester/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/ignou-bca-resources/4th-semester/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/ignou-bca-resources/5th-semester/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/ignou-bca-resources/6th-semester/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/ignou-bca-resources/downloads/syllabus/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/ignou-bca-resources/downloads/assignments/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/ignou-bca-resources/downloads/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://delhizones.com/edu/kids/nursery-ukg/games/</loc>
+<lastmod>2026-01-01T16:32:48+00:00</lastmod>
+<priority>0.41</priority>
+</url>
