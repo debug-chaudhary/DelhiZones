@@ -1,0 +1,32 @@
+<!-- Reusable site-wide head include for Delhizones -->
+<meta name="theme-color" content="#2563EB">
+<link rel="icon" href="/favicon.ico" />
+<!-- Default Open Graph image and site metadata (can be overridden per page) -->
+<meta property="og:site_name" content="Delhizones">
+<meta property="og:image" content="https://delhizones.com/assets/og-default.png">
+<meta name="twitter:site" content="@delhizones">
+
+<!-- Site-wide structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Delhizones",
+  "url": "https://delhizones.com",
+  "logo": "https://delhizones.com/favicon.ico"
+}
+</script>
+
+<!-- Dynamic canonical setter: if a page hasn't set a canonical, this will add one based on location -->
+<script>
+  (function(){
+    try {
+      if(!document.querySelector('link[rel="canonical"]')){
+        var link = document.createElement('link');
+        link.rel = 'canonical';
+        link.href = window.location.origin + window.location.pathname;
+        document.head.appendChild(link);
+      }
+    }catch(e){/* fail silently */}
+  })();
+</script>
