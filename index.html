@@ -3,62 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>document.head.insertAdjacentHTML('beforeend',t));</script>
-    <title>Delhizones.com - The Digital Ecosystem</title>
-        <meta name="description" content="Delhizones.com unites education, technology and community — tools, resources, and guides to empower your digital journey.">
-        <meta name="robots" content="index, follow">
-        <link rel="canonical" href="https://delhizones.com/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <!-- Open Graph / Twitter -->
-        <meta property="og:title" content="Delhizones.com - The Digital Ecosystem">
-        <meta property="og:description" content="Delhizones.com unites education, technology and community — tools, resources, and guides to empower your digital journey.">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://delhizones.com/">
-        <meta property="og:image" content="https://placehold.co/1200x630/2563EB/ffffff?text=Delhizones">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Delhizones.com - The Digital Ecosystem">
-        <meta name="twitter:description" content="Delhizones.com unites education, technology and community — tools, resources, and guides to empower your digital journey.">
-        <meta name="twitter:image" content="https://placehold.co/1200x630/2563EB/ffffff?text=Delhizones">
+    <!-- 1. SEO & META TAGS -->
+    <title>Delhizones | The Digital Ecosystem for Professionals & Creators</title>
+    <meta name="description" content="Welcome to Delhizones - Your unified digital ecosystem for educational resources, AI tools, telecom documentation, and creative portfolios. Empowering the digital generation.">
+    <meta name="keywords" content="Delhizones, Digital Ecosystem, Education, AI Tools, Telecom MOPs, Student Resources, Tech News, Portfolio, Delhi Startups">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    
+    <!-- 2. CANONICAL URL -->
+    <link rel="canonical" href="https://www.delhizones.com/">
+    
+    <!-- 3. OPEN GRAPH (Social Media) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.delhizones.com/">
+    <meta property="og:title" content="Delhizones | The Digital Ecosystem">
+    <meta property="og:description" content="Your unified gateway to educational resources, AI tools, and technology insights.">
+    <meta property="og:image" content="https://www.delhizones.com/assets/images/home-og-image.jpg">
+    <meta property="og:site_name" content="Delhizones">
 
-        <!-- Structured Data: Organization + WebSite -->
-        <script type="application/ld+json">
+    <!-- 4. TWITTER CARDS -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.delhizones.com/">
+    <meta name="twitter:title" content="Delhizones | Digital Ecosystem">
+    <meta name="twitter:description" content="Empowering the digital generation with tech insights, education, and innovation.">
+    <meta name="twitter:image" content="https://www.delhizones.com/assets/images/home-og-image.jpg">
+    
+    <!-- 5. SCHEMA MARKUP -->
+    <script type="application/ld+json">
+    [
         {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Delhizones",
-            "url": "https://delhizones.com",
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://delhizones.com/Search/index.html?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Delhizones",
+          "url": "https://www.delhizones.com/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.delhizones.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Delhizones",
+          "url": "https://www.delhizones.com/",
+          "logo": "https://www.delhizones.com/logo.png",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "delhizones@gmail.com",
+            "contactType": "customer support"
+          }
         }
-        </script>
+    ]
+    </script>
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
 
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter & Playfair Display -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     
-    <!-- Lucide Icons CDN -->
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         /* Custom styles */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Tailwind gray-50 */
         }
         h1, h2, h3, .brand-font {
             font-family: 'Playfair Display', serif;
         }
-        /* Gradient Text */
         .text-gradient {
             background: linear-gradient(to right, #2563EB, #9333ea);
             -webkit-background-clip: text;
@@ -71,11 +92,9 @@
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        /* Mobile Menu Transition */
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
         }
-        /* Scroll Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -85,7 +104,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Blob Animation */
         @keyframes blob {
             0% { transform: translate(0px, 0px) scale(1); }
             33% { transform: translate(30px, -50px) scale(1.1); }
@@ -102,16 +120,24 @@
             animation-delay: 4s;
         }
     </style>
-    <meta name="google-site-verification" content="kPTEXU0FmFXr9s-iinE9qY1EKiZGwfd3MXbNiBZmpRA" />
+    <script>
+        // Dark mode setup
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+        tailwind.config = { darkMode: 'class' }
+    </script>
 </head>
-<body class="text-slate-800 bg-slate-50 antialiased selection:bg-blue-100 selection:text-blue-900">
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-blue-100 selection:text-blue-900 flex flex-col min-h-screen">
 
     <!-- Header -->
-    <header id="header" class="fixed w-full top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 transition-all duration-300">
+    <header id="header" class="fixed w-full top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <a href="/" class="flex items-center gap-3 group" aria-label="Delhizones Homepage">
-                    <!-- Premium Logo SVG -->
+                    <!-- Logo -->
                     <div class="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110">
                         <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-md">
                             <g clip-path="url(#clip0_105_2_header)">
@@ -132,39 +158,47 @@
                             </defs>
                         </svg>
                     </div>
-                    <span class="text-2xl font-bold text-slate-900 brand-font tracking-tight">
-                        Delhi<span class="text-blue-600">zones</span>
+                    <span class="text-2xl font-bold text-slate-900 dark:text-white brand-font tracking-tight">
+                        Delhi<span class="text-blue-600 dark:text-blue-400">zones</span>
                     </span>
                 </a>
                 
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#services" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors duration-300">Services</a>
-                    <a href="#youtube" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors duration-300">YouTube</a>
-                    <a href="/posts/" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors duration-300">Journal</a>
-                    <a href="/Portfolio/" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors duration-300">Portfolio</a>
-                    <a href="#support" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors duration-300">Support</a>
-                    <a href="/contact.html" class="px-5 py-2.5 text-sm font-medium text-white bg-slate-900 rounded-full hover:bg-blue-600 transition-colors duration-300 shadow-lg shadow-blue-900/20">Contact</a>
-                </nav>
+                <div class="flex items-center gap-6">
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex items-center space-x-8">
+                        <a href="#services" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">Services</a>
+                        <a href="#youtube" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">YouTube</a>
+                        <a href="/posts/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">Journal</a>
+                        <a href="/Portfolio/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">Portfolio</a>
+                        <a href="#support" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">Support</a>
+                        <a href="/contact.html" class="px-5 py-2.5 text-sm font-medium text-white bg-slate-900 rounded-full hover:bg-blue-600 transition-colors duration-300 shadow-lg shadow-blue-900/20">Contact</a>
+                    </nav>
 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="p-2 text-slate-600 hover:text-blue-600 focus:outline-none transition-colors">
-                        <i id="menu-open-icon" data-lucide="menu" class="w-6 h-6"></i>
-                        <i id="menu-close-icon" data-lucide="x" class="w-6 h-6 hidden"></i>
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-colors rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i id="theme-toggle-dark-icon" class="w-5 h-5 hidden" data-lucide="moon"></i>
+                        <i id="theme-toggle-light-icon" class="w-5 h-5 hidden" data-lucide="sun"></i>
                     </button>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-colors">
+                            <i id="menu-open-icon" data-lucide="menu" class="w-6 h-6"></i>
+                            <i id="menu-close-icon" data-lucide="x" class="w-6 h-6 hidden"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-slate-100 shadow-lg absolute w-full left-0">
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-lg absolute w-full left-0">
             <div class="px-4 py-6 space-y-3">
-                <a href="#services" class="block px-4 py-3 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors">Services</a>
-                <a href="#youtube" class="block px-4 py-3 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors">YouTube Channels</a>
-                <a href="/posts/" class="block px-4 py-3 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors">Journal</a>
-                <a href="/Portfolio/" class="block px-4 py-3 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors">Portfolio</a>
-                <a href="#support" class="block px-4 py-3 text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors">Support</a>
+                <a href="#services" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Services</a>
+                <a href="#youtube" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">YouTube Channels</a>
+                <a href="/posts/" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Journal</a>
+                <a href="/Portfolio/" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Portfolio</a>
+                <a href="#support" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Support</a>
                 <a href="/contact.html" class="block px-4 py-3 text-base font-medium text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">Contact Us</a>
             </div>
         </div>
@@ -177,26 +211,26 @@
         <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden reveal">
             <!-- Background Decoration -->
             <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full z-[-1]">
-                <div class="absolute top-20 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl mix-blend-multiply animate-blob"></div>
-                <div class="absolute top-20 right-10 w-72 h-72 bg-purple-400/10 rounded-full blur-3xl mix-blend-multiply animate-blob animation-delay-2000"></div>
-                <div class="absolute -bottom-32 left-1/2 w-72 h-72 bg-pink-400/10 rounded-full blur-3xl mix-blend-multiply animate-blob animation-delay-4000"></div>
+                <div class="absolute top-20 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl mix-blend-multiply dark:mix-blend-screen animate-blob"></div>
+                <div class="absolute top-20 right-10 w-72 h-72 bg-purple-400/10 rounded-full blur-3xl mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-2000"></div>
+                <div class="absolute -bottom-32 left-1/2 w-72 h-72 bg-pink-400/10 rounded-full blur-3xl mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-4000"></div>
             </div>
 
             <div class="container mx-auto px-6 text-center">
-                <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold tracking-wider uppercase mb-6 border border-blue-100">
+                <span class="inline-block py-1 px-3 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-semibold tracking-wider uppercase mb-6 border border-blue-100 dark:border-blue-800">
                     Welcome to the Future
                 </span>
-                <h1 class="text-5xl md:text-7xl font-bold text-slate-900 leading-tight mb-6">
+                <h1 class="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-tight mb-6">
                     A Unified <span class="text-gradient">Digital Ecosystem</span>
                 </h1>
-                <p class="mt-6 text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-light">
+                <p class="mt-6 text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed font-light">
                     Delhizones.com brings together education, technology, and community in one seamless platform. Explore tools, resources, and insights designed to empower your digital journey.
                 </p>
                 <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#services" class="px-8 py-4 bg-slate-900 text-white font-medium rounded-full hover:bg-blue-600 transition-all duration-300 shadow-lg shadow-slate-900/20 hover:shadow-blue-600/30 transform hover:-translate-y-1">
+                    <a href="#services" class="px-8 py-4 bg-slate-900 dark:bg-blue-600 text-white font-medium rounded-full hover:bg-blue-600 dark:hover:bg-blue-700 transition-all duration-300 shadow-lg shadow-slate-900/20 hover:shadow-blue-600/30 transform hover:-translate-y-1">
                         Explore Platform
                     </a>
-                    <a href="/about.html" class="px-8 py-4 bg-white text-slate-700 font-medium rounded-full border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300 shadow-sm">
+                    <a href="/about.html" class="px-8 py-4 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium rounded-full border border-slate-200 dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-300 shadow-sm">
                         Our Mission
                     </a>
                 </div>
@@ -204,131 +238,131 @@
         </section>
 
         <!-- Services Grid -->
-        <section id="services" class="py-20 bg-white reveal">
+        <section id="services" class="py-20 bg-white dark:bg-slate-800 reveal transition-colors duration-300">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Curated Experiences</h2>
-                    <p class="text-slate-500 max-w-2xl mx-auto">Discover our suite of specialized platforms tailored for learning, productivity, and community support.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Curated Experiences</h2>
+                    <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">Discover our suite of specialized platforms tailored for learning, productivity, and community support.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     
                     <!-- EDU Platform -->
-                    <a href="/EDU/" class="group block p-8 bg-slate-50 rounded-2xl border border-slate-100 card-hover relative overflow-hidden">
+                    <a href="/EDU/" class="group block p-8 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700 card-hover relative overflow-hidden transition-colors">
                         <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                             <i data-lucide="graduation-cap" class="w-24 h-24 text-blue-600"></i>
                         </div>
                         <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg shadow-blue-600/30">
                             <i data-lucide="book-open"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">EDU Platform</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Comprehensive educational resources, including kids' learning apps and school management tools.</p>
-                        <span class="text-blue-600 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">EDU Platform</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">Comprehensive educational resources, including kids' learning apps and school management tools.</p>
+                        <span class="text-blue-600 dark:text-blue-400 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                             Access Portal <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </span>
                     </a>
                     
                     <!-- Telecom-Mops -->
-                    <a href="/Telecom-Mops/" class="group block p-8 bg-slate-50 rounded-2xl border border-slate-100 card-hover relative overflow-hidden">
+                    <a href="/Telecom-Mops/" class="group block p-8 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700 card-hover relative overflow-hidden transition-colors">
                          <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                             <i data-lucide="signal" class="w-24 h-24 text-green-600"></i>
                         </div>
                         <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg shadow-green-600/30">
                            <i data-lucide="book-marked"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-green-600 transition-colors">Telecom MOPs</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">A specialized library of MOPs, training materials, and technical documentation for telecom professionals.</p>
-                         <span class="text-green-600 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">Telecom MOPs</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">A specialized library of MOPs, training materials, and technical documentation for telecom professionals.</p>
+                         <span class="text-green-600 dark:text-green-400 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                             View Docs <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </span>
                     </a>
 
                     <!-- Web-Tool -->
-                    <a href="/Web-Tool/" class="group block p-8 bg-slate-50 rounded-2xl border border-slate-100 card-hover relative overflow-hidden">
+                    <a href="/Web-Tool/" class="group block p-8 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700 card-hover relative overflow-hidden transition-colors">
                          <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                             <i data-lucide="cpu" class="w-24 h-24 text-purple-600"></i>
                         </div>
                         <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg shadow-purple-600/30">
                             <i data-lucide="wrench"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-purple-600 transition-colors">Web Tools Suite</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Powerful online utilities including Excel Search Pro, eBook Reader, and the Top 20 AI Directory.</p>
-                         <span class="text-purple-600 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">Web Tools Suite</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">Powerful online utilities including Excel Search Pro, eBook Reader, and the Top 20 AI Directory.</p>
+                         <span class="text-purple-600 dark:text-purple-400 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                             Launch Tools <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </span>
                     </a>
 
                     <!-- Search -->
-                    <a href="/Search/" class="group block p-8 bg-slate-50 rounded-2xl border border-slate-100 card-hover relative overflow-hidden">
+                    <a href="/Search/" class="group block p-8 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700 card-hover relative overflow-hidden transition-colors">
                         <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                             <i data-lucide="radar" class="w-24 h-24 text-red-600"></i>
                         </div>
                         <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg shadow-red-600/30">
                             <i data-lucide="tower-control"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-red-600 transition-colors">Telecom Search</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Advanced BTS search and identification application for field engineers and technicians.</p>
-                         <span class="text-red-600 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">Telecom Search</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">Advanced BTS search and identification application for field engineers and technicians.</p>
+                         <span class="text-red-600 dark:text-red-400 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                             Start Search <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </span>
                     </a>
 
                     <!-- Posts -->
-                    <a href="/posts/" class="group block p-8 bg-slate-50 rounded-2xl border border-slate-100 card-hover relative overflow-hidden">
+                    <a href="/posts/" class="group block p-8 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700 card-hover relative overflow-hidden transition-colors">
                          <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                             <i data-lucide="file-text" class="w-24 h-24 text-yellow-600"></i>
                         </div>
                         <div class="w-12 h-12 bg-yellow-600 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg shadow-yellow-600/30">
                             <i data-lucide="newspaper"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-yellow-600 transition-colors">Daily Journal</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Curated articles on technology, politics, current affairs, and industry insights.</p>
-                         <span class="text-yellow-600 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">Daily Journal</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">Curated articles on technology, politics, current affairs, and industry insights.</p>
+                         <span class="text-yellow-600 dark:text-yellow-400 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                             Read Latest <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </span>
                     </a>
                     
                     <!-- Work -->
-                    <a href="/Work/" class="group block p-8 bg-slate-50 rounded-2xl border border-slate-100 card-hover relative overflow-hidden">
+                    <a href="/Work/" class="group block p-8 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700 card-hover relative overflow-hidden transition-colors">
                          <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                             <i data-lucide="settings-2" class="w-24 h-24 text-indigo-600"></i>
                         </div>
                         <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg shadow-indigo-600/30">
                             <i data-lucide="briefcase"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">Work Platform</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Collaborative workspace for engineering teams to track progress and share updates.</p>
-                         <span class="text-indigo-600 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Work Platform</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">Collaborative workspace for engineering teams to track progress and share updates.</p>
+                         <span class="text-indigo-600 dark:text-indigo-400 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                             Enter Workspace <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </span>
                     </a>
 
                     <!-- Emergency Group Fund -->
-                     <a href="/Emergency-GF/" class="group block p-8 bg-slate-50 rounded-2xl border border-slate-100 card-hover relative overflow-hidden">
+                     <a href="/Emergency-GF/" class="group block p-8 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700 card-hover relative overflow-hidden transition-colors">
                          <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                             <i data-lucide="heart-handshake" class="w-24 h-24 text-slate-500"></i>
                         </div>
                         <div class="w-12 h-12 bg-slate-700 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg shadow-slate-700/30">
                             <i data-lucide="shield"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-700 transition-colors">Emergency Fund</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Community-driven financial support system for emergencies. Secure and transparent.</p>
-                         <span class="text-slate-700 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Emergency Fund</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">Community-driven financial support system for emergencies. Secure and transparent.</p>
+                         <span class="text-slate-700 dark:text-slate-300 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                             View Fund <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </span>
                     </a>
 
                     <!-- Portfolio -->
-                    <a href="/Portfolio/" class="group block p-8 bg-slate-50 rounded-2xl border border-slate-100 card-hover relative overflow-hidden">
+                    <a href="/Portfolio/" class="group block p-8 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-700 card-hover relative overflow-hidden transition-colors">
                          <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                             <i data-lucide="layout" class="w-24 h-24 text-slate-500"></i>
                         </div>
                         <div class="w-12 h-12 bg-slate-700 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg shadow-slate-700/30">
                             <i data-lucide="user-circle"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-700 transition-colors">Portfolio</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-4">A showcase of our journey, projects, skills, and professional milestones.</p>
-                         <span class="text-slate-700 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Portfolio</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">A showcase of our journey, projects, skills, and professional milestones.</p>
+                         <span class="text-slate-700 dark:text-slate-300 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
                             View Portfolio <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </span>
                     </a>
@@ -338,50 +372,50 @@
         </section>
 
         <!-- YouTube Channels Section -->
-        <section id="youtube" class="py-20 bg-slate-50 border-t border-slate-200 reveal">
+        <section id="youtube" class="py-20 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 reveal transition-colors duration-300">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Our YouTube Channels</h2>
-                    <p class="text-slate-500 max-w-2xl mx-auto">Watch tutorials, tech reviews, and exclusive insights on our dedicated channels.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Our YouTube Channels</h2>
+                    <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">Watch tutorials, tech reviews, and exclusive insights on our dedicated channels.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Tech Channel -->
-                    <a href="#" target="_blank" class="group block bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100">
+                    <!-- Tech Channel (RapidReadouts) -->
+                    <a href="/RapidReadouts/index.html" class="group block bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100 dark:border-slate-700">
                         <div class="h-40 bg-gradient-to-r from-red-600 to-red-500 flex items-center justify-center relative">
                             <i data-lucide="youtube" class="w-16 h-16 text-white opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
                         </div>
                         <div class="p-8 text-center">
-                            <h3 class="text-xl font-bold text-slate-900 mb-2">Delhizones Tech</h3>
-                            <p class="text-slate-600 text-sm mb-4">Deep dives into the latest gadgets, software tutorials, and tech industry news.</p>
-                            <span class="inline-flex items-center text-red-600 font-semibold text-sm">
-                                Subscribe <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">RapidReadouts</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Your go-to source for quick, insightful summaries and tech updates.</p>
+                            <span class="inline-flex items-center text-red-600 dark:text-red-400 font-semibold text-sm">
+                                Visit Channel Page <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
                             </span>
                         </div>
                     </a>
                     
                     <!-- Vlogs Channel -->
-                    <a href="#" target="_blank" class="group block bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100">
+                    <a href="#" target="_blank" class="group block bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100 dark:border-slate-700">
                         <div class="h-40 bg-gradient-to-r from-orange-500 to-amber-500 flex items-center justify-center relative">
                              <i data-lucide="video" class="w-16 h-16 text-white opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
                         </div>
                          <div class="p-8 text-center">
-                            <h3 class="text-xl font-bold text-slate-900 mb-2">Delhizones Vlogs</h3>
-                            <p class="text-slate-600 text-sm mb-4">Behind the scenes, team events, and daily life at Delhizones.</p>
-                             <span class="inline-flex items-center text-orange-600 font-semibold text-sm">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Delhizones Vlogs</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Behind the scenes, team events, and daily life at Delhizones.</p>
+                             <span class="inline-flex items-center text-orange-600 dark:text-orange-400 font-semibold text-sm">
                                 Watch Now <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
                             </span>
                         </div>
                     </a>
 
                     <!-- Edu Channel -->
-                    <a href="#" target="_blank" class="group block bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100">
+                    <a href="#" target="_blank" class="group block bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100 dark:border-slate-700">
                         <div class="h-40 bg-gradient-to-r from-blue-600 to-cyan-500 flex items-center justify-center relative">
                              <i data-lucide="presentation" class="w-16 h-16 text-white opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
                         </div>
                         <div class="p-8 text-center">
-                            <h3 class="text-xl font-bold text-slate-900 mb-2">Delhizones Edu</h3>
-                            <p class="text-slate-600 text-sm mb-4">Free educational content, course lectures, and student guidance.</p>
-                             <span class="inline-flex items-center text-blue-600 font-semibold text-sm">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Delhizones Edu</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Free educational content, course lectures, and student guidance.</p>
+                             <span class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold text-sm">
                                 Start Learning <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
                             </span>
                         </div>
@@ -391,9 +425,9 @@
         </section>
 
         <!-- Ad Placeholder Section -->
-        <section class="py-12 bg-white reveal">
+        <section class="py-12 bg-white dark:bg-slate-800 reveal transition-colors duration-300">
             <div class="container mx-auto px-6">
-                <div class="bg-slate-50 rounded-xl h-24 flex items-center justify-center text-slate-400 border border-dashed border-slate-300">
+                <div class="bg-slate-50 dark:bg-slate-900 rounded-xl h-24 flex items-center justify-center text-slate-400 dark:text-slate-600 border border-dashed border-slate-300 dark:border-slate-700">
                     <span class="text-sm font-medium uppercase tracking-widest">Advertisement Space</span>
                 </div>
             </div>
@@ -401,56 +435,56 @@
 
 
         <!-- Support Us Section -->
-        <section id="support" class="py-20 bg-slate-50 border-t border-slate-200 reveal">
+        <section id="support" class="py-20 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 reveal transition-colors duration-300">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Support Our Mission</h2>
-                    <p class="text-slate-500 max-w-2xl mx-auto">Your contributions fuel innovation and keep our resources accessible to everyone.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Support Our Mission</h2>
+                    <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">Your contributions fuel innovation and keep our resources accessible to everyone.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <!-- Donation Card -->
-                    <div class="bg-white p-8 rounded-2xl border border-slate-100 text-center hover:border-pink-200 transition-colors duration-300 shadow-sm">
-                        <div class="w-14 h-14 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 text-center hover:border-pink-200 dark:hover:border-pink-900 transition-colors duration-300 shadow-sm">
+                        <div class="w-14 h-14 bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 rounded-full flex items-center justify-center mb-6 mx-auto">
                             <i data-lucide="heart" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-3">Donate</h3>
-                        <p class="text-slate-600 text-sm mb-6 h-12">Directly support server costs and development.</p>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Donate</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 h-12">Directly support server costs and development.</p>
                         <a href="#" class="inline-block w-full py-3 bg-pink-600 text-white font-semibold rounded-lg hover:bg-pink-700 transition-colors shadow-lg shadow-pink-600/20">
                             Donate Now
                         </a>
                     </div>
 
                      <!-- Affiliate Card -->
-                    <div class="bg-white p-8 rounded-2xl border border-slate-100 text-center hover:border-cyan-200 transition-colors duration-300 shadow-sm">
-                        <div class="w-14 h-14 bg-cyan-100 text-cyan-600 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 text-center hover:border-cyan-200 dark:hover:border-cyan-900 transition-colors duration-300 shadow-sm">
+                        <div class="w-14 h-14 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 rounded-full flex items-center justify-center mb-6 mx-auto">
                             <i data-lucide="shopping-bag" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-3">Affiliate</h3>
-                        <p class="text-slate-600 text-sm mb-6 h-12">Shop via our links at no extra cost to you.</p>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Affiliate</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 h-12">Shop via our links at no extra cost to you.</p>
                         <a href="#" class="inline-block w-full py-3 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 transition-colors shadow-lg shadow-cyan-600/20">
                             Shop Links
                         </a>
                     </div>
 
                     <!-- Ad-supported Card -->
-                    <div class="bg-white p-8 rounded-2xl border border-slate-100 text-center hover:border-teal-200 transition-colors duration-300 shadow-sm">
-                        <div class="w-14 h-14 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 text-center hover:border-teal-200 dark:hover:border-teal-900 transition-colors duration-300 shadow-sm">
+                        <div class="w-14 h-14 bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 rounded-full flex items-center justify-center mb-6 mx-auto">
                             <i data-lucide="monitor-play" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-3">Ads</h3>
-                        <p class="text-slate-600 text-sm mb-6 h-12">Non-intrusive ads help keep services free.</p>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Ads</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 h-12">Non-intrusive ads help keep services free.</p>
                         <span class="inline-block w-full py-3 bg-teal-600 text-white font-semibold rounded-lg opacity-80 cursor-default">
                             Active
                         </span>
                     </div>
 
                     <!-- Premium Features Card -->
-                    <div class="bg-white p-8 rounded-2xl border border-slate-100 text-center hover:border-amber-200 transition-colors duration-300 shadow-sm">
-                        <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 text-center hover:border-amber-200 dark:hover:border-amber-900 transition-colors duration-300 shadow-sm">
+                        <div class="w-14 h-14 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-full flex items-center justify-center mb-6 mx-auto">
                             <i data-lucide="gem" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-3">Premium</h3>
-                        <p class="text-slate-600 text-sm mb-6 h-12">Exclusive tools and ad-free experience coming soon.</p>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Premium</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 h-12">Exclusive tools and ad-free experience coming soon.</p>
                         <span class="inline-block w-full py-3 bg-amber-600 text-white font-semibold rounded-lg opacity-80 cursor-default">
                             Waitlist
                         </span>
@@ -462,7 +496,7 @@
     </main>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-slate-900 text-slate-300 pt-20 pb-10">
+    <footer id="contact" class="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 border-b border-slate-800 pb-12">
                 <div class="text-center md:text-left">
@@ -488,10 +522,21 @@
                         delhizones@gmail.com
                     </a>
                     <div class="mt-6 flex justify-center md:justify-end gap-4">
-                        <!-- Social Icons Placeholder -->
-                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-blue-600 transition-colors text-white"><i data-lucide="twitter" class="w-4 h-4"></i></a>
-                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-blue-600 transition-colors text-white"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-blue-600 transition-colors text-white"><i data-lucide="github" class="w-4 h-4"></i></a>
+                        <a href="https://www.facebook.com/DelhiZones/" target="_blank" rel="noopener" class="p-2 bg-slate-800 rounded-full hover:bg-blue-600 transition-colors text-white" aria-label="Facebook">
+                            <i data-lucide="facebook" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://www.instagram.com/delhizones/" target="_blank" rel="noopener" class="p-2 bg-slate-800 rounded-full hover:bg-pink-600 transition-colors text-white" aria-label="Instagram">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@DelhiZones" target="_blank" rel="noopener" class="p-2 bg-slate-800 rounded-full hover:bg-red-600 transition-colors text-white" aria-label="YouTube">
+                            <i data-lucide="youtube" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/delhizones/" target="_blank" rel="noopener" class="p-2 bg-slate-800 rounded-full hover:bg-blue-700 transition-colors text-white" aria-label="LinkedIn">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://x.com/delhizones" target="_blank" rel="noopener" class="p-2 bg-slate-800 rounded-full hover:bg-slate-600 transition-colors text-white" aria-label="Twitter">
+                            <i data-lucide="twitter" class="w-4 h-4"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -504,6 +549,29 @@
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        function updateThemeIcons() {
+            if (document.documentElement.classList.contains('dark')) {
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+            } else {
+                darkIcon.classList.remove('hidden');
+                lightIcon.classList.add('hidden');
+            }
+        }
+        // Initialize state
+        updateThemeIcons();
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+            updateThemeIcons();
+        });
 
         // Mobile Menu Logic
         const mobileMenuButton = document.getElementById('mobile-menu-button');
