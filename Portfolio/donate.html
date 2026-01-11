@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- 1. SEO & META TAGS -->
+    <title>Support Us | Donate to Delhizones</title>
+    <meta name="description" content="Support Delhizones in building a free digital ecosystem. Your contributions help us maintain servers, create educational content, and keep tools free for everyone.">
+    <meta name="keywords" content="Donate Delhizones, Support Creators, UPI Donation, Crowdfunding, Education Fund">
+    <meta name="robots" content="index, follow">
+    
+    <!-- 2. CANONICAL URL -->
+    <link rel="canonical" href="https://www.delhizones.com/donate.html">
+    
+    <!-- 3. OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.delhizones.com/donate.html">
+    <meta property="og:title" content="Support Delhizones Mission">
+    <meta property="og:description" content="Help us keep education and technology resources free for everyone.">
+    <meta property="og:image" content="https://www.delhizones.com/assets/images/donate-og.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Playfair Display', serif; }
+        .text-gradient {
+            background: linear-gradient(to right, #2563EB, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* QR Code Placeholder Animation */
+        .scan-line {
+            width: 100%;
+            height: 2px;
+            background: #2563EB;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: scan 3s infinite linear;
+            box-shadow: 0 0 4px #2563EB;
+        }
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+    </style>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+        tailwind.config = { darkMode: 'class' }
+    </script>
+</head>
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-pink-100 selection:text-pink-900 flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header id="header" class="fixed w-full top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center gap-3 group" aria-label="Delhizones Homepage">
+                    <div class="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110">
+                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-md">
+                            <g clip-path="url(#clip0_105_2_header)">
+                                <circle cx="16" cy="16" r="15.5" fill="white" stroke="#2563EB" stroke-width="1"></circle>
+                                <circle cx="16" cy="16" r="12" fill="#2563EB"></circle>
+                                <path d="M10.5 11.5L16 20.5L21.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z" fill="white"></path>
+                                <path d="M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z" fill="white"></path>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_105_2_header"><rect width="32" height="32" fill="white"></rect></clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold text-slate-900 dark:text-white brand-font tracking-tight">
+                        Delhi<span class="text-blue-600 dark:text-blue-400">zones</span>
+                    </span>
+                </a>
+                
+                <div class="flex items-center gap-6">
+                    <nav class="hidden md:flex items-center space-x-8">
+                        <a href="/#services" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Services</a>
+                        <a href="/posts/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Journal</a>
+                        <a href="/Portfolio/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Portfolio</a>
+                        <a href="/contact.html" class="px-5 py-2.5 text-sm font-medium text-white bg-slate-900 rounded-full hover:bg-blue-600 transition-colors shadow-lg shadow-blue-900/20">Contact</a>
+                    </nav>
+
+                    <button id="theme-toggle" class="p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-colors rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i id="theme-toggle-dark-icon" class="w-5 h-5 hidden" data-lucide="moon"></i>
+                        <i id="theme-toggle-light-icon" class="w-5 h-5 hidden" data-lucide="sun"></i>
+                    </button>
+
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-colors">
+                            <i id="menu-open-icon" data-lucide="menu" class="w-6 h-6"></i>
+                            <i id="menu-close-icon" data-lucide="x" class="w-6 h-6 hidden"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-lg absolute w-full left-0">
+            <div class="px-4 py-6 space-y-3">
+                <a href="/#services" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Services</a>
+                <a href="/posts/" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Journal</a>
+                <a href="/Portfolio/" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Portfolio</a>
+                <a href="/contact.html" class="block px-4 py-3 text-base font-medium text-blue-600 hover:bg-blue-50 rounded-lg">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-28 pb-20">
+        <div class="container mx-auto px-6">
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Page Header -->
+                <div class="text-center mb-12 reveal">
+                    <span class="inline-block py-1 px-3 rounded-full bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 text-xs font-semibold tracking-wider uppercase mb-6 border border-pink-200 dark:border-pink-800">
+                        Community Support
+                    </span>
+                    <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 brand-font">
+                        Fuel Our <span class="text-gradient">Mission</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                        Delhizones is committed to providing free educational tools, MOPs, and tech insights. Your support helps cover server costs and keeps our resources accessible to everyone.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 items-start reveal">
+                    
+                    <!-- Payment Card -->
+                    <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-700 relative">
+                        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white text-center">
+                            <h2 class="text-2xl font-bold mb-2">Scan to Pay</h2>
+                            <p class="text-blue-100 text-sm">Use any UPI App (GPay, PhonePe, Paytm)</p>
+                        </div>
+                        
+                        <div class="p-8 flex flex-col items-center">
+                            <!-- QR Code Placeholder -->
+                            <div class="relative w-48 h-48 bg-white p-2 rounded-xl border-2 border-slate-100 shadow-inner mb-6 flex items-center justify-center group cursor-pointer">
+                                <!-- Replace this src with your actual QR code image file -->
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=priyakadarsh2-1@okicici&pn=Delhizones&cu=INR" 
+                                     alt="UPI QR Code" 
+                                     class="w-full h-full object-contain rounded-lg">
+                                <div class="scan-line"></div>
+                                <div class="absolute inset-0 bg-black/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
+                                    <span class="bg-white text-xs font-bold px-2 py-1 rounded text-slate-800 shadow">Verified UPI</span>
+                                </div>
+                            </div>
+
+                            <!-- UPI ID Section -->
+                            <div class="w-full bg-slate-50 dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3">
+                                <div class="overflow-hidden">
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider mb-1">UPI ID</p>
+                                    <p id="upi-id" class="text-slate-900 dark:text-white font-mono font-medium truncate">priyakadarsh2-1@okicici</p>
+                                </div>
+                                <button onclick="copyUPI()" class="p-2 bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors" aria-label="Copy UPI ID">
+                                    <i data-lucide="copy" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Success Message (Hidden by default) -->
+                            <p id="copy-success" class="text-green-600 text-sm mt-3 opacity-0 transition-opacity font-medium flex items-center">
+                                <i data-lucide="check-circle" class="w-4 h-4 mr-1"></i> Copied to clipboard!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Impact Section -->
+                    <div class="space-y-6">
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                            <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mb-4">
+                                <i data-lucide="server" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Server & Maintenance</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">
+                                Your donation directly helps keep our websites, telecom tools, and databases online and fast for thousands of daily users.
+                            </p>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                            <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full flex items-center justify-center mb-4">
+                                <i data-lucide="book-open" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Free Education</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">
+                                We invest in creating free courses, kids' learning modules, and technical documentation (MOPs) that are accessible to all.
+                            </p>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                            <div class="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full flex items-center justify-center mb-4">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Community Fund</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">
+                                A portion of donations goes towards our Emergency Group Fund to help community members in need.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 border-b border-slate-800 pb-12">
+                <div class="text-center md:text-left">
+                     <a href="/" class="text-2xl font-bold text-white brand-font tracking-tight mb-4 inline-block">
+                        Delhi<span class="text-blue-500">zones</span>
+                    </a>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Building a comprehensive digital ecosystem for professionals, students, and creators. Join us on our journey.
+                    </p>
+                </div>
+                <div class="text-center">
+                    <h4 class="text-white font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="/about.html" class="hover:text-blue-400 transition-colors">About Us</a></li>
+                        <li><a href="/privacy.html" class="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="hover:text-blue-400 transition-colors">Terms of Service</a></li>
+                        <li><a href="/site-map.html" class="hover:text-blue-400 transition-colors">Site Map</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-right">
+                    <h4 class="text-white font-bold mb-6">Contact</h4>
+                    <a href="mailto:delhizones@gmail.com" class="text-blue-400 hover:text-blue-300 transition-colors font-medium">
+                        delhizones@gmail.com
+                    </a>
+                    <div class="mt-6 flex justify-center md:justify-end gap-4">
+                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-blue-600 transition-colors text-white"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-pink-600 transition-colors text-white"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-red-600 transition-colors text-white"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-blue-700 transition-colors text-white"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-slate-600 transition-colors text-white"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-xs text-slate-500">
+                <p>&copy; 2024 Delhizones.com. All Rights Reserved. Designed with <i data-lucide="heart" class="w-3 h-3 inline text-red-500"></i> in Delhi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const openIcon = document.getElementById('menu-open-icon');
+        const closeIcon = document.getElementById('menu-close-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            openIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Theme Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        function updateThemeIcons() {
+            if (document.documentElement.classList.contains('dark')) {
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+            } else {
+                darkIcon.classList.remove('hidden');
+                lightIcon.classList.add('hidden');
+            }
+        }
+        updateThemeIcons();
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+            updateThemeIcons();
+        });
+
+        // Copy UPI Function
+        function copyUPI() {
+            const upiId = document.getElementById('upi-id').innerText;
+            navigator.clipboard.writeText(upiId).then(() => {
+                const successMsg = document.getElementById('copy-success');
+                successMsg.classList.remove('opacity-0');
+                setTimeout(() => {
+                    successMsg.classList.add('opacity-0');
+                }, 3000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Reveal Animation
+        function reveal() {
+          var reveals = document.querySelectorAll(".reveal");
+          for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 100;
+            if (elementTop < windowHeight - elementVisible) {
+              reveals[i].classList.add("active");
+            }
+          }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+
+</body>
+</html>
