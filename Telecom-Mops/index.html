@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>{const range=document.createRange();range.selectNode(document.head);const frag=range.createContextualFragment(t);document.head.appendChild(frag);});</script>
 
     <!-- 1. SEO & META TAGS -->
     <title>Telecom MOPs Library | Technical Manuals & Safety Guidelines | Delhizones</title>
@@ -70,59 +71,8 @@
 </head>
 <body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-green-100 selection:text-green-900 flex flex-col min-h-screen">
 
-    <!-- Header -->
-    <header id="header" class="fixed w-full top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <a href="/" class="flex items-center gap-3 group" aria-label="Delhizones Homepage">
-                    <div class="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110">
-                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-md">
-                            <g clip-path="url(#clip0_105_2_header)">
-                                <circle cx="16" cy="16" r="15.5" fill="white" stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
-                            </g>
-                        </svg>
-                    </div>
-                    <span class="text-2xl font-bold text-slate-900 dark:text-white brand-font tracking-tight">
-                        Delhi<span class="text-blue-600 dark:text-blue-400">zones</span>
-                    </span>
-                </a>
-                
-                <div class="flex items-center gap-6">
-                    <nav class="hidden md:flex items-center space-x-8">
-                        <a href="/#services" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Services</a>
-                        <a href="/jobs/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Jobs</a>
-                        <a href="/search/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">SDB Search</a>
-                        <a href="/#support" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Support</a>
-                    </nav>
-
-                    <button id="theme-toggle" class="p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-colors rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
-                        <i id="theme-toggle-dark-icon" class="w-5 h-5 hidden" data-lucide="moon"></i>
-                        <i id="theme-toggle-light-icon" class="w-5 h-5 hidden" data-lucide="sun"></i>
-                    </button>
-
-                    <div class="md:hidden">
-                        <button id="mobile-menu-button" class="p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-colors">
-                            <i id="menu-open-icon" data-lucide="menu" class="w-6 h-6"></i>
-                            <i id="menu-close-icon" data-lucide="x" class="w-6 h-6 hidden"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-lg absolute w-full left-0">
-            <div class="px-4 py-6 space-y-3">
-                <a href="/#services" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Services</a>
-                <a href="/jobs/" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Jobs</a>
-                <a href="/search/" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Search</a>
-                <a href="/#support" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Support</a>
-                <a href="/contact.html" class="block px-4 py-3 text-base font-medium text-blue-600 hover:bg-blue-50 rounded-lg">Contact Us</a>
-            </div>
-        </div>
-    </header>
-
     <!-- Main Content -->
-    <main class="flex-grow pt-28 pb-20">
+    <main class="flex-grow pt-20 pb-20">
         <div class="container mx-auto px-6 max-w-6xl">
             
             <!-- Hero Section -->
@@ -215,78 +165,8 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 border-b border-slate-800 pb-12">
-                <div class="text-center md:text-left">
-                     <a href="/" class="text-2xl font-bold text-white brand-font tracking-tight mb-4 inline-block">
-                        Delhi<span class="text-blue-500">zones</span>
-                    </a>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Building a comprehensive digital ecosystem for professionals, students, and creators. Join us on our journey.
-                    </p>
-                </div>
-                <div class="text-center">
-                    <h4 class="text-white font-bold mb-6">Quick Links</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="/about.html" class="hover:text-blue-400 transition-colors">About Us</a></li>
-                        <li><a href="/privacy.html" class="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
-                        <li><a href="/terms.html" class="hover:text-blue-400 transition-colors">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="text-center md:text-right">
-                    <h4 class="text-white font-bold mb-6">Contact</h4>
-                    <a href="mailto:delhizones@gmail.com" class="text-blue-400 hover:text-blue-300 transition-colors font-medium">
-                        delhizones@gmail.com
-                    </a>
-                    <div class="mt-6 flex justify-center md:justify-end gap-4">
-                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-blue-600 transition-colors text-white"><i data-lucide="facebook" class="w-4 h-4"></i></a>
-                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-pink-600 transition-colors text-white"><i data-lucide="instagram" class="w-4 h-4"></i></a>
-                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-slate-600 transition-colors text-white"><i data-lucide="twitter" class="w-4 h-4"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center text-xs text-slate-500">
-                <p>&copy; 2024 Delhizones.com. All Rights Reserved. Designed with <i data-lucide="heart" class="w-3 h-3 inline text-red-500"></i> in Delhi.</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
         lucide.createIcons();
-
-        // Theme Toggle Logic
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const darkIcon = document.getElementById('theme-toggle-dark-icon');
-        const lightIcon = document.getElementById('theme-toggle-light-icon');
-
-        function updateThemeIcons() {
-            if (document.documentElement.classList.contains('dark')) {
-                lightIcon.classList.remove('hidden'); darkIcon.classList.add('hidden');
-            } else {
-                darkIcon.classList.remove('hidden'); lightIcon.classList.add('hidden');
-            }
-        }
-        updateThemeIcons();
-
-        themeToggleBtn.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-            updateThemeIcons();
-        });
-
-        // Mobile Menu
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const openIcon = document.getElementById('menu-open-icon');
-        const closeIcon = document.getElementById('menu-close-icon');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            openIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-        });
 
         // Cleaned, deduplicated, and sorted file list
         const files = [

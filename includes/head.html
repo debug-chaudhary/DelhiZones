@@ -30,3 +30,24 @@
     }catch(e){/* fail silently */}
   })();
 </script>
+
+<!-- Auto-inject site-wide navbar and footer for pages that include this head -->
+<script>
+  (function(){
+    function insert(path, where){
+      fetch(path).then(r=>r.text()).then(html=>{
+        if(!html) return;
+        const range = document.createRange();
+        range.selectNode(document.body); 
+        const frag = range.createContextualFragment(html);
+        if(where === 'top') document.body.insertBefore(frag, document.body.firstChild);
+        else if(where === 'bottom') document.body.appendChild(frag);
+      }).catch(e=>{});
+    }
+    if (document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', function(){ insert('/includes/navbar.html','top'); insert('/includes/footer.html','bottom'); });
+    } else {
+      insert('/includes/navbar.html','top'); insert('/includes/footer.html','bottom');
+    }
+  })();
+</script>

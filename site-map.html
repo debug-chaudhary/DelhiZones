@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>document.head.insertAdjacentHTML('beforeend',t));</script>
+    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>{const range=document.createRange();range.selectNode(document.head);const frag=range.createContextualFragment(t);document.head.appendChild(frag);});</script>
     <title>Site Map - Delhizones.com</title>
     
     <!-- Favicon -->
@@ -32,19 +32,6 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- Header -->
-    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-             <a href="/" class="flex items-center gap-2" aria-label="Delhizones Homepage">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0"><g clip-path="url(#clip0_105_2_header)"><circle cx="16" cy="16" r="15.5" fill="white" stroke="#2563EB"></circle><circle cx="16" cy="16" r="12" fill="#2563EB"></circle><path d="M10.5 11.5L16 20.5L21.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z" fill="white"></path><path d="M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z" fill="white"></path></g><defs><clipPath id="clip0_105_2_header"><rect width="32" height="32" fill="white"></rect></clipPath></defs></svg>
-                <span class="text-2xl font-bold text-gray-900">Delhi<span class="text-blue-600">zones</span></span>
-            </a>
-            <nav class="hidden md:flex items-center space-x-6">
-                <a href="/" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Home</a>
-            </nav>
-        </div>
-    </header>
-
     <!-- Main Content -->
     <main>
         <div class="container mx-auto px-6 py-16">
@@ -58,13 +45,6 @@
             </div>
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white mt-16">
-        <div class="container mx-auto px-6 py-12 text-center">
-            <p>&copy; 2024 Delhizones.com. All Rights Reserved.</p>
-        </div>
-    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -600,4 +580,3 @@
     </script>
 </body>
 </html>
-
