@@ -1,197 +1,293 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>document.head.insertAdjacentHTML('beforeend',t));</script>
-    <title>Telecom MOPs & Learning - Delhizones.com</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- 1. SEO & META TAGS -->
+    <title>Telecom MOPs Library | Technical Manuals & Safety Guidelines | Delhizones</title>
+    <meta name="description" content="Access a comprehensive database of Telecom Method of Procedures (MOPs), alarm clearing guides (Huawei, Ericsson, Nokia, ZTE), and safety manuals for field engineers.">
+    <meta name="keywords" content="Telecom MOP, Ericsson Alarm Clearing, Huawei MOP, ZTE Troubleshooting, Nokia Telecom Manuals, Field Engineer Safety, Telecom Documentation">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.delhizones.com/Telecom-Mops/">
+
+    <!-- 2. MONETIZATION (Google AdSense) -->
+    <meta name="google-adsense-account" content="ca-pub-YOUR_ADSENSE_ID_HERE">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID_HERE" crossorigin="anonymous"></script>
+
+    <!-- 3. OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.delhizones.com/Telecom-Mops/">
+    <meta property="og:title" content="Telecom MOPs Library | Delhizones">
+    <meta property="og:description" content="Technical documentation and SOPs for Telecom Engineers.">
+    <meta property="og:image" content="https://www.delhizones.com/assets/images/mops-og.jpg">
 
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
-    
-    <!-- Tailwind CSS CDN -->
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     
-    <!-- Lucide Icons CDN -->
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* Custom styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Tailwind gray-50 */
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Playfair Display', serif; }
+        .text-gradient {
+            background: linear-gradient(to right, #2563EB, #0d9488);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        /* Custom scrollbar for better aesthetics */
-        .table-container::-webkit-scrollbar {
-            width: 8px;
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
-        .table-container::-webkit-scrollbar-track {
-            background: #f1f5f9;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .table-container::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        .table-container::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-        /* Ensure modal appears above everything */
-        #fileViewerModal {
-            z-index: 100;
-        }
-        #mobile-menu {
-            transition: transform 0.3s ease-in-out;
-        }
+        .table-container::-webkit-scrollbar { width: 6px; }
+        .table-container::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+        /* Modal Z-Index */
+        #fileViewerModal { z-index: 100; }
     </style>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+        tailwind.config = { darkMode: 'class' }
+    </script>
 </head>
-<body class="text-gray-800">
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-green-100 selection:text-green-900 flex flex-col min-h-screen">
 
     <!-- Header -->
-    <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <header id="header" class="fixed w-full top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <a href="/" class="flex items-center gap-2" aria-label="Delhizones Homepage">
-                    <!-- New Logo SVG -->
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
-                        <g clip-path="url(#clip0_105_2_header)">
-                            <circle cx="16" cy="16" r="15.5" fill="white" stroke="#2563EB"></circle>
-                            <circle cx="16" cy="16" r="12" fill="#2563EB"></circle>
-                            <path d="M10.5 11.5L16 20.5L21.5 11.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z" fill="white"></path>
-                            <path d="M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z" fill="white"></path>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_105_2_header">
-                                <rect width="32" height="32" fill="white"></rect>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                    <span class="text-2xl font-bold text-gray-900">
-                        Delhi<span class="text-blue-600">zones</span>
+                <a href="/" class="flex items-center gap-3 group" aria-label="Delhizones Homepage">
+                    <div class="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110">
+                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-md">
+                            <g clip-path="url(#clip0_105_2_header)">
+                                <circle cx="16" cy="16" r="15.5" fill="white" stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold text-slate-900 dark:text-white brand-font tracking-tight">
+                        Delhi<span class="text-blue-600 dark:text-blue-400">zones</span>
                     </span>
                 </a>
                 
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-6">
-                    <a href="/#services" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Services</a>
-                    <a href="/posts/" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Posts</a>
-                    <a href="/#support" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Support Us</a>
-                    <a href="/contact.html" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Contact</a>
-                </nav>
+                <div class="flex items-center gap-6">
+                    <nav class="hidden md:flex items-center space-x-8">
+                        <a href="/#services" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Services</a>
+                        <a href="/jobs/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Jobs</a>
+                        <a href="/search/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">SDB Search</a>
+                        <a href="/#support" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Support</a>
+                    </nav>
 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none">
-                        <i id="menu-open-icon" data-lucide="menu" class="w-6 h-6"></i>
-                        <i id="menu-close-icon" data-lucide="x" class="w-6 h-6 hidden"></i>
+                    <button id="theme-toggle" class="p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-colors rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i id="theme-toggle-dark-icon" class="w-5 h-5 hidden" data-lucide="moon"></i>
+                        <i id="theme-toggle-light-icon" class="w-5 h-5 hidden" data-lucide="sun"></i>
                     </button>
+
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-colors">
+                            <i id="menu-open-icon" data-lucide="menu" class="w-6 h-6"></i>
+                            <i id="menu-close-icon" data-lucide="x" class="w-6 h-6 hidden"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
-             <a href="/#services" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Services</a>
-             <a href="/posts/" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Posts</a>
-             <a href="/#support" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Support Us</a>
-             <a href="/contact.html" class="block py-3 px-6 text-gray-700 font-medium hover:bg-gray-100 hover:text-blue-600 transition duration-300">Contact</a>
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-lg absolute w-full left-0">
+            <div class="px-4 py-6 space-y-3">
+                <a href="/#services" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Services</a>
+                <a href="/jobs/" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Jobs</a>
+                <a href="/search/" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Search</a>
+                <a href="/#support" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Support</a>
+                <a href="/contact.html" class="block px-4 py-3 text-base font-medium text-blue-600 hover:bg-blue-50 rounded-lg">Contact Us</a>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="bg-white">
-            <div class="container mx-auto px-6 py-16 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                    Telecom MOPs & Learning Hub
+    <main class="flex-grow pt-28 pb-20">
+        <div class="container mx-auto px-6 max-w-6xl">
+            
+            <!-- Hero Section -->
+            <div class="text-center mb-10 reveal">
+                <span class="inline-block py-1 px-3 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold tracking-wider uppercase mb-6 border border-green-200 dark:border-green-800">
+                    Technical Knowledge Base
+                </span>
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 brand-font">
+                    Telecom <span class="text-gradient">MOPs Library</span>
                 </h1>
-                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-                    A comprehensive library of Method of Procedures (MOPs), training materials, and safety documents.
+                <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                    A centralized repository of Method of Procedure (MOP) documents, alarm troubleshooting guides, and safety protocols for field engineers.
                 </p>
             </div>
-        </section>
 
-        <!-- File List Section -->
-        <section id="file-list" class="py-12">
-            <div class="container mx-auto px-6">
-                <div class="bg-white p-6 md:p-8 rounded-xl shadow-md">
+            <!-- Ad Slot: Top Banner -->
+            <div class="w-full max-w-4xl mx-auto mb-10 text-center">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_ADSENSE_ID_HERE"
+                     data-ad-slot="TOP_BANNER_SLOT_ID"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <!--script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                <!--div class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">Sponsored Advertisement</div>
+            </div>
+
+            <!-- File List Section -->
+            <section id="file-list" class="reveal">
+                <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700">
+                    
                     <!-- Search Input -->
                     <div class="relative mb-6">
-                        <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for files..." class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i data-lucide="search" class="text-gray-400 w-5 h-5"></i>
+                        <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search documents by name, vendor (Huawei/Ericsson), or type..." class="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white transition-all">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i data-lucide="search" class="text-slate-400 w-5 h-5"></i>
                         </div>
                     </div>
 
                     <!-- File Table -->
-                    <div class="table-container max-h-[70vh] overflow-y-auto">
-                        <table id="filesTable" class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50 sticky top-0">
+                    <div class="table-container max-h-[70vh] overflow-y-auto rounded-lg border border-slate-200 dark:border-slate-700">
+                        <table id="filesTable" class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+                            <thead class="bg-slate-50 dark:bg-slate-900 sticky top-0 z-10">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">File Name</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">Type</th>
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">File Name / Topic</th>
+                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider hidden sm:table-cell">Type</th>
+                                    <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Action</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
+                            <tbody class="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
                                 <!-- JS will populate this section -->
                             </tbody>
                         </table>
                     </div>
+                    
+                    <!-- No Results -->
+                    <div id="noResults" class="hidden text-center py-10">
+                        <p class="text-slate-500 dark:text-slate-400">No matching documents found.</p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
+        </div>
     </main>
     
     <!-- Modal for File Viewer -->
-    <div id="fileViewerModal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center p-4 sm:p-6 md:p-8">
-        <div class="bg-white rounded-lg shadow-2xl w-full h-full max-w-6xl flex flex-col">
-            <div class="flex justify-between items-center p-4 border-b">
-                <h3 id="modalFileName" class="text-lg font-semibold text-gray-800 truncate pr-4">File Viewer</h3>
-                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-800 transition-colors flex-shrink-0">
+    <div id="fileViewerModal" class="fixed inset-0 bg-black/90 hidden flex items-center justify-center p-4 sm:p-6 md:p-8 z-50 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full h-full max-w-6xl flex flex-col overflow-hidden border border-slate-200 dark:border-slate-700">
+            <div class="flex justify-between items-center p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                <div class="flex items-center gap-3 overflow-hidden">
+                    <div class="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                        <i data-lucide="file-text" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                    <h3 id="modalFileName" class="text-lg font-bold text-slate-800 dark:text-white truncate">File Viewer</h3>
+                </div>
+                <button onclick="closeModal()" class="text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
             </div>
-            <div class="flex-grow p-1 md:p-2 bg-gray-200 relative">
-                <iframe id="fileViewerFrame" src="" frameborder="0" class="w-full h-full bg-white"></iframe>
-                <div id="viewerError" class="absolute inset-0 bg-white items-center justify-center hidden flex-col text-center p-8">
-                     <!-- This content will be dynamically updated by JavaScript -->
+            <div class="flex-grow bg-slate-100 dark:bg-black relative">
+                <iframe id="fileViewerFrame" src="" frameborder="0" class="w-full h-full"></iframe>
+                
+                <!-- Error/Fallback View -->
+                <div id="viewerError" class="absolute inset-0 bg-white dark:bg-slate-800 flex flex-col items-center justify-center p-8 hidden text-center">
+                    <!-- Dynamic Content -->
                 </div>
             </div>
         </div>
     </div>
 
-
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white mt-16">
-        <div class="container mx-auto px-6 py-12">
-            <div class="text-center">
-                 <h2 class="text-3xl font-bold text-white">Get In Touch</h2>
-                 <p class="mt-3 text-gray-400">Feel free to reach out via email.</p>
-                 <a href="mailto:delhizones@gmail.com" class="mt-6 inline-block text-lg font-semibold text-blue-400 hover:text-blue-300 transition-colors">
-                    delhizones@gmail.com
-                 </a>
+    <footer class="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 border-b border-slate-800 pb-12">
+                <div class="text-center md:text-left">
+                     <a href="/" class="text-2xl font-bold text-white brand-font tracking-tight mb-4 inline-block">
+                        Delhi<span class="text-blue-500">zones</span>
+                    </a>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Building a comprehensive digital ecosystem for professionals, students, and creators. Join us on our journey.
+                    </p>
+                </div>
+                <div class="text-center">
+                    <h4 class="text-white font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="/about.html" class="hover:text-blue-400 transition-colors">About Us</a></li>
+                        <li><a href="/privacy.html" class="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="hover:text-blue-400 transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-right">
+                    <h4 class="text-white font-bold mb-6">Contact</h4>
+                    <a href="mailto:delhizones@gmail.com" class="text-blue-400 hover:text-blue-300 transition-colors font-medium">
+                        delhizones@gmail.com
+                    </a>
+                    <div class="mt-6 flex justify-center md:justify-end gap-4">
+                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-blue-600 transition-colors text-white"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-pink-600 transition-colors text-white"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                        <a href="#" class="p-2 bg-slate-800 rounded-full hover:bg-slate-600 transition-colors text-white"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
             </div>
-             <div class="mt-10 flex justify-center gap-x-8 gap-y-4 flex-wrap">
-                <a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a>
-                <a href="/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
-                <a href="/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
-                <a href="/contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a>
-            </div>
-            <div class="text-center text-gray-500 border-t border-gray-800 mt-10 pt-6">
-                <p>&copy; 2024 Delhizones.com. All Rights Reserved.</p>
+            <div class="text-center text-xs text-slate-500">
+                <p>&copy; 2024 Delhizones.com. All Rights Reserved. Designed with <i data-lucide="heart" class="w-3 h-3 inline text-red-500"></i> in Delhi.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        lucide.createIcons();
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        function updateThemeIcons() {
+            if (document.documentElement.classList.contains('dark')) {
+                lightIcon.classList.remove('hidden'); darkIcon.classList.add('hidden');
+            } else {
+                darkIcon.classList.remove('hidden'); lightIcon.classList.add('hidden');
+            }
+        }
+        updateThemeIcons();
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+            updateThemeIcons();
+        });
+
+        // Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const openIcon = document.getElementById('menu-open-icon');
+        const closeIcon = document.getElementById('menu-close-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            openIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
         // Cleaned, deduplicated, and sorted file list
         const files = [
             "Baseband Commands for FME & CEM.pdf",
@@ -315,16 +411,11 @@
         function getFileIcon(filename) {
             const extension = filename.split('.').pop().toLowerCase();
             switch (extension) {
-                case 'pdf':
-                    return '<i data-lucide="file-text" class="text-red-500 w-6 h-6"></i>';
-                case 'pptx':
-                    return '<i data-lucide="presentation" class="text-orange-500 w-6 h-6"></i>';
-                case 'docx':
-                    return '<i data-lucide="file-pen-line" class="text-blue-500 w-6 h-6"></i>';
-                case 'mp4':
-                    return '<i data-lucide="video" class="text-indigo-500 w-6 h-6"></i>';
-                default:
-                    return '<i data-lucide="file" class="text-gray-500 w-6 h-6"></i>';
+                case 'pdf': return '<i data-lucide="file-text" class="text-red-500 w-6 h-6"></i>';
+                case 'pptx': return '<i data-lucide="presentation" class="text-orange-500 w-6 h-6"></i>';
+                case 'docx': return '<i data-lucide="file-pen-line" class="text-blue-500 w-6 h-6"></i>';
+                case 'mp4': return '<i data-lucide="video" class="text-indigo-500 w-6 h-6"></i>';
+                default: return '<i data-lucide="file" class="text-gray-500 w-6 h-6"></i>';
             }
         }
 
@@ -332,27 +423,42 @@
             return filename.split('.').pop().toUpperCase();
         }
 
+        // Infer category based on filename keywords
+        function getCategoryBadge(filename) {
+            const name = filename.toLowerCase();
+            let category = "General";
+            let color = "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300";
+
+            if (name.includes("huawei")) { category = "Huawei"; color = "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"; }
+            else if (name.includes("ericsson")) { category = "Ericsson"; color = "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"; }
+            else if (name.includes("nokia")) { category = "Nokia"; color = "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400"; }
+            else if (name.includes("zte")) { category = "ZTE"; color = "bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400"; }
+            else if (name.includes("ceragon")) { category = "Ceragon"; color = "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400"; }
+            else if (name.includes("safety") || name.includes("fatality")) { category = "Safety"; color = "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400"; }
+
+            return `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${color}">${category}</span>`;
+        }
+
         function populateTable() {
             const tableBody = document.querySelector('#filesTable tbody');
             let content = '';
             files.forEach(file => {
                 content += `
-                    <tr class="hover:bg-gray-50">
+                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors border-b border-slate-100 dark:border-slate-700/50 last:border-0">
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0 h-6 w-6">${getFileIcon(file)}</div>
+                                <div class="flex-shrink-0 h-8 w-8 bg-slate-100 dark:bg-slate-700 rounded-lg flex items-center justify-center">${getFileIcon(file)}</div>
                                 <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">${file}</div>
+                                    <div class="text-sm font-medium text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer" onclick="viewFile('${file}')">${file}</div>
+                                    <div class="mt-1">${getCategoryBadge(file)}</div>
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell">
-                           <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                                ${getFileType(file)}
-                           </span>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400 hidden sm:table-cell font-mono">
+                           ${getFileType(file)}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                             <button onclick="viewFile('${file}')" class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                             <button onclick="viewFile('${file}')" class="inline-flex items-center px-4 py-2 border border-transparent text-xs font-bold rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm shadow-blue-600/20">
                                 <i data-lucide="eye" class="w-4 h-4 md:mr-2"></i>
                                 <span class="hidden md:inline">View</span>
                             </button>
@@ -361,7 +467,7 @@
                 `;
             });
             tableBody.innerHTML = content;
-            lucide.createIcons(); // Re-initialize icons after adding them to the DOM
+            lucide.createIcons();
         }
 
         function filterTable() {
@@ -369,17 +475,26 @@
             const filter = input.value.toUpperCase();
             const table = document.getElementById("filesTable");
             const tr = table.getElementsByTagName("tr");
+            const noRes = document.getElementById("noResults");
+            let visibleCount = 0;
 
-            for (let i = 1; i < tr.length; i++) { // Start from 1 to skip the header row
+            for (let i = 1; i < tr.length; i++) {
                 let td = tr[i].getElementsByTagName("td")[0];
                 if (td) {
                     let txtValue = td.textContent || td.innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";
+                        visibleCount++;
                     } else {
                         tr[i].style.display = "none";
                     }
-                }       
+                }        
+            }
+            
+            if (visibleCount === 0) {
+                noRes.classList.remove('hidden');
+            } else {
+                noRes.classList.add('hidden');
             }
         }
         
@@ -399,20 +514,19 @@
             viewerError.classList.remove('flex');
 
             if (extension === 'pdf' || extension === 'mp4') {
-                finalUrl = fileName; // Direct link for native types
+                finalUrl = fileName; 
             } else if ((extension === 'docx' || extension === 'pptx') && isLocal) {
-                // Special handling for Office docs on local server
+                // Local fallback for Office docs
                 iframe.classList.add('hidden');
                 viewerError.classList.remove('hidden');
                 viewerError.classList.add('flex');
                 
                 viewerError.innerHTML = `
-                    <i data-lucide="server-off" class="w-16 h-16 mx-auto text-blue-500"></i>
-                    <h4 class="mt-4 text-xl font-semibold text-gray-800">Local Preview Unavailable</h4>
-                    <p class="mt-2 text-gray-600">Live preview for Office documents requires a live web server. This feature is disabled in your local environment.</p>
-                    <a href="${fileName}" download class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        <i data-lucide="download" class="w-5 h-5 mr-2"></i>
-                        Download File
+                    <i data-lucide="server-off" class="w-16 h-16 mx-auto text-blue-500 mb-4"></i>
+                    <h4 class="text-xl font-bold text-slate-800 dark:text-white">Local Preview Unavailable</h4>
+                    <p class="mt-2 text-slate-600 dark:text-slate-400 mb-6">Live preview for Office documents requires a live web server.</p>
+                    <a href="${fileName}" download class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-bold rounded-full shadow-lg text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                        <i data-lucide="download" class="w-5 h-5 mr-2"></i> Download File
                     </a>
                 `;
                 
@@ -422,22 +536,20 @@
                 return;
 
             } else if (extension === 'docx' || extension === 'pptx') {
-                // IMPORTANT: This viewer requires the files to be publicly accessible on the internet.
                 const fileUrl = window.location.origin + window.location.pathname.replace('index.html', '') + fileName;
                 finalUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`;
             } else {
-                // Handle unsupported file types
+                // Unsupported type fallback
                 iframe.classList.add('hidden');
                 viewerError.classList.remove('hidden');
                 viewerError.classList.add('flex');
                 
                 viewerError.innerHTML = `
-                    <i data-lucide="file-warning" class="w-16 h-16 mx-auto text-amber-500"></i>
-                    <h4 class="mt-4 text-xl font-semibold text-gray-800">Preview Not Available</h4>
-                    <p class="mt-2 text-gray-600">This file type cannot be previewed directly in the browser.</p>
-                    <a href="${fileName}" download class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
-                        <i data-lucide="download" class="w-5 h-5 mr-2"></i>
-                        Download File
+                    <i data-lucide="file-warning" class="w-16 h-16 mx-auto text-amber-500 mb-4"></i>
+                    <h4 class="text-xl font-bold text-slate-800 dark:text-white">Preview Not Available</h4>
+                    <p class="mt-2 text-slate-600 dark:text-slate-400 mb-6">This file type cannot be previewed directly in the browser.</p>
+                    <a href="${fileName}" download class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-bold rounded-full shadow-lg text-white bg-amber-600 hover:bg-amber-700 transition-colors">
+                        <i data-lucide="download" class="w-5 h-5 mr-2"></i> Download File
                     </a>
                 `;
 
@@ -461,33 +573,11 @@
             viewerError.classList.remove('flex');
         }
 
-
         // Initial setup
         document.addEventListener('DOMContentLoaded', (event) => {
             populateTable();
             lucide.createIcons();
-
-            // Mobile Menu Logic
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const openIcon = document.getElementById('menu-open-icon');
-            const closeIcon = document.getElementById('menu-close-icon');
-
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                openIcon.classList.toggle('hidden');
-                closeIcon.classList.toggle('hidden');
-            });
             
-            const menuLinks = mobileMenu.getElementsByTagName('a');
-            for(let i = 0; i < menuLinks.length; i++) {
-                menuLinks[i].addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    openIcon.classList.remove('hidden');
-                    closeIcon.classList.add('hidden');
-                });
-            }
-
             // Close modal on escape key press
             window.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
@@ -495,11 +585,19 @@
                 }
             });
         });
+        
+        // Reveal Scroll Animation
+        function reveal() {
+          var reveals = document.querySelectorAll(".reveal");
+          for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            if (elementTop < windowHeight - 100) reveals[i].classList.add("active");
+          }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
     </script>
 
 </body>
 </html>
-
-
-
-

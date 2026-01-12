@@ -89,6 +89,11 @@
             border-color: #4ade80;
             color: #dcfce7;
         }
+        
+        /* Google Translate Hiding */
+        .goog-te-banner-frame { display: none !important; }
+        .goog-logo-link { display: none !important; }
+        .goog-te-gadget span { display: none !important; }
     </style>
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -114,27 +119,6 @@
         "position": 2,
         "name": "Job Finder",
         "item": "https://www.delhizones.com/jobs/"
-      }]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [{
-        "@type": "Question",
-        "name": "How can I earn money immediately in Delhi?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You can start earning immediately by joining gig platforms like Zomato, Swiggy, or Rapido which offer daily or weekly payouts. Alternatively, local labor jobs or event staffing often pay cash daily."
-        }
-      }, {
-        "@type": "Question",
-        "name": "Are there zero investment jobs available?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, many opportunities like content writing, tutoring, insurance agency, and affiliate marketing require zero financial investment to start."
-        }
       }]
     }
     </script>
@@ -166,6 +150,9 @@
                         <a href="/contact.html" class="px-5 py-2.5 text-sm font-medium text-white bg-slate-900 rounded-full hover:bg-blue-600 transition-colors shadow-lg shadow-blue-900/20">Contact</a>
                     </nav>
 
+                    <!-- Google Translate Widget Container -->
+                    <div id="google_translate_element" class="hidden md:block"></div>
+
                     <button id="theme-toggle" class="p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-colors rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
                         <i id="theme-toggle-dark-icon" class="w-5 h-5 hidden" data-lucide="moon"></i>
                         <i id="theme-toggle-light-icon" class="w-5 h-5 hidden" data-lucide="sun"></i>
@@ -187,6 +174,8 @@
                 <a href="/posts/" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Journal</a>
                 <a href="/Portfolio/" class="block px-4 py-3 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg">Portfolio</a>
                 <a href="/contact.html" class="block px-4 py-3 text-base font-medium text-blue-600 hover:bg-blue-50 rounded-lg">Contact Us</a>
+                <!-- Mobile Translate -->
+                <div id="google_translate_element_mobile" class="mt-4"></div>
             </div>
         </div>
     </header>
@@ -209,8 +198,7 @@
             </div>
 
             <!-- Ad Slot: Top Banner -->
-            <div class="w-full max-w-4xl mx-auto mb-10 text-center">
-                <!-- Google AdSense Unit (Responsive Display) -->
+            <!--div class="w-full max-w-4xl mx-auto mb-10 text-center">
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-YOUR_ADSENSE_ID_HERE"
@@ -221,7 +209,7 @@
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
                 <div class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">Sponsored Advertisement</div>
-            </div>
+            <!-- div>
 
             <!-- SEARCH ENGINE UI -->
             <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-700 mb-16 reveal">
@@ -252,7 +240,7 @@
                     </div>
 
                     <!-- Dropdown Filters -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
                         <div>
                             <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Qualification</label>
                             <select id="qualification-filter" class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -282,9 +270,19 @@
                                 <option value="Business">Small Business</option>
                             </select>
                         </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Min. Income</label>
+                            <select id="income-filter" class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="0">Any Income</option>
+                                <option value="5000">₹5,000+</option>
+                                <option value="10000">₹10,000+</option>
+                                <option value="15000">₹15,000+</option>
+                                <option value="25000">₹25,000+</option>
+                            </select>
+                        </div>
                         <div class="flex items-end gap-2">
                             <button onclick="searchJobs()" class="flex-grow bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg shadow transition-colors flex justify-center items-center gap-2">
-                                <i data-lucide="search" class="w-4 h-4"></i> Search Jobs
+                                <i data-lucide="search" class="w-4 h-4"></i> Search
                             </button>
                             <button onclick="resetAndSearch()" class="px-3 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold py-2 rounded-lg shadow transition-colors" title="View All Jobs">
                                 <i data-lucide="refresh-cw" class="w-4 h-4"></i>
@@ -315,7 +313,7 @@
                 </div>
             </div>
 
-            <!-- SEO & Affiliate Disclosure Section -->
+            <!-- Disclaimer -->
             <div class="max-w-4xl mx-auto mb-16 px-4">
                 <div class="bg-blue-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-blue-100 dark:border-slate-700">
                     <div class="flex gap-4 items-start">
@@ -323,33 +321,12 @@
                         <div>
                             <h3 class="font-bold text-slate-900 dark:text-white mb-2">Transparency & Disclaimer</h3>
                             <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                                Delhizones may earn a commission if you sign up or purchase through some of the links provided (Affiliate Links), at no extra cost to you. We are not directly affiliated with the hiring companies; please verify all terms, safety guidelines, and payout structures directly with the respective platforms before joining.
+                                Income figures are estimates based on market trends and platform claims; actual earnings may vary based on effort, location, and demand. Delhizones is not directly affiliated with the hiring companies; please verify terms and safety guidelines directly with the platforms.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- SEO Content: Guide -->
-            <section class="mb-12">
-                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">Complete Guide to Finding Immediate Income in Delhi NCR</h2>
-                <div class="grid md:grid-cols-2 gap-8 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                    <div>
-                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">The Gig Economy Boom</h3>
-                        <p class="mb-4">With the rise of apps like Blinkit, Zepto, and Swiggy, finding immediate work in Delhi, Noida, and Gurgaon has never been easier. These platforms often onboard partners within 24-48 hours.</p>
-                        
-                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">Freelancing & Remote Work</h3>
-                        <p>For those with a laptop, platforms like Upwork and Fiverr offer content writing, data entry, and translation jobs. These typically require zero investment but may take a week to start getting orders.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">Offline Opportunities</h3>
-                        <p class="mb-4">Traditional roles like Home Tuition, Security Guarding, and Event Staffing remain reliable sources of income. Check local listings or contact agencies directly for these roles.</p>
-                        
-                        <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">Skill Development</h3>
-                        <p>Upskilling is key. Spend time on YouTube or free course platforms to learn high-demand skills like Video Editing or Digital Marketing to increase your earning potential over time.</p>
-                    </div>
-                </div>
-            </section>
 
         </div>
     </main>
@@ -392,6 +369,15 @@
         </div>
     </footer>
 
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'hi,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+          new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'hi,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element_mobile');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <script>
         lucide.createIcons();
 
@@ -425,7 +411,6 @@
             const interestContainer = document.getElementById('interest-filters');
             const skillContainer = document.getElementById('skill-filters');
 
-            // Clear loading text
             interestContainer.innerHTML = '';
             skillContainer.innerHTML = '';
 
@@ -455,13 +440,12 @@
             const qualFilter = document.getElementById('qualification-filter').value;
             const budgetFilter = document.getElementById('budget-filter').value;
             const catFilter = document.getElementById('category-filter').value;
+            const incomeFilter = parseInt(document.getElementById('income-filter').value) || 0;
 
             const results = jobsDB.filter(job => {
-                // If no tags selected, allow all in that category, otherwise match
                 const matchInterest = selectedInterests.length === 0 || selectedInterests.includes(job.interest);
                 const matchSkill = selectedSkills.length === 0 || selectedSkills.includes(job.skill);
                 
-                // Loose matching for qualification (simplified logic)
                 let matchQual = true;
                 if (qualFilter !== 'all') {
                      if (job.qual !== 'None' && job.qual !== qualFilter) matchQual = false;
@@ -469,8 +453,12 @@
                 
                 const matchBudget = budgetFilter === 'all' || job.budget === budgetFilter;
                 const matchCat = catFilter === 'all' || job.category === catFilter;
+                
+                // Income filter logic (matches if job min_income >= filter value)
+                const jobIncome = job.min_income || 0;
+                const matchIncome = jobIncome >= incomeFilter;
 
-                return matchInterest && matchSkill && matchQual && matchBudget && matchCat;
+                return matchInterest && matchSkill && matchQual && matchBudget && matchCat && matchIncome;
             });
 
             displayResults(results);
@@ -478,12 +466,11 @@
 
         // Reset and Search All
         function resetAndSearch() {
-            // Clear tags
             document.querySelectorAll('.filter-tag.selected').forEach(el => el.classList.remove('selected'));
-            // Reset selects
             document.getElementById('qualification-filter').value = 'all';
             document.getElementById('budget-filter').value = 'all';
             document.getElementById('category-filter').value = 'all';
+            document.getElementById('income-filter').value = '0';
             
             searchJobs();
         }
@@ -501,35 +488,30 @@
             }
 
             jobs.forEach((job, index) => {
-                // MONETIZATION: Insert Ad Slot after every 6 items
+                // Ad Slot every 6 items (Placeholder)
                 if (index > 0 && index % 6 === 0) {
                     const adContainer = document.createElement('div');
                     adContainer.className = "col-span-full my-6 bg-slate-50 dark:bg-slate-900 border border-dashed border-slate-200 dark:border-slate-700 rounded-xl p-4 flex justify-center items-center";
-                    adContainer.innerHTML = `
-                        <div class="text-center">
-                            <span class="text-[10px] uppercase text-slate-400 mb-2 block">Sponsored</span>
-                            <!-- In-Feed Ad Placeholder -->
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-format="fluid"
-                                 data-ad-layout-key="-fb+5w+4e-db+86"
-                                 data-ad-client="ca-pub-YOUR_ADSENSE_ID_HERE"
-                                 data-ad-slot="FEED_AD_SLOT_ID"></ins>
-                             <script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>
-                        </div>
-                    `;
+                    adContainer.innerHTML = `<span class="text-[10px] uppercase text-slate-400">Sponsored Ad Space</span>`;
                     container.appendChild(adContainer);
                 }
 
                 const card = document.createElement('div');
-                card.className = "bg-white dark:bg-slate-700 rounded-xl p-5 border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-all reveal active flex flex-col";
+                card.className = "bg-white dark:bg-slate-700 rounded-xl p-5 border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-all reveal active flex flex-col relative overflow-hidden";
                 
-                // Construct Learn Link Section
+                // Income Badge
+                let incomeBadge = '';
+                if (job.income) {
+                    incomeBadge = `<div class="absolute top-0 right-0 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-[10px] font-bold px-2 py-1 rounded-bl-lg">
+                        ${job.income}
+                    </div>`;
+                }
+
                 let learnSection = '';
                 if(job.learn_platform && job.learn_link && job.learn_link !== '#') {
                     learnSection = `
                         <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-600">
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Requires: <span class="font-semibold text-slate-700 dark:text-slate-200">${job.skill}</span></p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Need skills? <span class="font-semibold text-slate-700 dark:text-slate-200">${job.skill}</span></p>
                             <a href="${job.learn_link}" target="_blank" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center">
                                 Learn on ${job.learn_platform} <i data-lucide="external-link" class="w-3 h-3 ml-1"></i>
                             </a>
@@ -538,7 +520,8 @@
                 }
 
                 card.innerHTML = `
-                    <div class="flex justify-between items-start mb-2">
+                    ${incomeBadge}
+                    <div class="flex justify-between items-start mb-2 mt-2">
                         <span class="text-xs font-bold px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 uppercase">${job.category}</span>
                         <span class="text-xs font-medium text-slate-400">${job.budget} Inv.</span>
                     </div>
@@ -553,12 +536,12 @@
                     ${learnSection}
 
                     <a href="${job.link}" target="_blank" rel="noopener" class="mt-4 block w-full text-center py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium rounded-lg hover:bg-blue-600 dark:hover:bg-blue-50 transition-colors">
-                        Apply on ${job.platform}
+                        Apply Now
                     </a>
                 `;
                 container.appendChild(card);
             });
-            lucide.createIcons(); // Refresh icons
+            lucide.createIcons();
         }
 
         // 5. EXPORT FUNCTION
@@ -566,12 +549,12 @@
             const count = document.getElementById('result-count').innerText;
             if (count === "0") { alert("No jobs to export."); return; }
 
-            // Re-run filter logic to get current list (copy-paste logic from searchJobs)
             const selectedInterests = Array.from(document.querySelectorAll('.tag-interest.selected')).map(b => b.textContent);
             const selectedSkills = Array.from(document.querySelectorAll('.tag-skill.selected')).map(b => b.textContent);
             const qualFilter = document.getElementById('qualification-filter').value;
             const budgetFilter = document.getElementById('budget-filter').value;
             const catFilter = document.getElementById('category-filter').value;
+            const incomeFilter = parseInt(document.getElementById('income-filter').value) || 0;
 
             const results = jobsDB.filter(job => {
                 const matchInterest = selectedInterests.length === 0 || selectedInterests.includes(job.interest);
@@ -582,16 +565,18 @@
                 }
                 const matchBudget = budgetFilter === 'all' || job.budget === budgetFilter;
                 const matchCat = catFilter === 'all' || job.category === catFilter;
-                return matchInterest && matchSkill && matchQual && matchBudget && matchCat;
+                const jobIncome = job.min_income || 0;
+                const matchIncome = jobIncome >= incomeFilter;
+                return matchInterest && matchSkill && matchQual && matchBudget && matchCat && matchIncome;
             });
 
             let content = "DELHIZONES JOB LIST\n";
             content += "===================\n\n";
             results.forEach((j, i) => {
-                content += `${i+1}. ${j.title} (${j.platform})\n   Description: ${j.description || 'N/A'}\n   Category: ${j.category} | Skill: ${j.skill}\n   Apply Link: ${j.link}\n   Learn Skill: ${j.learn_link || 'N/A'}\n\n`;
+                content += `${i+1}. ${j.title} (${j.platform})\n   Est. Income: ${j.income || 'N/A'}\n   Description: ${j.description || 'N/A'}\n   Category: ${j.category} | Skill: ${j.skill}\n   Apply Link: ${j.link}\n   Learn Skill: ${j.learn_link || 'N/A'}\n\n`;
             });
             
-            content += "\nDownloaded from Delhizones.com - Your Digital Ecosystem.";
+            content += "\nDownloaded from https://delhizones.com/jobs/ - Your Digital Ecosystem.";
 
             const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
             const link = document.createElement("a");
@@ -600,7 +585,7 @@
             link.click();
         }
 
-        // Theme Toggle & Mobile Menu logic matches other pages...
+        // Theme Toggle & Mobile Menu
         const themeToggleBtn = document.getElementById('theme-toggle');
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');

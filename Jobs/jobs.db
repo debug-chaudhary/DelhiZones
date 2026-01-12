@@ -10,7 +10,9 @@
     "link": "https://www.zomato.com/delivery-partner",
     "description": "Deliver food orders to customers using your bike or cycle. Flexible hours with daily/weekly payouts.",
     "learn_platform": "YouTube - Safe Riding",
-    "learn_link": "https://www.youtube.com/results?search_query=safe+bike+riding+tips"
+    "learn_link": "https://www.youtube.com/results?search_query=safe+bike+riding+tips",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Food Delivery Partner (Swiggy)",
@@ -23,7 +25,9 @@
     "link": "https://ride.swiggy.com/",
     "description": "Join Swiggy as a delivery partner. Earn incentives for peak hours and rain delivery.",
     "learn_platform": "Swiggy Partner App",
-    "learn_link": "https://ride.swiggy.com/"
+    "learn_link": "https://ride.swiggy.com/",
+    "income": "₹15,000 - ₹28,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Grocery Delivery (Blinkit)",
@@ -36,7 +40,9 @@
     "link": "https://blinkit.com/careers",
     "description": "Hyperlocal delivery of groceries within 10-20 minutes radius. Requires fast navigation skills.",
     "learn_platform": "Google Maps Support",
-    "learn_link": "https://support.google.com/maps/answer/3273406"
+    "learn_link": "https://support.google.com/maps/answer/3273406",
+    "income": "₹18,000 - ₹30,000/mo",
+    "min_income": 18000
   },
   {
     "title": "Grocery Delivery (Zepto)",
@@ -49,7 +55,9 @@
     "link": "https://www.zeptonow.com/careers",
     "description": "Quick commerce delivery partner. Short distances, strictly time-bound deliveries.",
     "learn_platform": "YouTube - Zepto Rider",
-    "learn_link": "https://www.youtube.com/results?search_query=zepto+delivery+partner+training"
+    "learn_link": "https://www.youtube.com/results?search_query=zepto+delivery+partner+training",
+    "income": "₹18,000 - ₹25,000/mo",
+    "min_income": 18000
   },
   {
     "title": "Bike Taxi Captain (Rapido)",
@@ -62,7 +70,9 @@
     "link": "https://rapido.bike/",
     "description": "Provide bike taxi services to daily commuters. Earn per ride with flexible login.",
     "learn_platform": "Local RTO",
-    "learn_link": "https://parivahan.gov.in/"
+    "learn_link": "https://parivahan.gov.in/",
+    "income": "₹12,000 - ₹20,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Bike Taxi Driver (Uber Moto)",
@@ -75,7 +85,9 @@
     "link": "https://www.uber.com/in/en/drive/",
     "description": "Use your bike to transport passengers via Uber Moto. Good demand in metro areas.",
     "learn_platform": "Uber Driver Guide",
-    "learn_link": "https://www.uber.com/in/en/drive/requirements/"
+    "learn_link": "https://www.uber.com/in/en/drive/requirements/",
+    "income": "₹15,000 - ₹22,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Bike Taxi Driver (Ola Bike)",
@@ -88,7 +100,9 @@
     "link": "https://partners.olacabs.com/",
     "description": "Join Ola as a bike partner. ideal for part-time income during rush hours.",
     "learn_platform": "Ola Partner Care",
-    "learn_link": "https://help.olacabs.com/partner"
+    "learn_link": "https://help.olacabs.com/partner",
+    "income": "₹12,000 - ₹20,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Cab Driver (Uber)",
@@ -101,7 +115,9 @@
     "link": "https://www.uber.com/in/en/drive/",
     "description": "Drive your car or a fleet car for Uber. Requires commercial license (Yellow Plate).",
     "learn_platform": "Maruti Driving School",
-    "learn_link": "https://www.marutisuzukidrivingschool.com/"
+    "learn_link": "https://www.marutisuzukidrivingschool.com/",
+    "income": "₹25,000 - ₹45,000/mo",
+    "min_income": 25000
   },
   {
     "title": "Cab Driver (Ola)",
@@ -114,7 +130,9 @@
     "link": "https://partners.olacabs.com/",
     "description": "Full-time driving opportunity with daily settlements and incentives.",
     "learn_platform": "Ola Partner Training",
-    "learn_link": "https://partners.olacabs.com/"
+    "learn_link": "https://partners.olacabs.com/",
+    "income": "₹25,000 - ₹45,000/mo",
+    "min_income": 25000
   },
   {
     "title": "Cab Driver (InDrive)",
@@ -127,7 +145,9 @@
     "link": "https://indrive.com/",
     "description": "Ride-hailing app where drivers can negotiate fares directly with passengers.",
     "learn_platform": "YouTube - InDrive Tips",
-    "learn_link": "https://www.youtube.com/results?search_query=indrive+driver+tips"
+    "learn_link": "https://www.youtube.com/results?search_query=indrive+driver+tips",
+    "income": "₹20,000 - ₹40,000/mo",
+    "min_income": 20000
   },
   {
     "title": "Electric Cab Driver (BluSmart)",
@@ -140,7 +160,9 @@
     "link": "https://blu-smart.com/",
     "description": "Drive electric cars for BluSmart. Fixed shifts and potentially stable income.",
     "learn_platform": "BluSmart Training",
-    "learn_link": "https://blu-smart.com/"
+    "learn_link": "https://blu-smart.com/",
+    "income": "₹20,000 - ₹30,000/mo",
+    "min_income": 20000
   },
   {
     "title": "Parcel Delivery (Porter 2-Wheeler)",
@@ -153,7 +175,9 @@
     "link": "https://porter.in/driver-partner",
     "description": "Deliver small parcels and packages within the city using your bike.",
     "learn_platform": "Porter Partner App",
-    "learn_link": "https://porter.in/"
+    "learn_link": "https://porter.in/",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Goods Vehicle Driver (Porter)",
@@ -166,7 +190,9 @@
     "link": "https://porter.in/driver-partner",
     "description": "Drive Tata Ace/Pickup for shifting and logistics. High earning potential per trip.",
     "learn_platform": "Porter Partner App",
-    "learn_link": "https://porter.in/"
+    "learn_link": "https://porter.in/",
+    "income": "₹30,000 - ₹60,000/mo",
+    "min_income": 30000
   },
   {
     "title": "Hyperlocal Delivery (Borzo)",
@@ -179,7 +205,9 @@
     "link": "https://borzodelivery.com/in/courier",
     "description": "Flexible courier delivery jobs. Pick up and drop off items across the city.",
     "learn_platform": "Borzo App",
-    "learn_link": "https://borzodelivery.com/"
+    "learn_link": "https://borzodelivery.com/",
+    "income": "₹12,000 - ₹20,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Amazon Flex Partner",
@@ -192,7 +220,9 @@
     "link": "https://flex.amazon.in/",
     "description": "Deliver Amazon packages using your own vehicle. Choose your own delivery blocks.",
     "learn_platform": "Amazon Flex FAQ",
-    "learn_link": "https://flex.amazon.in/faq"
+    "learn_link": "https://flex.amazon.in/faq",
+    "income": "₹120 - ₹140/hr",
+    "min_income": 10000
   },
   {
     "title": "E-Kart Logistics Associate",
@@ -205,7 +235,9 @@
     "link": "https://www.flipkartcareers.com/",
     "description": "Manage hub operations or last-mile delivery for Flipkart's logistics arm.",
     "learn_platform": "Flipkart Careers",
-    "learn_link": "https://www.flipkartcareers.com/"
+    "learn_link": "https://www.flipkartcareers.com/",
+    "income": "₹15,000 - ₹22,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Shadowfax Delivery Partner",
@@ -218,7 +250,9 @@
     "link": "https://www.shadowfax.in/",
     "description": "Multi-category delivery (food, grocery, pharma, e-com) in a single app.",
     "learn_platform": "Shadowfax App",
-    "learn_link": "https://www.shadowfax.in/"
+    "learn_link": "https://www.shadowfax.in/",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Pharmacy Delivery (1mg/Apollo)",
@@ -231,7 +265,9 @@
     "link": "#",
     "description": "Deliver medicines to patients. Requires care in handling packages.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹12,000 - ₹18,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Home Cleaning Professional",
@@ -244,7 +280,9 @@
     "link": "https://www.urbancompany.com/",
     "description": "Professional home cleaning including deep cleaning. High demand during festivals.",
     "learn_platform": "UC Partner Training",
-    "learn_link": "https://www.urbancompany.com/blog/partners"
+    "learn_link": "https://www.urbancompany.com/blog/partners",
+    "income": "₹20,000 - ₹35,000/mo",
+    "min_income": 20000
   },
   {
     "title": "Home Salon (Female)",
@@ -257,7 +295,9 @@
     "link": "https://www.urbancompany.com/",
     "description": "Provide waxing, facial, and grooming services at client's home. High earning potential.",
     "learn_platform": "Lakme Academy",
-    "learn_link": "https://www.lakme-academy.com/"
+    "learn_link": "https://www.lakme-academy.com/",
+    "income": "₹25,000 - ₹50,000/mo",
+    "min_income": 25000
   },
   {
     "title": "Massage Therapist (Male)",
@@ -270,7 +310,9 @@
     "link": "https://www.urbancompany.com/",
     "description": "Provide professional massage therapy for men at home. Requires certification.",
     "learn_platform": "Kerala Ayurveda Academy",
-    "learn_link": "https://www.keralaayurveda.biz/"
+    "learn_link": "https://www.keralaayurveda.biz/",
+    "income": "₹20,000 - ₹40,000/mo",
+    "min_income": 20000
   },
   {
     "title": "AC Repair Technician",
@@ -283,7 +325,9 @@
     "link": "https://www.urbancompany.com/",
     "description": "Service and repair Air Conditioners. Peak demand in summer season.",
     "learn_platform": "ITI Courses",
-    "learn_link": "https://dgt.gov.in/"
+    "learn_link": "https://dgt.gov.in/",
+    "income": "₹30,000 - ₹60,000/mo",
+    "min_income": 30000
   },
   {
     "title": "Electrician",
@@ -296,7 +340,9 @@
     "link": "https://www.urbancompany.com/",
     "description": "Fix wiring, install fans/lights, and troubleshoot electrical issues.",
     "learn_platform": "Skill India",
-    "learn_link": "https://www.skillindia.gov.in/"
+    "learn_link": "https://www.skillindia.gov.in/",
+    "income": "₹20,000 - ₹40,000/mo",
+    "min_income": 20000
   },
   {
     "title": "Plumber",
@@ -309,7 +355,9 @@
     "link": "https://www.urbancompany.com/",
     "description": "Fix leaks, install taps, and manage water systems in homes.",
     "learn_platform": "Skill India",
-    "learn_link": "https://www.skillindia.gov.in/"
+    "learn_link": "https://www.skillindia.gov.in/",
+    "income": "₹20,000 - ₹40,000/mo",
+    "min_income": 20000
   },
   {
     "title": "Carpenter",
@@ -322,7 +370,9 @@
     "link": "https://www.urbancompany.com/",
     "description": "Furniture repair, assembly, and custom woodwork jobs.",
     "learn_platform": "Skill India",
-    "learn_link": "https://www.skillindia.gov.in/"
+    "learn_link": "https://www.skillindia.gov.in/",
+    "income": "₹20,000 - ₹40,000/mo",
+    "min_income": 20000
   },
   {
     "title": "Pet Walker",
@@ -335,7 +385,9 @@
     "link": "https://www.petbacker.in/",
     "description": "Walk dogs in your neighborhood. Good for animal lovers.",
     "learn_platform": "YouTube - Dog Training",
-    "learn_link": "https://www.youtube.com/results?search_query=dog+handling+basics"
+    "learn_link": "https://www.youtube.com/results?search_query=dog+handling+basics",
+    "income": "₹5,000 - ₹15,000/mo",
+    "min_income": 5000
   },
   {
     "title": "Elderly Care Assistant",
@@ -348,7 +400,9 @@
     "link": "https://www.naukri.com/elder-care-jobs",
     "description": "Assist seniors with daily chores, medication, and companionship.",
     "learn_platform": "Red Cross Training",
-    "learn_link": "https://www.indianredcross.org/"
+    "learn_link": "https://www.indianredcross.org/",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Babysitter / Nanny",
@@ -361,7 +415,9 @@
     "link": "https://www.care.com/",
     "description": "Look after children, manage their schedules and meals.",
     "learn_platform": "Care Courses",
-    "learn_link": "https://www.care.com/"
+    "learn_link": "https://www.care.com/",
+    "income": "₹12,000 - ₹20,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Security Guard (Day/Night)",
@@ -374,7 +430,9 @@
     "link": "https://sisindia.com/",
     "description": "Guard residential societies or commercial complexes. Uniform mostly provided.",
     "learn_platform": "SIS Training",
-    "learn_link": "https://sisindia.com/"
+    "learn_link": "https://sisindia.com/",
+    "income": "₹14,000 - ₹20,000/mo",
+    "min_income": 14000
   },
   {
     "title": "ATM Guard",
@@ -387,7 +445,9 @@
     "link": "#",
     "description": "Secure ATM vestibules. Generally a sedentary job requiring alertness.",
     "learn_platform": "Local Agency Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹12,000 - ₹16,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Valet Parking Driver",
@@ -400,7 +460,9 @@
     "link": "#",
     "description": "Park cars for guests at hotels, weddings, or restaurants.",
     "learn_platform": "Driving School",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹500 - ₹1000/day",
+    "min_income": 15000
   },
   {
     "title": "Car Cleaner (Morning)",
@@ -413,7 +475,9 @@
     "link": "#",
     "description": "Wash cars in residential societies early morning (6 AM - 9 AM).",
     "learn_platform": "Self Taught",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹500/car/mo (Part-time)",
+    "min_income": 5000
   },
   {
     "title": "Gardener (Mali)",
@@ -426,7 +490,9 @@
     "link": "#",
     "description": "Maintain gardens for homes or offices. Pruning, watering, and planting.",
     "learn_platform": "YouTube - Gardening",
-    "learn_link": "https://www.youtube.com/results?search_query=basic+gardening+skills"
+    "learn_link": "https://www.youtube.com/results?search_query=basic+gardening+skills",
+    "income": "₹12,000 - ₹18,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Cook / Domestic Help",
@@ -439,7 +505,9 @@
     "link": "https://helper4u.in/",
     "description": "Prepare meals and manage kitchen for households.",
     "learn_platform": "YouTube - Indian Cooking",
-    "learn_link": "https://www.youtube.com/results?search_query=daily+indian+cooking+recipes"
+    "learn_link": "https://www.youtube.com/results?search_query=daily+indian+cooking+recipes",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Event Waiter/Server",
@@ -452,7 +520,9 @@
     "link": "#",
     "description": "Serve food and drinks at weddings and parties. Daily payout usually.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹500 - ₹800/day",
+    "min_income": 12000
   },
   {
     "title": "E-Rickshaw Driver",
@@ -465,7 +535,9 @@
     "link": "#",
     "description": "Drive e-rickshaws for last-mile connectivity near metro stations.",
     "learn_platform": "Local Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Data Entry Operator",
@@ -478,7 +550,9 @@
     "link": "https://www.freelancer.com/",
     "description": "Input data into spreadsheets or databases. Speed and accuracy required.",
     "learn_platform": "Typing.com",
-    "learn_link": "https://www.typing.com/"
+    "learn_link": "https://www.typing.com/",
+    "income": "₹8,000 - ₹15,000/mo",
+    "min_income": 8000
   },
   {
     "title": "Content Writer",
@@ -491,7 +565,9 @@
     "link": "https://www.upwork.com/",
     "description": "Write blogs, articles, and website content in Hindi or English.",
     "learn_platform": "HubSpot Academy",
-    "learn_link": "https://academy.hubspot.com/courses/content-marketing"
+    "learn_link": "https://academy.hubspot.com/courses/content-marketing",
+    "income": "₹10,000 - ₹30,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Translator (Hindi-English)",
@@ -504,7 +580,9 @@
     "link": "https://www.fiverr.com/",
     "description": "Translate documents or audio from Hindi to English or vice versa.",
     "learn_platform": "Google Translate Contributor",
-    "learn_link": "https://translate.google.com/contribute"
+    "learn_link": "https://translate.google.com/contribute",
+    "income": "₹10,000 - ₹25,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Transcriber",
@@ -517,7 +595,9 @@
     "link": "https://www.rev.com/",
     "description": "Convert audio recordings into text documents.",
     "learn_platform": "Express Scribe",
-    "learn_link": "https://www.nch.com.au/scribe/index.html"
+    "learn_link": "https://www.nch.com.au/scribe/index.html",
+    "income": "₹8,000 - ₹20,000/mo",
+    "min_income": 8000
   },
   {
     "title": "Voice Over Artist",
@@ -530,7 +610,9 @@
     "link": "https://www.voices.com/",
     "description": "Provide voice recordings for ads, YouTube videos, or audiobooks.",
     "learn_platform": "YouTube - Voice Acting",
-    "learn_link": "https://www.youtube.com/results?search_query=voice+over+training"
+    "learn_link": "https://www.youtube.com/results?search_query=voice+over+training",
+    "income": "₹5,000 - ₹30,000/project",
+    "min_income": 5000
   },
   {
     "title": "Virtual Assistant",
@@ -543,7 +625,9 @@
     "link": "https://www.upwork.com/",
     "description": "Manage emails, scheduling, and admin tasks for clients remotely.",
     "learn_platform": "Coursera - VA",
-    "learn_link": "https://www.coursera.org/courses?query=virtual%20assistant"
+    "learn_link": "https://www.coursera.org/courses?query=virtual%20assistant",
+    "income": "₹15,000 - ₹35,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Social Media Manager",
@@ -556,7 +640,9 @@
     "link": "https://www.fiverr.com/",
     "description": "Manage Instagram/Facebook pages for small businesses.",
     "learn_platform": "Meta Blueprint",
-    "learn_link": "https://www.facebook.com/business/learn"
+    "learn_link": "https://www.facebook.com/business/learn",
+    "income": "₹15,000 - ₹40,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Graphic Designer (Canva)",
@@ -569,7 +655,9 @@
     "link": "https://www.canva.com/",
     "description": "Create posters, social media posts, and logos using Canva.",
     "learn_platform": "Canva Design School",
-    "learn_link": "https://www.canva.com/designschool/"
+    "learn_link": "https://www.canva.com/designschool/",
+    "income": "₹10,000 - ₹25,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Video Editor (Reels/Shorts)",
@@ -582,7 +670,9 @@
     "link": "#",
     "description": "Edit short vertical videos for influencers using mobile apps.",
     "learn_platform": "YouTube - CapCut",
-    "learn_link": "https://www.youtube.com/results?search_query=capcut+editing+tutorial"
+    "learn_link": "https://www.youtube.com/results?search_query=capcut+editing+tutorial",
+    "income": "₹15,000 - ₹35,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Thumbnail Maker",
@@ -595,7 +685,9 @@
     "link": "https://www.fiverr.com/",
     "description": "Design attractive thumbnails for YouTube videos to increase clicks.",
     "learn_platform": "YouTube - Thumbnail Design",
-    "learn_link": "https://www.youtube.com/results?search_query=youtube+thumbnail+design+tutorial"
+    "learn_link": "https://www.youtube.com/results?search_query=youtube+thumbnail+design+tutorial",
+    "income": "₹200 - ₹500/thumbnail",
+    "min_income": 5000
   },
   {
     "title": "Resume Writer",
@@ -608,7 +700,9 @@
     "link": "https://www.linkedin.com/",
     "description": "Write professional resumes and cover letters for job seekers.",
     "learn_platform": "YouTube - Resume Writing",
-    "learn_link": "https://www.youtube.com/results?search_query=professional+resume+writing"
+    "learn_link": "https://www.youtube.com/results?search_query=professional+resume+writing",
+    "income": "₹500 - ₹2000/resume",
+    "min_income": 5000
   },
   {
     "title": "Online Survey Participant",
@@ -621,7 +715,9 @@
     "link": "https://www.swagbucks.com/",
     "description": "Fill out surveys and give feedback for small cash rewards or vouchers.",
     "learn_platform": "None",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹1,000 - ₹3,000/mo",
+    "min_income": 1000
   },
   {
     "title": "User Testing",
@@ -634,7 +730,9 @@
     "link": "https://www.usertesting.com/",
     "description": "Test websites and apps and record your feedback/screen.",
     "learn_platform": "UserTesting FAQ",
-    "learn_link": "https://www.usertesting.com/be-a-user-tester"
+    "learn_link": "https://www.usertesting.com/be-a-user-tester",
+    "income": "₹5,000 - ₹10,000/mo",
+    "min_income": 5000
   },
   {
     "title": "Telecaller (Work from Home)",
@@ -647,7 +745,9 @@
     "link": "https://www.squadstack.com/",
     "description": "Make sales or support calls from home using your phone.",
     "learn_platform": "SquadStack Academy",
-    "learn_link": "https://www.squadstack.com/"
+    "learn_link": "https://www.squadstack.com/",
+    "income": "₹10,000 - ₹20,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Chat Support Agent",
@@ -660,7 +760,9 @@
     "link": "https://in.indeed.com/",
     "description": "Provide customer support via live chat for companies.",
     "learn_platform": "Udemy - Customer Service",
-    "learn_link": "https://www.udemy.com/topic/customer-service/"
+    "learn_link": "https://www.udemy.com/topic/customer-service/",
+    "income": "₹12,000 - ₹22,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Proofreader",
@@ -673,7 +775,9 @@
     "link": "https://www.fiverr.com/",
     "description": "Check documents for spelling and grammar errors.",
     "learn_platform": "Grammarly Blog",
-    "learn_link": "https://www.grammarly.com/blog/"
+    "learn_link": "https://www.grammarly.com/blog/",
+    "income": "₹5,000 - ₹15,000/mo",
+    "min_income": 5000
   },
   {
     "title": "Home Tuition (K-5)",
@@ -686,7 +790,9 @@
     "link": "https://www.urbanpro.com/",
     "description": "Teach all subjects to primary school kids at home.",
     "learn_platform": "Khan Academy",
-    "learn_link": "https://www.khanacademy.org/"
+    "learn_link": "https://www.khanacademy.org/",
+    "income": "₹8,000 - ₹15,000/mo",
+    "min_income": 8000
   },
   {
     "title": "Math/Science Tutor (6-10)",
@@ -699,7 +805,9 @@
     "link": "https://www.urbanpro.com/",
     "description": "Teach Math or Science to middle/high school students.",
     "learn_platform": "NCERT Books",
-    "learn_link": "https://ncert.nic.in/textbook.php"
+    "learn_link": "https://ncert.nic.in/textbook.php",
+    "income": "₹15,000 - ₹30,000/mo",
+    "min_income": 15000
   },
   {
     "title": "English Speaking Coach",
@@ -712,7 +820,9 @@
     "link": "https://www.cambly.com/",
     "description": "Help people practice and improve their spoken English.",
     "learn_platform": "British Council",
-    "learn_link": "https://learnenglish.britishcouncil.org/"
+    "learn_link": "https://learnenglish.britishcouncil.org/",
+    "income": "₹500 - ₹1000/hr",
+    "min_income": 10000
   },
   {
     "title": "Yoga Instructor",
@@ -725,7 +835,9 @@
     "link": "#",
     "description": "Teach yoga asanas and breathing exercises in parks or homes.",
     "learn_platform": "Yoga Certification Board",
-    "learn_link": "https://yogacertificationboard.nic.in/"
+    "learn_link": "https://yogacertificationboard.nic.in/",
+    "income": "₹15,000 - ₹40,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Gym Trainer",
@@ -738,7 +850,9 @@
     "link": "#",
     "description": "Assist gym members with workouts and diet plans.",
     "learn_platform": "K11 School of Fitness",
-    "learn_link": "https://www.keleven.com/"
+    "learn_link": "https://www.keleven.com/",
+    "income": "₹15,000 - ₹30,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Zumba Instructor",
@@ -751,7 +865,9 @@
     "link": "#",
     "description": "Conduct energetic dance fitness classes.",
     "learn_platform": "Zumba Instructor Network",
-    "learn_link": "https://www.zumba.com/en-US/become-a-zumba-instructor"
+    "learn_link": "https://www.zumba.com/en-US/become-a-zumba-instructor",
+    "income": "₹10,000 - ₹25,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Guitar Teacher",
@@ -764,7 +880,9 @@
     "link": "#",
     "description": "Teach acoustic or electric guitar to beginners.",
     "learn_platform": "JustinGuitar",
-    "learn_link": "https://www.justinguitar.com/"
+    "learn_link": "https://www.justinguitar.com/",
+    "income": "₹500 - ₹1000/class",
+    "min_income": 5000
   },
   {
     "title": "Art Teacher",
@@ -777,7 +895,9 @@
     "link": "#",
     "description": "Teach drawing and painting to children.",
     "learn_platform": "YouTube - Art for Kids",
-    "learn_link": "https://www.youtube.com/user/ArtforKidsHub"
+    "learn_link": "https://www.youtube.com/user/ArtforKidsHub",
+    "income": "₹5,000 - ₹15,000/mo",
+    "min_income": 5000
   },
   {
     "title": "Dance Choreographer",
@@ -790,7 +910,9 @@
     "link": "#",
     "description": "Choreograph dances for weddings or teach dance classes.",
     "learn_platform": "YouTube - Dance Tutorials",
-    "learn_link": "https://www.youtube.com/results?search_query=dance+choreography+tutorial"
+    "learn_link": "https://www.youtube.com/results?search_query=dance+choreography+tutorial",
+    "income": "₹5,000 - ₹20,000/event",
+    "min_income": 5000
   },
   {
     "title": "Coding Tutor for Kids",
@@ -803,7 +925,9 @@
     "link": "#",
     "description": "Teach basic programming logic to children online.",
     "learn_platform": "Code.org",
-    "learn_link": "https://code.org/"
+    "learn_link": "https://code.org/",
+    "income": "₹20,000 - ₹40,000/mo",
+    "min_income": 20000
   },
   {
     "title": "Computer Basics Trainer",
@@ -816,7 +940,9 @@
     "link": "#",
     "description": "Teach MS Office, email, and internet basics to seniors or beginners.",
     "learn_platform": "GCFGlobal",
-    "learn_link": "https://edu.gcfglobal.org/en/computerbasics/"
+    "learn_link": "https://edu.gcfglobal.org/en/computerbasics/",
+    "income": "₹5,000 - ₹10,000/mo",
+    "min_income": 5000
   },
   {
     "title": "Mehendi Artist",
@@ -829,7 +955,9 @@
     "link": "#",
     "description": "Apply henna designs for weddings, festivals, and events.",
     "learn_platform": "YouTube - Mehendi",
-    "learn_link": "https://www.youtube.com/results?search_query=mehendi+design+for+beginners"
+    "learn_link": "https://www.youtube.com/results?search_query=mehendi+design+for+beginners",
+    "income": "₹2,000 - ₹10,000/event",
+    "min_income": 5000
   },
   {
     "title": "Makeup Artist (Freelance)",
@@ -842,7 +970,9 @@
     "link": "#",
     "description": "Provide party or bridal makeup services at client venues.",
     "learn_platform": "YouTube - Makeup",
-    "learn_link": "https://www.youtube.com/results?search_query=makeup+artist+course"
+    "learn_link": "https://www.youtube.com/results?search_query=makeup+artist+course",
+    "income": "₹3,000 - ₹15,000/booking",
+    "min_income": 5000
   },
   {
     "title": "Hair Stylist (Home Service)",
@@ -855,7 +985,9 @@
     "link": "#",
     "description": "Hair cutting and styling services at home.",
     "learn_platform": "YouTube - Hair Styling",
-    "learn_link": "https://www.youtube.com/results?search_query=hair+cutting+tutorial"
+    "learn_link": "https://www.youtube.com/results?search_query=hair+cutting+tutorial",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Nail Art Technician",
@@ -868,7 +1000,9 @@
     "link": "#",
     "description": "Provide manicure and nail art services.",
     "learn_platform": "YouTube - Nail Art",
-    "learn_link": "https://www.youtube.com/results?search_query=nail+art+tutorial"
+    "learn_link": "https://www.youtube.com/results?search_query=nail+art+tutorial",
+    "income": "₹15,000 - ₹30,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Event Photographer",
@@ -881,7 +1015,9 @@
     "link": "#",
     "description": "Cover birthday parties, small events, or portraits.",
     "learn_platform": "YouTube - Photography",
-    "learn_link": "https://www.youtube.com/user/DigitalRevCom"
+    "learn_link": "https://www.youtube.com/user/DigitalRevCom",
+    "income": "₹5,000 - ₹15,000/event",
+    "min_income": 5000
   },
   {
     "title": "Product Photographer",
@@ -894,7 +1030,9 @@
     "link": "#",
     "description": "Photograph products for e-commerce sellers (can use high-end phone).",
     "learn_platform": "YouTube - Product Photography",
-    "learn_link": "https://www.youtube.com/results?search_query=product+photography+at+home"
+    "learn_link": "https://www.youtube.com/results?search_query=product+photography+at+home",
+    "income": "₹50 - ₹200/product",
+    "min_income": 5000
   },
   {
     "title": "Tailor / Alteration",
@@ -907,7 +1045,9 @@
     "link": "#",
     "description": "Stitch clothes or perform alterations/repairs from home.",
     "learn_platform": "YouTube - Sewing",
-    "learn_link": "https://www.youtube.com/results?search_query=sewing+for+beginners"
+    "learn_link": "https://www.youtube.com/results?search_query=sewing+for+beginners",
+    "income": "₹10,000 - ₹25,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Handmade Jewellery",
@@ -920,7 +1060,9 @@
     "link": "#",
     "description": "Make and sell beaded or resin jewellery online.",
     "learn_platform": "YouTube - Jewellery Making",
-    "learn_link": "https://www.youtube.com/results?search_query=handmade+jewellery+tutorial"
+    "learn_link": "https://www.youtube.com/results?search_query=handmade+jewellery+tutorial",
+    "income": "₹5,000 - ₹20,000/mo",
+    "min_income": 5000
   },
   {
     "title": "Candle Maker",
@@ -933,7 +1075,9 @@
     "link": "#",
     "description": "Create scented or decorative candles for sale.",
     "learn_platform": "YouTube - Candle Making",
-    "learn_link": "https://www.youtube.com/results?search_query=candle+making+business"
+    "learn_link": "https://www.youtube.com/results?search_query=candle+making+business",
+    "income": "₹5,000 - ₹15,000/mo",
+    "min_income": 5000
   },
   {
     "title": "Tattoo Artist",
@@ -946,7 +1090,9 @@
     "link": "#",
     "description": "Design and apply permanent tattoos. Requires hygiene certification.",
     "learn_platform": "Aliens Tattoo School",
-    "learn_link": "https://www.alienstattooschool.com/"
+    "learn_link": "https://www.alienstattooschool.com/",
+    "income": "₹30,000 - ₹1,00,000/mo",
+    "min_income": 30000
   },
   {
     "title": "Rangoli Artist",
@@ -959,7 +1105,9 @@
     "link": "#",
     "description": "Create intricate rangoli designs for office or home events.",
     "learn_platform": "YouTube - Rangoli",
-    "learn_link": "https://www.youtube.com/results?search_query=rangoli+designs"
+    "learn_link": "https://www.youtube.com/results?search_query=rangoli+designs",
+    "income": "₹2,000 - ₹5,000/event",
+    "min_income": 2000
   },
   {
     "title": "Reselling (Meesho)",
@@ -972,7 +1120,9 @@
     "link": "https://meesho.com/",
     "description": "Share product catalogs on WhatsApp and earn margin on sales.",
     "learn_platform": "Meesho Learning Hub",
-    "learn_link": "https://supplier.meesho.com/learning-hub"
+    "learn_link": "https://supplier.meesho.com/learning-hub",
+    "income": "₹5,000 - ₹25,000/mo",
+    "min_income": 5000
   },
   {
     "title": "Affiliate Marketing",
@@ -985,7 +1135,9 @@
     "link": "https://affiliate-program.amazon.in/",
     "description": "Promote products via links and earn commission on purchases.",
     "learn_platform": "Amazon Associates Central",
-    "learn_link": "https://affiliate-program.amazon.in/"
+    "learn_link": "https://affiliate-program.amazon.in/",
+    "income": "₹1,000 - ₹50,000/mo",
+    "min_income": 1000
   },
   {
     "title": "Sell Used Items (OLX)",
@@ -998,7 +1150,9 @@
     "link": "https://www.olx.in/",
     "description": "Buy undervalued used items and resell them for profit.",
     "learn_platform": "YouTube - Flipping",
-    "learn_link": "https://www.youtube.com/results?search_query=how+to+flip+items+for+profit"
+    "learn_link": "https://www.youtube.com/results?search_query=how+to+flip+items+for+profit",
+    "income": "Profit varies",
+    "min_income": 5000
   },
   {
     "title": "Tiffin Service",
@@ -1011,7 +1165,9 @@
     "link": "#",
     "description": "Cook and deliver lunch/dinner boxes to office goers or students.",
     "learn_platform": "YouTube - Tiffin Business",
-    "learn_link": "https://www.youtube.com/results?search_query=start+tiffin+service+from+home"
+    "learn_link": "https://www.youtube.com/results?search_query=start+tiffin+service+from+home",
+    "income": "₹20,000 - ₹50,000/mo",
+    "min_income": 20000
   },
   {
     "title": "Tea/Coffee Stall",
@@ -1024,7 +1180,9 @@
     "link": "#",
     "description": "Set up a small tea stall in a busy area. High footfall = high cash flow.",
     "learn_platform": "YouTube - Chai Business",
-    "learn_link": "https://www.youtube.com/results?search_query=chai+stall+business+plan"
+    "learn_link": "https://www.youtube.com/results?search_query=chai+stall+business+plan",
+    "income": "₹30,000 - ₹60,000/mo",
+    "min_income": 30000
   },
   {
     "title": "Street Food Cart",
@@ -1037,7 +1195,9 @@
     "link": "#",
     "description": "Sell momos, rolls, or snacks. Requires food safety license (FSSAI).",
     "learn_platform": "YouTube - Street Food",
-    "learn_link": "https://www.youtube.com/results?search_query=street+food+business+ideas"
+    "learn_link": "https://www.youtube.com/results?search_query=street+food+business+ideas",
+    "income": "₹30,000 - ₹70,000/mo",
+    "min_income": 30000
   },
   {
     "title": "Flower Seller",
@@ -1050,7 +1210,9 @@
     "link": "#",
     "description": "Sell fresh flowers or garlands near temples or markets.",
     "learn_platform": "Local Florist",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Newspaper Delivery",
@@ -1063,7 +1225,9 @@
     "link": "#",
     "description": "Distribute newspapers in the early morning (4 AM - 7 AM).",
     "learn_platform": "Local Agency",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹3,000 - ₹6,000/mo",
+    "min_income": 3000
   },
   {
     "title": "Pamphlet Distribution",
@@ -1076,7 +1240,9 @@
     "link": "#",
     "description": "Distribute advertising flyers in newspapers or door-to-door.",
     "learn_platform": "Local Agency",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹300 - ₹500/day",
+    "min_income": 9000
   },
   {
     "title": "Event Helper",
@@ -1089,7 +1255,9 @@
     "link": "#",
     "description": "Help organize venues, manage guests, or handle logistics for events.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹800 - ₹1,500/day",
+    "min_income": 10000
   },
   {
     "title": "Real Estate Agent",
@@ -1102,7 +1270,9 @@
     "link": "#",
     "description": "Connect property buyers/renters with owners for a commission.",
     "learn_platform": "YouTube - Real Estate",
-    "learn_link": "https://www.youtube.com/results?search_query=real+estate+agent+tips"
+    "learn_link": "https://www.youtube.com/results?search_query=real+estate+agent+tips",
+    "income": "Commission Based",
+    "min_income": 10000
   },
   {
     "title": "Insurance Agent (LIC)",
@@ -1115,7 +1285,9 @@
     "link": "https://licindia.in/",
     "description": "Sell life insurance policies. Requires passing an IRDAI exam.",
     "learn_platform": "LIC Agent Portal",
-    "learn_link": "https://licindia.in/Bottom-Links/Careers/Agent"
+    "learn_link": "https://licindia.in/Bottom-Links/Careers/Agent",
+    "income": "Commission Based",
+    "min_income": 5000
   },
   {
     "title": "Travel Agent",
@@ -1128,7 +1300,9 @@
     "link": "#",
     "description": "Book flights, trains, and buses for people for a service charge.",
     "learn_platform": "IRCTC Agent",
-    "learn_link": "https://www.irctc.co.in/"
+    "learn_link": "https://www.irctc.co.in/",
+    "income": "Commission Based",
+    "min_income": 10000
   },
   {
     "title": "Mystery Shopper",
@@ -1141,7 +1315,9 @@
     "link": "#",
     "description": "Visit shops to evaluate customer service and product quality anonymously.",
     "learn_platform": "YouTube - Mystery Shopping",
-    "learn_link": "https://www.youtube.com/results?search_query=mystery+shopper+job"
+    "learn_link": "https://www.youtube.com/results?search_query=mystery+shopper+job",
+    "income": "₹500 - ₹2,000/audit",
+    "min_income": 5000
   },
   {
     "title": "Mobile Repair Technician",
@@ -1154,7 +1330,9 @@
     "link": "#",
     "description": "Fix screens, batteries, and software issues for mobile phones.",
     "learn_platform": "Udemy - Mobile Repair",
-    "learn_link": "https://www.udemy.com/topic/mobile-repair/"
+    "learn_link": "https://www.udemy.com/topic/mobile-repair/",
+    "income": "₹15,000 - ₹30,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Carpenter Helper",
@@ -1167,7 +1345,9 @@
     "link": "#",
     "description": "Assist a master carpenter with cutting, holding, and moving materials.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹12,000 - ₹18,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Electrician Helper",
@@ -1180,7 +1360,9 @@
     "link": "#",
     "description": "Assist electricians with wiring, chasing walls, and fetching tools.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹12,000 - ₹18,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Library Assistant",
@@ -1193,7 +1375,9 @@
     "link": "#",
     "description": "Shelve books, manage issue/return records, and maintain silence.",
     "learn_platform": "Library Science Basics",
-    "learn_link": "https://www.youtube.com/results?search_query=library+assistant+training"
+    "learn_link": "https://www.youtube.com/results?search_query=library+assistant+training",
+    "income": "₹10,000 - ₹18,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Gym Receptionist",
@@ -1204,9 +1388,11 @@
     "budget": "Zero",
     "platform": "Local Gym",
     "link": "#",
-    "description": "Handle gym memberships, attendance, and general enquiries.",
+    "description": "Manage front desk, attend calls, and handle gym memberships.",
     "learn_platform": "Coursera - Admin",
-    "learn_link": "https://www.coursera.org/courses?query=administrative"
+    "learn_link": "https://www.coursera.org/courses?query=administrative",
+    "income": "₹12,000 - ₹20,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Clinic Receptionist",
@@ -1219,7 +1405,9 @@
     "link": "#",
     "description": "Manage patient appointments and doctor's schedule.",
     "learn_platform": "YouTube - Receptionist Skills",
-    "learn_link": "https://www.youtube.com/results?search_query=medical+receptionist+training"
+    "learn_link": "https://www.youtube.com/results?search_query=medical+receptionist+training",
+    "income": "₹12,000 - ₹20,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Data Collector (Field)",
@@ -1232,7 +1420,9 @@
     "link": "#",
     "description": "Go door-to-door or to markets to collect data for surveys.",
     "learn_platform": "SurveyMonkey Guide",
-    "learn_link": "https://www.surveymonkey.com/mp/how-to-conduct-surveys/"
+    "learn_link": "https://www.surveymonkey.com/mp/how-to-conduct-surveys/",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Delivery Boy (Medicine)",
@@ -1245,7 +1435,9 @@
     "link": "#",
     "description": "Deliver medicines to customers. Requires checking prescriptions sometimes.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹12,000 - ₹18,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Lab Boy/Helper",
@@ -1258,7 +1450,9 @@
     "link": "#",
     "description": "Assist in pathology labs with cleaning and sample labeling.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹10,000 - ₹15,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Juice Stall Owner",
@@ -1271,7 +1465,9 @@
     "link": "#",
     "description": "Sell fresh fruit juices. Requires hygiene maintenance.",
     "learn_platform": "YouTube - Juice Business",
-    "learn_link": "https://www.youtube.com/results?search_query=juice+shop+business+plan"
+    "learn_link": "https://www.youtube.com/results?search_query=juice+shop+business+plan",
+    "income": "₹20,000 - ₹45,000/mo",
+    "min_income": 20000
   },
   {
     "title": "Popcorn Seller",
@@ -1284,7 +1480,9 @@
     "link": "#",
     "description": "Sell popcorn in busy markets or near parks.",
     "learn_platform": "Self Taught",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹15,000 - ₹30,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Balloon Seller",
@@ -1297,7 +1495,9 @@
     "link": "#",
     "description": "Sell balloons and toys near parks or malls.",
     "learn_platform": "Self Taught",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹10,000 - ₹20,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Recycling Scrap Collector",
@@ -1310,7 +1510,9 @@
     "link": "#",
     "description": "Collect and sell scrap materials like paper, metal, and plastic.",
     "learn_platform": "Local Scrap Dealer",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹15,000 - ₹30,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Photocopy Shop Helper",
@@ -1323,7 +1525,9 @@
     "link": "#",
     "description": "Operate xerox machines and bind books.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹8,000 - ₹12,000/mo",
+    "min_income": 8000
   },
   {
     "title": "Cyber Cafe Assistant",
@@ -1336,7 +1540,9 @@
     "link": "#",
     "description": "Help customers with printing, form filling, and internet surfing.",
     "learn_platform": "Basic Computer Course",
-    "learn_link": "https://www.youtube.com/results?search_query=basic+computer+course"
+    "learn_link": "https://www.youtube.com/results?search_query=basic+computer+course",
+    "income": "₹8,000 - ₹12,000/mo",
+    "min_income": 8000
   },
   {
     "title": "Car Driving Instructor",
@@ -1349,7 +1555,9 @@
     "link": "#",
     "description": "Teach people how to drive cars. Requires patience and expert driving skills.",
     "learn_platform": "Certified Instructor Course",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Swimming Coach",
@@ -1362,7 +1570,9 @@
     "link": "#",
     "description": "Teach swimming techniques and safety.",
     "learn_platform": "NIS Patiala",
-    "learn_link": "https://www.nsnis.org/"
+    "learn_link": "https://www.nsnis.org/",
+    "income": "₹15,000 - ₹30,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Skating Instructor",
@@ -1375,7 +1585,9 @@
     "link": "#",
     "description": "Teach roller skating to kids in parks or schools.",
     "learn_platform": "Self Taught",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹10,000 - ₹20,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Calligraphy Artist",
@@ -1388,7 +1600,9 @@
     "link": "#",
     "description": "Create beautiful handwritten invites and certificates.",
     "learn_platform": "YouTube - Calligraphy",
-    "learn_link": "https://www.youtube.com/results?search_query=calligraphy+for+beginners"
+    "learn_link": "https://www.youtube.com/results?search_query=calligraphy+for+beginners",
+    "income": "₹500 - ₹2,000/project",
+    "min_income": 5000
   },
   {
     "title": "Pottery Maker",
@@ -1401,7 +1615,9 @@
     "link": "#",
     "description": "Make clay pots and decorative items.",
     "learn_platform": "YouTube - Pottery",
-    "learn_link": "https://www.youtube.com/results?search_query=pottery+making+basics"
+    "learn_link": "https://www.youtube.com/results?search_query=pottery+making+basics",
+    "income": "Variable Sales",
+    "min_income": 5000
   },
   {
     "title": "Beta Reader",
@@ -1414,7 +1630,9 @@
     "link": "https://www.fiverr.com/",
     "description": "Read unpublished manuscripts and give feedback to authors.",
     "learn_platform": "Goodreads Groups",
-    "learn_link": "https://www.goodreads.com/"
+    "learn_link": "https://www.goodreads.com/",
+    "income": "₹500 - ₹2,000/book",
+    "min_income": 2000
   },
   {
     "title": "Stock Photo Contributor",
@@ -1427,7 +1645,9 @@
     "link": "https://submit.shutterstock.com/",
     "description": "Upload high-quality photos and earn when people download them.",
     "learn_platform": "Shutterstock Contributor Guide",
-    "learn_link": "https://submit.shutterstock.com/"
+    "learn_link": "https://submit.shutterstock.com/",
+    "income": "Passive Income",
+    "min_income": 1000
   },
   {
     "title": "Domain Flipper",
@@ -1440,7 +1660,9 @@
     "link": "https://in.godaddy.com/",
     "description": "Buy domain names at a low price and sell them for a profit.",
     "learn_platform": "YouTube - Domain Flipping",
-    "learn_link": "https://www.youtube.com/results?search_query=domain+flipping+guide"
+    "learn_link": "https://www.youtube.com/results?search_query=domain+flipping+guide",
+    "income": "Variable Profit",
+    "min_income": 5000
   },
   {
     "title": "Local Tour Guide",
@@ -1453,7 +1675,9 @@
     "link": "https://www.airbnb.co.in/host/experiences",
     "description": "Show tourists around your city's landmarks.",
     "learn_platform": "Min of Tourism Guide Course",
-    "learn_link": "https://tourism.gov.in/"
+    "learn_link": "https://tourism.gov.in/",
+    "income": "₹1,000 - ₹3,000/tour",
+    "min_income": 10000
   },
   {
     "title": "Plant Nursery Helper",
@@ -1466,7 +1690,9 @@
     "link": "#",
     "description": "Water plants, re-pot them, and help customers.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹8,000 - ₹12,000/mo",
+    "min_income": 8000
   },
   {
     "title": "Aquarium Maintenance",
@@ -1479,7 +1705,9 @@
     "link": "#",
     "description": "Clean and maintain fish tanks in homes and offices.",
     "learn_platform": "YouTube - Aquarium Care",
-    "learn_link": "https://www.youtube.com/results?search_query=aquarium+maintenance+guide"
+    "learn_link": "https://www.youtube.com/results?search_query=aquarium+maintenance+guide",
+    "income": "₹500 - ₹1,000/visit",
+    "min_income": 5000
   },
   {
     "title": "Sign Board Painter",
@@ -1492,7 +1720,9 @@
     "link": "#",
     "description": "Paint advertisements on walls and shutters.",
     "learn_platform": "Apprentice with Local Artist",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹500 - ₹1,000/day",
+    "min_income": 10000
   },
   {
     "title": "Petrol Pump Attendant",
@@ -1505,7 +1735,9 @@
     "link": "#",
     "description": "Fill fuel for vehicles and manage payments.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹10,000 - ₹15,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Toll Plaza Collector",
@@ -1518,7 +1750,9 @@
     "link": "#",
     "description": "Collect toll tax from vehicles on highways.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹12,000 - ₹18,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Cinema Hall Usher",
@@ -1531,7 +1765,9 @@
     "link": "#",
     "description": "Check tickets and guide people to their seats.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹10,000 - ₹15,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Warehouse Picker/Packer",
@@ -1544,7 +1780,9 @@
     "link": "#",
     "description": "Pick items from shelves and pack them for shipping.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹12,000 - ₹18,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Parking Lot Attendant",
@@ -1557,7 +1795,9 @@
     "link": "#",
     "description": "Manage vehicle entry/exit and collect parking fees.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹10,000 - ₹15,000/mo",
+    "min_income": 10000
   },
   {
     "title": "Newspaper Editor (Local)",
@@ -1570,7 +1810,9 @@
     "link": "#",
     "description": "Edit news stories for small local newspapers.",
     "learn_platform": "Journalism Basics",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Bill Collector",
@@ -1583,7 +1825,9 @@
     "link": "#",
     "description": "Collect payments for bills or loans door-to-door.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹12,000 - ₹20,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Surveyor (Land)",
@@ -1596,7 +1840,9 @@
     "link": "#",
     "description": "Assist in measuring land for construction projects.",
     "learn_platform": "Civil Engineering Diploma",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Cable TV Technician",
@@ -1609,7 +1855,9 @@
     "link": "#",
     "description": "Install and repair cable TV connections.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹12,000 - ₹18,000/mo",
+    "min_income": 12000
   },
   {
     "title": "Internet Installation (Fiber)",
@@ -1622,7 +1870,9 @@
     "link": "#",
     "description": "Lay fiber cables and install routers.",
     "learn_platform": "ISP Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹15,000 - ₹22,000/mo",
+    "min_income": 15000
   },
   {
     "title": "Wedding Planner Asst",
@@ -1635,7 +1885,9 @@
     "link": "#",
     "description": "Assist in coordinating wedding logistics.",
     "learn_platform": "On-job Training",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹15,000 - ₹25,000/mo",
+    "min_income": 15000
   },
   {
     "title": "DJ (Disc Jockey)",
@@ -1648,6 +1900,8 @@
     "link": "#",
     "description": "Play music at parties and weddings.",
     "learn_platform": "DJ Academy",
-    "learn_link": "#"
+    "learn_link": "#",
+    "income": "₹5,000 - ₹20,000/event",
+    "min_income": 5000
   }
 ]
