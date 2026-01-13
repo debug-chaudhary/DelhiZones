@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>document.head.insertAdjacentHTML('beforeend',t));</script>
+    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>{const range=document.createRange();range.selectNode(document.head);const frag=range.createContextualFragment(t);document.head.appendChild(frag);});</script>
     <title>Rhymes & Songs - Sing Along | Kids Zone</title>
     
     <!-- Favicon -->
@@ -67,24 +67,14 @@
 </head>
 <body class="bg-purple-50 text-slate-800">
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-purple shadow-sm rounded-b-3xl">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="/EDU/Kids/nursery-ukg/index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-purple transition-colors font-bold text-lg">
-                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
-                Back
-            </a>
-            
-            <span class="text-2xl font-black text-kid-purple tracking-wide">
-                Sing <span class="text-kid-pink">Along</span>
-            </span>
-
-            <div class="w-8"></div> <!-- Spacer -->
-        </div>
-    </nav>
-
     <!-- Main Content -->
     <main class="container mx-auto px-4 pt-28 pb-10">
+        
+        <div class="flex justify-between items-center mb-8">
+            <a href="/EDU/Kids/nursery-ukg/index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-purple transition-colors font-bold text-lg">
+                <i data-lucide="arrow-left-circle" class="w-6 h-6"></i> Back
+            </a>
+        </div>
         
         <!-- Header -->
         <div class="text-center mb-12 relative">
@@ -127,11 +117,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="text-center py-8 text-slate-400 font-bold">
-        <p>Music makes learning magical! ✨</p>
-    </footer>
 
     <script>
         lucide.createIcons();

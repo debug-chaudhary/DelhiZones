@@ -59,6 +59,7 @@
             function updateFooterVisibility() {
                 if(!footerInstallBtn) return;
                 if (window.deferredPrompt) {
+                    console.log('PWA: Showing footer install button');
                     footerInstallBtn.classList.remove('hidden');
                 } else {
                     footerInstallBtn.classList.add('hidden');

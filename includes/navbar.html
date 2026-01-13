@@ -122,6 +122,7 @@
 
             function updateInstallVisibility() {
                 if (window.deferredPrompt) {
+                    console.log('PWA: Showing install buttons');
                     if(installBtn) installBtn.classList.remove('hidden');
                     if(mobileInstallBtn) mobileInstallBtn.classList.remove('hidden');
                 } else {

@@ -1,11 +1,12 @@
-const CACHE_NAME = 'delhizones-v4';
+const CACHE_NAME = 'delhizones-v5';
 const urlsToCache = [
   '/',
   '/includes/head.html',
   '/includes/navbar.html',
   '/includes/footer.html',
   '/contact.html',
-  '/logo.svg'
+  '/logo.svg',
+  '/manifest.json'
 ];
 
 self.addEventListener('install', event => {

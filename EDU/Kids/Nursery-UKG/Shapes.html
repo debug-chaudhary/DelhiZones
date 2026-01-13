@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+﻿﻿﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>document.head.insertAdjacentHTML('beforeend',t));</script>
+    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>{const range=document.createRange();range.selectNode(document.head);const frag=range.createContextualFragment(t);document.head.appendChild(frag);});</script>
     <title>Shapes - Learn Geometry | Kids Zone</title>
     
     <!-- Favicon -->
@@ -75,26 +75,17 @@
 </head>
 <body class="bg-teal-50 text-slate-800">
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-teal shadow-sm rounded-b-3xl">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pt-28 pb-10">
+        
+        <div class="flex justify-between items-center mb-8">
             <a href="/EDU/Kids/nursery-ukg/index.html" class="flex items-center gap-2 text-slate-600 hover:text-kid-teal transition-colors font-bold text-lg">
-                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
-                Back
+                <i data-lucide="arrow-left-circle" class="w-6 h-6"></i> Back
             </a>
-            
-            <span class="text-2xl font-black text-kid-teal tracking-wide">
-                Shape <span class="text-kid-pink">World</span>
-            </span>
-
-            <button onclick="playAll()" class="hidden md:flex items-center gap-2 px-4 py-2 bg-kid-yellow text-slate-800 rounded-full font-bold hover:bg-yellow-400 transition-colors shadow-md">
+            <button onclick="playAll()" class="flex items-center gap-2 px-4 py-2 bg-kid-yellow text-slate-800 rounded-full font-bold hover:bg-yellow-400 transition-colors shadow-md">
                 <i data-lucide="play" class="w-5 h-5"></i> Auto Play
             </button>
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 pt-28 pb-10">
         
         <!-- Header -->
         <div class="text-center mb-12 relative">
@@ -113,11 +104,6 @@
         </div>
 
     </main>
-
-    <!-- Footer -->
-    <footer class="text-center py-8 text-slate-400 font-bold">
-        <p>Geometry is fun! 📐</p>
-    </footer>
 
     <script>
         lucide.createIcons();

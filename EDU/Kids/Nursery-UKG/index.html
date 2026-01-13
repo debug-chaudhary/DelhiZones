@@ -1,9 +1,9 @@
-﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>document.head.insertAdjacentHTML('beforeend',t));</script>
+    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>{const range=document.createRange();range.selectNode(document.head);const frag=range.createContextualFragment(t);document.head.appendChild(frag);});</script>
     <title>Nursery - UKG Learning World | Delhizones</title>
     
     <!-- Favicon -->
@@ -64,31 +64,6 @@
     </style>
 </head>
 <body class="bg-orange-50 text-slate-800">
-
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-4 border-kid-orange shadow-sm rounded-b-3xl">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="/EDU/Kids/" class="flex items-center gap-2 text-slate-600 hover:text-kid-blue transition-colors font-bold text-lg">
-                <i data-lucide="arrow-left-circle" class="w-8 h-8"></i>
-                Back
-            </a>
-            
-            <span class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-kid-pink to-kid-orange tracking-wide">
-                Tiny<span class="text-kid-blue">Tots</span> World
-            </span>
-
-            <div class="hidden md:flex gap-4">
-                <a href="#english" class="px-4 py-1 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 font-bold text-sm">English</a>
-                <a href="#hindi" class="px-4 py-1 rounded-full bg-orange-100 text-orange-600 hover:bg-orange-200 font-bold text-sm">Hindi</a>
-                <a href="#math" class="px-4 py-1 rounded-full bg-red-100 text-red-600 hover:bg-red-200 font-bold text-sm">Math</a>
-            </div>
-            
-            <!-- Mobile Menu Btn -->
-             <button class="md:hidden text-slate-800">
-                <i data-lucide="grid" class="w-8 h-8"></i>
-            </button>
-        </div>
-    </nav>
 
     <!-- Hero -->
     <header class="pt-32 pb-16 px-4 text-center relative overflow-hidden bg-white">
@@ -281,14 +256,6 @@
         </section>
 
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-white border-t-4 border-slate-100 py-10 mt-10">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-slate-400 font-bold">Keep Smiling & Learning! 🌟</p>
-            <p class="text-xs text-slate-300 mt-2">&copy; 2025 Delhizones.com</p>
-        </div>
-    </footer>
 
     <script>
         lucide.createIcons();
