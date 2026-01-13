@@ -1,6 +1,7 @@
 <!-- Reusable site-wide head include for Delhizones -->
 <meta name="theme-color" content="#2563EB">
 <link rel="icon" href="/favicon.ico" />
+<link rel="manifest" href="/manifest.json">
 <!-- Default Open Graph image and site metadata (can be overridden per page) -->
 <meta property="og:site_name" content="Delhizones">
 <meta property="og:image" content="https://delhizones.com/assets/og-default.png">
@@ -15,6 +16,23 @@
   "url": "https://delhizones.com",
   "logo": "https://delhizones.com/favicon.ico"
 }
+</script>
+
+<!-- PWA Install Prompt Capture -->
+<script>
+  window.deferredPrompt = window.deferredPrompt || null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('PWA: beforeinstallprompt fired');
+    e.preventDefault();
+    window.deferredPrompt = e;
+  });
+</script>
+
+<!-- Service Worker Registration -->
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
 </script>
 
 <!-- Dynamic canonical setter: if a page hasn't set a canonical, this will add one based on location -->
