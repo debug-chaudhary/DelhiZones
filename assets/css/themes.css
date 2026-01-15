@@ -1,83 +1,124 @@
-/* Delhizones Dynamic Theme System */
+/* Delhizones Dynamic Theme System - Final Fix */
 
 :root {
-    /* DEFAULT THEME (Blue Corporate) */
-    --theme-dominant: #f8fafc;   /* Slate-50 */
-    --theme-secondary: #ffffff;  /* White */
-    --theme-accent: #2563EB;     /* Blue-600 */
-    --theme-text-main: #0f172a;  /* Slate-900 */
-    --theme-text-sec: #475569;   /* Slate-600 */
-    --theme-border: #e2e8f0;     /* Slate-200 */
+    /* 1. DEFAULT (Blue/White) */
+    --theme-dominant: #f8fafc;       /* Main Background */
+    --theme-secondary: #ffffff;      /* Card/Content Background */
+    --theme-text-main: #0f172a;      /* Main Headings */
+    --theme-text-sec: #475569;       /* Paragraphs */
+    --theme-border: #e2e8f0;         /* Borders */
+    
+    --theme-nav-bg: rgba(255, 255, 255, 0.95);
+    --theme-nav-text: #334155;
+    --theme-nav-hover: #2563EB;
+
+    --theme-footer-bg: #0f172a;
+    --theme-footer-text: #cbd5e1;
+    
+    --theme-accent: #2563EB;
 }
 
-/* THEME CLASSES (Applies the variables) */
+/* --- THEME CLASSES --- */
+
+/* Body Background */
 .theme-body {
     background-color: var(--theme-dominant) !important;
     color: var(--theme-text-main) !important;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.theme-nav, .theme-footer {
+/* Content Card Background (New) */
+.theme-bg-secondary {
     background-color: var(--theme-secondary) !important;
+    border: 1px solid var(--theme-border) !important;
+    color: var(--theme-text-main) !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* NUCLEAR FIX: Force elements to accept theme colors */
+.theme-body h1, 
+.theme-body h2, 
+.theme-body h3, 
+.theme-body h4, 
+.theme-body h5, 
+.theme-body h6,
+.theme-bg-secondary h1,
+.theme-bg-secondary h2 {
+    color: var(--theme-text-main) !important;
+}
+
+.theme-body p, 
+.theme-body li, 
+.theme-body span, 
+.theme-body div,
+.theme-bg-secondary p,
+.theme-bg-secondary li {
+    color: var(--theme-text-sec) !important;
+}
+
+/* Navbar & Footer */
+.theme-nav {
+    background-color: var(--theme-nav-bg) !important;
+    color: var(--theme-nav-text) !important;
     border-color: var(--theme-border) !important;
-    transition: background-color 0.3s, border-color 0.3s;
+}
+.theme-nav a, .theme-nav button { color: var(--theme-nav-text) !important; }
+.theme-nav a:hover { color: var(--theme-nav-hover) !important; }
+
+.theme-footer {
+    background-color: var(--theme-footer-bg) !important;
+    color: var(--theme-footer-text) !important;
 }
 
-.theme-text-accent { color: var(--theme-accent) !important; }
-.theme-bg-accent { background-color: var(--theme-accent) !important; color: white !important; }
-.theme-text-sec { color: var(--theme-text-sec) !important; }
+/* --- PALETTE DEFINITIONS --- */
 
-/* --- PRE-DEFINED PALETTES --- */
-
-/* 1. DARK MODE (Monochrome) */
+/* 2. NIGHT MODE */
 [data-theme="dark"] {
-    --theme-dominant: #0f172a;   /* Slate-900 */
-    --theme-secondary: #1e293b;  /* Slate-800 */
-    --theme-accent: #3b82f6;     /* Blue-500 */
-    --theme-text-main: #f1f5f9;  /* Slate-100 */
-    --theme-text-sec: #94a3b8;   /* Slate-400 */
-    --theme-border: #334155;     /* Slate-700 */
+    --theme-dominant: #0f172a;    /* Dark Background */
+    --theme-secondary: #1e293b;   /* Slightly Lighter Card */
+    --theme-text-main: #f8fafc;   /* Pure White Text */
+    --theme-text-sec: #cbd5e1;    /* Light Gray Text */
+    --theme-border: #334155;
+
+    --theme-nav-bg: rgba(15, 23, 42, 0.95);
+    --theme-nav-text: #f1f5f9;
+    --theme-nav-hover: #60a5fa;
+
+    --theme-footer-bg: #020617;
+    --theme-footer-text: #94a3b8;
+    --theme-accent: #3b82f6;
 }
 
-/* 2. NATURE (Forest & Beige) - Analogous */
+/* 3. NATURE */
 [data-theme="nature"] {
-    --theme-dominant: #fcf9f2;   /* Cream */
-    --theme-secondary: #2c4a34;  /* Forest Green */
-    --theme-accent: #d4a373;     /* Earthy Tan */
-    --theme-text-main: #1a1a1a;
-    --theme-text-sec: #2c4a34;   /* Green Text for contrast on cream */
+    --theme-dominant: #fcf9f2;    /* Cream */
+    --theme-secondary: #ffffff;   /* White Card */
+    --theme-text-main: #1a2e20;   /* Dark Green Text */
+    --theme-text-sec: #4a5d23;    /* Olive Text */
     --theme-border: #dcdcdc;
-}
-/* Specific fix for text inside the dark green navbar */
-[data-theme="nature"] .theme-nav, 
-[data-theme="nature"] .theme-footer {
-    color: #fcf9f2 !important;
-}
-[data-theme="nature"] .theme-nav a, 
-[data-theme="nature"] .theme-footer a {
-    color: #e2e8f0 !important;
+
+    --theme-nav-bg: rgba(44, 74, 52, 0.95);
+    --theme-nav-text: #fcf9f2;
+    --theme-nav-hover: #86efac;
+
+    --theme-footer-bg: #1a2e20;
+    --theme-footer-text: #e2e8f0;
+    --theme-accent: #d4a373;
 }
 
-/* 3. SUNSET (Purple & Gold) - Complementary */
-[data-theme="sunset"] {
-    --theme-dominant: #2e1065;   /* Deep Purple */
-    --theme-secondary: #4c1d95;  /* Lighter Purple */
-    --theme-accent: #f59e0b;     /* Gold/Amber */
-    --theme-text-main: #faf5ff;
-    --theme-text-sec: #d8b4fe;
-    --theme-border: #5b21b6;
-}
-
-/* 4. OCEAN (Teal & Navy) - Triadic */
+/* 4. OCEAN */
 [data-theme="ocean"] {
-    --theme-dominant: #ecfeff;   /* Cyan-50 */
-    --theme-secondary: #0e7490;  /* Cyan-700 */
-    --theme-accent: #facc15;     /* Yellow Pop */
-    --theme-text-main: #164e63;
+    --theme-dominant: #ecfeff;    /* Cyan Tint */
+    --theme-secondary: #ffffff;
+    --theme-text-main: #0e7490;   /* Teal Text */
     --theme-text-sec: #155e75;
     --theme-border: #a5f3fc;
-}
-[data-theme="ocean"] .theme-nav, 
-[data-theme="ocean"] .theme-footer {
-    color: white !important;
+
+    --theme-nav-bg: rgba(14, 116, 144, 0.95);
+    --theme-nav-text: #ffffff;
+    --theme-nav-hover: #fef08a;
+
+    --theme-footer-bg: #155e75;
+    --theme-footer-text: #cffafe;
+    --theme-accent: #06b6d4;
 }

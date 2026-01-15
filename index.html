@@ -33,7 +33,7 @@
     <script src="/assets/js/loader.js" defer></script>
 
     <style>
-        /* Custom Animations */
+        /* Floating Animation for background elements */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -43,17 +43,7 @@
             animation: float 6s ease-in-out infinite;
         }
         
-        /* Service Card Hover Effect */
-        .service-card {
-            background-color: var(--theme-secondary, #ffffff);
-            border: 1px solid var(--theme-border, #e2e8f0);
-            transition: all 0.3s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--theme-accent, #2563EB);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+        /* Service Icons Background */
         .service-icon-bg {
             background-color: var(--theme-dominant, #f8fafc);
             color: var(--theme-accent, #2563EB);
@@ -66,7 +56,7 @@
     <section class="relative pt-32 pb-20 overflow-hidden">
         <div class="container mx-auto px-6 relative z-10 text-center">
             
-            <div class="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wide uppercase rounded-full theme-bg-accent bg-opacity-10 theme-text-accent border border-current opacity-80">
+            <div class="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wide uppercase rounded-full bg-blue-100 text-blue-700 border border-blue-200 opacity-90">
                 Welcome to 2026 Digital India
             </div>
 
@@ -80,11 +70,11 @@
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#explore" class="px-8 py-4 text-lg font-bold rounded-full theme-bg-accent shadow-lg shadow-blue-500/30 hover:scale-105 transition-transform text-white">
+                <a href="#explore" class="px-8 py-4 text-lg font-bold rounded-full bg-blue-600 text-white shadow-lg shadow-blue-500/30 hover:scale-105 transition-transform">
                     Explore Services
                 </a>
                 
-                <button id="hero-install-btn" class="hidden px-8 py-4 text-lg font-bold rounded-full border-2 border-slate-300 dark:border-slate-700 theme-text-main hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-2">
+                <button id="hero-install-btn" class="hidden px-8 py-4 text-lg font-bold rounded-full border-2 border-current theme-text-main hover:opacity-70 transition-opacity flex items-center gap-2">
                     <i data-lucide="download" class="w-5 h-5"></i> Install App
                 </button>
             </div>
@@ -96,7 +86,7 @@
         </div>
     </section>
 
-    <section id="explore" class="py-20 bg-opacity-50 theme-nav">
+    <section id="explore" class="py-20 bg-black/5 border-y border-black/5">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-bold theme-text-main mb-4">Everything You Need</h2>
@@ -105,100 +95,100 @@
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 
-                <a href="/JOBs/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/JOBs/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="briefcase" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">Job Portal</h3>
-                    <p class="text-sm theme-text-sec">Govt & Private Vacancies</p>
+                    <h3 class="text-lg font-bold mb-1">Job Portal</h3>
+                    <p class="text-sm opacity-80">Govt & Private Vacancies</p>
                 </a>
 
-                <a href="/delhizones-portal/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/delhizones-portal/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="landmark" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">Govt Services</h3>
-                    <p class="text-sm theme-text-sec">Schemes & Applications</p>
+                    <h3 class="text-lg font-bold mb-1">Govt Services</h3>
+                    <p class="text-sm opacity-80">Schemes & Applications</p>
                 </a>
 
-                <a href="/WebTool/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/WebTool/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="wrench" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">Web Tools</h3>
-                    <p class="text-sm theme-text-sec">Converters & Calculators</p>
+                    <h3 class="text-lg font-bold mb-1">Web Tools</h3>
+                    <p class="text-sm opacity-80">Converters & Calculators</p>
                 </a>
 
-                <a href="/Learning/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/Learning/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="graduation-cap" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">Learning</h3>
-                    <p class="text-sm theme-text-sec">Free Courses & Skills</p>
+                    <h3 class="text-lg font-bold mb-1">Learning</h3>
+                    <p class="text-sm opacity-80">Free Courses & Skills</p>
                 </a>
 
-                <a href="/Business/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/Business/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="trending-up" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">Business</h3>
-                    <p class="text-sm theme-text-sec">Startup Resources</p>
+                    <h3 class="text-lg font-bold mb-1">Business</h3>
+                    <p class="text-sm opacity-80">Startup Resources</p>
                 </a>
 
-                <a href="/News/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/News/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="newspaper" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">Daily News</h3>
-                    <p class="text-sm theme-text-sec">Latest Updates</p>
+                    <h3 class="text-lg font-bold mb-1">Daily News</h3>
+                    <p class="text-sm opacity-80">Latest Updates</p>
                 </a>
 
-                <a href="/WebStory/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/WebStory/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="smartphone" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">Web Stories</h3>
-                    <p class="text-sm theme-text-sec">Visual Bite-sized Content</p>
+                    <h3 class="text-lg font-bold mb-1">Web Stories</h3>
+                    <p class="text-sm opacity-80">Visual Bite-sized Content</p>
                 </a>
 
-                <a href="/Telecom/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/Telecom/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="wifi" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">Telecom</h3>
-                    <p class="text-sm theme-text-sec">Plans & Tech Guide</p>
+                    <h3 class="text-lg font-bold mb-1">Telecom</h3>
+                    <p class="text-sm opacity-80">Plans & Tech Guide</p>
                 </a>
 
-                <a href="/Portfolio/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/Portfolio/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="user-circle" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">Portfolio</h3>
-                    <p class="text-sm theme-text-sec">Showcase Your Work</p>
+                    <h3 class="text-lg font-bold mb-1">Portfolio</h3>
+                    <p class="text-sm opacity-80">Showcase Your Work</p>
                 </a>
 
-                <a href="/YouTube/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/YouTube/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="youtube" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">YouTube</h3>
-                    <p class="text-sm theme-text-sec">Video Tutorials</p>
+                    <h3 class="text-lg font-bold mb-1">YouTube</h3>
+                    <p class="text-sm opacity-80">Video Tutorials</p>
                 </a>
                 
-                <a href="/LifeStyle/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/LifeStyle/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="coffee" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">Lifestyle</h3>
-                    <p class="text-sm theme-text-sec">Health & Living</p>
+                    <h3 class="text-lg font-bold mb-1">Lifestyle</h3>
+                    <p class="text-sm opacity-80">Health & Living</p>
                 </a>
 
-                <a href="/Blog/" class="service-card p-6 rounded-2xl flex flex-col items-center text-center group">
+                <a href="/Blog/" class="theme-bg-secondary p-6 rounded-2xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                     <div class="w-14 h-14 rounded-full service-icon-bg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <i data-lucide="book-open" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-lg font-bold theme-text-main mb-1">Blog</h3>
-                    <p class="text-sm theme-text-sec">In-depth Articles</p>
+                    <h3 class="text-lg font-bold mb-1">Blog</h3>
+                    <p class="text-sm opacity-80">In-depth Articles</p>
                 </a>
 
             </div>
@@ -209,21 +199,21 @@
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-3 gap-10">
                 <div class="text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full theme-bg-accent text-white flex items-center justify-center shadow-lg">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg">
                         <i data-lucide="shield-check" class="w-8 h-8"></i>
                     </div>
                     <h3 class="text-xl font-bold theme-text-main mb-3">Verified Information</h3>
                     <p class="theme-text-sec">Reliable data from trusted government and business sources.</p>
                 </div>
                 <div class="text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full theme-bg-accent text-white flex items-center justify-center shadow-lg">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg">
                         <i data-lucide="zap" class="w-8 h-8"></i>
                     </div>
                     <h3 class="text-xl font-bold theme-text-main mb-3">Lightning Fast</h3>
                     <p class="theme-text-sec">Optimized PWA technology that works even on slow networks.</p>
                 </div>
                 <div class="text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full theme-bg-accent text-white flex items-center justify-center shadow-lg">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg">
                         <i data-lucide="users" class="w-8 h-8"></i>
                     </div>
                     <h3 class="text-xl font-bold theme-text-main mb-3">Community First</h3>
@@ -233,7 +223,7 @@
         </div>
     </section>
 
-    <section class="py-16 theme-bg-accent text-white">
+    <section class="py-16 bg-blue-600 text-white">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-4">Ready to simplify your digital life?</h2>
             <p class="mb-8 opacity-90 max-w-2xl mx-auto">Join thousands of users who rely on Delhizones for their daily digital needs. Download the app today.</p>
