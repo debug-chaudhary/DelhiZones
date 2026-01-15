@@ -5,7 +5,7 @@
 
 (function() {
     // Available Themes
-    const themes = ['default', 'dark', 'nature', 'sunset', 'ocean'];
+    const themes = ['default', 'dark', 'nature', 'ocean', 'sunset'];
 
     function applyTheme(themeName) {
         const root = document.documentElement;
@@ -24,10 +24,19 @@
         if(window.lucide) setTimeout(() => window.lucide.createIcons(), 50);
     }
 
+    function cycleTheme() {
+        const currentTheme = localStorage.getItem('site-theme') || 'default';
+        const currentIndex = themes.indexOf(currentTheme);
+        const nextIndex = (currentIndex + 1) % themes.length;
+        const nextTheme = themes[nextIndex];
+        applyTheme(nextTheme);
+    }
+
     // Initialize on Load
     const savedTheme = localStorage.getItem('site-theme') || 'default';
     applyTheme(savedTheme);
 
     // Export function to global scope so buttons can call it
     window.setTheme = applyTheme;
+    window.cycleTheme = cycleTheme;
 })();

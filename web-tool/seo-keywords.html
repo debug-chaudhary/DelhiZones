@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Free SEO File Naming Tool. Convert keywords into SEO-friendly filenames for images, PDFs, and URLs. Follows 2026 Google best practices.">
+    <meta name="keywords" content="SEO filename generator, slug generator, image seo tool, webp renamer, folder structure seo">
+    <title>SEO File & Folder Renamer - Delhizones Tools</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { primary: '#2563EB', darkBg: '#0f172a' }
+                }
+            }
+        }
+    </script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script src="/assets/js/loader.js" defer></script>
+</head>
+
+<body class="theme-body transition-colors duration-300">
+
+    <main class="container mx-auto px-4 pt-28 pb-16 max-w-4xl">
+        
+        <div class="theme-bg-secondary p-8 rounded-2xl shadow-sm border border-black/5">
+            
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-600 mb-4">
+                    <i data-lucide="file-check" class="w-8 h-8"></i>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-2">SEO File & Folder Renamer</h1>
+                <p class="opacity-70">Convert raw keywords into Google-friendly filenames automatically.</p>
+            </div>
+
+            <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 mb-10">
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-bold mb-2 opacity-80">Enter Keyword or Description</label>
+                    <div class="relative">
+                        <input type="text" id="rawInput" 
+                            placeholder="e.g. Best Organic Coffee Beans 2026!" 
+                            class="w-full p-4 pr-12 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-lg"
+                            oninput="generateSEO()">
+                        <button onclick="clearInput()" class="absolute right-4 top-1/2 -translate-y-1/2 opacity-50 hover:opacity-100 p-1">
+                            <i data-lucide="x" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="flex gap-4 mt-3 text-sm opacity-70">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="removeStopWords" checked onchange="generateSEO()" class="rounded text-blue-600">
+                            Remove Stop Words (a, the, in...)
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="removeDuplicates" checked onchange="generateSEO()" class="rounded text-blue-600">
+                            Deduplicate Words
+                        </label>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    
+                    <div class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-700 relative group">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="image" class="w-4 h-4 text-purple-500"></i>
+                            <span class="text-xs font-bold uppercase opacity-60">Image File (.webp)</span>
+                        </div>
+                        <div id="outImage" class="font-mono text-blue-600 dark:text-blue-400 break-all text-lg">...</div>
+                        <button onclick="copyText('outImage')" class="absolute top-2 right-2 p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 opacity-0 group-hover:opacity-100 transition-opacity" title="Copy">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-700 relative group">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="folder-tree" class="w-4 h-4 text-yellow-500"></i>
+                            <span class="text-xs font-bold uppercase opacity-60">Folder Structure</span>
+                        </div>
+                        <div id="outFolder" class="font-mono text-green-600 dark:text-green-400 break-all text-lg">...</div>
+                        <button onclick="copyText('outFolder')" class="absolute top-2 right-2 p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 opacity-0 group-hover:opacity-100 transition-opacity" title="Copy">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-700 relative group">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="file-text" class="w-4 h-4 text-red-500"></i>
+                            <span class="text-xs font-bold uppercase opacity-60">Document (.pdf)</span>
+                        </div>
+                        <div id="outDoc" class="font-mono text-orange-600 dark:text-orange-400 break-all text-lg">...</div>
+                        <button onclick="copyText('outDoc')" class="absolute top-2 right-2 p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 opacity-0 group-hover:opacity-100 transition-opacity" title="Copy">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-700 relative group">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="globe" class="w-4 h-4 text-blue-500"></i>
+                            <span class="text-xs font-bold uppercase opacity-60">Web Page (.html)</span>
+                        </div>
+                        <div id="outHtml" class="font-mono text-cyan-600 dark:text-cyan-400 break-all text-lg">...</div>
+                        <button onclick="copyText('outHtml')" class="absolute top-2 right-2 p-2 rounded hover:bg-slate-100 dark:hover:bg-slate-800 opacity-0 group-hover:opacity-100 transition-opacity" title="Copy">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="analysisBadge" class="mt-4 flex flex-wrap gap-2 text-xs font-bold">
+                    </div>
+            </div>
+
+            <div class="prose dark:prose-invert max-w-none">
+                <h2 class="text-2xl font-bold mb-4 border-l-4 border-blue-500 pl-4">2026 SEO Naming Guidelines</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold flex items-center gap-2 mb-3">
+                        <i data-lucide="image" class="w-5 h-5 text-blue-500"></i> 1. Image File Naming
+                    </h3>
+                    <p class="mb-3 opacity-80">Google uses filenames as a primary signal to understand the subject matter. Rename files <strong>before</strong> uploading.</p>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div class="p-3 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded border border-red-200 dark:border-red-800">
+                            <strong>❌ Bad Examples:</strong><br>
+                            • IMG_0452.jpg <span class="opacity-60">(No context)</span><br>
+                            • best-coffee-cheap-coffee-beans.jpg <span class="opacity-60">(Stuffing)</span>
+                        </div>
+                        <div class="p-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded border border-green-200 dark:border-green-800">
+                            <strong>✅ Good Examples:</strong><br>
+                            • organic-medium-roast-coffee.webp <span class="opacity-60">(Descriptive)</span><br>
+                            • san-francisco-skyline.avif <span class="opacity-60">(Concise)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold flex items-center gap-2 mb-3">
+                        <i data-lucide="folder" class="w-5 h-5 text-blue-500"></i> 2. Folder Structure
+                    </h3>
+                    <p class="mb-3 opacity-80">Folder structures provide a hierarchical map for crawlers. Grouping similar content establishes topical authority.</p>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div class="p-3 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded border border-red-200 dark:border-red-800">
+                            <strong>❌ Bad Structure:</strong><br>
+                            /images/1/file.jpg
+                        </div>
+                        <div class="p-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded border border-green-200 dark:border-green-800">
+                            <strong>✅ Good Structure:</strong><br>
+                            /products/office-chairs/high-back.jpg<br>
+                            /blog/2026/fix-leaky-faucet.html
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-black/5 dark:bg-white/5 p-6 rounded-xl">
+                    <h3 class="text-lg font-bold mb-4">Summary Checklist</h3>
+                    <ul class="space-y-2 text-sm md:text-base">
+                        <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> <strong>Separator:</strong> Use Hyphens (-) not underscores or spaces.</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> <strong>Case:</strong> Always lowercase.</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> <strong>Length:</strong> 3-5 descriptive words.</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> <strong>Format:</strong> Use WebP or AVIF for images.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        const stopWords = new Set(['a', 'an', 'the', 'and', 'but', 'or', 'nor', 'for', 'so', 'yet', 'at', 'by', 'from', 'in', 'into', 'of', 'off', 'on', 'onto', 'out', 'over', 'up', 'with', 'to', 'is', 'are', 'was', 'were']);
+
+        function generateSEO() {
+            const raw = document.getElementById('rawInput').value;
+            const removeStop = document.getElementById('removeStopWords').checked;
+            const removeDupes = document.getElementById('removeDuplicates').checked;
+            const badgeContainer = document.getElementById('analysisBadge');
+
+            if (!raw.trim()) {
+                document.getElementById('outImage').textContent = '...';
+                document.getElementById('outFolder').textContent = '...';
+                document.getElementById('outDoc').textContent = '...';
+                document.getElementById('outHtml').textContent = '...';
+                badgeContainer.innerHTML = '';
+                return;
+            }
+
+            // 1. Clean String
+            let words = raw.toLowerCase()
+                // Remove file extension if user pasted one (e.g. .jpg)
+                .replace(/\.[^/.]+$/, "")
+                // Replace non-alphanumeric chars with space
+                .replace(/[^a-z0-9]/g, ' ')
+                .split(' ')
+                .filter(w => w.length > 0);
+
+            // 2. Remove Stop Words
+            if (removeStop) {
+                words = words.filter(w => !stopWords.has(w));
+            }
+
+            // 3. Deduplicate
+            if (removeDupes) {
+                words = [...new Set(words)];
+            }
+
+            // 4. Create Slug
+            const slug = words.join('-');
+
+            // 5. Update UI
+            document.getElementById('outImage').textContent = slug + '.webp';
+            document.getElementById('outFolder').textContent = '/' + slug.split('-').slice(0, 1).join('-') + '/' + slug + '/'; // Tries to make a category from 1st word
+            document.getElementById('outDoc').textContent = slug + '.pdf';
+            document.getElementById('outHtml').textContent = slug + '.html';
+
+            // 6. Analysis Badges
+            let badges = '';
+            if (slug.includes('_')) badges += `<span class="px-2 py-1 bg-red-100 text-red-600 rounded">Underscores detected</span>`;
+            if (words.length > 5) badges += `<span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded">Long (${words.length} words)</span>`;
+            else if (words.length >= 2) badges += `<span class="px-2 py-1 bg-green-100 text-green-700 rounded">Perfect Length</span>`;
+            
+            if (raw.match(/[A-Z]/)) badges += `<span class="px-2 py-1 bg-blue-100 text-blue-700 rounded">Converted to Lowercase</span>`;
+
+            badgeContainer.innerHTML = badges;
+        }
+
+        function clearInput() {
+            document.getElementById('rawInput').value = '';
+            generateSEO();
+            document.getElementById('rawInput').focus();
+        }
+
+        function copyText(id) {
+            const text = document.getElementById(id).textContent;
+            if(text === '...') return;
+            navigator.clipboard.writeText(text);
+            
+            // Visual feedback
+            const el = document.getElementById(id);
+            const originalColor = el.className;
+            el.style.opacity = '0.5';
+            setTimeout(() => el.style.opacity = '1', 200);
+            
+            alert('Copied: ' + text); 
+        }
+
+        // Init icons
+        if(window.lucide) lucide.createIcons();
+    </script>
+
+</body>
+</html>

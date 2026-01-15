@@ -122,3 +122,20 @@
     --theme-footer-text: #cffafe;
     --theme-accent: #06b6d4;
 }
+
+/* 5. SUNSET */
+[data-theme="sunset"] {
+    --theme-dominant: #fff7ed;    /* Warm Page Background */
+    --theme-secondary: #ffffff;   /* Card Background */
+    --theme-text-main: #7c2d12;   /* Deep Orange/Brown Text */
+    --theme-text-sec: #9a3412;    /* Muted Orange Text */
+    --theme-border: #fed7aa;      /* Peach Border */
+
+    --theme-nav-bg: rgba(194, 65, 12, 0.95); /* Burnt Orange Nav */
+    --theme-nav-text: #ffffff;
+    --theme-nav-hover: #ffedd5;
+
+    --theme-footer-bg: #431407;   /* Dark Brown Footer */
+    --theme-footer-text: #fdba74;
+    --theme-accent: #ea580c;
+}

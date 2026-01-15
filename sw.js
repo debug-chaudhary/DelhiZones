@@ -19,6 +19,10 @@ const ASSETS_TO_CACHE = [
   '/favicon.ico',
   '/offline.html' // Ensure you create this file for true offline support
 ];
+// CHANGE THIS LINE: Increment v1 to v2, v3, etc.
+const CACHE_NAME = 'delhizones-v2-cache'; 
+
+// ... keep the rest of your code exactly the same ...
 // Inside sw.js fetch event
 if (!event.request.url.startsWith(self.location.origin)) {
      return; // This skips caching for external links like Google Analytics (good!)
