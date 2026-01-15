@@ -80,9 +80,10 @@
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#explore" class="px-8 py-4 text-lg font-bold rounded-full theme-bg-accent shadow-lg shadow-blue-500/30 hover:scale-105 transition-transform">
+                <a href="#explore" class="px-8 py-4 text-lg font-bold rounded-full theme-bg-accent shadow-lg shadow-blue-500/30 hover:scale-105 transition-transform text-white">
                     Explore Services
                 </a>
+                
                 <button id="hero-install-btn" class="hidden px-8 py-4 text-lg font-bold rounded-full border-2 border-slate-300 dark:border-slate-700 theme-text-main hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-2">
                     <i data-lucide="download" class="w-5 h-5"></i> Install App
                 </button>
@@ -242,38 +243,5 @@
             </div>
         </div>
     </section>
-
-    <script>
-        // Hero Install Button Logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroBtn = document.getElementById('hero-install-btn');
-            
-            function updateHeroBtn() {
-                if (window.deferredPrompt) {
-                    heroBtn.classList.remove('hidden');
-                }
-            }
-            
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                window.deferredPrompt = e;
-                updateHeroBtn();
-            });
-
-            // Check if prompt already fired
-            if(window.deferredPrompt) updateHeroBtn();
-
-            if(heroBtn) {
-                heroBtn.addEventListener('click', async () => {
-                    if (window.deferredPrompt) {
-                        window.deferredPrompt.prompt();
-                        const { outcome } = await window.deferredPrompt.userChoice;
-                        window.deferredPrompt = null;
-                        heroBtn.classList.add('hidden');
-                    }
-                });
-            }
-        });
-    </script>
 </body>
 </html>

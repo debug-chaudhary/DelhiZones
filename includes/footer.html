@@ -1,4 +1,4 @@
-<footer id="contact" class="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800">
+<footer id="contact" class="bg-slate-900 text-slate-300 pt-20 pb-10 border-t border-slate-800 theme-footer theme-text-sec">
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 border-b border-slate-800 pb-12">
             
@@ -14,13 +14,13 @@
             <div class="text-center">
                 <h4 class="text-white font-bold mb-6">Quick Links</h4>
                 <ul class="space-y-3 text-sm">
-                    <li><a href="/about.html" class="hover:text-blue-400 transition-colors">About Us</a></li>
-                    <li><a href="/privacy.html" class="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
-                    <li><a href="/terms.html" class="hover:text-blue-400 transition-colors">Terms of Service</a></li>
+                    <li><a href="/About.html" class="hover:text-blue-400 transition-colors">About Us</a></li>
+                    <li><a href="/Privacy.html" class="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
+                    <li><a href="/Terms.html" class="hover:text-blue-400 transition-colors">Terms of Service</a></li>
                     <li><a href="/sitemap.xml" class="hover:text-blue-400 transition-colors">Site Map</a></li>
                     
                     <li>
-                        <button id="footer-install-btn" class="hidden mt-2 px-4 py-2 text-sm font-bold text-blue-400 border border-blue-400/30 rounded-lg hover:bg-blue-400/10 transition-colors mx-auto flex items-center gap-2">
+                        <button id="footer-install-btn" onclick="window.installPWA()" class="hidden mt-2 px-4 py-2 text-sm font-bold text-blue-400 border border-blue-400/30 rounded-lg hover:bg-blue-400/10 transition-colors mx-auto flex items-center gap-2">
                             <i data-lucide="download" class="w-4 h-4"></i> Install App
                         </button>
                     </li>
@@ -58,42 +58,6 @@
     </div>
     
     <script>
-        (function(){
-            // 1. PWA Install Logic
-            const footerInstallBtn = document.getElementById('footer-install-btn');
-            
-            function updateFooterVisibility() {
-                if(!footerInstallBtn) return;
-                // Check if the PWA prompt is ready (captured in head.html)
-                if (window.deferredPrompt) {
-                    footerInstallBtn.classList.remove('hidden');
-                } else {
-                    footerInstallBtn.classList.add('hidden');
-                }
-            }
-
-            // Listen for the event (in case footer loads before event fires)
-            window.addEventListener('beforeinstallprompt', updateFooterVisibility);
-            // Check immediately on load
-            updateFooterVisibility();
-
-            if(footerInstallBtn) {
-                footerInstallBtn.addEventListener('click', async () => {
-                    if (window.deferredPrompt) {
-                        window.deferredPrompt.prompt();
-                        const { outcome } = await window.deferredPrompt.userChoice;
-                        // Reset prompt after choice
-                        window.deferredPrompt = null;
-                        updateFooterVisibility();
-                    }
-                });
-            }
-
-            // 2. Icon Re-initialization (Backup)
-            // If footer loads late, ensuring icons render
-            if(window.lucide) {
-                window.lucide.createIcons();
-            }
-        })();
+        if(window.lucide) window.lucide.createIcons();
     </script>
 </footer>
