@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "npm --prefix ./delhizones-portal run dev",
+    "dev": "npm --prefix ./delhizones run dev",
     "build:css": "node ./node_modules/tailwindcss/dist/lib.js -i src/input.css -o dist/output.css --minify"
   },
   "dependencies": {

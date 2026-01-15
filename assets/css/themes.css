@@ -1,0 +1,83 @@
+/* Delhizones Dynamic Theme System */
+
+:root {
+    /* DEFAULT THEME (Blue Corporate) */
+    --theme-dominant: #f8fafc;   /* Slate-50 */
+    --theme-secondary: #ffffff;  /* White */
+    --theme-accent: #2563EB;     /* Blue-600 */
+    --theme-text-main: #0f172a;  /* Slate-900 */
+    --theme-text-sec: #475569;   /* Slate-600 */
+    --theme-border: #e2e8f0;     /* Slate-200 */
+}
+
+/* THEME CLASSES (Applies the variables) */
+.theme-body {
+    background-color: var(--theme-dominant) !important;
+    color: var(--theme-text-main) !important;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-nav, .theme-footer {
+    background-color: var(--theme-secondary) !important;
+    border-color: var(--theme-border) !important;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.theme-text-accent { color: var(--theme-accent) !important; }
+.theme-bg-accent { background-color: var(--theme-accent) !important; color: white !important; }
+.theme-text-sec { color: var(--theme-text-sec) !important; }
+
+/* --- PRE-DEFINED PALETTES --- */
+
+/* 1. DARK MODE (Monochrome) */
+[data-theme="dark"] {
+    --theme-dominant: #0f172a;   /* Slate-900 */
+    --theme-secondary: #1e293b;  /* Slate-800 */
+    --theme-accent: #3b82f6;     /* Blue-500 */
+    --theme-text-main: #f1f5f9;  /* Slate-100 */
+    --theme-text-sec: #94a3b8;   /* Slate-400 */
+    --theme-border: #334155;     /* Slate-700 */
+}
+
+/* 2. NATURE (Forest & Beige) - Analogous */
+[data-theme="nature"] {
+    --theme-dominant: #fcf9f2;   /* Cream */
+    --theme-secondary: #2c4a34;  /* Forest Green */
+    --theme-accent: #d4a373;     /* Earthy Tan */
+    --theme-text-main: #1a1a1a;
+    --theme-text-sec: #2c4a34;   /* Green Text for contrast on cream */
+    --theme-border: #dcdcdc;
+}
+/* Specific fix for text inside the dark green navbar */
+[data-theme="nature"] .theme-nav, 
+[data-theme="nature"] .theme-footer {
+    color: #fcf9f2 !important;
+}
+[data-theme="nature"] .theme-nav a, 
+[data-theme="nature"] .theme-footer a {
+    color: #e2e8f0 !important;
+}
+
+/* 3. SUNSET (Purple & Gold) - Complementary */
+[data-theme="sunset"] {
+    --theme-dominant: #2e1065;   /* Deep Purple */
+    --theme-secondary: #4c1d95;  /* Lighter Purple */
+    --theme-accent: #f59e0b;     /* Gold/Amber */
+    --theme-text-main: #faf5ff;
+    --theme-text-sec: #d8b4fe;
+    --theme-border: #5b21b6;
+}
+
+/* 4. OCEAN (Teal & Navy) - Triadic */
+[data-theme="ocean"] {
+    --theme-dominant: #ecfeff;   /* Cyan-50 */
+    --theme-secondary: #0e7490;  /* Cyan-700 */
+    --theme-accent: #facc15;     /* Yellow Pop */
+    --theme-text-main: #164e63;
+    --theme-text-sec: #155e75;
+    --theme-border: #a5f3fc;
+}
+[data-theme="ocean"] .theme-nav, 
+[data-theme="ocean"] .theme-footer {
+    color: white !important;
+}

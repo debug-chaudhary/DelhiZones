@@ -1,4 +1,4 @@
 User-agent: *
-Disallow:
+Disallow:/delhizones
 Disallow: /Search/database/posts.json
 Sitemap: https://delhizones.com/sitemap.xml

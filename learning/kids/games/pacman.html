@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacman - Kids Zone</title>
+    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>document.head.insertAdjacentHTML('beforeend',t));</script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'kid-blue': '#4facfe',
+                        'kid-yellow': '#f6d365',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { touch-action: none; }
+        canvas { background-color: black; border-radius: 10px; display: block; margin: 0 auto; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+    </style>
+</head>
+<body class="bg-slate-900 text-white min-h-screen flex flex-col items-center justify-center font-sans select-none">
+
+    <div class="w-full max-w-md px-4 py-4 flex justify-between items-center">
+        <a href="index_1.html" class="flex items-center gap-2 text-slate-300 hover:text-white transition-colors">
+        <a href="/EDU/Kids/Nursery-UKG/Games/index.html" class="flex items-center gap-2 text-slate-300 hover:text-white transition-colors">
+            <i data-lucide="arrow-left-circle"></i> Back
+        </a>
+        <h1 class="text-3xl font-bold text-kid-yellow tracking-wider">PACMAN</h1>
+        <div class="text-xl font-bold bg-slate-800 px-4 py-1 rounded-full">Score: <span id="score" class="text-kid-blue">0</span></div>
+    </div>
+
+    <div class="relative">
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <div id="overlay" class="absolute inset-0 flex items-center justify-center bg-black/80 rounded-lg hidden z-10">
+            <div class="text-center p-6 bg-slate-800 rounded-xl border-4 border-kid-blue shadow-2xl">
+                <h2 id="overlayTitle" class="text-4xl font-black mb-2 text-white">Game Over</h2>
+                <p id="finalScore" class="text-xl text-slate-300 mb-6">Score: 0</p>
+                <button onclick="startGame()" class="px-8 py-3 bg-kid-yellow text-black rounded-full font-bold text-lg hover:bg-yellow-400 transition transform hover:scale-105 shadow-lg">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8 grid grid-cols-3 gap-3 md:hidden">
+        <div></div>
+        <button class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center active:bg-kid-blue active:text-black transition-colors shadow-lg border-b-4 border-slate-950 active:border-b-0 active:translate-y-1" onclick="handleInput('ArrowUp')"><i data-lucide="arrow-up" class="w-8 h-8"></i></button>
+        <div></div>
+        <button class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center active:bg-kid-blue active:text-black transition-colors shadow-lg border-b-4 border-slate-950 active:border-b-0 active:translate-y-1" onclick="handleInput('ArrowLeft')"><i data-lucide="arrow-left" class="w-8 h-8"></i></button>
+        <button class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center active:bg-kid-blue active:text-black transition-colors shadow-lg border-b-4 border-slate-950 active:border-b-0 active:translate-y-1" onclick="handleInput('ArrowDown')"><i data-lucide="arrow-down" class="w-8 h-8"></i></button>
+        <button class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center active:bg-kid-blue active:text-black transition-colors shadow-lg border-b-4 border-slate-950 active:border-b-0 active:translate-y-1" onclick="handleInput('ArrowRight')"><i data-lucide="arrow-right" class="w-8 h-8"></i></button>
+    </div>
+    
+    <div class="hidden md:block mt-4 text-slate-500 text-sm">
+        Use Arrow Keys to Move
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('score');
+        const overlay = document.getElementById('overlay');
+        const overlayTitle = document.getElementById('overlayTitle');
+        const finalScoreEl = document.getElementById('finalScore');
+
+        const CELL_SIZE = 20;
+        const ROWS = 20;
+        const COLS = 20;
+        
+        // 0: Wall, 1: Dot, 2: Empty
+        const mapLayout = [
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0],
+            [0,1,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,1,1,0],
+            [0,1,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,1,1,0],
+            [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+            [0,1,0,0,1,0,1,0,0,0,0,0,1,0,1,0,0,1,1,0],
+            [0,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,1,0],
+            [0,0,0,0,1,0,0,0,2,0,2,0,0,0,1,0,0,0,0,0],
+            [2,2,2,0,1,0,2,2,2,2,2,2,2,0,1,0,2,2,2,2],
+            [0,0,0,0,1,0,2,0,0,2,0,0,2,0,1,0,0,0,0,0],
+            [2,2,2,2,1,2,2,0,2,2,2,0,2,2,1,2,2,2,2,2],
+            [0,0,0,0,1,0,2,0,0,0,0,0,2,0,1,0,0,0,0,0],
+            [0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0],
+            [0,1,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,1,1,0],
+            [0,1,1,0,1,1,1,1,1,2,1,1,1,1,1,0,1,1,1,0],
+            [0,0,1,0,1,0,1,0,0,0,0,0,1,0,1,0,1,0,0,0],
+            [0,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,1,0],
+            [0,1,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,1,0],
+            [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        ];
+
+        let currentMap = [];
+        let pacman = { x: 1, y: 1, dir: { x: 0, y: 0 }, nextDir: { x: 0, y: 0 }, mouth: 0.2, mouthOpen: true };
+        let ghosts = [];
+        let score = 0;
+        let gameLoop;
+        let animationId;
+        let gameRunning = false;
+
+        function initMap() {
+            currentMap = JSON.parse(JSON.stringify(mapLayout));
+        }
+
+        function startGame() {
+            if(gameRunning) return;
+            
+            initMap();
+            pacman = { x: 9, y: 14, dir: { x: 0, y: 0 }, nextDir: { x: 0, y: 0 }, mouth: 0.2, mouthOpen: true };
+            ghosts = [
+                { x: 9, y: 8, color: '#ff0000', dir: { x: 0, y: 0 } }, // Blinky
+                { x: 10, y: 8, color: '#ffb8ff', dir: { x: 0, y: 0 } }, // Pinky
+                { x: 9, y: 9, color: '#00ffff', dir: { x: 0, y: 0 } }, // Inky
+                { x: 10, y: 9, color: '#ffb852', dir: { x: 0, y: 0 } }  // Clyde
+            ];
+            score = 0;
+            scoreEl.innerText = score;
+            overlay.classList.add('hidden');
+            gameRunning = true;
+            
+            if(gameLoop) clearInterval(gameLoop);
+            gameLoop = setInterval(update, 150); // Game tick
+            
+            if(animationId) cancelAnimationFrame(animationId);
+            draw();
+        }
+
+        function handleInput(key) {
+            if(!gameRunning) return;
+            switch(key) {
+                case 'ArrowUp': pacman.nextDir = { x: 0, y: -1 }; break;
+                case 'ArrowDown': pacman.nextDir = { x: 0, y: 1 }; break;
+                case 'ArrowLeft': pacman.nextDir = { x: -1, y: 0 }; break;
+                case 'ArrowRight': pacman.nextDir = { x: 1, y: 0 }; break;
+            }
+        }
+
+        window.addEventListener('keydown', e => {
+            if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+                e.preventDefault();
+                handleInput(e.key);
+            }
+        });
+
+        function canMove(x, y) {
+            if (x < 0 || x >= COLS || y < 0 || y >= ROWS) return false;
+            return currentMap[y][x] !== 0;
+        }
+
+        function update() {
+            if(!gameRunning) return;
+
+            // Try to change direction
+            if (pacman.nextDir.x !== 0 || pacman.nextDir.y !== 0) {
+                if (canMove(pacman.x + pacman.nextDir.x, pacman.y + pacman.nextDir.y)) {
+                    pacman.dir = pacman.nextDir;
+                    pacman.nextDir = { x: 0, y: 0 };
+                }
+            }
+
+            // Move Pacman
+            if (canMove(pacman.x + pacman.dir.x, pacman.y + pacman.dir.y)) {
+                pacman.x += pacman.dir.x;
+                pacman.y += pacman.dir.y;
+                
+                // Eat dot
+                if (currentMap[pacman.y][pacman.x] === 1) {
+                    currentMap[pacman.y][pacman.x] = 2;
+                    score += 10;
+                    scoreEl.innerText = score;
+                    
+                    // Check win
+                    let dotsLeft = false;
+                    for(let r=0; r<ROWS; r++) for(let c=0; c<COLS; c++) if(currentMap[r][c] === 1) dotsLeft = true;
+                    if(!dotsLeft) gameOver(true);
+                }
+            }
+
+            // Move Ghosts
+            ghosts.forEach(ghost => {
+                const directions = [
+                    { x: 0, y: -1 }, { x: 0, y: 1 }, { x: -1, y: 0 }, { x: 1, y: 0 }
+                ];
+                
+                let validDirs = directions.filter(d => canMove(ghost.x + d.x, ghost.y + d.y));
+                
+                if (validDirs.length > 0) {
+                    // Simple AI: Try to continue current direction, else pick random
+                    // Also small chance to change direction randomly
+                    let currentDirValid = validDirs.some(d => d.x === ghost.dir.x && d.y === ghost.dir.y);
+                    
+                    if (currentDirValid && Math.random() > 0.2) {
+                        // Keep going
+                    } else {
+                        // Don't reverse immediately if possible
+                        let nonReverseDirs = validDirs.filter(d => !(d.x === -ghost.dir.x && d.y === -ghost.dir.y));
+                        if(nonReverseDirs.length > 0) {
+                            ghost.dir = nonReverseDirs[Math.floor(Math.random() * nonReverseDirs.length)];
+                        } else {
+                            ghost.dir = validDirs[Math.floor(Math.random() * validDirs.length)];
+                        }
+                    }
+                    
+                    ghost.x += ghost.dir.x;
+                    ghost.y += ghost.dir.y;
+                }
+
+                // Collision
+                if (ghost.x === pacman.x && ghost.y === pacman.y) {
+                    gameOver(false);
+                }
+            });
+            
+            // Mouth animation
+            pacman.mouthOpen = !pacman.mouthOpen;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Map
+            for (let r = 0; r < ROWS; r++) {
+                for (let c = 0; c < COLS; c++) {
+                    if (currentMap[r][c] === 0) {
+                        ctx.fillStyle = '#1e3a8a'; // Wall color
+                        ctx.fillRect(c * CELL_SIZE, r * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        // Inner detail
+                        ctx.fillStyle = 'black';
+                        ctx.fillRect(c * CELL_SIZE + 5, r * CELL_SIZE + 5, CELL_SIZE - 10, CELL_SIZE - 10);
+                        ctx.strokeStyle = '#3b82f6';
+                        ctx.lineWidth = 1;
+                        ctx.strokeRect(c * CELL_SIZE + 5, r * CELL_SIZE + 5, CELL_SIZE - 10, CELL_SIZE - 10);
+                    } else if (currentMap[r][c] === 1) {
+                        ctx.fillStyle = '#fbbf24'; // Dot color
+                        ctx.beginPath();
+                        ctx.arc(c * CELL_SIZE + CELL_SIZE/2, r * CELL_SIZE + CELL_SIZE/2, 3, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            }
+
+            // Draw Pacman
+            const px = pacman.x * CELL_SIZE + CELL_SIZE/2;
+            const py = pacman.y * CELL_SIZE + CELL_SIZE/2;
+            ctx.fillStyle = '#fbbf24'; // Yellow
+            ctx.beginPath();
+            
+            let angle = 0;
+            if (pacman.dir.x === 1) angle = 0;
+            if (pacman.dir.x === -1) angle = Math.PI;
+            if (pacman.dir.y === -1) angle = -Math.PI/2;
+            if (pacman.dir.y === 1) angle = Math.PI/2;
+
+            const mouthSize = pacman.mouthOpen ? 0.25 : 0.05;
+            
+            ctx.arc(px, py, CELL_SIZE/2 - 2, angle + mouthSize * Math.PI, angle + (2 - mouthSize) * Math.PI);
+            ctx.lineTo(px, py);
+            ctx.fill();
+
+            // Draw Ghosts
+            ghosts.forEach(ghost => {
+                const gx = ghost.x * CELL_SIZE + CELL_SIZE/2;
+                const gy = ghost.y * CELL_SIZE + CELL_SIZE/2;
+                
+                // Body
+                ctx.fillStyle = ghost.color;
+                ctx.beginPath();
+                ctx.arc(gx, gy - 2, CELL_SIZE/2 - 2, Math.PI, 0);
+                ctx.lineTo(gx + CELL_SIZE/2 - 2, gy + CELL_SIZE/2 - 2);
+                // Feet
+                ctx.lineTo(gx + (CELL_SIZE/2 - 2)/3, gy + CELL_SIZE/2 - 4);
+                ctx.lineTo(gx - (CELL_SIZE/2 - 2)/3, gy + CELL_SIZE/2 - 2);
+                ctx.lineTo(gx - (CELL_SIZE/2 - 2), gy + CELL_SIZE/2 - 2);
+                ctx.fill();
+                
+                // Eyes
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.arc(gx - 4, gy - 4, 3, 0, Math.PI*2);
+                ctx.arc(gx + 4, gy - 4, 3, 0, Math.PI*2);
+                ctx.fill();
+                ctx.fillStyle = 'black';
+                ctx.beginPath();
+                ctx.arc(gx - 4, gy - 4, 1.5, 0, Math.PI*2);
+                ctx.arc(gx + 4, gy - 4, 1.5, 0, Math.PI*2);
+                ctx.fill();
+            });
+
+            if(gameRunning) {
+                animationId = requestAnimationFrame(draw);
+            }
+        }
+
+        function gameOver(win) {
+            gameRunning = false;
+            clearInterval(gameLoop);
+            cancelAnimationFrame(animationId);
+            overlayTitle.innerText = win ? "YOU WIN!" : "GAME OVER";
+            overlayTitle.className = win ? "text-4xl font-black mb-2 text-green-400" : "text-4xl font-black mb-2 text-red-500";
+            finalScoreEl.innerText = `Score: ${score}`;
+            overlay.classList.remove('hidden');
+        }
+
+        // Start immediately
+        startGame();
+
+    </script>
+</body>
+</html>
