@@ -1,173 +1,167 @@
-﻿﻿﻿﻿<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+﻿﻿<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>{const range=document.createRange();range.selectNode(document.head);const frag=range.createContextualFragment(t);document.head.appendChild(frag);});</script>
-    <title>Contact Us - Delhizones.com</title>
     
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
+    <meta name="description" content="Contact Delhizones. Reach out to our support team for queries regarding Jobs, Government Portals, Business Resources, or advertising opportunities.">
+    <meta name="keywords" content="Contact Delhizones, Customer Support, Advertising Inquiry, Help Desk, Delhi Zones Office">
+    <title>Contact Us - Delhizones</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, .brand-font { font-family: 'Playfair Display', serif; }
-        .text-gradient {
-            background: linear-gradient(to right, #2563EB, #9333ea);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        
-        /* Floating Animation */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GV2529T0CM"></script>
     <script>
-        // Dark mode setup
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-        tailwind.config = { darkMode: 'class' }
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GV2529T0CM');
     </script>
-</head>
-<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-blue-100 selection:text-blue-900 flex flex-col min-h-screen">
 
-    <main class="pt-20 pb-20 flex-grow">
-        <!-- Hero -->
-        <section class="relative pt-12 pb-20 px-6 text-center reveal active">
-            <span class="inline-block py-1 px-3 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-semibold tracking-wider uppercase mb-6 border border-blue-100 dark:border-blue-800">
-                Get In Touch
-            </span>
-            <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6">
-                Let's Start a <span class="text-gradient">Conversation</span>
-            </h1>
-            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                Have a question, suggestion, or just want to say hello? We'd love to hear from you.
-            </p>
-        </section>
-
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-                
-                <!-- Contact Info & Socials -->
-                <div class="space-y-8 reveal delay-100">
-                    <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-lg border border-slate-100 dark:border-slate-700">
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">Connect With Us</h3>
-                        
-                        <div class="space-y-6">
-                            <a href="mailto:delhizones@gmail.com" class="flex items-center gap-4 group">
-                                <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
-                                    <i data-lucide="mail" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">Email Us</p>
-                                    <p class="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">delhizones@gmail.com</p>
-                                </div>
-                            </a>
-                            
-                            <div class="flex items-center gap-4 group">
-                                <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
-                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">Location</p>
-                                    <p class="text-lg font-semibold text-slate-900 dark:text-white">New Delhi, India</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Social Media Links -->
-                        <div class="mt-10 pt-10 border-t border-slate-100 dark:border-slate-700">
-                            <h4 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-6">Follow Our Journey</h4>
-                            <div class="flex flex-wrap gap-4">
-                                <a href="https://www.facebook.com/DelhiZones/" target="_blank" rel="noopener" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1" aria-label="Facebook">
-                                    <i data-lucide="facebook" class="w-5 h-5"></i>
-                                </a>
-                                <a href="https://www.instagram.com/delhizones/" target="_blank" rel="noopener" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-pink-600 hover:text-white dark:hover:bg-pink-600 transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1" aria-label="Instagram">
-                                    <i data-lucide="instagram" class="w-5 h-5"></i>
-                                </a>
-                                <a href="https://www.youtube.com/@DelhiZones" target="_blank" rel="noopener" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-red-600 hover:text-white dark:hover:bg-red-600 transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1" aria-label="YouTube">
-                                    <i data-lucide="youtube" class="w-5 h-5"></i>
-                                </a>
-                                <a href="https://www.linkedin.com/in/delhizones/" target="_blank" rel="noopener" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-blue-700 hover:text-white dark:hover:bg-blue-700 transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1" aria-label="LinkedIn">
-                                    <i data-lucide="linkedin" class="w-5 h-5"></i>
-                                </a>
-                                <a href="https://x.com/delhizones" target="_blank" rel="noopener" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1" aria-label="Twitter">
-                                    <i data-lucide="twitter" class="w-5 h-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="reveal delay-200">
-                    <form class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-700 relative overflow-hidden" onsubmit="event.preventDefault(); alert('Message sent!');">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-bl-full -mr-10 -mt-10"></div>
-                        
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 relative z-10">Send a Message</h3>
-                        
-                        <div class="space-y-5 relative z-10">
-                            <div>
-                                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Name</label>
-                                <input type="text" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 outline-none transition-all" placeholder="Your Name">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Email</label>
-                                <input type="email" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 outline-none transition-all" placeholder="hello@example.com">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Message</label>
-                                <textarea rows="4" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 outline-none transition-all resize-none" placeholder="How can we help you?"></textarea>
-                            </div>
-                            <button type="submit" class="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-xl hover:bg-blue-600 dark:hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                                Send Message
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </main>
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-
-        // Scroll Animation
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { primary: '#2563EB', darkBg: '#0f172a' }
                 }
             }
         }
-        window.addEventListener("scroll", reveal);
-        reveal();
     </script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script src="/assets/js/loader.js" defer></script>
+</head>
+
+<body class="theme-body transition-colors duration-300">
+
+    <div class="pt-28 pb-10 container mx-auto px-4 md:px-6">
+
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 theme-text-main">Get in Touch</h1>
+            <p class="text-xl theme-text-sec max-w-2xl mx-auto">
+                Have a question about our services? Want to partner with us? We'd love to hear from you.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            
+            <div class="space-y-8">
+                
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div class="theme-bg-secondary p-6 rounded-2xl shadow-sm border border-black/5 flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-4">
+                            <i data-lucide="mail" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-1">Email Us</h3>
+                        <p class="text-sm opacity-70 mb-3">For general inquiries</p>
+                        <a href="mailto:delhizones@gmail.com" class="text-blue-600 font-semibold hover:underline">delhizones@gmail.com</a>
+                    </div>
+
+                    <div class="theme-bg-secondary p-6 rounded-2xl shadow-sm border border-black/5 flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
+                            <i data-lucide="briefcase" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-1">Business</h3>
+                        <p class="text-sm opacity-70 mb-3">For partnerships & ads</p>
+                        <a href="mailto:delhizones@gmail.com" class="text-purple-600 font-semibold hover:underline">delhizones@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="theme-bg-secondary p-8 rounded-2xl shadow-sm border border-black/5">
+                    <h3 class="font-bold text-xl mb-6 flex items-center gap-2">
+                        <i data-lucide="share-2" class="w-5 h-5 text-blue-500"></i> Connect on Social Media
+                    </h3>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://www.facebook.com/DelhiZones/" target="_blank" class="flex items-center gap-2 px-5 py-3 rounded-lg bg-[#1877F2]/10 text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all font-semibold">
+                            <i data-lucide="facebook" class="w-5 h-5"></i> Facebook
+                        </a>
+                        <a href="https://www.instagram.com/delhizones/" target="_blank" class="flex items-center gap-2 px-5 py-3 rounded-lg bg-[#E4405F]/10 text-[#E4405F] hover:bg-[#E4405F] hover:text-white transition-all font-semibold">
+                            <i data-lucide="instagram" class="w-5 h-5"></i> Instagram
+                        </a>
+                        <a href="https://twitter.com/delhizones" target="_blank" class="flex items-center gap-2 px-5 py-3 rounded-lg bg-slate-800/10 text-slate-800 dark:text-slate-200 hover:bg-black hover:text-white transition-all font-semibold">
+                            <i data-lucide="twitter" class="w-5 h-5"></i> Twitter
+                        </a>
+                        <a href="https://www.linkedin.com/in/delhizones/" target="_blank" class="flex items-center gap-2 px-5 py-3 rounded-lg bg-[#0A66C2]/10 text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-all font-semibold">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl overflow-hidden shadow-lg border border-black/10 h-64 w-full">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83923192776!2d77.0688975472578!3d28.52728034389636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1705330000000!5m2!1sen!2sin" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="theme-bg-secondary p-8 md:p-10 rounded-3xl shadow-lg border border-black/5 relative overflow-hidden">
+                
+                <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full filter blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+                <h2 class="text-2xl font-bold mb-6 relative z-10">Send a Message</h2>
+                
+                <form action="mailto:delhizones@gmail.com" method="POST" enctype="text/plain" class="space-y-6 relative z-10">
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold opacity-80 ml-1">Your Name</label>
+                            <div class="relative">
+                                <i data-lucide="user" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 opacity-40"></i>
+                                <input type="text" name="name" required placeholder="John Doe" 
+                                    class="w-full pl-12 pr-4 py-3 rounded-xl bg-black/5 border border-transparent focus:bg-transparent focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold opacity-80 ml-1">Email Address</label>
+                            <div class="relative">
+                                <i data-lucide="at-sign" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 opacity-40"></i>
+                                <input type="email" name="email" required placeholder="john@example.com" 
+                                    class="w-full pl-12 pr-4 py-3 rounded-xl bg-black/5 border border-transparent focus:bg-transparent focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold opacity-80 ml-1">Subject</label>
+                        <select name="subject" class="w-full px-4 py-3 rounded-xl bg-black/5 border border-transparent focus:bg-transparent focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all appearance-none">
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Advertising">Advertising / Business</option>
+                            <option value="Technical Issue">Report a Bug</option>
+                            <option value="Feedback">Feedback</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold opacity-80 ml-1">Message</label>
+                        <textarea name="message" required rows="5" placeholder="How can we help you today?" 
+                            class="w-full px-4 py-3 rounded-xl bg-black/5 border border-transparent focus:bg-transparent focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 group">
+                        <span>Send Message</span>
+                        <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    
+                    <p class="text-xs text-center opacity-60 mt-4">
+                        By sending this message, you agree to our <a href="/Privacy.html" class="underline hover:text-blue-500">Privacy Policy</a>.
+                    </p>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="mt-20 text-center">
+            <h3 class="text-2xl font-bold mb-4">Looking for quick answers?</h3>
+            <p class="opacity-70 mb-8">Check out our Support Center for frequently asked questions.</p>
+            <a href="/Support/" class="inline-block px-8 py-3 border-2 border-current rounded-full font-bold hover:bg-black/5 transition-colors">
+                Visit Support Center
+            </a>
+        </div>
+
+    </div>
+
 </body>
 </html>
