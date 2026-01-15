@@ -50,27 +50,37 @@
 
         /* Typography */
         h1 {
-            color: var(--theme-text-main);
-            font-size: 2.5em;
+            background: linear-gradient(to right, #2563EB, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #2563EB; /* Fallback */
+            font-size: 3em;
             margin-bottom: 20px;
             line-height: 1.3;
             font-weight: 800;
         }
         h2 {
             color: var(--theme-text-main);
-            font-size: 1.8em;
+            font-size: 2.25em;
             margin-top: 40px;
             margin-bottom: 15px;
-            border-left: 4px solid var(--theme-accent, #2563EB);
+            border-left: 5px solid var(--theme-accent, #2563EB);
             padding-left: 15px;
             font-weight: 700;
+            background: linear-gradient(90deg, rgba(37, 99, 235, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            padding-top: 8px;
+            padding-bottom: 8px;
+            border-radius: 0 8px 8px 0;
         }
         h3 {
-            color: var(--theme-text-sec, #475569);
-            font-size: 1.4em;
+            color: var(--theme-text-main);
+            font-size: 1.75em;
             margin-top: 25px;
             margin-bottom: 12px;
             font-weight: 600;
+            border-bottom: 2px solid var(--theme-border, #e2e8f0);
+            padding-bottom: 5px;
         }
         p { margin-bottom: 18px; text-align: justify; }
 
@@ -111,6 +121,10 @@
             color: var(--theme-accent, #2563EB);
             font-size: 1.1em;
             margin-bottom: 8px;
+            /* Reset global h3 styles for FAQ */
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-top: 15px;
         }
         .faq-answer { color: var(--theme-text-sec, #555); padding-left: 15px; }
 
@@ -137,13 +151,13 @@
         /* Mobile adjustment */
         @media (max-width: 768px) {
             .blog-container { padding: 20px; }
-            h1 { font-size: 1.8em; }
+            h1 { font-size: 2.2em; }
         }
 
         /* Merged styles */
         h4 {
             color: var(--theme-text-sec, #555);
-            font-size: 1.2em;
+            font-size: 1.4em;
             margin-top: 20px;
             margin-bottom: 10px;
             font-weight: 600;
@@ -178,7 +192,7 @@
         
         <div class="blog-container">
 
-            <h1>Delhizones: The Ultimate MultiPurpose Platform for All Your Digital Needs in 2026</h1>
+            <h1>Delhizones: The Ultimate Multipurpose Website Platform for All Your Digital Needs in 2026</h1>
 
             <p>In today's fast-paced digital world, finding a single platform that caters to multiple needs can be challenging. Enter <strong>Delhizones</strong>, a revolutionary <strong>multipurpose website</strong> that seamlessly combines <a href="/Blog/">blogging</a>, <a href="/Business/">business resources</a>, <a href="/delhizones-portal/">government portals</a>, <a href="/JOBs/">job listings</a>, <a href="/Learning/">learning modules</a>, <a href="/LifeStyle/">lifestyle content</a>, <a href="/News/">news updates</a>, <a href="/Portfolio/">portfolio showcases</a>, <a href="/Telecom/">telecom information</a>, <a href="/WebStory/">web stories</a>, <a href="/WebTool/">web tools</a>, and <a href="/YouTube/">YouTube integration</a> all under one roof. Whether you're a job seeker, entrepreneur, student, or content creator, the Delhizones multipurpose website offers everything you need to succeed in the digital age.</p>
 
@@ -407,22 +421,22 @@
                 <h2>Frequently Asked Questions (People Also Ask)</h2>
 
                 <div class="faq-item">
-                    <div class="faq-question">Q: Is Delhizones multipurpose website free to use?</div>
+                    <h3 class="faq-question">Q: Is Delhizones multipurpose website free to use?</h3>
                     <div class="faq-answer">Yes, Delhizones is completely free to use for most of its features. Users can access <a href="/Blog/">blogs</a>, <a href="/JOBs/">job listings</a>, <a href="/delhizones-portal/">government portal links</a>, <a href="/News/">news</a>, <a href="/WebTool/">web tools</a>, and many <a href="/Learning/">learning resources</a> without any payment. Some premium courses and advanced features may require a subscription, but the majority of the platform's content and services remain freely accessible to all registered users of this multipurpose website.</div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">Q: How do I apply for jobs through Delhizones?</div>
+                    <h3 class="faq-question">Q: How do I apply for jobs through Delhizones?</h3>
                     <div class="faq-answer">To apply for jobs on the Delhizones multipurpose website, first create a free account and complete your profile. Browse the <a href="/JOBs/">jobs section</a> using filters to find relevant opportunities. Click on any job listing to view full details, and use the "Apply" button to submit your application. You can upload your resume directly or use the platform's resume builder to create a professional CV. Most applications redirect to the employer's website or allow direct submission through the Delhizones job portal.</div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">Q: What types of learning courses are available on Delhizones?</div>
+                    <h3 class="faq-question">Q: What types of learning courses are available on Delhizones?</h3>
                     <div class="faq-answer">The <a href="/Learning/">Delhizones learning platform</a> offers a wide variety of courses across multiple categories including technology (programming, web development, data science), business skills (digital marketing, entrepreneurship, project management), creative arts (graphic design, photography, content writing), language learning, competitive exam preparation for government jobs, and professional certification programs. Courses range from beginner to advanced levels, with both free and premium options available on this multipurpose website.</div>
                 </div>
 
                 <div class="faq-item">
-                    <div class="faq-question">Q: Can I create a professional portfolio on Delhizones?</div>
+                    <h3 class="faq-question">Q: Can I create a professional portfolio on Delhizones?</h3>
                     <div class="faq-answer">Absolutely! The <a href="/Portfolio/">Delhizones portfolio section</a> provides a user-friendly portfolio builder that allows creative professionals, freelancers, and job seekers to showcase their work. The multipurpose website offers customizable templates for different professions including photographers, designers, writers, developers, and marketers. You can add project galleries, descriptions, client testimonials, skills, and contact information. The portfolios are mobile-responsive and can be shared via a unique URL, making them perfect for including in job applications or sharing with potential clients.</div>
                 </div>
             </div>
