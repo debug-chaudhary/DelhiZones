@@ -19,7 +19,10 @@ const ASSETS_TO_CACHE = [
   '/favicon.ico',
   '/offline.html' // Ensure you create this file for true offline support
 ];
-
+// Inside sw.js fetch event
+if (!event.request.url.startsWith(self.location.origin)) {
+     return; // This skips caching for external links like Google Analytics (good!)
+}
 // 1. INSTALL EVENT
 // Runs once when the browser sees a new version of this sw.js
 self.addEventListener('install', (event) => {
