@@ -1,504 +1,364 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>{const range=document.createRange();range.selectNode(document.head);const frag=range.createContextualFragment(t);document.head.appendChild(frag);});</script>
-
-    <!-- 1. SEO & META TAGS -->
-    <title>Job Finder Delhi NCR | Low Investment & Immediate Income Opportunities</title>
-    <meta name="description" content="Search 100+ immediate income opportunities in Delhi NCR. Find zero investment jobs, work from home, delivery partner gigs, and freelance projects. Updated daily.">
-    <meta name="keywords" content="Delhi Jobs, Immediate Income, Job Search Hindi, Part Time Jobs Delhi, Work from Home, Zomato Delivery, Data Entry, Tuition, Gig Economy, Earn Money Online">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="author" content="Delhizones">
     
-    <!-- 2. CANONICAL URL -->
-    <link rel="canonical" href="https://www.delhizones.com/jobs/">
+    <meta name="description" content="Find latest job alerts, government job vacancies, NREGA job card details, Assam job opportunities, and recruitment updates. Free job alerts 2025, job card list, and career opportunities in India.">
+    <meta name="keywords" content="job alert, nrega job card, job card list, govt job alert, assam job card, mgnrega job card, job vacancy, job opportunities, india job alert, job rasta, job guru, jobkoly, recruitment in assam">
+    <meta name="robots" content="index, follow">
     
-    <!-- 3. MONETIZATION (Google AdSense Placeholder) -->
-    <meta name="google-adsense-account" content="ca-pub-YOUR_ADSENSE_ID_HERE">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID_HERE" crossorigin="anonymous"></script>
-    
-    <!-- 4. OPEN GRAPH -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.delhizones.com/jobs/">
-    <meta property="og:title" content="Job Finder Engine | Delhizones">
-    <meta property="og:description" content="Find the perfect low-investment or zero-cost job in Delhi NCR tailored to your skills.">
-    <meta property="og:image" content="https://www.delhizones.com/assets/images/jobs-og.jpg">
+    <title>Job Alert 2025: Latest Govt Jobs, NREGA Job Card List & Vacancies in India | Delhizones</title>
 
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { primary: '#2563EB', darkBg: '#0f172a' }
+                }
+            }
+        }
+    </script>
+
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/loader.js" defer></script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, .brand-font { font-family: 'Playfair Display', serif; }
-        .text-gradient {
-            background: linear-gradient(to right, #16a34a, #0d9488);
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+        .card-hover {
+            transition: all 0.3s ease;
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        
-        /* Tag Selection Styles */
-        .filter-tag {
-            transition: all 0.2s;
-            user-select: none;
-        }
-        .filter-tag.selected {
-            transform: scale(1.05);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        
-        .tag-interest.selected {
-            background-color: #eff6ff;
-            border-color: #3b82f6;
-            color: #1d4ed8;
-        }
-        .dark .tag-interest.selected {
-            background-color: #1e3a8a;
-            border-color: #60a5fa;
-            color: #dbeafe;
-        }
-
-        .tag-skill.selected {
-            background-color: #f0fdf4;
-            border-color: #22c55e;
-            color: #15803d;
-        }
-        .dark .tag-skill.selected {
-            background-color: #14532d;
-            border-color: #4ade80;
-            color: #dcfce7;
-        }
-        
-        /* Google Translate Hiding */
-        .goog-te-banner-frame { display: none !important; }
-        .goog-logo-link { display: none !important; }
-        .goog-te-gadget span { display: none !important; }
     </style>
-    <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-        tailwind.config = { darkMode: 'class' }
-    </script>
-
-    <!-- 5. STRUCTURED DATA (Schema.org) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.delhizones.com/"
-      },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Job Finder",
-        "item": "https://www.delhizones.com/jobs/"
-      }]
-    }
-    </script>
 </head>
-<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-green-100 selection:text-green-900 flex flex-col min-h-screen">
 
-    <!-- Main Content -->
-    <main class="flex-grow pt-28 pb-20">
-        <div class="container mx-auto px-6">
-            
-            <!-- Hero Section -->
-            <div class="text-center mb-10 reveal">
-                <span class="inline-block py-1 px-3 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold tracking-wider uppercase mb-6 border border-green-200 dark:border-green-800">
-                    Employment & Survival
-                </span>
-                <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6 brand-font">
-                    Job Finder <span class="text-gradient">Engine</span>
-                </h1>
-                <p class="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
-                    A systematic tool to identify immediate income opportunities in Delhi NCR. Select your interests, skills, and constraints to find the perfect match.
-                </p>
-            </div>
+<body class="theme-body transition-colors duration-300">
 
-            <!-- Ad Slot: Top Banner -->
-            <!--div class="w-full max-w-4xl mx-auto mb-10 text-center">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-YOUR_ADSENSE_ID_HERE"
-                     data-ad-slot="TOP_BANNER_SLOT_ID"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-                <div class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">Sponsored Advertisement</div>
-            <!-- div>
-
-            <!-- SEARCH ENGINE UI -->
-            <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-700 mb-16 reveal">
-                <div class="p-6 md:p-8 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50">
-                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Find Your Perfect Role</h2>
-                    
-                    <div class="grid md:grid-cols-2 gap-8">
-                        
-                        <!-- Interests (Blue) -->
-                        <div>
-                            <h3 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3 flex items-center">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Select Interests
-                            </h3>
-                            <div class="flex flex-wrap gap-2" id="interest-filters">
-                                <span class="text-sm text-slate-400 italic">Loading filters...</span>
-                            </div>
-                        </div>
-
-                        <!-- Skills (Green) -->
-                        <div>
-                            <h3 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3 flex items-center">
-                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span> Select Skills
-                            </h3>
-                            <div class="flex flex-wrap gap-2" id="skill-filters">
-                                <span class="text-sm text-slate-400 italic">Loading filters...</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Dropdown Filters -->
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Qualification</label>
-                            <select id="qualification-filter" class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <option value="all">Any</option>
-                                <option value="8th">8th Pass</option>
-                                <option value="10th">10th Pass</option>
-                                <option value="12th">12th Pass</option>
-                                <option value="Graduate">Graduate</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Budget (Investment)</label>
-                            <select id="budget-filter" class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <option value="all">Any</option>
-                                <option value="Zero">Zero Investment</option>
-                                <option value="Low">Low (Bike/Equip)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Category</label>
-                            <select id="category-filter" class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <option value="all">All Categories</option>
-                                <option value="Service-Based">Service Based</option>
-                                <option value="Freelancing">Online Freelancing</option>
-                                <option value="Teaching">Teaching & Tutor</option>
-                                <option value="Creative">Creative & Art</option>
-                                <option value="Business">Small Business</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Min. Income</label>
-                            <select id="income-filter" class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <option value="0">Any Income</option>
-                                <option value="5000">₹5,000+</option>
-                                <option value="10000">₹10,000+</option>
-                                <option value="15000">₹15,000+</option>
-                                <option value="25000">₹25,000+</option>
-                            </select>
-                        </div>
-                        <div class="flex items-end gap-2">
-                            <button onclick="searchJobs()" class="flex-grow bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg shadow transition-colors flex justify-center items-center gap-2">
-                                <i data-lucide="search" class="w-4 h-4"></i> Search
-                            </button>
-                            <button onclick="resetAndSearch()" class="px-3 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold py-2 rounded-lg shadow transition-colors" title="View All Jobs">
-                                <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Results Area -->
-                <div class="p-6 md:p-8 bg-white dark:bg-slate-800 min-h-[300px]">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Opportunities (<span id="result-count">0</span>)</h3>
-                        <button onclick="exportResults()" class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline flex items-center">
-                            <i data-lucide="download" class="w-4 h-4 mr-1"></i> Export List
-                        </button>
-                    </div>
-                    
-                    <div id="results-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Initial State: Hidden/Instructions -->
-                        <div class="col-span-full text-center py-12 text-slate-500 dark:text-slate-400 flex flex-col items-center">
-                            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mb-4">
-                                <i data-lucide="search" class="w-8 h-8 text-slate-400"></i>
-                            </div>
-                            <p class="text-lg font-medium">Select filters and click search to view jobs.</p>
-                            <p class="text-sm mt-2">Or click the refresh icon to see all.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Disclaimer -->
-            <div class="max-w-4xl mx-auto mb-16 px-4">
-                <div class="bg-blue-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-blue-100 dark:border-slate-700">
-                    <div class="flex gap-4 items-start">
-                        <i data-lucide="info" class="w-6 h-6 text-blue-600 dark:text-blue-400 mt-1 flex-shrink-0"></i>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Transparency & Disclaimer</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                                Income figures are estimates based on market trends and platform claims; actual earnings may vary based on effort, location, and demand. Delhizones is not directly affiliated with the hiring companies; please verify terms and safety guidelines directly with the platforms.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <script>
-        lucide.createIcons();
-
-        // 1. DATA LOADING
-        let jobsDB = [];
-
-        async function loadJobsData() {
-            try {
-                const response = await fetch('jobs.db');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                jobsDB = await response.json();
-                initializeFilters();
-                // Removed initial searchJobs() call to hide results on load
-            } catch (error) {
-                console.error("Could not load jobs database:", error);
-                document.getElementById('results-container').innerHTML = `
-                    <div class="col-span-full text-center py-8 text-red-500">
-                        Failed to load job data. Please try refreshing the page.
-                    </div>
-                `;
-            }
-        }
-
-        // 2. UI INITIALIZATION
-        function initializeFilters() {
-            const interests = [...new Set(jobsDB.map(j => j.interest))].sort();
-            const skills = [...new Set(jobsDB.map(j => j.skill))].sort();
-            
-            const interestContainer = document.getElementById('interest-filters');
-            const skillContainer = document.getElementById('skill-filters');
-
-            interestContainer.innerHTML = '';
-            skillContainer.innerHTML = '';
-
-            renderTags(interests, interestContainer, 'interest');
-            renderTags(skills, skillContainer, 'skill');
-        }
-
-        // Render Tags
-        function renderTags(items, container, type) {
-            items.forEach(item => {
-                const btn = document.createElement('button');
-                btn.className = `filter-tag px-3 py-1 rounded-full text-xs font-medium border bg-white dark:bg-slate-700 transition-colors ${type === 'interest' ? 'border-blue-200 text-blue-700 dark:border-blue-900 dark:text-blue-300 tag-interest' : 'border-green-200 text-green-700 dark:border-green-900 dark:text-green-300 tag-skill'}`;
-                btn.textContent = item;
-                btn.onclick = () => {
-                    btn.classList.toggle('selected');
-                };
-                container.appendChild(btn);
-            });
-        }
-
-        // 3. SEARCH LOGIC
-        function searchJobs() {
-            if (jobsDB.length === 0) return;
-
-            const selectedInterests = Array.from(document.querySelectorAll('.tag-interest.selected')).map(b => b.textContent);
-            const selectedSkills = Array.from(document.querySelectorAll('.tag-skill.selected')).map(b => b.textContent);
-            const qualFilter = document.getElementById('qualification-filter').value;
-            const budgetFilter = document.getElementById('budget-filter').value;
-            const catFilter = document.getElementById('category-filter').value;
-            const incomeFilter = parseInt(document.getElementById('income-filter').value) || 0;
-
-            const results = jobsDB.filter(job => {
-                const matchInterest = selectedInterests.length === 0 || selectedInterests.includes(job.interest);
-                const matchSkill = selectedSkills.length === 0 || selectedSkills.includes(job.skill);
-                
-                let matchQual = true;
-                if (qualFilter !== 'all') {
-                     if (job.qual !== 'None' && job.qual !== qualFilter) matchQual = false;
-                }
-                
-                const matchBudget = budgetFilter === 'all' || job.budget === budgetFilter;
-                const matchCat = catFilter === 'all' || job.category === catFilter;
-                
-                // Income filter logic (matches if job min_income >= filter value)
-                const jobIncome = job.min_income || 0;
-                const matchIncome = jobIncome >= incomeFilter;
-
-                return matchInterest && matchSkill && matchQual && matchBudget && matchCat && matchIncome;
-            });
-
-            displayResults(results);
-        }
-
-        // Reset and Search All
-        function resetAndSearch() {
-            document.querySelectorAll('.filter-tag.selected').forEach(el => el.classList.remove('selected'));
-            document.getElementById('qualification-filter').value = 'all';
-            document.getElementById('budget-filter').value = 'all';
-            document.getElementById('category-filter').value = 'all';
-            document.getElementById('income-filter').value = '0';
-            
-            searchJobs();
-        }
-
-        // 4. DISPLAY RESULTS
-        function displayResults(jobs) {
-            const container = document.getElementById('results-container');
-            const countSpan = document.getElementById('result-count');
-            container.innerHTML = '';
-            countSpan.textContent = jobs.length;
-
-            if (jobs.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500">No matching jobs found. Try adjusting your filters.</div>`;
-                return;
-            }
-
-            jobs.forEach((job, index) => {
-                // Ad Slot every 6 items (Placeholder)
-                if (index > 0 && index % 6 === 0) {
-                    const adContainer = document.createElement('div');
-                    adContainer.className = "col-span-full my-6 bg-slate-50 dark:bg-slate-900 border border-dashed border-slate-200 dark:border-slate-700 rounded-xl p-4 flex justify-center items-center";
-                    adContainer.innerHTML = `<span class="text-[10px] uppercase text-slate-400">Sponsored Ad Space</span>`;
-                    container.appendChild(adContainer);
-                }
-
-                const card = document.createElement('div');
-                card.className = "bg-white dark:bg-slate-700 rounded-xl p-5 border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-all reveal active flex flex-col relative overflow-hidden";
-                
-                // Income Badge
-                let incomeBadge = '';
-                if (job.income) {
-                    incomeBadge = `<div class="absolute top-0 right-0 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-[10px] font-bold px-2 py-1 rounded-bl-lg">
-                        ${job.income}
-                    </div>`;
-                }
-
-                let learnSection = '';
-                if(job.learn_platform && job.learn_link && job.learn_link !== '#') {
-                    learnSection = `
-                        <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-600">
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Need skills? <span class="font-semibold text-slate-700 dark:text-slate-200">${job.skill}</span></p>
-                            <a href="${job.learn_link}" target="_blank" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center">
-                                Learn on ${job.learn_platform} <i data-lucide="external-link" class="w-3 h-3 ml-1"></i>
-                            </a>
-                        </div>
-                    `;
-                }
-
-                card.innerHTML = `
-                    ${incomeBadge}
-                    <div class="flex justify-between items-start mb-2 mt-2">
-                        <span class="text-xs font-bold px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 uppercase">${job.category}</span>
-                        <span class="text-xs font-medium text-slate-400">${job.budget} Inv.</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 leading-snug">${job.title}</h3>
-                    
-                    <p class="text-sm text-slate-600 dark:text-slate-300 mb-4 flex-grow">${job.description || 'No description available.'}</p>
-                    
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 px-2 py-0.5 rounded">${job.interest}</span>
-                    </div>
-
-                    ${learnSection}
-
-                    <a href="${job.link}" target="_blank" rel="noopener" class="mt-4 block w-full text-center py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium rounded-lg hover:bg-blue-600 dark:hover:bg-blue-50 transition-colors">
-                        Apply Now
-                    </a>
-                `;
-                container.appendChild(card);
-            });
-            lucide.createIcons();
-        }
-
-        // 5. EXPORT FUNCTION
-        function exportResults() {
-            const count = document.getElementById('result-count').innerText;
-            if (count === "0") { alert("No jobs to export."); return; }
-
-            const selectedInterests = Array.from(document.querySelectorAll('.tag-interest.selected')).map(b => b.textContent);
-            const selectedSkills = Array.from(document.querySelectorAll('.tag-skill.selected')).map(b => b.textContent);
-            const qualFilter = document.getElementById('qualification-filter').value;
-            const budgetFilter = document.getElementById('budget-filter').value;
-            const catFilter = document.getElementById('category-filter').value;
-            const incomeFilter = parseInt(document.getElementById('income-filter').value) || 0;
-
-            const results = jobsDB.filter(job => {
-                const matchInterest = selectedInterests.length === 0 || selectedInterests.includes(job.interest);
-                const matchSkill = selectedSkills.length === 0 || selectedSkills.includes(job.skill);
-                let matchQual = true;
-                if (qualFilter !== 'all') {
-                     if (job.qual !== 'None' && job.qual !== qualFilter) matchQual = false;
-                }
-                const matchBudget = budgetFilter === 'all' || job.budget === budgetFilter;
-                const matchCat = catFilter === 'all' || job.category === catFilter;
-                const jobIncome = job.min_income || 0;
-                const matchIncome = jobIncome >= incomeFilter;
-                return matchInterest && matchSkill && matchQual && matchBudget && matchCat && matchIncome;
-            });
-
-            let content = "DELHIZONES JOB LIST\n";
-            content += "===================\n\n";
-            results.forEach((j, i) => {
-                content += `${i+1}. ${j.title} (${j.platform})\n   Est. Income: ${j.income || 'N/A'}\n   Description: ${j.description || 'N/A'}\n   Category: ${j.category} | Skill: ${j.skill}\n   Apply Link: ${j.link}\n   Learn Skill: ${j.learn_link || 'N/A'}\n\n`;
-            });
-            
-            content += "\nDownloaded from https://delhizones.com/jobs/ - Your Digital Ecosystem.";
-
-            const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = "My_Jobs_List.txt";
-            link.click();
-        }
-
-        // Initialize
-        loadJobsData();
+    <main class="container mx-auto px-4 pt-28 pb-16 max-w-7xl">
         
-        // Scroll Reveal
-        function reveal() {
-          var reveals = document.querySelectorAll(".reveal");
-          for (var i = 0; i < reveals.length; i++) {
-            var windowHeight = window.innerHeight;
-            var elementTop = reveals[i].getBoundingClientRect().top;
-            if (elementTop < windowHeight - 100) reveals[i].classList.add("active");
-          }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal();
-    </script>
+        <!-- Hero Section -->
+        <div class="theme-bg-secondary p-8 md:p-12 rounded-2xl shadow-sm border border-black/5 mb-8">
+            
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-4">
+                <span class="gradient-text">Job Alert 2025:</span> Latest Government Jobs & NREGA Job Card Information
+            </h1>
+            
+            <p class="text-lg md:text-xl mb-6 leading-relaxed opacity-90">
+                Welcome to <strong>Delhizones Jobs Portal</strong> – your comprehensive destination for the latest <strong>job alerts</strong>, <strong>government job vacancies</strong>, <strong>NREGA job card lists</strong>, and <strong>career opportunities</strong> across India. Whether you're searching for jobs in Assam, checking your <strong>job card number</strong>, or looking for free <strong>govt job alerts 2025</strong>, we've got you covered with accurate, timely information.
+            </p>
 
-</body>
-</html>
+            <div class="flex flex-wrap gap-3 mb-8">
+                <a href="#job-alerts" class="px-6 py-3 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-colors shadow-lg">Latest Job Alerts</a>
+                <a href="#nrega-card" class="px-6 py-3 bg-green-600 text-white rounded-full font-bold hover:bg-green-700 transition-colors shadow-lg">NREGA Job Card</a>
+                <a href="#assam-jobs" class="px-6 py-3 bg-purple-600 text-white rounded-full font-bold hover:bg-purple-700 transition-colors shadow-lg">Assam Jobs</a>
+                <a href="#job-search" class="px-6 py-3 bg-orange-600 text-white rounded-full font-bold hover:bg-orange-700 transition-colors shadow-lg">Search Jobs</a>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="text-center p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20">
+                    <div class="text-3xl font-bold text-blue-600">10,000+</div>
+                    <div class="text-sm opacity-70">Active Job Listings</div>
+                </div>
+                <div class="text-center p-4 rounded-xl bg-green-50 dark:bg-green-900/20">
+                    <div class="text-3xl font-bold text-green-600">5,000+</div>
+                    <div class="text-sm opacity-70">Govt Job Alerts</div>
+                </div>
+                <div class="text-center p-4 rounded-xl bg-purple-50 dark:bg-purple-900/20">
+                    <div class="text-3xl font-bold text-purple-600">Daily</div>
+                    <div class="text-sm opacity-70">Updated Content</div>
+                </div>
+                <div class="text-center p-4 rounded-xl bg-orange-50 dark:bg-orange-900/20">
+                    <div class="text-3xl font-bold text-orange-600">Free</div>
+                    <div class="text-sm opacity-70">100% Free Service</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="theme-bg-secondary p-8 rounded-2xl shadow-sm border border-black/5 mb-8">
+            <h2 class="text-2xl font-bold mb-6">📑 Quick Navigation</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <a href="#job-alerts" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ Latest Job Alerts 2025</a>
+                <a href="#govt-jobs" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ Government Job Alerts</a>
+                <a href="#nrega-card" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ NREGA Job Card Information</a>
+                <a href="#job-card-list" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ MGNREGA Job Card List</a>
+                <a href="#assam-jobs" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ Jobs in Assam</a>
+                <a href="#job-card-assam" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ Assam Job Card Details</a>
+                <a href="#job-vacancies" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ Current Job Vacancies</a>
+                <a href="#job-opportunities" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ Career Opportunities</a>
+                <a href="#job-portals" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ Top Job Portals</a>
+                <a href="#job-card-check" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ Check Job Card Number</a>
+                <a href="#recruitment" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ Recruitment Updates</a>
+                <a href="#faq" class="p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">→ FAQs</a>
+            </div>
+        </div>
+
+        <!-- Latest Job Alerts Section -->
+        <section id="job-alerts" class="theme-bg-secondary p-8 md:p-12 rounded-2xl shadow-sm border border-black/5 mb-8">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-blue-500 pl-4">🔔 Latest Job Alerts 2025</h2>
+            
+            <p class="text-lg mb-6 leading-relaxed">
+                Stay updated with the latest <strong>job alerts</strong> and <strong>job vacancy</strong> notifications from across India. Our <strong>job alert 2025</strong> system brings you real-time updates on government and private sector <strong>job openings</strong>, ensuring you never miss an opportunity. Subscribe to our free <strong>job alert</strong> service to receive instant notifications about new <strong>job vacancies</strong> matching your profile.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="card-hover p-6 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 border border-blue-200 dark:border-blue-700">
+                    <h3 class="text-xl font-bold mb-3 text-blue-700 dark:text-blue-300">📢 Free Job Alert Service</h3>
+                    <p class="mb-4 opacity-90">
+                        Get instant <strong>job alert</strong> notifications directly to your email or phone. Our <strong>free govt job alert</strong> service covers all major <strong>job recruitment</strong> drives, <strong>job vacancies</strong>, and <strong>career opportunities</strong> across India.
+                    </p>
+                    <ul class="space-y-2 text-sm">
+                        <li>✓ Daily <strong>govt jobs alert</strong> updates</li>
+                        <li>✓ All <strong>job alert</strong> categories covered</li>
+                        <li>✓ <strong>New job alert</strong> push notifications</li>
+                        <li>✓ <strong>Job alert vacancy</strong> filters by location</li>
+                    </ul>
+                </div>
+
+                <div class="card-hover p-6 rounded-xl bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 border border-green-200 dark:border-green-700">
+                    <h3 class="text-xl font-bold mb-3 text-green-700 dark:text-green-300">🎯 Job Categories</h3>
+                    <p class="mb-4 opacity-90">
+                        Explore <strong>job opportunities</strong> across various sectors including government, banking, railway, defense, teaching, and private sector <strong>jobs</strong>.
+                    </p>
+                    <ul class="space-y-2 text-sm">
+                        <li>✓ Government <strong>job vacancies</strong></li>
+                        <li>✓ Banking & Finance <strong>jobs</strong></li>
+                        <li>✓ Railway <strong>job recruitment</strong></li>
+                        <li>✓ State-wise <strong>job alerts</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-6 rounded-lg mb-6">
+                <h4 class="font-bold text-lg mb-2">⚡ Featured: <strong>India Job Alert</strong></h4>
+                <p class="mb-3">
+                    Access comprehensive <strong>India job alert</strong> listings covering all states and union territories. From <strong>jobs in Assam</strong> to opportunities in metro cities, find your perfect <strong>job career</strong> match with our advanced search filters.
+                </p>
+                <a href="/JOBs/" class="inline-block px-6 py-2 bg-yellow-500 text-white rounded-full font-bold hover:bg-yellow-600 transition-colors">Browse All Jobs →</a>
+            </div>
+        </section>
+
+        <!-- Government Jobs Section -->
+        <section id="govt-jobs" class="theme-bg-secondary p-8 md:p-12 rounded-2xl shadow-sm border border-black/5 mb-8">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4">🏛️ Government Job Alerts</h2>
+            
+            <p class="text-lg mb-6 leading-relaxed">
+                Looking for <strong>govt job alert</strong> notifications? Our dedicated <strong>govt jobs alert</strong> section provides daily updates on central and state government <strong>job vacancies</strong>. Get <strong>free govt job alert</strong> for positions in SSC, UPSC, Railway, Banking, Defense, and state government departments. Never miss a <strong>govt job alert 2025</strong> with our comprehensive tracking system.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="card-hover p-6 rounded-xl border-2 border-green-200 dark:border-green-700">
+                    <div class="text-4xl mb-3">🎓</div>
+                    <h3 class="text-xl font-bold mb-3">Central Government Jobs</h3>
+                    <p class="text-sm opacity-90 mb-4">
+                        Latest <strong>govt job alert</strong> from UPSC, SSC, Railway Recruitment Boards, and other central agencies. Get timely <strong>job alert</strong> for IAS, IPS, Group A, B, C, and D positions.
+                    </p>
+                    <a href="/JOBs/central-govt-jobs/" class="text-green-600 font-bold hover:underline">Explore Jobs →</a>
+                </div>
+
+                <div class="card-hover p-6 rounded-xl border-2 border-green-200 dark:border-green-700">
+                    <div class="text-4xl mb-3">🏢</div>
+                    <h3 class="text-xl font-bold mb-3">State Government Jobs</h3>
+                    <p class="text-sm opacity-90 mb-4">
+                        State-wise <strong>govt jobs alert</strong> including <strong>jobs in Assam</strong>, UP, Bihar, Maharashtra, and all other states. Check <strong>recruitment in Assam</strong> and other regions regularly.
+                    </p>
+                    <a href="/JOBs/state-govt-jobs/" class="text-green-600 font-bold hover:underline">View Vacancies →</a>
+                </div>
+
+                <div class="card-hover p-6 rounded-xl border-2 border-green-200 dark:border-green-700">
+                    <div class="text-4xl mb-3">🏦</div>
+                    <h3 class="text-xl font-bold mb-3">PSU & Banking Jobs</h3>
+                    <p class="text-sm opacity-90 mb-4">
+                        Public Sector Undertaking and Banking sector <strong>job alerts</strong>. Get notifications for IBPS, SBI, RBI, and PSU <strong>job recruitment</strong> drives.
+                    </p>
+                    <a href="/JOBs/banking-psu-jobs/" class="text-green-600 font-bold hover:underline">Check Openings →</a>
+                </div>
+            </div>
+
+            <div class="bg-green-50 dark:bg-green-900/20 p-6 rounded-xl border border-green-200 dark:border-green-700">
+                <h4 class="font-bold text-lg mb-3">🔔 How to Subscribe to <strong>Govt Job Alert</strong></h4>
+                <ol class="list-decimal pl-6 space-y-2">
+                    <li>Visit our <a href="/JOBs/" class="text-blue-600 hover:underline">Jobs Portal</a></li>
+                    <li>Select your preferred <strong>job</strong> categories and locations</li>
+                    <li>Enter your email/phone for <strong>job alert</strong> notifications</li>
+                    <li>Receive instant <strong>new job alert</strong> directly to your inbox</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- NREGA Job Card Section -->
+        <section id="nrega-card" class="theme-bg-secondary p-8 md:p-12 rounded-2xl shadow-sm border border-black/5 mb-8">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-purple-500 pl-4">📋 NREGA Job Card: Complete Guide</h2>
+            
+            <p class="text-lg mb-6 leading-relaxed">
+                The <strong>NREGA job card</strong> (also known as <strong>MGNREGA job card</strong> or simply <strong>job card</strong>) is an essential document for accessing employment under the Mahatma Gandhi National Rural Employment Guarantee Act. Check your <strong>nrega job card list</strong>, <strong>job card number</strong>, and work details through our comprehensive guide.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">What is a <strong>Job Card</strong>?</h3>
+                    <p class="mb-4">
+                        A <strong>NREGA job card</strong> (or <strong>MGNREGA job card</strong>) is an official document issued to households under the employment guarantee scheme. The <strong>job card</strong> contains details of adult members who are willing to do unskilled manual work and is mandatory for getting employment under NREGA.
+                    </p>
+                    <h4 class="font-bold mb-2">Key Features of <strong>Job Card NREGA</strong>:</h4>
+                    <ul class="space-y-2 text-sm opacity-90">
+                        <li>✓ Unique <strong>job card number</strong> for each household</li>
+                        <li>✓ Access to 100 days guaranteed employment</li>
+                        <li>✓ Transparent payment tracking system</li>
+                        <li>✓ State-wise <strong>job card list</strong> management</li>
+                        <li>✓ Digital <strong>nrega job card list</strong> access</li>
+                    </ul>
+                </div>
+
+                <div class="card-hover p-6 rounded-xl bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 border border-purple-200 dark:border-purple-700">
+                    <h3 class="text-xl font-bold mb-4">🔍 Check Your <strong>Job Card Number</strong></h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="p-3 bg-white dark:bg-gray-800 rounded-lg">
+                            <strong>Step 1:</strong> Visit the official <strong>NREGA</strong> portal
+                        </div>
+                        <div class="p-3 bg-white dark:bg-gray-800 rounded-lg">
+                            <strong>Step 2:</strong> Select your state from the list
+                        </div>
+                        <div class="p-3 bg-white dark:bg-gray-800 rounded-lg">
+                            <strong>Step 3:</strong> Choose District, Block, and Panchayat
+                        </div>
+                        <div class="p-3 bg-white dark:bg-gray-800 rounded-lg">
+                            <strong>Step 4:</strong> View <strong>job card list</strong> and find your <strong>job card number</strong>
+                        </div>
+                    </div>
+                    <a href="/delhizones-portal/nrega-job-card/" class="mt-4 inline-block px-6 py-2 bg-purple-600 text-white rounded-full font-bold hover:bg-purple-700 transition-colors">Check Job Card →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- MGNREGA Job Card List Section -->
+        <section id="job-card-list" class="theme-bg-secondary p-8 md:p-12 rounded-2xl shadow-sm border border-black/5 mb-8">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-indigo-500 pl-4">📜 MGNREGA Job Card List & Job Card Number Search</h2>
+            
+            <p class="text-lg mb-6 leading-relaxed">
+                Access the complete <strong>MGNREGA job card list</strong> and <strong>nrega job card list</strong> for all states in India. Search your <strong>job card number</strong>, check work allocation, and track payment status through our easy-to-use interface. The <strong>job card list</strong> is updated regularly with the latest data from official government portals.
+            </p>
+
+            <div class="bg-indigo-50 dark:bg-indigo-900/20 p-6 rounded-xl border border-indigo-200 dark:border-indigo-700 mb-6">
+                <h3 class="text-xl font-bold mb-4">🔎 <strong>Job Card Number Search</strong></h3>
+                <p class="mb-4">
+                    To perform a <strong>job card number search</strong>, you'll need to know your state, district, and block information. The <strong>nrega job card number</strong> is unique to each household and can be used to track all employment and payment details.
+                </p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-bold mb-2">Search by:</h4>
+                        <ul class="space-y-1 text-sm">
+                            <li>→ <strong>Job card number</strong></li>
+                            <li>→ Head of household name</li>
+                            <li>→ Aadhaar number (where linked)</li>
+                            <li>→ Bank account number</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-2">Information Available:</h4>
+                        <ul class="space-y-1 text-sm">
+                            <li>→ Work allocation details</li>
+                            <li>→ Payment history</li>
+                            <li>→ Days worked</li>
+                            <li>→ Pending payments</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold mb-4">State-wise <strong>Job Card List</strong> Access</h3>
+            <div class="grid md:grid-cols-4 gap-4">
+                <a href="/delhizones-portal/nrega-job-card/assam/" class="card-hover p-4 text-center rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-indigo-500">
+                    <div class="font-bold">Assam</div>
+                    <div class="text-sm opacity-70"><strong>Job Card Assam</strong></div>
+                </a>
+                <a href="/delhizones-portal/nrega-job-card/bihar/" class="card-hover p-4 text-center rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-indigo-500">
+                    <div class="font-bold">Bihar</div>
+                    <div class="text-sm opacity-70"><strong>Job Card List</strong></div>
+                </a>
+                <a href="/delhizones-portal/nrega-job-card/up/" class="card-hover p-4 text-center rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-indigo-500">
+                    <div class="font-bold">Uttar Pradesh</div>
+                    <div class="text-sm opacity-70"><strong>NREGA List</strong></div>
+                </a>
+                <a href="/delhizones-portal/nrega-job-card/all-states/" class="card-hover p-4 text-center rounded-xl border-2 border-indigo-500 hover:border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20">
+                    <div class="font-bold">All States</div>
+                    <div class="text-sm opacity-70">View Complete List</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Assam Jobs Section -->
+        <section id="assam-jobs" class="theme-bg-secondary p-8 md:p-12 rounded-2xl shadow-sm border border-black/5 mb-8">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-orange-500 pl-4">🌏 Jobs in Assam: Complete Employment Guide</h2>
+            
+            <p class="text-lg mb-6 leading-relaxed">
+                Looking for <strong>jobs in Assam</strong>? Find the latest <strong>Assam job</strong> opportunities, <strong>job in Assam</strong> vacancies, and <strong>recruitment in Assam</strong> updates. Our <strong>Assam jobs</strong> portal covers government, private sector, and <strong>new job in Assam</strong> listings. Get instant <strong>job news Assam</strong> and <strong>Assam job news</strong> alerts for <strong>all Assam job</strong> vacancies.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="card-hover p-6 rounded-xl bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30">
+                    <h3 class="text-xl font-bold mb-3">🏛️ <strong>Assam Job</strong> - Government</h3>
+                    <p class="text-sm mb-4 opacity-90">
+                        Latest government <strong>job in Assam</strong> including APSC, Assam Police, Education Department, and other state departments. Check <strong>recruitment in Assam</strong> for all govt positions.
+                    </p>
+                    <a href="/JOBs/assam-govt-jobs/" class="text-orange-600 font-bold hover:underline">View Govt Jobs →</a>
+                </div>
+
+                <div class="card-hover p-6 rounded-xl bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30">
+                    <h3 class="text-xl font-bold mb-3">🏢 <strong>Jobs in Assam</strong> - Private</h3>
+                    <p class="text-sm mb-4 opacity-90">
+                        Explore private sector <strong>Assam jobs</strong> in IT, healthcare, education, hospitality, and other industries. Find <strong>new job in Assam</strong> opportunities daily.
+                    </p>
+                    <a href="/JOBs/assam-private-jobs/" class="text-orange-600 font-bold hover:underline">Browse Private Jobs →</a>
+                </div>
+
+                <div class="card-hover p-6 rounded-xl bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30">
+                    <h3 class="text-xl font-bold mb-3">📰 <strong>Job News Assam</strong></h3>
+                    <p class="text-sm mb-4 opacity-90">
+                        Stay updated with latest <strong>job news Assam</strong> and <strong>Assam job news</strong>. Get daily updates on <strong>all jobs Assam</strong> including walk-in interviews and urgent hirings.
+                    </p>
+                    <a href="/News/assam-job-news/" class="text-orange-600 font-bold hover:underline">Read Latest News →</a>
+                </div>
+            </div>
+
+            <div class="bg-orange-50 dark:bg-orange-900/20 border-l-4 border-orange-500 p-6 rounded-lg">
+                <h4 class="font-bold text-lg mb-3">🎯 Popular <strong>Job Assam</strong> Categories</h4>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h5 class="font-bold mb-2"><strong>All Assam Job</strong> - Government Sectors:</h5>
+                        <ul class="space-y-1 text-sm">
+                            <li>→ APSC <strong>jobs in Assam</strong></li>
+                            <li>→ Assam Police <strong>recruitment in Assam</strong></li>
+                            <li>→ Teaching <strong>job in Assam</strong></li>
+                            <li>→ Health Department <strong>Assam jobs</strong></li>
+                            <li>→ Railway <strong>jobs Assam</strong></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-bold mb-2"><strong>All Jobs Assam</strong> - Private Sectors:</h5>
+                        <ul class="space-y-1 text-sm">
+                            <li>→ IT/Software <strong>jobs in Assam</strong></li>
+                            <li>→ Banking <strong>job Assam</strong></li>
+                            <li>→ Hospitality <strong>Assam job</strong></li>
+                            <li>→ Retail <strong>jobs Assam</strong></li>
+                            <li>→ Manufacturing <strong>job in Assam</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assam Job Card Section -->
+        <section id="job-card-assam" class="theme-bg-secondary p-8 md:p-12 rounded-2xl shadow-sm border border-black/5 mb-8">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border

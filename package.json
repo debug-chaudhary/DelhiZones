@@ -4,6 +4,7 @@
     "build:css": "node ./node_modules/tailwindcss/dist/lib.js -i src/input.css -o dist/output.css --minify"
   },
   "dependencies": {
+    "@netlify/neon": "^0.1.0",
     "lucide-react": "^0.562.0"
   },
   "devDependencies": {
