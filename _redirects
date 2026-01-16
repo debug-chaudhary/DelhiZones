@@ -1,6 +1,16 @@
-# Catch-all Redirect (Fixes Broken Links)
-# If a file is not found, redirect to Homepage (301 Permanent)
-/* /    301
+# --- 1. SPECIFIC 301 REDIRECTS (Keep these for real pages) ---
+# Map old categories if they exist on the new site
+/job-vacancies/* /JOBs/:splat    301
+/latest-news/* /News/:splat    301
+/articles/* /Blog/:splat    301
 
-# Optional: Redirect specific old pages to new ones
-/old-page.html    /new-page.html    301
+# --- 2. FORCE 404 FOR OLD JUNK LINKS (The Fix) ---
+# This tells Google "These paths are dead, stop indexing them."
+/hr-* /404.html   404
+/a* /404.html   404
+/page/* /404.html   404
+/search-2/* /404.html   404
+/home/      /           301  # Redirect /home/ to root
+
+# --- 3. CATCH-ALL 404 (For everything else) ---
+/* /404.html   404

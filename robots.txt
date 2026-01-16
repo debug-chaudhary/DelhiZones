@@ -1,4 +1,9 @@
 User-agent: *
-Disallow:
-Disallow: /Search/database/posts.json
+Allow: /
+
+# Disallow admin or private system files if you have them
+Disallow: /admin/
+Disallow: /private/
+
+# Point Google directly to your Sitemap
 Sitemap: https://delhizones.com/sitemap.xml
