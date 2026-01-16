@@ -7,7 +7,7 @@
  */
 
 // CHANGE THIS: Increment 'v2' to 'v3', 'v4' etc. whenever you update the site.
-const CACHE_NAME = 'delhizones-v3-static';
+const CACHE_NAME = 'delhizones-v4-static';
 const DATA_CACHE_NAME = 'delhizones-v3-data';
 
 // Files to cache immediately (The "App Shell")
