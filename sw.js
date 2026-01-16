@@ -5,7 +5,7 @@
  * Includes: Logic to ignore Google Analytics (so tracking always works).
  */
 
-const CACHE_NAME = 'delhizones-v1-cache';
+const CACHE_NAME = 'delhizones-v2-cache';
 
 // Core assets to pre-cache immediately on install
 const ASSETS_TO_CACHE = [

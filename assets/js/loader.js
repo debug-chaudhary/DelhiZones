@@ -11,7 +11,7 @@
     
     // --- CONFIGURATION ---
     // CHANGE THIS NUMBER whenever you update your code to force a refresh for all users.
-    const SITE_VERSION = '?v=1.2'; 
+    const SITE_VERSION = '?v=1.3'; 
 
     // --- 1. IMMEDIATE PWA CAPTURE ---
     window.deferredPrompt = null;
