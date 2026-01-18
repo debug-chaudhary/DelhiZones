@@ -1,11 +1,11 @@
 /**
- * Delhizones Master Loader (v6.0 - PWA Multi-Button Fix)
+ * Delhizones Master Loader (v7.0 - PWA Multi-Button Fix)
  * Integrates: Themes, PWA (Hero+Nav), Navigation, and Component Injection
  */
 
 (function () {
     
-    const SITE_VERSION = '?v=6.0'; // Version bump for cache busting
+    const SITE_VERSION = '?v=7.0'; // Version bump for cache busting
     
     // Paths
     const PATHS = {
@@ -192,6 +192,22 @@
             }
         });
     });
+
+    // Force Update Feature (Clear Cache & Reload)
+    window.forceUpdate = () => {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(regs => {
+                regs.forEach(reg => reg.unregister());
+            });
+        }
+        if ('caches' in window) {
+            caches.keys().then(keys => {
+                Promise.all(keys.map(key => caches.delete(key))).then(() => window.location.reload());
+            });
+        } else {
+            window.location.reload();
+        }
+    };
     
     // ==========================================
     // 4. COMPONENT INJECTOR
@@ -243,9 +259,19 @@
         
         // 5. Register Service Worker
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then(reg => console.log('SW Registered'))
-                .catch(err => console.error('SW Failed:', err));
+            navigator.serviceWorker.register('/sw.js').then(reg => {
+                console.log('SW Registered');
+                reg.update(); // Check for updates immediately
+            }).catch(err => console.error('SW Failed:', err));
+
+            // Auto-reload when new version takes control
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!refreshing) {
+                    refreshing = true;
+                    window.location.reload();
+                }
+            });
         }
     }
 

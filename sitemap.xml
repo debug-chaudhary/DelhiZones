@@ -13,14 +13,15 @@
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+
   <url>
-    <loc>https://delhizones.com/Telecom/operator/bsnl/complete-Guide-2026-Plans-Recharge-Customer-Care-All-Solutions.html</loc>
+    <loc>https://delhizones.com/jobs/</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://delhizones.com/jobs/survival-finder-engine.html</loc>
+    <loc>https://delhizones.com/govt-portal/</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -32,7 +33,38 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://delhizones.com/learning/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://delhizones.com/learning/synopsis/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://delhizones.com/news/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://delhizones.com/blog/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://delhizones.com/business/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://delhizones.com/lifestyle/</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -44,7 +76,32 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://delhizones.com/portfolio/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://delhizones.com/web-story/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://delhizones.com/youtube/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://delhizones.com/web-tool/seo-file-folder-renamer.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://delhizones.com/results/ignou-practical-search/</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -62,6 +119,25 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://delhizones.com/donate.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://delhizones.com/subscribe.html</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://delhizones.com/support/</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
   <url>
     <loc>https://delhizones.com/privacy.html</loc>
     <lastmod>2026-01-15</lastmod>
