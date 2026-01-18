@@ -12,8 +12,8 @@ const PRECACHE_URLS = [
     '/',
     '/index.html',
     '/404.html',
-    '/Donate.html',       // Added
-    '/Subscribe.html',    // Added
+    '/donate.html',       // Added
+    '/subscribe.html',    // Added
     '/includes/navbar.html',
     '/includes/footer.html',
     '/assets/css/themes.css',

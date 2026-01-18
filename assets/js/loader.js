@@ -231,6 +231,16 @@
                 
                 const currentTheme = localStorage.getItem('selected-theme') || 'system';
                 updateThemeUI(currentTheme);
+
+                // PWA FIX: If the prompt fired before this component loaded, show buttons now
+                if (window.deferredPrompt) {
+                    const buttons = document.querySelectorAll('#install-app-btn, #hero-install-btn');
+                    buttons.forEach(btn => {
+                        btn.hidden = false;
+                        btn.style.display = 'flex';
+                        btn.classList.remove('hidden');
+                    });
+                }
             })
             .catch(err => console.error(`Failed to load ${path}`, err));
     }
