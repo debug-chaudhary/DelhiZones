@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title id="page-title">Operator Hub</title>
+    <meta id="page-desc" name="description" content="Telecom Operator Landing Page">
+    <meta name="robots" content="index, follow">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        #navbar-placeholder { min-height: 80px; display: block; }
+        #footer-placeholder { min-height: 300px; display: block; }
+        
+        /* Dynamic Theme Variables (Updated by JS) */
+        :root {
+            --brand-color: #2563EB; /* Default */
+            --brand-light: #EFF6FF;
+        }
+        
+        .brand-bg { background-color: var(--brand-color); }
+        .brand-text { color: var(--brand-color); }
+        .brand-border { border-color: var(--brand-color); }
+        .brand-light-bg { background-color: var(--brand-light); }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="text-center mb-12">
+        comming soon    <h1 class="text-4xl font-extrabold mb-4">Vi (Vodafone Idea) - Coming Soon</h1>
+            <p class="text-lg text-slate-600 dark:text-slate-400">Details about Vi's services, plans, and support will be available shortly.</p>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Init Icons
+        lucide.createIcons();
+
+        // Set dynamic theme for Vi
+        document.documentElement.style.setProperty('--brand-color', '#f37021');
+        document.documentElement.style.setProperty('--brand-light', '#FEF3C7'); // A light orange/yellow
+        document.getElementById('page-title').textContent = 'Vi - Operator Hub';
+        document.getElementById('page-desc').setAttribute('content', "Explore Vi's (Vodafone Idea) services, plans, and support options.");
+    </script>
+    
+        </div>
+        
+
+</body>
+</html>

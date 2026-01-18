@@ -3,43 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found - Delhizones</title>
+    <title>Page Status - Delhizones</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script src="/assets/js/loader.js" defer></script>
+
     <script>
         tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#2563EB', darkBg: '#0f172a' } } } }
     </script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="/assets/js/loader.js" defer></script>
 </head>
 
-<body class="theme-body transition-colors duration-300 flex flex-col min-h-screen">
+<body class="theme-body transition-colors duration-300 flex flex-col min-h-screen font-sans">
     
-    <main class="flex-grow flex items-center justify-center p-4">
-        <div class="theme-bg-secondary text-center p-10 md:p-16 rounded-3xl shadow-2xl border border-black/5 max-w-lg mx-auto">
+    <main class="flex-grow flex items-center justify-center p-4 relative overflow-hidden">
+        
+        <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+        <div class="theme-bg-secondary relative z-10 text-center p-8 md:p-16 rounded-3xl shadow-2xl border border-black/5 max-w-lg mx-auto w-full transition-all transform hover:scale-[1.01]">
             
-            <div class="mb-6 inline-flex items-center justify-center w-24 h-24 bg-red-100 text-red-500 rounded-full">
-                <i data-lucide="alert-triangle" class="w-12 h-12"></i>
+            <div id="status-bg" class="mb-6 inline-flex items-center justify-center w-24 h-24 bg-red-100 text-red-500 rounded-full animate-bounce-slow">
+                <i id="status-icon" data-lucide="alert-triangle" class="w-10 h-10"></i>
             </div>
 
-            <h1 class="text-6xl font-extrabold mb-2 theme-text-main">404</h1>
-            <h2 class="text-2xl font-bold mb-4 theme-text-sec">Page Not Found</h2>
+            <h1 id="status-code" class="text-6xl font-extrabold mb-2 theme-text-main tracking-tighter">404</h1>
+            <h2 id="status-title" class="text-2xl font-bold mb-4 theme-text-sec">Page Not Found</h2>
             
-            <p class="mb-8 opacity-70">
+            <p id="status-desc" class="mb-8 opacity-70 leading-relaxed">
                 Oops! The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
             </p>
 
-            <div class="flex flex-col gap-3">
-                <a href="/index.html" class="px-8 py-3 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
-                    Go Back Home
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="/" class="px-8 py-3 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i> Go Home
                 </a>
-                <a href="/Contact.html" class="text-sm font-semibold opacity-60 hover:opacity-100 hover:underline">
-                    Report Broken Link
+                
+                <a id="secondary-btn" href="/Contact.html" class="px-8 py-3 border border-current opacity-60 hover:opacity-100 rounded-full transition-all hover:bg-black/5 dark:hover:bg-white/5 flex items-center justify-center gap-2">
+                    <i data-lucide="flag" class="w-4 h-4"></i> Report Issue
                 </a>
             </div>
 
         </div>
     </main>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const path = window.location.pathname.toLowerCase();
+            
+            // LIST OF PATHS THAT SHOULD SHOW "COMING SOON" INSTEAD OF 404
+            // Add any keywords here (e.g., 'shop', 'premium', 'app')
+            const comingSoonPaths = ['/shop', '/premium', '/beta', '/app-feature', '/dashboard'];
+
+            // Check if current URL contains any of the keywords above
+            const isComingSoon = comingSoonPaths.some(keyword => path.includes(keyword));
+
+            if (isComingSoon) {
+                // SWITCH TO 'COMING SOON' MODE
+                document.title = "Coming Soon - Delhizones";
+                
+                // 1. Change Icon & Color to Orange/Construction
+                const bg = document.getElementById('status-bg');
+                bg.classList.remove('bg-red-100', 'text-red-500');
+                bg.classList.add('bg-orange-100', 'text-orange-600'); // Orange for construction
+                
+                // 2. Change Icon Image
+                // We have to manually set the SVG because Lucide runs on load
+                // This replaces the triangle with a Construction Hammer/Cone
+                document.getElementById('status-icon').setAttribute('data-lucide', 'hard-hat'); 
+
+                // 3. Change Text
+                document.getElementById('status-code').textContent = "WIP";
+                document.getElementById('status-title').textContent = "Under Construction";
+                document.getElementById('status-desc').textContent = "We are currently building this feature. Check back soon for the launch of this section!";
+                
+                // 4. Update Secondary Button
+                const btn = document.getElementById('secondary-btn');
+                btn.href = "/News/"; // Send them to news instead
+                btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> Notify Me';
+            }
+
+            // Re-render icons after changes
+            if(window.lucide) window.lucide.createIcons();
+        });
+    </script>
+
+    <style>
+        .animate-bounce-slow { animation: bounce 3s infinite; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-5%); }
+            50% { transform: translateY(0); }
+        }
+    </style>
 </body>
 </html>

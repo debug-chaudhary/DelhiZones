@@ -1,53 +1,51 @@
 /**
- * Delhizones Service Worker (v2.0)
- * Strategy: 
- * 1. HTML Pages: Network First (Get latest content, fallback to cache)
- * 2. Static Assets: Cache First (Speed up loading)
- * 3. External: Network Only (Google Analytics, Ads)
+ * Delhizones Service Worker (v6.0 - PWA & SEO Optimized)
+ * Strategy: Stale-While-Revalidate for Assets, Network-First for HTML
  */
 
-// CHANGE THIS: Increment 'v2' to 'v3', 'v4' etc. whenever you update the site.
-const CACHE_NAME = 'delhizones-v4-static';
-const DATA_CACHE_NAME = 'delhizones-v3-data';
+const CACHE_NAME = 'delhizones-static-v6'; // Bumped to match Loader
+const DATA_CACHE_NAME = 'delhizones-data-v6';
 
-// Files to cache immediately (The "App Shell")
+// CRITICAL: Files to cache immediately.
+// If any of these are missing from your server, the PWA Install will fail.
 const PRECACHE_URLS = [
     '/',
     '/index.html',
     '/404.html',
-    '/assets/css/themes.css',
-    '/assets/js/loader.js',
-    '/assets/js/theme-manager.js',
-    '/assets/js/pwa-manager.js',
+    '/Donate.html',       // Added
+    '/Subscribe.html',    // Added
     '/includes/navbar.html',
     '/includes/footer.html',
-    '/includes/head.html',
+    '/assets/css/themes.css',
+    '/assets/js/loader.js', 
     '/assets/icons/icon-192.png',
-    '/assets/icons/icon-512.png',
     '/assets/icons/favicon.ico'
 ];
 
-// 1. INSTALL: Cache the App Shell
+// 1. INSTALL PHASE
 self.addEventListener('install', (event) => {
-    console.log('[Service Worker] Installing version:', CACHE_NAME);
+    console.log('[SW] Installing v6.0...');
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
-                console.log('[Service Worker] Precaching App Shell');
-                return cache.addAll(PRECACHE_URLS);
+                console.log('[SW] Precaching App Shell');
+                // We use catch() so one missing file doesn't break the entire install
+                return cache.addAll(PRECACHE_URLS).catch(err => {
+                    console.error('[SW] Precache Error - check file paths:', err);
+                });
             })
-            .then(() => self.skipWaiting()) // Activate immediately
+            .then(() => self.skipWaiting())
     );
 });
 
-// 2. ACTIVATE: Clean up old caches (v1, v2...)
+// 2. ACTIVATE PHASE (Cleanup old caches)
 self.addEventListener('activate', (event) => {
-    console.log('[Service Worker] Activating & Cleaning old caches');
+    console.log('[SW] Activating & Cleaning');
     event.waitUntil(
         caches.keys().then((keyList) => {
             return Promise.all(keyList.map((key) => {
                 if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
-                    console.log('[Service Worker] Removing old cache:', key);
+                    console.log('[SW] Removing old cache:', key);
                     return caches.delete(key);
                 }
             }));
@@ -56,60 +54,64 @@ self.addEventListener('activate', (event) => {
     self.clients.claim();
 });
 
-// 3. FETCH: The Routing Logic
+// 3. FETCH STRATEGY
 self.addEventListener('fetch', (event) => {
-    
     const url = new URL(event.request.url);
 
-    // A. IGNORE: Google Analytics, Netlify Forms, Admin Panels, External Ads
-    if (url.hostname.includes('google-analytics.com') || 
-        url.hostname.includes('googletagmanager.com') ||
-        url.pathname.includes('/admin') ||
+    // A. EXCLUSIONS (Analytics, Admin, POST requests)
+    if (url.hostname.includes('google') || 
+        url.pathname.includes('/admin') || 
         event.request.method !== 'GET') {
-        return; // Let the network handle it directly
+        return; 
     }
 
-    // B. HTML PAGES: Network First (Fresh Content)
-    // If user asks for a page, try Internet first. If offline, give Cache.
+    // B. HTML PAGES (Network First -> Fallback to Cache)
     if (event.request.mode === 'navigate' || event.request.destination === 'document') {
         event.respondWith(
             fetch(event.request)
                 .then((response) => {
-                    // Update cache with the fresh page
-                    const responseClone = response.clone();
-                    caches.open(DATA_CACHE_NAME).then((cache) => {
-                        cache.put(event.request, responseClone);
-                    });
+                    // 1. If Server says 404, return our custom 404 page
+                    if (response.status === 404) {
+                        return caches.match('/404.html');
+                    }
+
+                    // 2. If Good response, Cache it and return it
+                    if (response.status === 200) {
+                        const responseClone = response.clone();
+                        caches.open(DATA_CACHE_NAME).then((cache) => {
+                            cache.put(event.request, responseClone);
+                        });
+                    }
                     return response;
                 })
                 .catch(() => {
-                    // If offline, serve from cache
+                    // 3. Network failed (Offline), try cache
                     return caches.match(event.request)
                         .then((cachedResponse) => {
                             if (cachedResponse) return cachedResponse;
-                            // If page not in cache, show 404
-                            return caches.match('/404.html');
+                            
+                            // 4. If page not in cache, show 404 or Home
+                            // Ideally, show 404.html as a generic offline fallback if specific page is missing
+                            return caches.match('/404.html'); 
                         });
                 })
         );
         return;
     }
 
-    // C. STATIC ASSETS (CSS, JS, Images): Cache First (Speed)
-    // Check cache first. If missing, fetch from network and cache it.
+    // C. STATIC ASSETS (Cache First -> Fallback to Network)
+    // CSS, JS, Images
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
-            if (cachedResponse) {
-                return cachedResponse;
-            }
+            if (cachedResponse) return cachedResponse;
 
             return fetch(event.request).then((response) => {
-                // Check if valid response
+                // Check if valid
                 if (!response || response.status !== 200 || response.type !== 'basic') {
                     return response;
                 }
 
-                // Cache the new asset
+                // Cache the new asset dynamically
                 const responseToCache = response.clone();
                 caches.open(CACHE_NAME).then((cache) => {
                     cache.put(event.request, responseToCache);

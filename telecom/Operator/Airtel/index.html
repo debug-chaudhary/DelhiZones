@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title id="page-title">Operator Hub</title>
+    <meta id="page-desc" name="description" content="Telecom Operator Landing Page">
+    <meta name="robots" content="index, follow">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        #navbar-placeholder { min-height: 80px; display: block; }
+        #footer-placeholder { min-height: 300px; display: block; }
+        
+        /* Dynamic Theme Variables (Updated by JS) */
+        :root {
+            --brand-color: #2563EB; /* Default */
+            --brand-light: #EFF6FF;
+        }
+        
+        .brand-bg { background-color: var(--brand-color); }
+        .brand-text { color: var(--brand-color); }
+        .brand-border { border-color: var(--brand-color); }
+        .brand-light-bg { background-color: var(--brand-light); }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="flex-grow pt-10">
+        
+        <div class="brand-bg text-white relative overflow-hidden transition-colors duration-500">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+            
+            <div class="container mx-auto px-6 py-16 relative z-10">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                    
+                    <div class="md:w-1/2 space-y-6">
+                        <div id="operator-logo" class="bg-white/10 backdrop-blur-md inline-block px-4 py-2 rounded-lg text-2xl font-black tracking-tighter uppercase border border-white/20">
+                            OPERATOR
+                        </div>
+                        <h1 id="hero-headline" class="text-4xl md:text-6xl font-bold leading-tight">
+                            Experience the Future<br>of Connectivity
+                        </h1>
+                        <p id="hero-subtext" class="text-lg text-white/90 max-w-lg">
+                            Manage your account, explore enterprise solutions, and check network coverage in Delhi NCR.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <a href="https://www.airtel.in/s/selfcare/"" target="_blank" class="px-8 py-3 bg-black/20 text-white font-bold rounded-full border border-white/30 hover:bg-black/30 transition flex items-center gap-2">
+                                <i data-lucide="user" class="w-5 h-5"></i> My Account
+                            </a>
+                            <a href="https://www.airtel.in/s/selfcare/" target="_blank" class="px-8 py-3 bg-black/20 text-white font-bold rounded-full border border-white/30 hover:bg-black/30 transition flex items-center gap-2">
+                                <i data-lucide="zap" class="w-5 h-5"></i> View Plans
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="md:w-1/3 w-full">
+                        <div class="glass-panel p-6 rounded-2xl shadow-2xl text-slate-800">
+                            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                <i data-lucide="smartphone" class="w-5 h-5 brand-text"></i> Quick Recharge
+                            </h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="text-xs font-bold text-slate-500 uppercase">Mobile Number</label>
+                                    <input type="text" placeholder="Enter 10 digit number" class="w-full mt-1 p-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-400 font-mono">
+                                </div>
+                                <button class="w-full brand-bg text-white font-bold py-3 rounded-lg hover:opacity-90 transition shadow-md">
+                                    Browse Plans
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 py-16">
+            <div class="flex items-center gap-3 mb-10">
+                <div class="p-2 brand-light-bg rounded-lg brand-text"><i data-lucide="briefcase" class="w-6 h-6"></i></div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Enterprise & Tools</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="tools-grid">
+                </div>
+        </div>
+
+        <div class="bg-slate-100 dark:bg-slate-800/50 border-y border-slate-200 dark:border-slate-700">
+            <div class="container mx-auto px-6 py-16">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">Network Coverage</h2>
+                        <p class="text-slate-600 dark:text-slate-400 mb-6">
+                            Check 5G/4G coverage in your sector. Report network issues directly to the engineering team.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="bg-green-100 p-2 rounded-full text-green-600"><i data-lucide="signal" class="w-5 h-5"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 dark:text-white">5G Plus Live</h4>
+                                    <p class="text-xs text-slate-500">Available in 98% of Delhi NCR</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="bg-orange-100 p-2 rounded-full text-orange-600"><i data-lucide="alert-triangle" class="w-5 h-5"></i></div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 dark:text-white">Report Outage</h4>
+                                    <p class="text-xs text-slate-500">Raise a ticket for weak signal</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 text-center">
+                        <i data-lucide="gauge" class="w-16 h-16 brand-text mx-auto mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Test Your Speed</h3>
+                        <p class="text-sm text-slate-500 mb-6">Check your current download and upload speeds.</p>
+                        <a href="https://www.speedtest.net/" target="_blank" class="inline-block px-6 py-2 border-2 brand-border brand-text font-bold rounded-full hover:bg-slate-50 transition">
+                            Launch SpeedTest
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 py-16">
+            <h2 class="text-2xl font-bold text-center mb-10 text-slate-900 dark:text-white">Customer Support</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center" id="support-grid">
+                </div>
+        </div>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // *** STEP 1: CHANGE THIS VARIABLE TO 'airtel', 'jio', 'vi', OR 'bsnl' ***
+        const currentOperator = 'airtel'; 
+
+        // DATA STORE
+        const operatorData = {
+            'airtel': {
+                name: 'Airtel',
+                color: '#e40000',
+                light: '#fef2f2',
+                headline: 'Airtel 5G Plus is Live',
+                subtext: 'Experience up to 30x faster speeds with Airtel 5G Plus. No SIM change needed.',
+                tools: [
+                    { title: 'Airtel Thanks', desc: 'Manage mobile, fiber, and DTH accounts.', icon: 'smartphone', link: 'https://www.airtel.in/s/selfcare/' },
+                    { title: 'Airtel Business', desc: 'Enterprise connectivity and IoT solutions.', icon: 'building-2', link: 'https://www.airtel.in/business/' },
+                    { title: 'Xstream Fiber', desc: 'Book new high-speed fiber connection.', icon: 'wifi', link: 'https://www.airtel.in/broadband/' },
+                    { title: 'Payment Bank', desc: 'Secure banking and payments.', icon: 'wallet', link: 'https://www.airtel.in/bank/' },
+                    { title: 'Wi-Fi Calling', desc: 'Activate VoWiFi on your device.', icon: 'phone-call', link: 'https://www.airtel.in/wifi-calling' },
+                    { title: 'Store Locator', desc: 'Find nearest Airtel gallery.', icon: 'map-pin', link: 'https://www.airtel.in/store' }
+                ],
+                support: [
+                    { label: 'Mobile Support', value: '121' },
+                    { label: 'Broadband', value: '121' },
+                    { label: 'Complaint', value: '198' }
+                ]
+            },
+            'jio': {
+                name: 'Jio',
+                color: '#0057ae',
+                light: '#eff6ff',
+                headline: 'Jio True 5G',
+                subtext: 'Welcome to the world of Jio. Experience the fastest 5G network in India.',
+                tools: [
+                    { title: 'MyJio Login', desc: 'Access your account and usage.', icon: 'user-check', link: 'https://www.jio.com/selfcare/login/' },
+                    { title: 'JioFiber', desc: 'Get new fiber connection.', icon: 'wifi', link: 'https://www.jio.com/fiber' },
+                    { title: 'JioBusiness', desc: 'Enterprise grade connectivity.', icon: 'briefcase', link: 'https://www.jio.com/business/' },
+                    { title: 'JioCloud', desc: 'Secure cloud storage.', icon: 'cloud', link: 'https://www.jio.com/cloud' },
+                    { title: 'Port to Jio', desc: 'Switch to Jio easily.', icon: 'arrow-left-right', link: 'https://www.jio.com/port-to-jio' },
+                    { title: 'Track Order', desc: 'Track SIM/Device status.', icon: 'package', link: 'https://www.jio.com/shop/en-in/track-order' }
+                ],
+                support: [
+                    { label: 'Jio Care', value: '199' },
+                    { label: 'Fiber Care', value: '1800-896-9999' },
+                    { label: 'Complaint', value: '198' }
+                ]
+            },
+            'vi': {
+                name: 'Vi',
+                color: '#f37021', // Can also use Vi Yellow #f3ec19, but Orange reads better
+                light: '#fff7ed',
+                headline: 'Vi GigaNet 5G',
+                subtext: 'Together for Tomorrow. Enjoy high speed data and unlimited night binge.',
+                tools: [
+                    { title: 'MyVi Account', desc: 'Recharge and manage services.', icon: 'smartphone', link: 'https://www.myvi.in/account/login' },
+                    { title: 'Vi Business', desc: 'SME and Corporate solutions.', icon: 'building', link: 'https://www.myvi.in/business' },
+                    { title: 'Fancy Number', desc: 'Choose your premium VIP number.', icon: 'star', link: 'https://www.myvi.in/new-connection/choose-your-fancy-number' },
+                    { title: 'International Roaming', desc: 'Check roaming packs.', icon: 'plane', link: 'https://www.myvi.in/international-roaming-packs' },
+                    { title: 'Caller Tunes', desc: 'Set latest songs.', icon: 'music', link: 'https://www.myvi.in/music-videos-and-more/callertunes' },
+                    { title: 'Hero Unlimited', desc: 'Data delight benefits.', icon: 'gift', link: '#' }
+                ],
+                support: [
+                    { label: 'Customer Care', value: '199' },
+                    { label: 'WhatsApp', value: '9654297000' },
+                    { label: 'Complaint', value: '198' }
+                ]
+            },
+            'bsnl': {
+                name: 'BSNL',
+                color: '#008b43',
+                light: '#f0fdf4',
+                headline: 'Connecting India',
+                subtext: 'Bharat Sanchar Nigam Limited. Reliable connectivity across the nation.',
+                tools: [
+                    { title: 'Selfcare Portal', desc: 'Login to manage landline/mobile.', icon: 'user', link: 'https://selfcare.bsnl.co.in/' },
+                    { title: 'Bharat Fibre', desc: 'Apply for FTTH connection.', icon: 'wifi', link: 'https://bookmyfiber.bsnl.co.in/' },
+                    { title: 'Bill Payment', desc: 'Pay landline/broadband bills.', icon: 'credit-card', link: 'https://portal.bsnl.in/myportal/cynespayment.do' },
+                    { title: 'Choose Number', desc: 'Select mobile number.', icon: 'hash', link: 'https://cymn.bsnl.co.in/' },
+                    { title: 'Enterprise', desc: 'Leased lines and VPN.', icon: 'server', link: 'https://ebportal.bsnl.in/' },
+                    { title: '4G Saturation', desc: 'Check network upgrades.', icon: 'signal', link: '#' }
+                ],
+                support: [
+                    { label: 'Mobile', value: '1503' },
+                    { label: 'Broadband', value: '1504' },
+                    { label: 'Landline', value: '1500' }
+                ]
+            }
+        };
+
+        // RENDERING LOGIC
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = operatorData[currentOperator];
+            if(!data) return;
+
+            // 1. Set CSS Variables for Theme
+            document.documentElement.style.setProperty('--brand-color', data.color);
+            document.documentElement.style.setProperty('--brand-light', data.light);
+
+            // 2. Update Hero Content
+            document.getElementById('page-title').innerText = `${data.name} Hub | Delhizones Telecom`;
+            document.getElementById('operator-logo').innerText = data.name;
+            document.getElementById('hero-headline').innerText = data.headline;
+            document.getElementById('hero-subtext').innerText = data.subtext;
+
+            // 3. Render Tools
+            const toolsContainer = document.getElementById('tools-grid');
+            toolsContainer.innerHTML = data.tools.map(tool => `
+                <a href="${tool.link}" target="_blank" class="group bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 hover:border-[color:var(--brand-color)]">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4 brand-light-bg brand-text group-hover:scale-110 transition-transform">
+                        <i data-lucide="${tool.icon}" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[color:var(--brand-color)] transition-colors">${tool.title}</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">${tool.desc}</p>
+                </a>
+            `).join('');
+
+            // 4. Render Support
+            const supportContainer = document.getElementById('support-grid');
+            supportContainer.innerHTML = data.support.map(item => `
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">${item.label}</p>
+                    <p class="text-2xl font-bold brand-text">${item.value}</p>
+                </div>
+            `).join('');
+
+            // Init Icons
+            lucide.createIcons();
+        });
+    </script>
+
+</body>
+</html>

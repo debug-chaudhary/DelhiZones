@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Delhi Govt Services Portal | E-District, MCD, & Schemes Directory</title>
+    <meta name="description" content="Access all NCT of Delhi government services in one place. Apply for Certificates, Pay Water/Electricity Bills, Job Portal (Rozgar Bazar), and MCD services instantly.">
+    <meta name="keywords" content="e-district delhi, delhi govt schemes, rozgar bazar, mcd online, delhi police fir, ration card delhi, dda housing, delhi jal board, bsphcl">
+    <meta name="author" content="Delhizones Portals">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://delhizones.com/portals/">
+
+    <meta property="og:title" content="Delhizones - The Gateway to Delhi Govt Services">
+    <meta property="og:description" content="Find and apply for Delhi government schemes, certificates, and utilities effortlessly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://delhizones.com/portals/">
+    <meta property="og:image" content="https://delhizones.com/assets/images/portals-cover.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+        
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { primary: '#2563EB', darkBg: '#0f172a' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
+
+    <style>
+        #navbar-placeholder { min-height: 80px; display: block; }
+        #footer-placeholder { min-height: 300px; display: block; }
+        .brand-font { font-family: 'Playfair Display', serif; }
+        
+        /* Official Badge Style */
+        .official-badge {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: white;
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-blue-100 selection:text-blue-900 flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="flex-grow pt-10">
+        
+        <div class="relative bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+            <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#2563EB_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            
+            <div class="container mx-auto px-6 py-16 relative z-10">
+                <div class="text-center max-w-4xl mx-auto">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs font-bold uppercase tracking-wider mb-6 border border-orange-200 dark:border-orange-800">
+                        <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span> Public Services
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white brand-font mb-6 leading-tight">
+                        Delhi Govt <span class="text-blue-600">Services Portal</span>
+                    </h1>
+                    
+                    <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8 max-w-2xl mx-auto">
+                        A unified directory for citizens of the NCT of Delhi. Find direct links to apply for certificates, pay bills, and access government schemes.
+                    </p>
+                    
+                    <div class="relative max-w-xl mx-auto group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
+                        <div class="relative">
+                            <input type="text" id="portalSearch" placeholder="Search service (e.g., 'Caste Certificate', 'Electricity', 'Police')..." 
+                                class="w-full pl-12 pr-4 py-4 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition text-slate-900 dark:text-white">
+                            <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 py-12">
+            
+            <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 p-4 mb-10 rounded-r-lg flex gap-4 items-start">
+                <i data-lucide="info" class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1"></i>
+                <div class="text-sm text-slate-700 dark:text-slate-300">
+                    <strong>Information Aggregator:</strong> Delhizones provides direct links to official government portals for your convenience. We are not a government entity. Always verify details on the official <code>.gov.in</code> or <code>.nic.in</code> websites.
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-10 justify-center">
+                <button class="filter-btn active px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-bold shadow-md transition" data-filter="all">All Services</button>
+                <button class="filter-btn px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-filter="certificates">Certificates</button>
+                <button class="filter-btn px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-filter="utilities">Utilities</button>
+                <button class="filter-btn px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-filter="jobs">Jobs & Ed</button>
+                <button class="filter-btn px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-filter="police">Police & Law</button>
+            </div>
+
+            <div id="portalGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <a href="https://edistrict.delhigovt.nic.in/" target="_blank" class="portal-card group bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-category="certificates">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-red-100 dark:bg-red-900/30 rounded-xl text-red-600 dark:text-red-400">
+                            <i data-lucide="file-text" class="w-8 h-8"></i>
+                        </div>
+                        <span class="official-badge">GOVT.IN</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                        e-District Delhi <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Apply for Income, Caste, Birth, and Marriage certificates online. Track application status.</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Income Cert</span>
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">SC/ST Cert</span>
+                    </div>
+                </a>
+
+                <a href="https://jobs.delhi.gov.in/" target="_blank" class="portal-card group bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-category="jobs">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl text-green-600 dark:text-green-400">
+                            <i data-lucide="briefcase" class="w-8 h-8"></i>
+                        </div>
+                        <span class="official-badge">GOVT.IN</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                        Rozgar Bazar <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Delhi Government's official job portal connecting employers and job seekers directly.</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Find Jobs</span>
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Post Jobs</span>
+                    </div>
+                </a>
+
+                <a href="https://delhipolice.gov.in/" target="_blank" class="portal-card group bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-category="police">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl text-blue-600 dark:text-blue-400">
+                            <i data-lucide="shield-alert" class="w-8 h-8"></i>
+                        </div>
+                        <span class="official-badge">NIC.IN</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                        Delhi Police <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Online FIR for lost items, Tenant Verification, PCC (Police Clearance Certificate).</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Lost Report</span>
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">PCC</span>
+                    </div>
+                </a>
+
+                <a href="https://mcdonline.nic.in/" target="_blank" class="portal-card group bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-category="certificates">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl text-orange-600 dark:text-orange-400">
+                            <i data-lucide="building" class="w-8 h-8"></i>
+                        </div>
+                        <span class="official-badge">MCD</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                        MCD Online <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Pay Property Tax, Register Birth/Death, and apply for Trade Licenses across Delhi zones.</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Property Tax</span>
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Trade License</span>
+                    </div>
+                </a>
+
+                <a href="https://djb.gov.in/" target="_blank" class="portal-card group bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-category="utilities">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-cyan-100 dark:bg-cyan-900/30 rounded-xl text-cyan-600 dark:text-cyan-400">
+                            <i data-lucide="droplet" class="w-8 h-8"></i>
+                        </div>
+                        <span class="official-badge">GOVT.IN</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                        Delhi Jal Board <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">View and pay water bills, apply for new connections, and check tanker schedules.</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Bill Pay</span>
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">New Connection</span>
+                    </div>
+                </a>
+
+                <a href="https://delhi.gov.in/" target="_blank" class="portal-card group bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-category="utilities">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl text-purple-600 dark:text-purple-400">
+                            <i data-lucide="truck" class="w-8 h-8"></i>
+                        </div>
+                        <span class="official-badge">1076</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                        Doorstep Delivery <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Call 1076 to get 100+ government services delivered to your home (Certificates, License, etc).</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Home Service</span>
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Helpline</span>
+                    </div>
+                </a>
+
+                <a href="https://nfs.delhi.gov.in/" target="_blank" class="portal-card group bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-category="certificates">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl text-yellow-600 dark:text-yellow-400">
+                            <i data-lucide="shopping-bag" class="w-8 h-8"></i>
+                        </div>
+                        <span class="official-badge">NFS</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                        e-Ration Card <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Department of Food & Supplies. Apply for Ration Card, check status, and download e-Card.</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Food Security</span>
+                    </div>
+                </a>
+
+                <a href="https://www.bsesdelhi.com/" target="_blank" class="portal-card group bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-category="utilities">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl text-yellow-600 dark:text-yellow-400">
+                            <i data-lucide="zap" class="w-8 h-8"></i>
+                        </div>
+                        <span class="official-badge">Power</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                        BSES Delhi <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Official portals for BSES Rajdhani (BRPL) and Yamuna (BYPL). Pay bills and report outages.</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Electricity</span>
+                    </div>
+                </a>
+
+                <a href="https://www.edudel.nic.in/" target="_blank" class="portal-card group bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-category="jobs">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl text-indigo-600 dark:text-indigo-400">
+                            <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+                        </div>
+                        <span class="official-badge">Edudel</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                        Education Dept <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Directorate of Education. Admissions for EWS/DG category, results, and circulars.</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Schools</span>
+                        <span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">EWS Admission</span>
+                    </div>
+                </a>
+
+            </div>
+
+            <div id="noResults" class="hidden text-center py-20">
+                <i data-lucide="search-x" class="mx-auto h-12 w-12 text-slate-300 mb-4"></i>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white">No services found</h3>
+                <p class="text-slate-500">Try searching for specific terms like 'Water' or 'Police'.</p>
+            </div>
+
+        </div>
+
+        <section class="bg-slate-900 text-white py-16 mt-8">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold brand-font mb-4">Need Help Applying?</h2>
+                <p class="text-slate-300 mb-8 max-w-2xl mx-auto">Many services are available at your doorstep via 1076. For technical issues with portals, contact the respective department helplines.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="tel:1076" class="inline-flex items-center gap-2 bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-500 transition">
+                        <i data-lucide="phone" class="w-5 h-5"></i> Call 1076
+                    </a>
+                    <a href="/Contact.html" class="inline-flex items-center gap-2 bg-slate-800 border border-slate-700 text-white font-bold py-3 px-8 rounded-full hover:bg-slate-700 transition">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+
+            const searchInput = document.getElementById('portalSearch');
+            const cards = document.querySelectorAll('.portal-card');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const noResults = document.getElementById('noResults');
+
+            // 1. Filter Buttons Logic
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Visual Toggle
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-blue-600', 'text-white', 'active');
+                        b.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+                    });
+                    btn.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+                    btn.classList.add('bg-blue-600', 'text-white', 'active');
+
+                    // Filter Apply
+                    const category = btn.getAttribute('data-filter');
+                    filterCards(category, searchInput.value);
+                });
+            });
+
+            // 2. Search Logic
+            searchInput.addEventListener('input', (e) => {
+                const activeCategory = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                filterCards(activeCategory, e.target.value);
+            });
+
+            // Core Logic
+            function filterCards(category, searchText) {
+                let visibleCount = 0;
+                const lowerSearch = searchText.toLowerCase();
+
+                cards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    const cardTitle = card.querySelector('h3').innerText.toLowerCase();
+                    const cardDesc = card.querySelector('p').innerText.toLowerCase();
+
+                    // Check Category Match
+                    const matchesCategory = category === 'all' || cardCategory === category;
+                    
+                    // Check Search Match
+                    const matchesSearch = cardTitle.includes(lowerSearch) || cardDesc.includes(lowerSearch);
+
+                    if (matchesCategory && matchesSearch) {
+                        card.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    noResults.classList.remove('hidden');
+                } else {
+                    noResults.classList.add('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

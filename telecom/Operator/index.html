@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Select Telecom Operator | Delhizones Telecom Hub</title>
+    <meta name="description" content="Access login portals, business tools, and 5G plans for all major Indian telecom operators: Jio, Airtel, Vi, and BSNL.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://delhizones.com/telecom/operator/">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { 
+                        primary: '#2563EB', 
+                        darkBg: '#0f172a',
+                        // Operator Brand Colors
+                        airtel: '#e40000',
+                        jio: '#0057ae',
+                        vi: '#f37021',
+                        bsnl: '#008b43'
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
+
+    <style>
+        #navbar-placeholder { min-height: 80px; display: block; }
+        #footer-placeholder { min-height: 300px; display: block; }
+        
+        /* Card Hover Effects */
+        .op-card { transition: all 0.3s ease; }
+        .op-card:hover { transform: translateY(-8px); }
+        
+        /* Brand Glows on Hover */
+        .hover-airtel:hover { border-color: #e40000; box-shadow: 0 10px 30px -10px rgba(228, 0, 0, 0.3); }
+        .hover-jio:hover { border-color: #0057ae; box-shadow: 0 10px 30px -10px rgba(0, 87, 174, 0.3); }
+        .hover-vi:hover { border-color: #f37021; box-shadow: 0 10px 30px -10px rgba(243, 112, 33, 0.3); }
+        .hover-bsnl:hover { border-color: #008b43; box-shadow: 0 10px 30px -10px rgba(0, 139, 67, 0.3); }
+    </style>
+</head>
+
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-blue-100 selection:text-blue-900 flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="flex-grow pt-10">
+        
+        <div class="relative bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+            <div class="container mx-auto px-6 py-16 relative z-10 text-center">
+                <span class="inline-block py-1 px-3 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-bold uppercase tracking-wider mb-6">
+                    Telecom Directory
+                </span>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white font-display mb-6">
+                    Select Your <span class="text-blue-600">Operator</span>
+                </h1>
+                <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-8">
+                    Access dedicated portals for login, enterprise tools, network coverage maps, and 5G/4G plans for your service provider.
+                </p>
+                
+                <div class="relative max-w-lg mx-auto">
+                    <input type="text" placeholder="Search by number series (e.g. 9810...)" 
+                        class="w-full pl-12 pr-4 py-3.5 rounded-full shadow-sm border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <a href="/telecom/operator/airtel/" class="op-card hover-airtel bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+                    <div class="w-16 h-16 mx-auto bg-red-50 dark:bg-red-900/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl font-black text-airtel">a</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Airtel</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">India's leading provider. Access Xstream Fiber, 5G Plus, and Black.</p>
+                    <span class="inline-flex items-center text-sm font-bold text-airtel">
+                        Enter Portal <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                    </span>
+                </a>
+
+                <a href="/telecom/operator/jio/" class="op-card hover-jio bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+                    <div class="w-16 h-16 mx-auto bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl font-black text-jio">Jio</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Jio</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Largest 4G/5G network. Manage JioFiber, Business, and Mobility.</p>
+                    <span class="inline-flex items-center text-sm font-bold text-jio">
+                        Enter Portal <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                    </span>
+                </a>
+
+                <a href="/telecom/operator/vi/" class="op-card hover-vi bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+                    <div class="w-16 h-16 mx-auto bg-orange-50 dark:bg-orange-900/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl font-black text-vi">Vi</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Vi</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Together for Tomorrow. GigaNet 4G, RED Postpaid, and Enterprise tools.</p>
+                    <span class="inline-flex items-center text-sm font-bold text-vi">
+                        Enter Portal <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                    </span>
+                </a>
+
+                <a href="/telecom/operator/bsnl/" class="op-card hover-bsnl bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-700 text-center group">
+                    <div class="w-16 h-16 mx-auto bg-teal-50 dark:bg-teal-900/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="globe" class="w-8 h-8 text-bsnl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">BSNL</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Connecting India. Landline, Bharat Fibre, and Government Services.</p>
+                    <span class="inline-flex items-center text-sm font-bold text-bsnl">
+                        Enter Portal <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                    </span>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="bg-slate-100 dark:bg-slate-900 py-16">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row gap-8">
+                    
+                    <div class="flex-1 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-start gap-4">
+                        <div class="bg-purple-100 dark:bg-purple-900/30 p-3 rounded-lg text-purple-600">
+                            <i data-lucide="arrow-left-right" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">Port Your Number (MNP)</h4>
+                            <p class="text-sm text-slate-500 mb-3">Learn how to switch operators without changing your number.</p>
+                            <a href="#" class="text-xs font-bold text-purple-600 hover:underline">View MNP Guide</a>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-start gap-4">
+                        <div class="bg-slate-100 dark:bg-slate-700 p-3 rounded-lg text-slate-600 dark:text-slate-300">
+                            <i data-lucide="bell-off" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">Activate DND</h4>
+                            <p class="text-sm text-slate-500 mb-3">Stop unwanted telemarketing calls and SMS on any network.</p>
+                            <a href="#" class="text-xs font-bold text-slate-600 dark:text-slate-300 hover:underline">DND Registry</a>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-start gap-4">
+                        <div class="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-lg text-blue-600">
+                            <i data-lucide="hash" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">USSD Master List</h4>
+                            <p class="text-sm text-slate-500 mb-3">Check balance, data usage, and own number codes for all SIMs.</p>
+                            <a href="#" class="text-xs font-bold text-blue-600 hover:underline">View All Codes</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Init Icons
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>

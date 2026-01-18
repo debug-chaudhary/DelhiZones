@@ -3,107 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>{const range=document.createRange();range.selectNode(document.head);const frag=range.createContextualFragment(t);document.head.appendChild(frag);});</script>
-    <title>EDU Platform - Delhizones.com</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
+    <title>Delhizones Learning Hub | Free Courses, Tools & Study Resources</title>
+    <meta name="description" content="Access free educational tools and resources. IGNOU BCA study materials, SEO courses, Kids learning zone, Fee managers, and Project Synopsis guides.">
+    <meta name="keywords" content="ignou bca notes, seo course free, kids learning delhi, project synopsis guide, education tools, tuition finder, study resources">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://delhizones.com/learning/">
 
-    <!-- Tailwind CSS CDN -->
+    <meta property="og:title" content="Delhizones Learning - Empower Your Future">
+    <meta property="og:description" content="One-stop destination for students and professionals. Access tools, notes, and guides.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://delhizones.com/learning/">
+    <meta property="og:image" content="https://delhizones.com/assets/images/learning-cover.jpg">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons CDN -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <style>
-        /* Custom styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Tailwind gray-50 */
-        }
-        #mobile-menu {
-            transition: transform 0.3s ease-in-out;
-        }
-    </style>
     <script>
-        // Dark mode setup
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark')
         } else {
             document.documentElement.classList.remove('dark')
         }
-        tailwind.config = { darkMode: 'class' }
+        
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { primary: '#2563EB', darkBg: '#0f172a' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
     </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
+
+    <style>
+        #navbar-placeholder { min-height: 80px; display: block; }
+        #footer-placeholder { min-height: 300px; display: block; }
+        .brand-font { font-family: 'Playfair Display', serif; }
+        /* Card Hover Effect */
+        .learn-card { transition: all 0.3s ease; }
+        .learn-card:hover { transform: translateY(-5px); }
+    </style>
 </head>
+
 <body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-blue-100 selection:text-blue-900 flex flex-col min-h-screen">
 
-    <!-- Main Content -->
-    <main class="pt-20 flex-grow">
-        <div class="container mx-auto px-6 py-16">
-            <!-- Page Header -->
-            <div class="text-center mb-16">
-                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">Delhizones EDU Platform</h1>
-                <p class="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">Educational apps and tools designed for kids' learning, school management, and more.</p>
-            </div>
+    <div id="navbar-placeholder"></div>
 
-            <!-- Services Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <main class="flex-grow pt-10">
+        
+        <div class="relative bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 overflow-hidden">
+            <div class="absolute top-0 left-0 w-64 h-64 bg-blue-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+            <div class="absolute top-0 right-0 w-64 h-64 bg-purple-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+
+            <div class="container mx-auto px-6 py-20 relative z-10 text-center">
+                <span class="inline-block py-1 px-3 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-bold uppercase tracking-wider mb-6">
+                    Knowledge Base
+                </span>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white brand-font mb-6 leading-tight">
+                    Empower Your <span class="text-blue-600">Future</span>
+                </h1>
+                <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8 max-w-2xl mx-auto">
+                    A curated collection of educational tools, university resources, and skill development courses designed for students and professionals in Delhi NCR.
+                </p>
                 
-                <!-- Card 1: Kids Learning Apps -->
-                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-8 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div class="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full p-4 mb-4">
-                        <i data-lucide="blocks" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Kids Learning Apps</h3>
-                    <p class="text-slate-600 dark:text-slate-400 mb-6 flex-grow">
-                        Fun and interactive educational games and applications designed to make learning an adventure for children.
-                    </p>
-                    <a href="/EDU/Kids/" class="mt-auto w-full text-center bg-red-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-red-600 transition-colors">
-                        Explore Apps
-                    </a>
+                <div class="relative max-w-xl mx-auto">
+                    <input type="text" id="resourceSearch" placeholder="Search resources (e.g. 'IGNOU', 'SEO', 'Kids')..." 
+                        class="w-full pl-12 pr-4 py-4 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition text-slate-900 dark:text-white">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"></i>
                 </div>
-
-                <!-- Card 2: EDU Fees Manager -->
-                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-8 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full p-4 mb-4">
-                        <i data-lucide="calculator" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">EDU Fees Manager</h3>
-                    <p class="text-slate-600 dark:text-slate-400 mb-6 flex-grow">
-                        A comprehensive tool for educational institutions to manage student fees, track payments, and generate reports efficiently.
-                    </p>
-                    <a href="/EDU/EDU-fees-Manager/" class="mt-auto w-full text-center bg-green-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors">
-                        Launch Tool
-                    </a>
-                </div>
-
-                <!-- Card 3: IGNOU BCA Resources -->
-                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-8 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div class="bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full p-4 mb-4">
-                        <i data-lucide="book-open-check" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">IGNOU BCA Resources</h3>
-                    <p class="text-slate-600 dark:text-slate-400 mb-6 flex-grow">
-                        A curated collection of study materials, notes, and past papers for IGNOU's Bachelor of Computer Applications program.
-                    </p>
-                    <a href="/EDU/ignou-bca-resources/" class="mt-auto w-full text-center bg-purple-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-600 transition-colors">
-                        Access Resources
-                    </a>
-                </div>
-
             </div>
         </div>
+
+        <div class="container mx-auto px-6 py-16">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="resourceGrid">
+
+                <a href="/learning/ignou-bca-resources/" class="learn-card group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 block">
+                    <div class="w-14 h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center mb-6 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="graduation-cap" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition">IGNOU BCA Resources</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Solved assignments, previous year papers, and study notes for BCA students.</p>
+                    <div class="flex items-center gap-2 text-xs font-bold text-indigo-600 dark:text-indigo-400">
+                        <span>View Materials</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </a>
+
+                <a href="/learning/edu-fees-manager/" class="learn-card group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 block">
+                    <div class="w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-6 text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="calculator" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition">Edu Fees Manager</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Smart utility to calculate, track, and manage school or college fee installments.</p>
+                    <div class="flex items-center gap-2 text-xs font-bold text-green-600 dark:text-green-400">
+                        <span>Launch Tool</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </a>
+
+                <a href="/learning/seo/" class="learn-card group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 block">
+                    <div class="w-14 h-14 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mb-6 text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="trending-up" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition">SEO Learning Hub</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Master Search Engine Optimization. Tutorials on keywords, backlinks, and ranking factors.</p>
+                    <div class="flex items-center gap-2 text-xs font-bold text-orange-600 dark:text-orange-400">
+                        <span>Start Learning</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </a>
+
+                <a href="/learning/synopsis/" class="learn-card group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 block">
+                    <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="file-text" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition">Project Synopsis Guide</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Templates and guides for writing final year project synopses and reports.</p>
+                    <div class="flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-blue-400">
+                        <span>View Templates</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </a>
+
+                <a href="/learning/kids/" class="learn-card group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 block">
+                    <div class="w-14 h-14 bg-pink-100 dark:bg-pink-900/30 rounded-xl flex items-center justify-center mb-6 text-pink-600 dark:text-pink-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="smile" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition">Kids Learning Zone</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Interactive games, worksheets, and fun learning activities for primary students.</p>
+                    <div class="flex items-center gap-2 text-xs font-bold text-pink-600 dark:text-pink-400">
+                        <span>Visit Zone</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </a>
+
+                <a href="/learning/tutor/" class="learn-card group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 block">
+                    <div class="w-14 h-14 bg-teal-100 dark:bg-teal-900/30 rounded-xl flex items-center justify-center mb-6 text-teal-600 dark:text-teal-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="users" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition">Find a Tutor</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Connect with home tutors and coaching centers in your local Delhi zone.</p>
+                    <div class="flex items-center gap-2 text-xs font-bold text-teal-600 dark:text-teal-400">
+                        <span>Search Tutors</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </a>
+
+            </div>
+
+            <div id="noResults" class="hidden text-center py-20">
+                <div class="inline-flex bg-slate-100 dark:bg-slate-800 p-4 rounded-full mb-4">
+                    <i data-lucide="search-x" class="h-8 w-8 text-slate-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white">No resources found</h3>
+                <p class="text-slate-500 dark:text-slate-400">Try searching for a different topic.</p>
+            </div>
+
+        </div>
+
+        <section class="bg-slate-900 text-white py-16">
+            <div class="container mx-auto px-6 text-center">
+                <i data-lucide="book-open" class="w-12 h-12 text-blue-500 mx-auto mb-4"></i>
+                <h2 class="text-3xl font-bold brand-font mb-4">Have Study Material to Share?</h2>
+                <p class="text-slate-300 mb-8 max-w-2xl mx-auto">Help the community by contributing notes or tools. We credit all authors.</p>
+                <a href="/contact.html" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-500 transition shadow-lg">
+                    Submit Resources
+                </a>
+            </div>
+        </section>
+
     </main>
 
-    <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-    </script>
+    <div id="footer-placeholder"></div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+
+            const searchInput = document.getElementById('resourceSearch');
+            const cards = document.querySelectorAll('.learn-card');
+            const noResults = document.getElementById('noResults');
+
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const desc = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (title.includes(term) || desc.includes(term)) {
+                        card.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    noResults.classList.remove('hidden');
+                } else {
+                    noResults.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

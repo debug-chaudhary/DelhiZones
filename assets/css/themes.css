@@ -1,13 +1,16 @@
-/* Delhizones Dynamic Theme System - Final Fix */
+/* =========================================================
+   Delhizones Dynamic Theme System (v5.0 - Contrast Fix)
+   ========================================================= */
 
 :root {
-    /* 1. DEFAULT (Blue/White) */
-    --theme-dominant: #f8fafc;       /* Main Background */
-    --theme-secondary: #ffffff;      /* Card/Content Background */
-    --theme-text-main: #0f172a;      /* Main Headings */
-    --theme-text-sec: #475569;       /* Paragraphs */
-    --theme-border: #e2e8f0;         /* Borders */
+    /* DEFAULT (Blue/White) */
+    --theme-dominant: #f8fafc;       
+    --theme-secondary: #ffffff;      
+    --theme-text-main: #0f172a;      
+    --theme-text-sec: #475569;       
+    --theme-border: #e2e8f0;         
     
+    /* Navbar & UI */
     --theme-nav-bg: rgba(255, 255, 255, 0.95);
     --theme-nav-text: #334155;
     --theme-nav-hover: #2563EB;
@@ -16,69 +19,20 @@
     --theme-footer-text: #cbd5e1;
     
     --theme-accent: #2563EB;
+    --theme-btn-text: #ffffff; /* New variable for button text */
 }
 
-/* --- THEME CLASSES --- */
+/* =========================================
+   PALETTE DEFINITIONS 
+   ========================================= */
 
-/* Body Background */
-.theme-body {
-    background-color: var(--theme-dominant) !important;
-    color: var(--theme-text-main) !important;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Content Card Background (New) */
-.theme-bg-secondary {
-    background-color: var(--theme-secondary) !important;
-    border: 1px solid var(--theme-border) !important;
-    color: var(--theme-text-main) !important;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-/* NUCLEAR FIX: Force elements to accept theme colors */
-.theme-body h1, 
-.theme-body h2, 
-.theme-body h3, 
-.theme-body h4, 
-.theme-body h5, 
-.theme-body h6,
-.theme-bg-secondary h1,
-.theme-bg-secondary h2 {
-    color: var(--theme-text-main) !important;
-}
-
-.theme-body p, 
-.theme-body li, 
-.theme-body span, 
-.theme-body div,
-.theme-bg-secondary p,
-.theme-bg-secondary li {
-    color: var(--theme-text-sec) !important;
-}
-
-/* Navbar & Footer */
-.theme-nav {
-    background-color: var(--theme-nav-bg) !important;
-    color: var(--theme-nav-text) !important;
-    border-color: var(--theme-border) !important;
-}
-.theme-nav a, .theme-nav button { color: var(--theme-nav-text) !important; }
-.theme-nav a:hover { color: var(--theme-nav-hover) !important; }
-
-.theme-footer {
-    background-color: var(--theme-footer-bg) !important;
-    color: var(--theme-footer-text) !important;
-}
-
-/* --- PALETTE DEFINITIONS --- */
-
-/* 2. NIGHT MODE */
+/* NIGHT MODE */
 [data-theme="dark"] {
-    --theme-dominant: #0f172a;    /* Dark Background */
-    --theme-secondary: #1e293b;   /* Slightly Lighter Card */
-    --theme-text-main: #f8fafc;   /* Pure White Text */
-    --theme-text-sec: #cbd5e1;    /* Light Gray Text */
-    --theme-border: #334155;
+    --theme-dominant: #0f172a;    
+    --theme-secondary: #1e293b;   
+    --theme-text-main: #f8fafc;   
+    --theme-text-sec: #94a3b8;    
+    --theme-border: #334155;      
 
     --theme-nav-bg: rgba(15, 23, 42, 0.95);
     --theme-nav-text: #f1f5f9;
@@ -86,56 +40,189 @@
 
     --theme-footer-bg: #020617;
     --theme-footer-text: #94a3b8;
-    --theme-accent: #3b82f6;
+    --theme-accent: #3b82f6;      
+    --theme-btn-text: #ffffff;
 }
 
-/* 3. NATURE */
-[data-theme="nature"] {
-    --theme-dominant: #fcf9f2;    /* Cream */
-    --theme-secondary: #ffffff;   /* White Card */
-    --theme-text-main: #1a2e20;   /* Dark Green Text */
-    --theme-text-sec: #4a5d23;    /* Olive Text */
-    --theme-border: #dcdcdc;
-
-    --theme-nav-bg: rgba(44, 74, 52, 0.95);
-    --theme-nav-text: #fcf9f2;
-    --theme-nav-hover: #86efac;
-
-    --theme-footer-bg: #1a2e20;
-    --theme-footer-text: #e2e8f0;
-    --theme-accent: #d4a373;
-}
-
-/* 4. OCEAN */
-[data-theme="ocean"] {
-    --theme-dominant: #ecfeff;    /* Cyan Tint */
+/* SUNSET (Orange) - FIXED CONTRAST */
+[data-theme="sunset"] {
+    --theme-dominant: #fff7ed;    
     --theme-secondary: #ffffff;
-    --theme-text-main: #0e7490;   /* Teal Text */
-    --theme-text-sec: #155e75;
+    --theme-text-main: #431407;   /* Darker brown for better readability */
+    --theme-text-sec: #7c2d12;    
+    --theme-border: #fed7aa;
+
+    --theme-nav-bg: #ea580c;      /* Solid Orange for Header */
+    --theme-nav-text: #ffffff;    /* White text on Orange Header */
+    --theme-nav-hover: #fed7aa;   /* Light orange hover */
+
+    --theme-footer-bg: #431407;
+    --theme-footer-text: #fdba74;
+    --theme-accent: #ea580c;      
+    --theme-btn-text: #ffffff;
+}
+
+/* NATURE (Green) */
+[data-theme="nature"] {
+    --theme-dominant: #fcf9f2;    
+    --theme-secondary: #ffffff;   
+    --theme-text-main: #14532d;   
+    --theme-text-sec: #166534;    
+    --theme-border: #bbf7d0;
+
+    --theme-nav-bg: #15803d;
+    --theme-nav-text: #ffffff;
+    --theme-nav-hover: #dcfce7;
+
+    --theme-footer-bg: #14532d;
+    --theme-footer-text: #dcfce7;
+    --theme-accent: #16a34a;      
+    --theme-btn-text: #ffffff;
+}
+
+/* OCEAN (Cyan) */
+[data-theme="ocean"] {
+    --theme-dominant: #ecfeff;    
+    --theme-secondary: #ffffff;
+    --theme-text-main: #164e63;   
+    --theme-text-sec: #155e75;    
     --theme-border: #a5f3fc;
 
-    --theme-nav-bg: rgba(14, 116, 144, 0.95);
+    --theme-nav-bg: #0e7490;
     --theme-nav-text: #ffffff;
-    --theme-nav-hover: #fef08a;
+    --theme-nav-hover: #cffafe;
 
     --theme-footer-bg: #155e75;
     --theme-footer-text: #cffafe;
-    --theme-accent: #06b6d4;
+    --theme-accent: #06b6d4;      
+    --theme-btn-text: #ffffff;
 }
 
-/* 5. SUNSET */
-[data-theme="sunset"] {
-    --theme-dominant: #fff7ed;    /* Warm Page Background */
-    --theme-secondary: #ffffff;   /* Card Background */
-    --theme-text-main: #7c2d12;   /* Deep Orange/Brown Text */
-    --theme-text-sec: #9a3412;    /* Muted Orange Text */
-    --theme-border: #fed7aa;      /* Peach Border */
+/* =========================================
+   CORE ELEMENT ASSIGNMENT
+   ========================================= */
 
-    --theme-nav-bg: rgba(194, 65, 12, 0.95); /* Burnt Orange Nav */
-    --theme-nav-text: #ffffff;
-    --theme-nav-hover: #ffedd5;
+body, .theme-body {
+    background-color: var(--theme-dominant) !important;
+    color: var(--theme-text-main) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-    --theme-footer-bg: #431407;   /* Dark Brown Footer */
-    --theme-footer-text: #fdba74;
-    --theme-accent: #ea580c;
+/* Navbar Specifics */
+.theme-nav {
+    background-color: var(--theme-nav-bg) !important;
+    color: var(--theme-nav-text) !important;
+    border-color: var(--theme-border) !important;
+}
+.theme-nav a, 
+.theme-nav i { 
+    color: var(--theme-nav-text) !important; 
+}
+/* Fix: Ensure hover doesn't disappear */
+.theme-nav a:hover { 
+    color: var(--theme-nav-hover) !important; 
+}
+
+/* --- THEME SWITCHER DROPDOWN FIXES --- */
+.dropdown-content {
+    background-color: var(--theme-secondary) !important;
+    border: 1px solid var(--theme-border) !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* 1. Header Text in Dropdown (Mode / Accent Color) */
+.dropdown-content span {
+    color: var(--theme-text-sec) !important; 
+    opacity: 0.8;
+}
+
+/* 2. Mode Buttons (Sun/Moon) - The specific fix for invisible icons */
+.dropdown-content button i {
+    color: var(--theme-text-sec) !important; /* Default to visible grey */
+    transition: color 0.2s;
+}
+
+/* 3. Active Mode Button */
+.dropdown-content button[aria-pressed="true"] i {
+    color: var(--theme-accent) !important; /* Active one gets color */
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.1));
+}
+
+/* 4. Button Hovers */
+.dropdown-content button:hover {
+    background-color: var(--theme-dominant) !important;
+}
+.dropdown-content button:hover i {
+    color: var(--theme-accent) !important;
+}
+
+/* =========================================
+   BUTTON & COMPONENT FIXES
+   ========================================= */
+
+/* Primary Buttons (Install, Find Jobs) */
+.btn-primary, #install-app-btn {
+    background-color: var(--theme-accent) !important;
+    color: var(--theme-btn-text) !important;
+}
+
+/* Secondary Buttons (Latest News) - Fixes Blue Text on Orange Theme */
+.btn-secondary {
+    background-color: transparent !important;
+    border: 1px solid var(--theme-border) !important;
+    color: var(--theme-text-main) !important; /* Use main text color, not accent */
+}
+.btn-secondary:hover {
+    border-color: var(--theme-accent) !important;
+    color: var(--theme-accent) !important;
+}
+
+/* Footer */
+.theme-footer {
+    background-color: var(--theme-footer-bg) !important;
+    color: var(--theme-footer-text) !important;
+}
+.theme-footer h3, .theme-footer h4 {
+    color: var(--theme-accent) !important; 
+    filter: brightness(1.2); /* Make it pop slightly on dark bg */
+}
+
+/* =========================================================
+   CRITICAL FIXES FOR DROPDOWN VISIBILITY
+   Paste this at the VERY BOTTOM of themes.css
+   ========================================================= */
+
+/* 1. Force Dropdown Links to be DARK (Overrides White Navbar Text) */
+.dropdown-content a,
+.dropdown-content span {
+    color: var(--theme-text-main) !important; /* Forces text to be Black/Dark Brown */
+    opacity: 1 !important;
+}
+
+/* 2. Fix Theme Switcher Icons (Sun/Moon invisible issue) */
+.dropdown-content button {
+    color: #64748b !important; /* Force a visible Slate Grey by default */
+}
+.dropdown-content button i {
+    color: currentColor !important; /* Icon takes the grey color */
+}
+
+/* 3. Fix Active Theme Icon (The selected one) */
+.dropdown-content button[aria-pressed="true"] {
+    color: var(--theme-accent) !important; /* Active turns Blue/Orange/Green */
+    background-color: rgba(0,0,0,0.05); /* Subtle background to show it's active */
+}
+
+/* 4. Fix Hover States */
+.dropdown-content a:hover {
+    background-color: var(--theme-dominant) !important;
+    color: var(--theme-accent) !important;
+}
+
+/* 5. Fix "Donate" Button Visibility */
+/* This makes the Donate button Pink again instead of white-on-white */
+.dropdown-content a[href*="Donate"] {
+    background-color: #fdf2f8 !important; /* Light Pink Bg */
+    color: #db2777 !important; /* Dark Pink Text */
+    font-weight: bold;
 }

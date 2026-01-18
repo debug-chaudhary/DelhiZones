@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Delhi Business Hub | Startup Resources, Manufacturing & Shop Guides</title>
+    <meta name="description" content="The ultimate resource for Delhi NCR entrepreneurs. Find suppliers, manufacturing partners, retail guides, and healthcare business tools. Launch and scale your business today.">
+    <meta name="keywords" content="Delhi business directory, startup resources, manufacturing delhi, shop registration, healthcare business, RSD enterprises, business consulting delhi">
+    <meta name="author" content="Delhizones Business">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://delhizones.com/business/">
+
+    <meta property="og:title" content="Delhizones Business Hub - Launch. Grow. Scale.">
+    <meta property="og:description" content="Connect with manufacturers, find retail spaces, and access government tools for your Delhi business.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://delhizones.com/business/">
+    <meta property="og:image" content="https://delhizones.com/assets/images/business-hub-cover.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+        
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { primary: '#2563EB', darkBg: '#0f172a' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
+
+    <style>
+        #navbar-placeholder { min-height: 80px; display: block; }
+        #footer-placeholder { min-height: 300px; display: block; }
+        .brand-font { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-blue-100 selection:text-blue-900 flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="flex-grow pt-10">
+        
+        <div class="relative bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 overflow-hidden">
+            <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-50 dark:bg-blue-900/10 skew-x-12 transform origin-top-right"></div>
+            
+            <div class="container mx-auto px-6 py-20 relative z-10">
+                <div class="text-center max-w-3xl mx-auto">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-bold uppercase tracking-wider mb-6">
+                        Entrepreneur Ecosystem
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white brand-font mb-6 leading-tight">
+                        Launch. Grow. <span class="text-blue-600">Scale.</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+                        The definitive resource directory for Delhi NCR. From sourcing manufacturing partners to setting up retail shops and healthcare clinics.
+                    </p>
+                    
+                    <div class="relative max-w-xl mx-auto">
+                        <input type="text" id="resourceSearch" placeholder="Search resources (e.g., 'PVC', 'Clinic', 'GST')..." 
+                            class="w-full pl-12 pr-4 py-4 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition text-slate-900 dark:text-white">
+                        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 py-16">
+            
+            <div class="flex flex-wrap gap-2 mb-10 justify-center">
+                <button class="filter-btn active px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-bold shadow-md transition" data-filter="all">All Sectors</button>
+                <button class="filter-btn px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-filter="manufacturing">Manufacturing</button>
+                <button class="filter-btn px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-filter="healthcare">Healthcare</button>
+                <button class="filter-btn px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-filter="retail">Retail & Shops</button>
+                <button class="filter-btn px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-filter="tools">Govt Tools</button>
+            </div>
+
+            <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <a href="/business/rsd-pvc-connection/index.html" class="resource-card group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-all duration-300" data-category="manufacturing">
+                    <div class="h-48 bg-slate-100 dark:bg-slate-700 relative overflow-hidden">
+                        <img src="/business/rsd-pvc-connection/catalog/PVC_connection2.jpeg" alt="RSD PVC Pipes" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute top-4 left-4 bg-orange-00 text-white text-xs font-bold px-2 py-1 rounded">Supplier</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition">RSD Enterprises</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Premium manufacturer of PVC connection pipes, Zet Sprays, and sanitary ware components.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Plumbing</span>
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Wholesale</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="resource-card group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-all duration-300" data-category="healthcare">
+                    <div class="h-48 bg-green-50 dark:bg-slate-700 flex items-center justify-center relative">
+                        <i data-lucide="stethoscope" class="w-16 h-16 text-green-300"></i>
+                        <div class="absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">Guide</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition">Clinic Setup Guide</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Step-by-step guide to registering a medical clinic in Delhi, including MCD and DPCC norms.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Medical</span>
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Legal</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="resource-card group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-all duration-300" data-category="retail">
+                    <div class="h-48 bg-purple-50 dark:bg-slate-700 flex items-center justify-center relative">
+                        <i data-lucide="store" class="w-16 h-16 text-purple-300"></i>
+                        <div class="absolute top-4 left-4 bg-purple-500 text-white text-xs font-bold px-2 py-1 rounded">Retail</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition">Shop Registration 101</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">How to obtain a Shop & Establishment Act license in Delhi NCR online.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Licensing</span>
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Small Biz</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.gst.gov.in/" target="_blank" class="resource-card group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-all duration-300" data-category="tools">
+                    <div class="h-48 bg-blue-50 dark:bg-slate-700 flex items-center justify-center relative">
+                        <i data-lucide="landmark" class="w-16 h-16 text-blue-300"></i>
+                        <div class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">Govt Tool</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition flex items-center gap-2">
+                            GST Portal <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Official Goods and Services Tax portal for registration, filing returns, and challan payments.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Finance</span>
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Tax</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="resource-card group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-all duration-300" data-category="manufacturing">
+                    <div class="h-48 bg-slate-100 dark:bg-slate-700 flex items-center justify-center relative">
+                        <i data-lucide="factory" class="w-16 h-16 text-slate-300"></i>
+                        <div class="absolute top-4 left-4 bg-slate-600 text-white text-xs font-bold px-2 py-1 rounded">Directory</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition">Okhla & Bawana Industrial Hub</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Directory of factories, warehouses, and industrial plots available in Delhi's key zones.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Real Estate</span>
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Industrial</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://udyamregistration.gov.in/" target="_blank" class="resource-card group bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-all duration-300" data-category="tools">
+                    <div class="h-48 bg-orange-50 dark:bg-slate-700 flex items-center justify-center relative">
+                        <i data-lucide="file-check" class="w-16 h-16 text-orange-300"></i>
+                        <div class="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">Govt Tool</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition flex items-center gap-2">
+                            Udyam (MSME) <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Zero-cost registration for Micro, Small and Medium Enterprises to avail government benefits.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Startup</span>
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">Subsidy</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <div id="noResults" class="hidden text-center py-20">
+                <i data-lucide="search-x" class="mx-auto h-12 w-12 text-slate-300 mb-4"></i>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white">No resources found</h3>
+                <p class="text-slate-500">Try adjusting your search or category filter.</p>
+            </div>
+
+        </div>
+
+        <section class="bg-blue-600 dark:bg-blue-800 py-16">
+            <div class="container mx-auto px-6 text-center text-white">
+                <h2 class="text-3xl font-bold brand-font mb-4">Want to List Your Business?</h2>
+                <p class="text-blue-100 mb-8 max-w-2xl mx-auto">Join the fastest growing business network in Delhi NCR. Get verified, get listed, and get customers.</p>
+                <a href="/Contact.html" class="inline-block bg-white text-blue-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-50 transition">
+                    Submit Your Business
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Init Icons
+            lucide.createIcons();
+
+            const searchInput = document.getElementById('resourceSearch');
+            const cards = document.querySelectorAll('.resource-card');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const noResults = document.getElementById('noResults');
+
+            // 1. Filter Logic
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Visual Update
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-blue-600', 'text-white', 'active');
+                        b.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+                    });
+                    btn.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+                    btn.classList.add('bg-blue-600', 'text-white', 'active');
+
+                    // Filter Logic
+                    const category = btn.getAttribute('data-filter');
+                    filterCards(category, searchInput.value);
+                });
+            });
+
+            // 2. Search Logic
+            searchInput.addEventListener('input', (e) => {
+                const activeCategory = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                filterCards(activeCategory, e.target.value);
+            });
+
+            // Combined Filter Function
+            function filterCards(category, searchText) {
+                let visibleCount = 0;
+                const lowerSearch = searchText.toLowerCase();
+
+                cards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    const cardTitle = card.querySelector('h3').innerText.toLowerCase();
+                    const cardDesc = card.querySelector('p').innerText.toLowerCase();
+
+                    const matchesCategory = category === 'all' || cardCategory === category;
+                    const matchesSearch = cardTitle.includes(lowerSearch) || cardDesc.includes(lowerSearch);
+
+                    if (matchesCategory && matchesSearch) {
+                        card.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    noResults.classList.remove('hidden');
+                } else {
+                    noResults.classList.add('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

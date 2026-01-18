@@ -1,0 +1,49 @@
+DelhiZones/
+├── 404.html
+├── about.html
+├── assets/
+│   └── js/
+│       └── loader.js
+├── blog/
+│   ├── gaming-gones-in-delhi-you-must-visit-2026-edition.html
+│   ├── index.html
+│   ├── kids-zone-delhi.html
+│   └── top-10-gaming-zones-delhi.html
+├── Contact.html
+├── delhizones-portal/
+│   └── node_modules/
+│       ├── escalade/
+│       │   └── readme.md
+│       └── lucide-react/
+│           └── dist/
+│               └── esm/
+│                   └── icons/
+│                       ├── screen-share.js
+│                       └── share.js
+├── donate.html
+├── includes/
+│   ├── footer.html
+│   ├── head.html
+│   └── navbar.html
+├── index.html
+├── multipurpose-website-platform.html
+├── node_modules/
+│   ├── escalade/
+│   │   └── readme.md
+│   └── lucide-react/
+│       └── dist/
+│           └── esm/
+│               └── icons/
+│                   ├── screen-share.js
+│                   └── share.js
+├── privacy.html
+├── README.md
+├── results/
+│   └── ignou-practical-search/
+│       └── assets/
+│           └── js/
+│               └── script.js
+├── subscribe.html
+├── sw.js
+├── terms.html
+└── test.html

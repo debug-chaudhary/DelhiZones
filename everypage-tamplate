@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/assets/js/loader.js?v=4.0"></script>
+    <link rel="stylesheet" href="/assets/css/tailwind.css">
+</head>
+<body>
+    <main class="container mx-auto mt-24 px-4">
+         <h1>Page Content Here...</h1>
+    </main>
+
+    </body>
+</html>

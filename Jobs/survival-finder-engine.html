@@ -4,192 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>{const range=document.createRange();range.selectNode(document.head);const frag=range.createContextualFragment(t);document.head.appendChild(frag);});</script>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GV2529T0CM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GV2529T0CM');
+    </script>
 
-    <!-- 1. SEO & META TAGS -->
-    <title>Job Finder Delhi NCR | Low Investment & Immediate Income Opportunities</title>
-    <meta name="description" content="Search 100+ immediate income opportunities in Delhi NCR. Find zero investment jobs, work from home, delivery partner gigs, and freelance projects. Updated daily.">
-    <meta name="keywords" content="Delhi Jobs, Immediate Income, Job Search Hindi, Part Time Jobs Delhi, Work from Home, Zomato Delivery, Data Entry, Tuition, Gig Economy, Earn Money Online">
+    <title>Survival Job Finder Delhi NCR | 120+ Immediate Income Gigs</title>
+    <meta name="description" content="Search 120+ immediate income opportunities in Delhi NCR. Find zero investment jobs, work from home, delivery partner gigs, and freelance projects tailored to your skills.">
+    <meta name="keywords" content="Delhi Jobs, Immediate Income, Job Search Hindi, Part Time Jobs Delhi, Work from Home, Zomato Delivery, Data Entry, Tuition, Gig Economy">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="author" content="Delhizones">
-    
-    <!-- 2. CANONICAL URL -->
-    <link rel="canonical" href="https://www.delhizones.com/jobs/">
-    
-    <!-- 3. MONETIZATION (Google AdSense Placeholder) -->
-    <meta name="google-adsense-account" content="ca-pub-YOUR_ADSENSE_ID_HERE">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID_HERE" crossorigin="anonymous"></script>
-    
-    <!-- 4. OPEN GRAPH -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.delhizones.com/jobs/">
-    <meta property="og:title" content="Job Finder Engine | Delhizones">
+    <link rel="canonical" href="https://delhizones.com/jobs/survival-finder-engine.html">
+
+    <meta property="og:title" content="Survival Job Finder - Delhizones">
     <meta property="og:description" content="Find the perfect low-investment or zero-cost job in Delhi NCR tailored to your skills.">
-    <meta property="og:image" content="https://www.delhizones.com/assets/images/jobs-og.jpg">
+    <meta property="og:image" content="https://delhizones.com/assets/images/jobs-og.jpg">
+    <meta property="og:type" content="website">
 
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,%3csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_105_2)'%3e%3ccircle cx='16' cy='16' r='15.5' fill='white' stroke='%232563EB'/%3e%3ccircle cx='16' cy='16' r='12' fill='%232563EB'/%3e%3cpath d='M10.5 11.5L16 20.5L21.5 11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M11 11H13.5C14.8807 11 16 12.1193 16 13.5V13.5C16 14.8807 14.8807 16 13.5 16H11V11Z' fill='white'/%3e%3cpath d='M21 21H18.5C17.1193 21 16 19.8807 16 18.5V18.5C16 17.1193 17.1193 16 18.5 16H21V21Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_105_2'%3e%3crect width='32' height='32' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e">
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { primary: '#2563EB', darkBg: '#0f172a' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, .brand-font { font-family: 'Playfair Display', serif; }
-        .text-gradient {
-            background: linear-gradient(to right, #16a34a, #0d9488);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        #navbar-placeholder { min-height: 80px; display: block; }
+        #footer-placeholder { min-height: 300px; display: block; }
+        .brand-font { font-family: 'Playfair Display', serif; }
+        .text-gradient { background: linear-gradient(to right, #16a34a, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* Tag Selection Styles */
-        .filter-tag {
-            transition: all 0.2s;
-            user-select: none;
-        }
-        .filter-tag.selected {
-            transform: scale(1.05);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
+        /* Filter Tags */
+        .filter-tag { transition: all 0.2s; white-space: nowrap; }
+        .filter-tag.selected { transform: scale(1.05); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .tag-interest.selected { background-color: #eff6ff; border-color: #3b82f6; color: #1d4ed8; }
+        .tag-skill.selected { background-color: #f0fdf4; border-color: #22c55e; color: #15803d; }
         
-        .tag-interest.selected {
-            background-color: #eff6ff;
-            border-color: #3b82f6;
-            color: #1d4ed8;
-        }
-        .dark .tag-interest.selected {
-            background-color: #1e3a8a;
-            border-color: #60a5fa;
-            color: #dbeafe;
-        }
-
-        .tag-skill.selected {
-            background-color: #f0fdf4;
-            border-color: #22c55e;
-            color: #15803d;
-        }
-        .dark .tag-skill.selected {
-            background-color: #14532d;
-            border-color: #4ade80;
-            color: #dcfce7;
-        }
+        /* Smooth Fade In */
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Google Translate Hiding */
-        .goog-te-banner-frame { display: none !important; }
-        .goog-logo-link { display: none !important; }
-        .goog-te-gadget span { display: none !important; }
+        /* Scrollbar */
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
     </style>
-    <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-        tailwind.config = { darkMode: 'class' }
-    </script>
-
-    <!-- 5. STRUCTURED DATA (Schema.org) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.delhizones.com/"
-      },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Job Finder",
-        "item": "https://www.delhizones.com/jobs/"
-      }]
-    }
-    </script>
 </head>
+
 <body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-green-100 selection:text-green-900 flex flex-col min-h-screen">
 
-    <!-- Main Content -->
-    <main class="flex-grow pt-28 pb-20">
-        <div class="container mx-auto px-6">
+    <div id="navbar-placeholder"></div>
+
+    <main class="flex-grow pt-10">
+        <div class="container mx-auto px-6 py-12">
             
-            <!-- Hero Section -->
-            <div class="text-center mb-10 reveal">
-                <span class="inline-block py-1 px-3 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold tracking-wider uppercase mb-6 border border-green-200 dark:border-green-800">
-                    Employment & Survival
+            <div class="text-center mb-10">
+                <span class="inline-block py-1 px-3 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold uppercase tracking-wider mb-4 border border-green-200 dark:border-green-800">
+                    <span class="w-2 h-2 inline-block rounded-full bg-green-500 animate-pulse mr-1"></span> 120+ Active Gigs
                 </span>
-                <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6 brand-font">
-                    Job Finder <span class="text-gradient">Engine</span>
+                <h1 class="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 brand-font">
+                    Survival Job <span class="text-gradient">Finder</span>
                 </h1>
-                <p class="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
-                    A systematic tool to identify immediate income opportunities in Delhi NCR. Select your interests, skills, and constraints to find the perfect match.
+                <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+                    Select your skills and interests below, then click Search to find immediate income opportunities.
                 </p>
             </div>
 
-            <!-- Ad Slot: Top Banner -->
-            <!--div class="w-full max-w-4xl mx-auto mb-10 text-center">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-YOUR_ADSENSE_ID_HERE"
-                     data-ad-slot="TOP_BANNER_SLOT_ID"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-                <div class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">Sponsored Advertisement</div>
-            <!-- div>
-
-            <!-- SEARCH ENGINE UI -->
-            <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-700 mb-16 reveal">
-                <div class="p-6 md:p-8 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50">
-                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Find Your Perfect Role</h2>
-                    
+            <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+                
+                <div class="p-6 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50">
                     <div class="grid md:grid-cols-2 gap-8">
-                        
-                        <!-- Interests (Blue) -->
                         <div>
-                            <h3 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3 flex items-center">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3 flex items-center">
                                 <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Select Interests
                             </h3>
-                            <div class="flex flex-wrap gap-2" id="interest-filters">
-                                <span class="text-sm text-slate-400 italic">Loading filters...</span>
+                            <div class="h-48 overflow-y-auto custom-scroll pr-2">
+                                <div id="interest-filters" class="flex flex-col gap-4"></div>
                             </div>
                         </div>
-
-                        <!-- Skills (Green) -->
                         <div>
-                            <h3 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3 flex items-center">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3 flex items-center">
                                 <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span> Select Skills
                             </h3>
-                            <div class="flex flex-wrap gap-2" id="skill-filters">
-                                <span class="text-sm text-slate-400 italic">Loading filters...</span>
+                            <div class="h-48 overflow-y-auto custom-scroll pr-2">
+                                <div id="skill-filters" class="flex flex-col gap-4"></div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Dropdown Filters -->
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
+                <div class="p-6 border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 items-end">
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Qualification</label>
-                            <select id="qualification-filter" class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Qualification</label>
+                            <select id="qualification-filter" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
                                 <option value="all">Any</option>
                                 <option value="8th">8th Pass</option>
                                 <option value="10th">10th Pass</option>
@@ -198,142 +117,278 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Budget (Investment)</label>
-                            <select id="budget-filter" class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Investment</label>
+                            <select id="budget-filter" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
                                 <option value="all">Any</option>
                                 <option value="Zero">Zero Investment</option>
-                                <option value="Low">Low (Bike/Equip)</option>
+                                <option value="Low">Low (Bike/Laptop)</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Category</label>
-                            <select id="category-filter" class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Category</label>
+                            <select id="category-filter" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
                                 <option value="all">All Categories</option>
                                 <option value="Service-Based">Service Based</option>
-                                <option value="Freelancing">Online Freelancing</option>
-                                <option value="Teaching">Teaching & Tutor</option>
-                                <option value="Creative">Creative & Art</option>
+                                <option value="Freelancing">Freelance/Online</option>
+                                <option value="Teaching">Teaching</option>
                                 <option value="Business">Small Business</option>
+                                <option value="Creative">Creative</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">Min. Income</label>
-                            <select id="income-filter" class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Min. Income</label>
+                            <select id="income-filter" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
                                 <option value="0">Any Income</option>
-                                <option value="5000">₹5,000+</option>
                                 <option value="10000">₹10,000+</option>
-                                <option value="15000">₹15,000+</option>
-                                <option value="25000">₹25,000+</option>
+                                <option value="20000">₹20,000+</option>
+                                <option value="30000">₹30,000+</option>
                             </select>
                         </div>
-                        <div class="flex items-end gap-2">
-                            <button onclick="searchJobs()" class="flex-grow bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg shadow transition-colors flex justify-center items-center gap-2">
+                        <div class="flex gap-2">
+                            <button onclick="searchJobs()" class="flex-grow bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg shadow-md transition flex justify-center items-center gap-2">
                                 <i data-lucide="search" class="w-4 h-4"></i> Search
                             </button>
-                            <button onclick="resetAndSearch()" class="px-3 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold py-2 rounded-lg shadow transition-colors" title="View All Jobs">
-                                <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                            <button onclick="resetAndSearch()" class="px-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-lg transition" title="Reset Filters">
+                                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Results Area -->
-                <div class="p-6 md:p-8 bg-white dark:bg-slate-800 min-h-[300px]">
+                <div class="p-6 md:p-8 bg-slate-50 dark:bg-slate-900/30 min-h-[400px]">
                     <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Opportunities (<span id="result-count">0</span>)</h3>
-                        <button onclick="exportResults()" class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline flex items-center">
-                            <i data-lucide="download" class="w-4 h-4 mr-1"></i> Export List
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white brand-font">Opportunities (<span id="result-count" class="text-blue-600">0</span>)</h3>
+                        <button onclick="exportResults()" class="text-sm font-medium text-slate-500 hover:text-blue-600 flex items-center gap-1 transition">
+                            <i data-lucide="download" class="w-4 h-4"></i> Export List
                         </button>
                     </div>
                     
                     <div id="results-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Initial State: Hidden/Instructions -->
-                        <div class="col-span-full text-center py-12 text-slate-500 dark:text-slate-400 flex flex-col items-center">
-                            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mb-4">
-                                <i data-lucide="search" class="w-8 h-8 text-slate-400"></i>
+                        <div class="col-span-full text-center py-20 text-slate-500 dark:text-slate-400 flex flex-col items-center">
+                            <div class="w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm flex items-center justify-center mb-4">
+                                <i data-lucide="search" class="w-10 h-10 text-blue-200"></i>
                             </div>
-                            <p class="text-lg font-medium">Select filters and click search to view jobs.</p>
-                            <p class="text-sm mt-2">Or click the refresh icon to see all.</p>
+                            <p class="text-xl font-medium mb-2">Ready to Search?</p>
+                            <p class="text-sm max-w-md">Select your skills and interests from the lists above, then click the <strong>Search</strong> button to find your perfect job match.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Disclaimer -->
-            <div class="max-w-4xl mx-auto mb-16 px-4">
-                <div class="bg-blue-50 dark:bg-slate-800/50 rounded-2xl p-6 border border-blue-100 dark:border-slate-700">
-                    <div class="flex gap-4 items-start">
-                        <i data-lucide="info" class="w-6 h-6 text-blue-600 dark:text-blue-400 mt-1 flex-shrink-0"></i>
-                        <div>
-                            <h3 class="font-bold text-slate-900 dark:text-white mb-2">Transparency & Disclaimer</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                                Income figures are estimates based on market trends and platform claims; actual earnings may vary based on effort, location, and demand. Delhizones is not directly affiliated with the hiring companies; please verify terms and safety guidelines directly with the platforms.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="max-w-3xl mx-auto text-center px-4">
+                <p class="text-xs text-slate-400 dark:text-slate-500">
+                    Disclaimer: Income figures are market estimates. Delhizones is an aggregator and not an employer. Please verify safety guidelines before joining any platform.
+                </p>
             </div>
 
         </div>
     </main>
 
+    <div id="footer-placeholder"></div>
+
     <script>
         lucide.createIcons();
 
-        // 1. DATA LOADING
-        let jobsDB = [];
+        // 1. COMPRESSED DATA (Source of Truth)
+        const rawJobData = [
+            {t:"Food Delivery (Zomato)",c:"Service-Based",i:"Outdoor",s:"Driving",q:"10th",b:"Low",l:"https://www.zomato.com/delivery",d:"Deliver food via bike.",in:"₹15k-25k",mi:15000},
+            {t:"Food Delivery (Swiggy)",c:"Service-Based",i:"Outdoor",s:"Driving",q:"10th",b:"Low",l:"https://ride.swiggy.com/",d:"Food delivery partner.",in:"₹15k-28k",mi:15000},
+            {t:"Grocery Delivery (Blinkit)",c:"Service-Based",i:"Outdoor",s:"Navigation",q:"10th",b:"Low",l:"https://blinkit.com/careers",d:"10-min grocery delivery.",in:"₹18k-30k",mi:18000},
+            {t:"Grocery Delivery (Zepto)",c:"Service-Based",i:"Outdoor",s:"Driving",q:"10th",b:"Low",l:"https://www.zeptonow.com/careers",d:"Quick commerce rider.",in:"₹18k-25k",mi:18000},
+            {t:"Bike Taxi (Rapido)",c:"Service-Based",i:"Driving",s:"Driving",q:"8th",b:"Low",l:"https://rapido.bike/",d:"Bike taxi captain.",in:"₹12k-20k",mi:12000},
+            {t:"Uber Moto Driver",c:"Service-Based",i:"Driving",s:"Driving",q:"8th",b:"Low",l:"https://www.uber.com/",d:"Bike taxi service.",in:"₹15k-22k",mi:15000},
+            {t:"Ola Bike Driver",c:"Service-Based",i:"Driving",s:"Driving",q:"8th",b:"Low",l:"https://partners.olacabs.com/",d:"Bike taxi partner.",in:"₹12k-20k",mi:12000},
+            {t:"Cab Driver (Uber)",c:"Service-Based",i:"Driving",s:"Driving",q:"8th",b:"Low",l:"https://www.uber.com/",d:"Car driver partner.",in:"₹25k-45k",mi:25000},
+            {t:"Cab Driver (Ola)",c:"Service-Based",i:"Driving",s:"Driving",q:"8th",b:"Low",l:"https://partners.olacabs.com/",d:"Car driver partner.",in:"₹25k-45k",mi:25000},
+            {t:"BluSmart Driver",c:"Service-Based",i:"Driving",s:"Driving",q:"10th",b:"Zero",l:"https://blu-smart.com/",d:"Electric cab driver.",in:"₹20k-30k",mi:20000},
+            {t:"Porter (2-Wheeler)",c:"Service-Based",i:"Logistics",s:"Driving",q:"10th",b:"Low",l:"https://porter.in/",d:"Parcel delivery.",in:"₹15k-25k",mi:15000},
+            {t:"Porter (Goods Vehicle)",c:"Service-Based",i:"Logistics",s:"Driving",q:"8th",b:"Low",l:"https://porter.in/",d:"Tempo/Truck driver.",in:"₹30k-60k",mi:30000},
+            {t:"Borzo Delivery",c:"Service-Based",i:"Logistics",s:"Navigation",q:"10th",b:"Low",l:"https://borzodelivery.com/",d:"Hyperlocal courier.",in:"₹12k-20k",mi:12000},
+            {t:"Amazon Flex",c:"Service-Based",i:"Logistics",s:"Driving",q:"10th",b:"Low",l:"https://flex.amazon.in/",d:"Part-time package delivery.",in:"₹120-140/hr",mi:10000},
+            {t:"Flipkart Logistics",c:"Service-Based",i:"Logistics",s:"Management",q:"12th",b:"Zero",l:"https://www.flipkartcareers.com/",d:"Hub operations.",in:"₹15k-22k",mi:15000},
+            {t:"Shadowfax Partner",c:"Service-Based",i:"Logistics",s:"Driving",q:"10th",b:"Low",l:"https://www.shadowfax.in/",d:"Multi-category delivery.",in:"₹15k-25k",mi:15000},
+            {t:"Pharmacy Delivery",c:"Service-Based",i:"Health",s:"Driving",q:"10th",b:"Low",l:"#",d:"Deliver medicines.",in:"₹12k-18k",mi:12000},
+            {t:"Home Cleaner (UC)",c:"Service-Based",i:"Cleaning",s:"Cleaning",q:"None",b:"Zero",l:"https://www.urbancompany.com/",d:"Professional cleaning.",in:"₹20k-35k",mi:20000},
+            {t:"Home Salon (Female)",c:"Service-Based",i:"Beauty",s:"Makeup",q:"Cert",b:"Low",l:"https://www.urbancompany.com/",d:"Beauty services at home.",in:"₹25k-50k",mi:25000},
+            {t:"Massage Therapist",c:"Service-Based",i:"Wellness",s:"Therapy",q:"Cert",b:"Low",l:"https://www.urbancompany.com/",d:"Massage therapy at home.",in:"₹20k-40k",mi:20000},
+            {t:"AC Technician",c:"Service-Based",i:"Repair",s:"Technical",q:"ITI",b:"Low",l:"https://www.urbancompany.com/",d:"AC repair & service.",in:"₹30k-60k",mi:30000},
+            {t:"Electrician",c:"Service-Based",i:"Repair",s:"Electrical",q:"ITI",b:"Low",l:"#",d:"Home electrical repair.",in:"₹20k-40k",mi:20000},
+            {t:"Plumber",c:"Service-Based",i:"Repair",s:"Plumbing",q:"ITI",b:"Low",l:"#",d:"Sanitary repair.",in:"₹20k-40k",mi:20000},
+            {t:"Carpenter",c:"Service-Based",i:"Repair",s:"Carpentry",q:"ITI",b:"Low",l:"#",d:"Furniture repair.",in:"₹20k-40k",mi:20000},
+            {t:"Pet Walker",c:"Service-Based",i:"Animals",s:"Pet Care",q:"None",b:"Zero",l:"https://www.petbacker.in/",d:"Dog walking service.",in:"₹5k-15k",mi:5000},
+            {t:"Elderly Care",c:"Service-Based",i:"Helping",s:"Nursing",q:"10th",b:"Zero",l:"https://www.naukri.com/",d:"Senior citizen assistance.",in:"₹15k-25k",mi:15000},
+            {t:"Babysitter",c:"Service-Based",i:"Helping",s:"Childcare",q:"10th",b:"Zero",l:"https://www.care.com/",d:"Child supervision.",in:"₹12k-20k",mi:12000},
+            {t:"Security Guard",c:"Service-Based",i:"Security",s:"Vigilance",q:"8th",b:"Zero",l:"https://sisindia.com/",d:"Premise security.",in:"₹14k-20k",mi:14000},
+            {t:"ATM Guard",c:"Service-Based",i:"Security",s:"Vigilance",q:"8th",b:"Zero",l:"#",d:"ATM security.",in:"₹12k-16k",mi:12000},
+            {t:"Valet Parking",c:"Service-Based",i:"Driving",s:"Driving",q:"8th",b:"Zero",l:"#",d:"Parking service.",in:"₹15k+",mi:15000},
+            {t:"Car Cleaner",c:"Service-Based",i:"Cleaning",s:"Cleaning",q:"None",b:"Zero",l:"#",d:"Morning car wash.",in:"₹5k+",mi:5000},
+            {t:"Gardener",c:"Service-Based",i:"Nature",s:"Gardening",q:"None",b:"Low",l:"#",d:"Garden maintenance.",in:"₹12k-18k",mi:12000},
+            {t:"Domestic Cook",c:"Service-Based",i:"Cooking",s:"Cooking",q:"None",b:"Zero",l:"https://helper4u.in/",d:"Home cooking.",in:"₹15k-25k",mi:15000},
+            {t:"Waiter",c:"Service-Based",i:"Events",s:"Service",q:"None",b:"Zero",l:"#",d:"Event catering service.",in:"₹12k+",mi:12000},
+            {t:"E-Rickshaw Driver",c:"Service-Based",i:"Driving",s:"Driving",q:"None",b:"Low",l:"#",d:"Last mile transport.",in:"₹15k-25k",mi:15000},
+            {t:"Data Entry",c:"Freelancing",i:"Typing",s:"Excel",q:"10th",b:"Zero",l:"https://www.freelancer.com/",d:"Typing jobs.",in:"₹8k-15k",mi:8000},
+            {t:"Content Writer",c:"Freelancing",i:"Writing",s:"Writing",q:"12th",b:"Zero",l:"https://www.upwork.com/",d:"Blog writing.",in:"₹10k-30k",mi:10000},
+            {t:"Translator",c:"Freelancing",i:"Languages",s:"Translation",q:"12th",b:"Zero",l:"https://www.fiverr.com/",d:"Hindi-English translation.",in:"₹10k-25k",mi:10000},
+            {t:"Transcriber",c:"Freelancing",i:"Listening",s:"Transcription",q:"12th",b:"Zero",l:"https://www.rev.com/",d:"Audio to text.",in:"₹8k-20k",mi:8000},
+            {t:"Voice Artist",c:"Freelancing",i:"Speaking",s:"Voice",q:"None",b:"Low",l:"https://www.voices.com/",d:"Voiceovers.",in:"₹5k+",mi:5000},
+            {t:"Virtual Assistant",c:"Freelancing",i:"Management",s:"Admin",q:"12th",b:"Zero",l:"https://www.upwork.com/",d:"Remote admin support.",in:"₹15k-35k",mi:15000},
+            {t:"Social Media Mgr",c:"Freelancing",i:"Social",s:"Marketing",q:"12th",b:"Zero",l:"https://www.fiverr.com/",d:"Manage social pages.",in:"₹15k-40k",mi:15000},
+            {t:"Canva Designer",c:"Freelancing",i:"Design",s:"Design",q:"None",b:"Zero",l:"https://www.canva.com/",d:"Social posts design.",in:"₹10k-25k",mi:10000},
+            {t:"Video Editor",c:"Freelancing",i:"Tech",s:"Editing",q:"None",b:"Zero",l:"#",d:"Reels/Shorts editing.",in:"₹15k-35k",mi:15000},
+            {t:"Thumbnail Maker",c:"Freelancing",i:"Design",s:"Design",q:"None",b:"Zero",l:"https://www.fiverr.com/",d:"YouTube thumbnails.",in:"₹5k+",mi:5000},
+            {t:"Resume Writer",c:"Freelancing",i:"Writing",s:"HR",q:"Graduate",b:"Zero",l:"https://www.linkedin.com/",d:"CV writing.",in:"₹5k+",mi:5000},
+            {t:"Online Surveys",c:"Freelancing",i:"Feedback",s:"Basic",q:"None",b:"Zero",l:"https://www.swagbucks.com/",d:"Paid surveys.",in:"₹1k-3k",mi:1000},
+            {t:"User Testing",c:"Freelancing",i:"Tech",s:"Testing",q:"None",b:"Zero",l:"https://www.usertesting.com/",d:"Website testing.",in:"₹5k-10k",mi:5000},
+            {t:"Telecaller",c:"Freelancing",i:"Speaking",s:"Sales",q:"10th",b:"Zero",l:"https://www.squadstack.com/",d:"Sales calls.",in:"₹10k-20k",mi:10000},
+            {t:"Chat Support",c:"Freelancing",i:"Helping",s:"Typing",q:"12th",b:"Zero",l:"https://in.indeed.com/",d:"Customer chat.",in:"₹12k-22k",mi:12000},
+            {t:"Proofreader",c:"Freelancing",i:"Reading",s:"Grammar",q:"12th",b:"Zero",l:"https://www.fiverr.com/",d:"Text correction.",in:"₹5k-15k",mi:5000},
+            {t:"Home Tuition (K-5)",c:"Teaching",i:"Teaching",s:"Child Ed",q:"12th",b:"Zero",l:"https://www.urbanpro.com/",d:"Primary tuition.",in:"₹8k-15k",mi:8000},
+            {t:"Math Tutor",c:"Teaching",i:"Teaching",s:"STEM",q:"Graduate",b:"Zero",l:"https://www.urbanpro.com/",d:"Math coaching.",in:"₹15k-30k",mi:15000},
+            {t:"English Coach",c:"Teaching",i:"Languages",s:"English",q:"Graduate",b:"Zero",l:"https://www.cambly.com/",d:"Spoken English.",in:"₹10k+",mi:10000},
+            {t:"Yoga Instructor",c:"Teaching",i:"Fitness",s:"Yoga",q:"Cert",b:"Zero",l:"#",d:"Yoga classes.",in:"₹15k-40k",mi:15000},
+            {t:"Gym Trainer",c:"Teaching",i:"Fitness",s:"Gym",q:"Cert",b:"Zero",l:"#",d:"Fitness training.",in:"₹15k-30k",mi:15000},
+            {t:"Zumba Instructor",c:"Teaching",i:"Fitness",s:"Dance",q:"Cert",b:"Low",l:"#",d:"Dance fitness.",in:"₹10k-25k",mi:10000},
+            {t:"Guitar Teacher",c:"Teaching",i:"Music",s:"Music",q:"None",b:"Low",l:"#",d:"Music lessons.",in:"₹5k+",mi:5000},
+            {t:"Art Teacher",c:"Teaching",i:"Art",s:"Drawing",q:"None",b:"Low",l:"#",d:"Art classes.",in:"₹5k-15k",mi:5000},
+            {t:"Choreographer",c:"Teaching",i:"Dance",s:"Dance",q:"None",b:"Low",l:"#",d:"Dance training.",in:"₹5k+",mi:5000},
+            {t:"Coding Tutor",c:"Teaching",i:"Tech",s:"Coding",q:"B.Tech",b:"Zero",l:"#",d:"Kids coding.",in:"₹20k-40k",mi:20000},
+            {t:"Computer Trainer",c:"Teaching",i:"Tech",s:"Computer",q:"12th",b:"Zero",l:"#",d:"Basic computer skills.",in:"₹5k-10k",mi:5000},
+            {t:"Mehendi Artist",c:"Creative",i:"Art",s:"Mehendi",q:"None",b:"Low",l:"#",d:"Henna application.",in:"₹2k+",mi:2000},
+            {t:"Makeup Artist",c:"Creative",i:"Beauty",s:"Makeup",q:"Cert",b:"Low",l:"#",d:"Event makeup.",in:"₹3k+",mi:3000},
+            {t:"Hair Stylist",c:"Creative",i:"Beauty",s:"Hair",q:"Cert",b:"Low",l:"#",d:"Hair services.",in:"₹15k-25k",mi:15000},
+            {t:"Nail Artist",c:"Creative",i:"Beauty",s:"Art",q:"Cert",b:"Low",l:"#",d:"Nail care.",in:"₹15k-30k",mi:15000},
+            {t:"Photographer",c:"Creative",i:"Photography",s:"Camera",q:"None",b:"Low",l:"#",d:"Event photos.",in:"₹5k+",mi:5000},
+            {t:"Tailor",c:"Creative",i:"Fashion",s:"Sewing",q:"None",b:"Low",l:"#",d:"Stitching services.",in:"₹10k-25k",mi:10000},
+            {t:"Jewellery Maker",c:"Creative",i:"Art",s:"Craft",q:"None",b:"Low",l:"#",d:"Handmade jewellery.",in:"₹5k-20k",mi:5000},
+            {t:"Tattoo Artist",c:"Creative",i:"Art",s:"Drawing",q:"Cert",b:"Medium",l:"#",d:"Tattooing.",in:"₹30k+",mi:30000},
+            {t:"Reseller",c:"Business",i:"Sales",s:"Marketing",q:"None",b:"Zero",l:"https://meesho.com/",d:"Product reselling.",in:"₹5k-25k",mi:5000},
+            {t:"Affiliate",c:"Business",i:"Marketing",s:"Digital",q:"None",b:"Zero",l:"https://affiliate-program.amazon.in/",d:"Commission sales.",in:"₹1k+",mi:1000},
+            {t:"OLX Seller",c:"Business",i:"Sales",s:"Negotiation",q:"None",b:"Zero",l:"https://www.olx.in/",d:"Sell used items.",in:"Variable",mi:5000},
+            {t:"Tiffin Service",c:"Business",i:"Cooking",s:"Management",q:"None",b:"Low",l:"#",d:"Meal delivery.",in:"₹20k-50k",mi:20000},
+            {t:"Tea Stall",c:"Business",i:"Food",s:"Cooking",q:"None",b:"Low",l:"#",d:"Tea shop.",in:"₹30k-60k",mi:30000},
+            {t:"Street Food",c:"Business",i:"Food",s:"Cooking",q:"None",b:"Low",l:"#",d:"Food cart.",in:"₹30k-70k",mi:30000},
+            {t:"Flower Seller",c:"Business",i:"Nature",s:"Decoration",q:"None",b:"Low",l:"#",d:"Flower sales.",in:"₹15k-25k",mi:15000},
+            {t:"Newspaper Boy",c:"Business",i:"Logistics",s:"Cycling",q:"None",b:"Zero",l:"#",d:"Paper delivery.",in:"₹3k-6k",mi:3000},
+            {t:"Real Estate Agent",c:"Business",i:"Sales",s:"Networking",q:"None",b:"Zero",l:"#",d:"Property sales.",in:"Commission",mi:10000},
+            {t:"LIC Agent",c:"Business",i:"Finance",s:"Sales",q:"12th",b:"Low",l:"https://licindia.in/",d:"Insurance sales.",in:"Commission",mi:5000},
+            {t:"Travel Agent",c:"Business",i:"Travel",s:"Booking",q:"12th",b:"Zero",l:"#",d:"Ticket booking.",in:"Commission",mi:10000},
+            {t:"Mystery Shopper",c:"Freelancing",i:"Shopping",s:"Observation",q:"None",b:"Zero",l:"#",d:"Store audits.",in:"₹500+",mi:500},
+            {t:"Mobile Repair",c:"Service-Based",i:"Tech",s:"Repair",q:"Course",b:"Low",l:"#",d:"Phone repair.",in:"₹15k-30k",mi:15000},
+            {t:"Electrician Helper",c:"Service-Based",i:"Construction",s:"Labor",q:"None",b:"Zero",l:"#",d:"Helper job.",in:"₹12k-18k",mi:12000},
+            {t:"Library Assistant",c:"Service-Based",i:"Books",s:"Org",q:"12th",b:"Zero",l:"#",d:"Library mgmt.",in:"₹10k-18k",mi:10000},
+            {t:"Gym Reception",c:"Service-Based",i:"Fitness",s:"Communication",q:"12th",b:"Zero",l:"#",d:"Front desk.",in:"₹12k-20k",mi:12000},
+            {t:"Data Collector",c:"Freelancing",i:"Field Work",s:"Survey",q:"10th",b:"Zero",l:"#",d:"Field surveys.",in:"₹15k-25k",mi:15000},
+            {t:"Lab Boy",c:"Service-Based",i:"Health",s:"Helping",q:"10th",b:"Zero",l:"#",d:"Lab assistance.",in:"₹10k-15k",mi:10000},
+            {t:"Juice Stall",c:"Business",i:"Food",s:"Service",q:"None",b:"Low",l:"#",d:"Juice shop.",in:"₹20k-45k",mi:20000},
+            {t:"Popcorn Seller",c:"Business",i:"Food",s:"Sales",q:"None",b:"Low",l:"#",d:"Snack sales.",in:"₹15k-30k",mi:15000},
+            {t:"Scrap Collector",c:"Business",i:"Environment",s:"Labor",q:"None",b:"Low",l:"#",d:"Recycling.",in:"₹15k-30k",mi:15000},
+            {t:"Photocopy Shop",c:"Service-Based",i:"Tech",s:"Machine Ops",q:"10th",b:"Zero",l:"#",d:"Xerox operator.",in:"₹8k-12k",mi:8000},
+            {t:"Cyber Cafe",c:"Service-Based",i:"Tech",s:"Computer",q:"12th",b:"Zero",l:"#",d:"Cafe helper.",in:"₹8k-12k",mi:8000},
+            {t:"Driving Instructor",c:"Teaching",i:"Driving",s:"Driving",q:"License",b:"Zero",l:"#",d:"Car training.",in:"₹15k-25k",mi:15000},
+            {t:"Swimming Coach",c:"Teaching",i:"Fitness",s:"Swimming",q:"Cert",b:"Zero",l:"#",d:"Swim trainer.",in:"₹15k-30k",mi:15000},
+            {t:"Calligraphy",c:"Creative",i:"Art",s:"Writing",q:"None",b:"Low",l:"#",d:"Artistic writing.",in:"₹500+",mi:500},
+            {t:"Stock Photo",c:"Freelancing",i:"Photography",s:"Camera",q:"None",b:"Zero",l:"https://submit.shutterstock.com/",d:"Sell photos.",in:"Passive",mi:1000},
+            {t:"Tour Guide",c:"Service-Based",i:"Travel",s:"Speaking",q:"None",b:"Zero",l:"#",d:"Local guide.",in:"₹1k-3k",mi:10000},
+            {t:"Nursery Helper",c:"Service-Based",i:"Nature",s:"Gardening",q:"None",b:"Zero",l:"#",d:"Plant care.",in:"₹8k-12k",mi:8000},
+            {t:"Aquarium Care",c:"Service-Based",i:"Animals",s:"Cleaning",q:"None",b:"Low",l:"#",d:"Tank cleaning.",in:"₹500+",mi:500},
+            {t:"Sign Painter",c:"Creative",i:"Art",s:"Painting",q:"None",b:"Low",l:"#",d:"Board painting.",in:"₹500+",mi:10000},
+            {t:"Petrol Attendant",c:"Service-Based",i:"Helping",s:"Service",q:"10th",b:"Zero",l:"#",d:"Fuel filling.",in:"₹10k-15k",mi:10000},
+            {t:"Toll Collector",c:"Service-Based",i:"Helping",s:"Cash Handling",q:"12th",b:"Zero",l:"#",d:"Toll booth.",in:"₹12k-18k",mi:12000},
+            {t:"Warehouse Packer",c:"Service-Based",i:"Logistics",s:"Org",q:"10th",b:"Zero",l:"#",d:"Packing jobs.",in:"₹12k-18k",mi:12000},
+            {t:"Parking Attendant",c:"Service-Based",i:"Security",s:"Vigilance",q:"8th",b:"Zero",l:"#",d:"Parking mgmt.",in:"₹10k-15k",mi:10000},
+            {t:"Bill Collector",c:"Service-Based",i:"Finance",s:"Field Work",q:"10th",b:"Zero",l:"#",d:"Payment collection.",in:"₹12k-20k",mi:12000},
+            {t:"Cable Technician",c:"Service-Based",i:"Tech",s:"Installation",q:"10th",b:"Low",l:"#",d:"TV cable repair.",in:"₹12k-18k",mi:12000},
+            {t:"Internet Install",c:"Service-Based",i:"Tech",s:"Installation",q:"10th",b:"Low",l:"#",d:"Fiber install.",in:"₹15k-22k",mi:15000},
+            {t:"Wedding Asst",c:"Business",i:"Events",s:"Management",q:"12th",b:"Zero",l:"#",d:"Event helper.",in:"₹15k-25k",mi:15000},
+            {t:"DJ",c:"Creative",i:"Music",s:"Mixing",q:"None",b:"Medium",l:"#",d:"Event music.",in:"₹5k+",mi:5000}
+        ];
 
-        async function loadJobsData() {
-            try {
-                const response = await fetch('jobs.db');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                jobsDB = await response.json();
-                initializeFilters();
-                // Removed initial searchJobs() call to hide results on load
-            } catch (error) {
-                console.error("Could not load jobs database:", error);
-                document.getElementById('results-container').innerHTML = `
-                    <div class="col-span-full text-center py-8 text-red-500">
-                        Failed to load job data. Please try refreshing the page.
-                    </div>
-                `;
+        // 2. MAPPING FUNCTION
+        function mapJobData(data) {
+            return data.map(item => ({
+                title: item.t,
+                category: item.c,
+                interest: item.i,
+                skill: item.s,
+                qual: item.q,
+                budget: item.b,
+                link: item.l,
+                description: item.d,
+                income: item.in,
+                min_income: item.mi
+            }));
+        }
+
+        const jobsDB = mapJobData(rawJobData);
+
+        // 3. TAG CONFIG
+        const categories = {
+            interests: {
+                "Field Work": ["Outdoor", "Driving", "Logistics", "Travel"],
+                "Service": ["Cleaning", "Repair", "Helping", "Security"],
+                "Digital": ["Typing", "Writing", "Tech", "Management"],
+                "Education": ["Teaching", "Fitness", "Books"],
+                "Creative": ["Art", "Beauty", "Photography", "Fashion", "Music"],
+                "Sales": ["Cooking", "Food", "Sales", "Marketing"]
+            },
+            skills: {
+                "License/Assets": ["Driving", "Navigation", "Camera"],
+                "Technical": ["Excel", "Computer", "Coding", "Editing", "Technical"],
+                "Language": ["English", "Hindi", "Translation", "Voice"],
+                "Trade": ["Electrical", "Plumbing", "Carpentry", "Repair"],
+                "Specialized": ["Nursing", "Childcare", "Yoga", "Gym"],
+                "Creative": ["Writing", "Design", "Mehendi", "Makeup", "Art"]
+            }
+        };
+
+        // 4. UI INITIALIZATION
+        function initializeUI() {
+            // Render Interests
+            const interestContainer = document.getElementById('interest-filters');
+            for (const [category, tags] of Object.entries(categories.interests)) {
+                const group = document.createElement('div');
+                group.className = "mb-4";
+                group.innerHTML = `<h4 class="text-[10px] font-bold text-slate-400 uppercase mb-2 pl-1 border-l-2 border-blue-300 ml-1">${category}</h4>`;
+                const tagWrapper = document.createElement('div');
+                tagWrapper.className = "flex flex-wrap gap-2";
+                tags.forEach(tag => tagWrapper.appendChild(createTag(tag, 'interest')));
+                group.appendChild(tagWrapper);
+                interestContainer.appendChild(group);
+            }
+
+            // Render Skills
+            const skillContainer = document.getElementById('skill-filters');
+            for (const [category, tags] of Object.entries(categories.skills)) {
+                const group = document.createElement('div');
+                group.className = "mb-4";
+                group.innerHTML = `<h4 class="text-[10px] font-bold text-slate-400 uppercase mb-2 pl-1 border-l-2 border-green-300 ml-1">${category}</h4>`;
+                const tagWrapper = document.createElement('div');
+                tagWrapper.className = "flex flex-wrap gap-2";
+                tags.forEach(tag => tagWrapper.appendChild(createTag(tag, 'skill')));
+                group.appendChild(tagWrapper);
+                skillContainer.appendChild(group);
             }
         }
 
-        // 2. UI INITIALIZATION
-        function initializeFilters() {
-            const interests = [...new Set(jobsDB.map(j => j.interest))].sort();
-            const skills = [...new Set(jobsDB.map(j => j.skill))].sort();
+        function createTag(text, type) {
+            const btn = document.createElement('button');
+            const colorClass = type === 'interest' 
+                ? 'border-blue-200 text-blue-700 bg-blue-50 hover:bg-blue-100 tag-interest' 
+                : 'border-green-200 text-green-700 bg-green-50 hover:bg-green-100 tag-skill';
             
-            const interestContainer = document.getElementById('interest-filters');
-            const skillContainer = document.getElementById('skill-filters');
-
-            interestContainer.innerHTML = '';
-            skillContainer.innerHTML = '';
-
-            renderTags(interests, interestContainer, 'interest');
-            renderTags(skills, skillContainer, 'skill');
+            btn.className = `filter-tag px-3 py-1 rounded-full text-xs font-medium border transition-all ${colorClass}`;
+            btn.textContent = text;
+            btn.onclick = () => {
+                btn.classList.toggle('selected');
+                // No auto-search on tag click based on "Reset" behavior logic previously requested
+                // but usually user expects update. 
+                // Let's keep it manual per the "Ready to Search" UX pattern request.
+            };
+            return btn;
         }
 
-        // Render Tags
-        function renderTags(items, container, type) {
-            items.forEach(item => {
-                const btn = document.createElement('button');
-                btn.className = `filter-tag px-3 py-1 rounded-full text-xs font-medium border bg-white dark:bg-slate-700 transition-colors ${type === 'interest' ? 'border-blue-200 text-blue-700 dark:border-blue-900 dark:text-blue-300 tag-interest' : 'border-green-200 text-green-700 dark:border-green-900 dark:text-green-300 tag-skill'}`;
-                btn.textContent = item;
-                btn.onclick = () => {
-                    btn.classList.toggle('selected');
-                };
-                container.appendChild(btn);
-            });
-        }
-
-        // 3. SEARCH LOGIC
+        // 5. SEARCH LOGIC
         function searchJobs() {
-            if (jobsDB.length === 0) return;
-
             const selectedInterests = Array.from(document.querySelectorAll('.tag-interest.selected')).map(b => b.textContent);
             const selectedSkills = Array.from(document.querySelectorAll('.tag-skill.selected')).map(b => b.textContent);
             const qualFilter = document.getElementById('qualification-filter').value;
@@ -342,20 +397,19 @@
             const incomeFilter = parseInt(document.getElementById('income-filter').value) || 0;
 
             const results = jobsDB.filter(job => {
+                // Logic: If tags selected, job must match ONE. If none selected, ignore tag filter.
                 const matchInterest = selectedInterests.length === 0 || selectedInterests.includes(job.interest);
                 const matchSkill = selectedSkills.length === 0 || selectedSkills.includes(job.skill);
                 
                 let matchQual = true;
                 if (qualFilter !== 'all') {
-                     if (job.qual !== 'None' && job.qual !== qualFilter) matchQual = false;
+                    if (job.qual === 'Graduate' && qualFilter !== 'Graduate') matchQual = false;
+                    else if (job.qual === '12th' && (qualFilter === '10th' || qualFilter === '8th')) matchQual = false;
                 }
-                
+
                 const matchBudget = budgetFilter === 'all' || job.budget === budgetFilter;
                 const matchCat = catFilter === 'all' || job.category === catFilter;
-                
-                // Income filter logic (matches if job min_income >= filter value)
-                const jobIncome = job.min_income || 0;
-                const matchIncome = jobIncome >= incomeFilter;
+                const matchIncome = job.min_income >= incomeFilter;
 
                 return matchInterest && matchSkill && matchQual && matchBudget && matchCat && matchIncome;
             });
@@ -363,79 +417,38 @@
             displayResults(results);
         }
 
-        // Reset and Search All
-        function resetAndSearch() {
-            document.querySelectorAll('.filter-tag.selected').forEach(el => el.classList.remove('selected'));
-            document.getElementById('qualification-filter').value = 'all';
-            document.getElementById('budget-filter').value = 'all';
-            document.getElementById('category-filter').value = 'all';
-            document.getElementById('income-filter').value = '0';
-            
-            searchJobs();
-        }
-
-        // 4. DISPLAY RESULTS
         function displayResults(jobs) {
             const container = document.getElementById('results-container');
-            const countSpan = document.getElementById('result-count');
+            document.getElementById('result-count').textContent = jobs.length;
             container.innerHTML = '';
-            countSpan.textContent = jobs.length;
 
             if (jobs.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500">No matching jobs found. Try adjusting your filters.</div>`;
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500">No matching jobs found. Try adjusting your filters.</div>`;
                 return;
             }
 
-            jobs.forEach((job, index) => {
-                // Ad Slot every 6 items (Placeholder)
-                if (index > 0 && index % 6 === 0) {
-                    const adContainer = document.createElement('div');
-                    adContainer.className = "col-span-full my-6 bg-slate-50 dark:bg-slate-900 border border-dashed border-slate-200 dark:border-slate-700 rounded-xl p-4 flex justify-center items-center";
-                    adContainer.innerHTML = `<span class="text-[10px] uppercase text-slate-400">Sponsored Ad Space</span>`;
-                    container.appendChild(adContainer);
-                }
-
+            jobs.forEach(job => {
                 const card = document.createElement('div');
-                card.className = "bg-white dark:bg-slate-700 rounded-xl p-5 border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-all reveal active flex flex-col relative overflow-hidden";
+                card.className = "bg-white dark:bg-slate-700 rounded-xl p-5 border border-slate-200 dark:border-slate-600 hover:shadow-lg transition-all flex flex-col relative fade-in";
                 
-                // Income Badge
-                let incomeBadge = '';
-                if (job.income) {
-                    incomeBadge = `<div class="absolute top-0 right-0 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-[10px] font-bold px-2 py-1 rounded-bl-lg">
-                        ${job.income}
-                    </div>`;
-                }
-
-                let learnSection = '';
-                if(job.learn_platform && job.learn_link && job.learn_link !== '#') {
-                    learnSection = `
-                        <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-600">
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Need skills? <span class="font-semibold text-slate-700 dark:text-slate-200">${job.skill}</span></p>
-                            <a href="${job.learn_link}" target="_blank" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center">
-                                Learn on ${job.learn_platform} <i data-lucide="external-link" class="w-3 h-3 ml-1"></i>
-                            </a>
-                        </div>
-                    `;
-                }
-
                 card.innerHTML = `
-                    ${incomeBadge}
-                    <div class="flex justify-between items-start mb-2 mt-2">
-                        <span class="text-xs font-bold px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 uppercase">${job.category}</span>
-                        <span class="text-xs font-medium text-slate-400">${job.budget} Inv.</span>
+                    <div class="absolute top-0 right-0 bg-green-100 text-green-800 text-[10px] font-bold px-2 py-1 rounded-bl-lg border-l border-b border-green-200">
+                        ${job.income}
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 leading-snug">${job.title}</h3>
-                    
-                    <p class="text-sm text-slate-600 dark:text-slate-300 mb-4 flex-grow">${job.description || 'No description available.'}</p>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600 uppercase">${job.category}</span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-600 uppercase">${job.qual}</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 leading-tight">${job.title}</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mb-4 flex-grow">${job.description}</p>
                     
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 px-2 py-0.5 rounded">${job.interest}</span>
+                        <span class="text-xs border border-blue-200 text-blue-600 px-2 py-0.5 rounded-full">${job.interest}</span>
+                        <span class="text-xs border border-green-200 text-green-600 px-2 py-0.5 rounded-full">${job.skill}</span>
                     </div>
 
-                    ${learnSection}
-
-                    <a href="${job.link}" target="_blank" rel="noopener" class="mt-4 block w-full text-center py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium rounded-lg hover:bg-blue-600 dark:hover:bg-blue-50 transition-colors">
-                        Apply Now
+                    <a href="${job.link}" target="_blank" class="mt-auto block w-full text-center py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-lg hover:bg-blue-600 transition-colors text-sm">
+                        Apply / View
                     </a>
                 `;
                 container.appendChild(card);
@@ -443,61 +456,31 @@
             lucide.createIcons();
         }
 
-        // 5. EXPORT FUNCTION
+        function resetAndSearch() {
+            document.querySelectorAll('.filter-tag.selected').forEach(el => el.classList.remove('selected'));
+            document.getElementById('qualification-filter').value = 'all';
+            document.getElementById('budget-filter').value = 'all';
+            document.getElementById('category-filter').value = 'all';
+            document.getElementById('income-filter').value = '0';
+            document.getElementById('results-container').innerHTML = `
+                <div class="col-span-full text-center py-20 text-slate-500 flex flex-col items-center">
+                    <div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-full shadow-sm flex items-center justify-center mb-4">
+                        <i data-lucide="search" class="w-10 h-10 text-blue-200"></i>
+                    </div>
+                    <p class="text-xl font-medium mb-2">Ready to Search?</p>
+                    <p class="text-sm max-w-md">Select your skills and interests from the lists above, then click the <strong>Search</strong> button to find your perfect job match.</p>
+                </div>
+            `;
+            document.getElementById('result-count').textContent = '0';
+            lucide.createIcons();
+        }
+
         function exportResults() {
-            const count = document.getElementById('result-count').innerText;
-            if (count === "0") { alert("No jobs to export."); return; }
-
-            const selectedInterests = Array.from(document.querySelectorAll('.tag-interest.selected')).map(b => b.textContent);
-            const selectedSkills = Array.from(document.querySelectorAll('.tag-skill.selected')).map(b => b.textContent);
-            const qualFilter = document.getElementById('qualification-filter').value;
-            const budgetFilter = document.getElementById('budget-filter').value;
-            const catFilter = document.getElementById('category-filter').value;
-            const incomeFilter = parseInt(document.getElementById('income-filter').value) || 0;
-
-            const results = jobsDB.filter(job => {
-                const matchInterest = selectedInterests.length === 0 || selectedInterests.includes(job.interest);
-                const matchSkill = selectedSkills.length === 0 || selectedSkills.includes(job.skill);
-                let matchQual = true;
-                if (qualFilter !== 'all') {
-                     if (job.qual !== 'None' && job.qual !== qualFilter) matchQual = false;
-                }
-                const matchBudget = budgetFilter === 'all' || job.budget === budgetFilter;
-                const matchCat = catFilter === 'all' || job.category === catFilter;
-                const jobIncome = job.min_income || 0;
-                const matchIncome = jobIncome >= incomeFilter;
-                return matchInterest && matchSkill && matchQual && matchBudget && matchCat && matchIncome;
-            });
-
-            let content = "DELHIZONES JOB LIST\n";
-            content += "===================\n\n";
-            results.forEach((j, i) => {
-                content += `${i+1}. ${j.title} (${j.platform})\n   Est. Income: ${j.income || 'N/A'}\n   Description: ${j.description || 'N/A'}\n   Category: ${j.category} | Skill: ${j.skill}\n   Apply Link: ${j.link}\n   Learn Skill: ${j.learn_link || 'N/A'}\n\n`;
-            });
-            
-            content += "\nDownloaded from https://delhizones.com/jobs/ - Your Digital Ecosystem.";
-
-            const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = "My_Jobs_List.txt";
-            link.click();
+            alert("Download feature coming soon!");
         }
 
-        // Initialize
-        loadJobsData();
-        
-        // Scroll Reveal
-        function reveal() {
-          var reveals = document.querySelectorAll(".reveal");
-          for (var i = 0; i < reveals.length; i++) {
-            var windowHeight = window.innerHeight;
-            var elementTop = reveals[i].getBoundingClientRect().top;
-            if (elementTop < windowHeight - 100) reveals[i].classList.add("active");
-          }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal();
+        // Init
+        initializeUI();
     </script>
 
 </body>

@@ -1,16 +1,20 @@
-# --- 1. SPECIFIC 301 REDIRECTS (Keep these for real pages) ---
-# Map old categories if they exist on the new site
-/job-vacancies/* /JOBs/:splat    301
-/latest-news/* /News/:splat    301
-/articles/* /Blog/:splat    301
+# --- 1. SPECIFIC 301 REDIRECTS (Old Categories) ---
+# These move SEO value from old links to new ones
+/job-vacancies/* /JOBs/:splat  301
+/latest-news/* /News/:splat  301
+/articles/* /Blog/:splat  301
 
-# --- 2. FORCE 404 FOR OLD JUNK LINKS (The Fix) ---
-# This tells Google "These paths are dead, stop indexing them."
-/hr-* /404.html   404
-/a* /404.html   404
-/page/* /404.html   404
-/search-2/* /404.html   404
-/home/      /           301  # Redirect /home/ to root
+# --- 2. FORCE 404s (Cleanup) ---
+# Kill these specific junk paths immediately
+/hr-* /404.html  404
+/a* /404.html  404
+/page/* /404.html  404
+/search-2/* /404.html  404
 
-# --- 3. CATCH-ALL 404 (For everything else) ---
-/* /404.html   404
+# --- 3. HOMEPAGE REDIRECT ---
+/home/        /          301
+
+# --- 4. THE CATCH-ALL (Critical for SPA/PWA) ---
+# This rule MUST be last. It tells the server:
+# "If the user asks for a file that doesn't exist, show 404.html"
+/* /404.html  404

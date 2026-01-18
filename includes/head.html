@@ -1,21 +1,53 @@
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GV2529T0CM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  gtag('config', 'G-GV2529T0CM');
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.google-analytics.com">
+
+<script>
+    (function() {
+        try {
+            const savedTheme = localStorage.getItem('selected-theme');
+            // Check for saved theme OR system preference if you add that later
+            if (savedTheme && savedTheme !== 'default') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        } catch (e) {}
+    })();
 </script>
+
+<title>Delhizones - Latest News, Jobs & Places to Visit in Delhi</title>
+<meta name="description" content="Delhizones: The ultimate guide to the City of Delhi (NCT). Find the latest news of Delhi, government jobs, and the best places to visit in Delhi today.">
+<meta name="keywords" content="delhi, delhi nct, delhi state, new delhi city, latest news of delhi, breaking news in delhi, places to visit in delhi, tourist places in delhi, delhi famous tourist places, delhi sightseeing, govt jobs delhi, what's happening in delhi today">
 <meta name="theme-color" content="#2563EB">
+
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<meta property="og:site_name" content="Delhizones">
+<meta property="og:title" content="Delhizones - Latest News, Jobs & Places to Visit in Delhi">
+<meta property="og:description" content="The ultimate guide to the City of Delhi (NCT). News, jobs, and tourism.">
+<meta property="og:url" content="https://delhizones.com">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_IN">
+<meta property="og:image" content="https://delhizones.com/assets/og-default.png">
+
+<meta name="twitter:card" content="summary_large_image"> <meta name="twitter:site" content="@delhizones">
+<meta name="twitter:image" content="https://delhizones.com/assets/og-default.png">
 
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
 <link rel="icon" href="/assets/icons/favicon.ico">
+<link rel="manifest" href="/manifest.json">
 
-<meta property="og:site_name" content="Delhizones">
-<meta property="og:image" content="https://delhizones.com/assets/og-default.png">
-<meta name="twitter:site" content="@delhizones">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GV2529T0CM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GV2529T0CM');
+</script>
 
 <script type="application/ld+json">
 {
@@ -23,7 +55,12 @@
   "@type": "Organization",
   "name": "Delhizones",
   "url": "https://delhizones.com",
-  "logo": "https://delhizones.com/assets/icons/icon-512.png"
+  "logo": "https://delhizones.com/assets/icons/icon-512.png",
+  "sameAs": [
+    "https://twitter.com/delhizones",
+    "https://facebook.com/delhizones",
+    "https://instagram.com/delhizones"
+  ]
 }
 </script>
 
@@ -31,8 +68,8 @@
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js')
-        .then(reg => console.log('SW Registered:', reg.scope))
-        .catch(err => console.error('SW Registration Failed:', err));
+        .then(reg => console.log('SW Registered'))
+        .catch(err => console.error('SW Failed:', err));
     });
   }
 </script>
@@ -46,6 +83,6 @@
         link.href = window.location.origin + window.location.pathname;
         document.head.appendChild(link);
       }
-    }catch(e){/* fail silently */}
+    } catch(e) {}
   })();
 </script>

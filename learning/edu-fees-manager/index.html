@@ -3,411 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>fetch('/includes/head.html').then(r=>r.text()).then(t=>document.head.insertAdjacentHTML('beforeend',t));</script>
-    <title>Edu-Manager | School & Tuition Management</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Edu-Manager | School & Tuition Fee Management Tool</title>
+    <meta name="description" content="Free tool to manage school fees, tuition installments, and student records. Dashboard for students and administrators.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://delhizones.com/learning/edu-fees-manager/">
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#2563EB', darkBg: '#0f172a' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .sidebar-link {
-            transition: all 0.2s ease-in-out;
-        }
-        .sidebar-link:hover, .sidebar-link.active {
-            background-color: #3b82f6;
-            color: white;
-            transform: translateX(4px);
-        }
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Tool-Specific Styles */
+        .sidebar-link { transition: all 0.2s ease-in-out; }
+        .sidebar-link:hover, .sidebar-link.active { background-color: rgba(255,255,255,0.1); color: white; border-right: 3px solid #60a5fa; }
+        
+        /* App Container Scrollbar */
+        .app-scroll::-webkit-scrollbar { width: 6px; }
+        .app-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
+        .app-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .app-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .fade-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Fix for injected navbar layout shift */
+        #navbar-placeholder { min-height: 80px; display: block; }
+        #footer-placeholder { min-height: 300px; display: block; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
 
-    <div id="app" class="flex h-screen overflow-hidden">
-        <!-- Sidebar -->
-        <aside id="sidebar" class="bg-blue-600 text-white w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out z-30">
-            <div class="px-4 flex items-center space-x-2">
-                <i data-lucide="book-marked" class="h-8 w-8"></i>
-                <h1 class="text-2xl font-bold">Edu-Manager</h1>
-            </div>
-            <nav id="nav-menu" class="px-4">
-                <!-- Navigation links will be populated by JS -->
-            </nav>
-            <div class="px-4 absolute bottom-4 w-full left-0">
-                 <div class="flex items-center justify-center p-2 rounded-lg bg-blue-700">
-                    <label for="userToggle" class="mr-2 text-sm font-medium">Student</label>
-                    <div class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" value="" id="userToggle" class="sr-only peer">
-                        <div class="w-11 h-6 bg-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
+<body class="bg-slate-100 text-slate-800 flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="flex-grow pt-8 pb-12 px-4 sm:px-6">
+        <div class="container mx-auto max-w-7xl h-full flex flex-col">
+            
+            <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 text-sm text-slate-500 mb-1">
+                        <a href="/learning/" class="hover:text-blue-600">Learning</a>
+                        <i data-lucide="chevron-right" class="h-4 w-4"></i>
+                        <span class="text-slate-800 font-medium">Tools</span>
                     </div>
-                    <label for="userToggle" class="ml-2 text-sm font-medium">Admin</label>
+                    <h1 class="text-2xl font-bold text-slate-900">Edu-Fees Manager</h1>
+                </div>
+                
+                <div class="bg-white p-1.5 rounded-lg shadow-sm border border-slate-200 inline-flex">
+                    <button id="roleStudent" class="px-4 py-1.5 rounded-md text-sm font-bold transition-all bg-blue-100 text-blue-700" onclick="switchRole('student')">Student View</button>
+                    <button id="roleAdmin" class="px-4 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:bg-slate-50 transition-all" onclick="switchRole('admin')">Admin View</button>
                 </div>
             </div>
-        </aside>
 
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <header class="flex justify-between items-center p-4 bg-white border-b">
-                <button id="menu-button" class="md:hidden">
-                    <i data-lucide="menu" class="h-6 w-6"></i>
-                </button>
-                <h2 id="page-title" class="text-2xl font-semibold">Dashboard</h2>
-                <div class="flex items-center space-x-4">
-                    <i data-lucide="bell" class="h-6 w-6 text-gray-500 cursor-pointer"></i>
-                    <div id="user-profile" class="flex items-center space-x-2">
-                        <img src="https://placehold.co/40x40/E2E8F0/4A5568?text=U" alt="User Avatar" class="rounded-full w-10 h-10 border-2 border-gray-200">
-                        <div>
-                            <p id="user-name" class="font-semibold text-sm">User Name</p>
-                            <p id="user-role" class="text-xs text-gray-500">Role</p>
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden flex flex-col md:flex-row min-h-[700px] md:h-[750px] relative">
+                
+                <aside id="app-sidebar" class="bg-slate-900 text-slate-300 w-full md:w-64 flex-shrink-0 md:flex flex-col border-r border-slate-800 hidden absolute inset-y-0 left-0 z-20 md:relative">
+                    <div class="p-6 border-b border-slate-800 flex justify-between items-center md:block">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-blue-600 p-2 rounded-lg text-white">
+                                <i data-lucide="book-open" class="h-5 w-5"></i>
+                            </div>
+                            <span class="font-bold text-white tracking-tight">Menu</span>
+                        </div>
+                        <button class="md:hidden text-white" onclick="toggleAppSidebar()">
+                            <i data-lucide="x" class="h-6 w-6"></i>
+                        </button>
+                    </div>
+
+                    <nav id="nav-menu" class="flex-1 py-4 space-y-1 overflow-y-auto app-scroll">
+                        </nav>
+
+                    <div class="p-4 bg-slate-900 border-t border-slate-800">
+                        <div class="flex items-center gap-3 p-3 bg-slate-800 rounded-lg">
+                            <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm" id="user-initial">A</div>
+                            <div class="overflow-hidden">
+                                <p id="user-name" class="text-xs font-bold text-white truncate">User</p>
+                                <p id="user-role" class="text-[10px] text-slate-400 truncate">Role</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </header>
+                </aside>
 
-            <main id="main-content" class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
-                <!-- Content will be populated by JS -->
-            </main>
+                <div class="flex-1 flex flex-col bg-slate-50 relative">
+                    
+                    <div class="md:hidden bg-white border-b border-slate-200 p-4 flex justify-between items-center">
+                        <span class="font-bold text-slate-700" id="mobile-page-title">Dashboard</span>
+                        <button onclick="toggleAppSidebar()" class="p-2 bg-slate-100 rounded-lg text-slate-600">
+                            <i data-lucide="menu" class="h-5 w-5"></i>
+                        </button>
+                    </div>
+
+                    <div id="main-content" class="flex-1 overflow-y-auto app-scroll p-6 md:p-8">
+                        </div>
+                </div>
+
+            </div>
+
         </div>
-    </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Lucide icons
             lucide.createIcons();
-
-            const userToggle = document.getElementById('userToggle');
-            const navMenu = document.getElementById('nav-menu');
-            const mainContent = document.getElementById('main-content');
-            const pageTitle = document.getElementById('page-title');
-            const userName = document.getElementById('user-name');
-            const userRole = document.getElementById('user-role');
-            const menuButton = document.getElementById('menu-button');
-            const sidebar = document.getElementById('sidebar');
-
-            // --- MOCK DATA ---
+            
+            // --- DATA & STATE ---
+            let currentRole = 'student';
+            const sidebar = document.getElementById('app-sidebar');
+            
             const studentData = {
-                name: "Alex Doe",
-                role: "Student",
-                dashboard: {
-                    welcome: "Welcome back, Alex!",
-                    stats: [
-                        { label: "Enrolled Courses", value: 3, icon: "book-open" },
-                        { label: "Pending Fees", value: "$250.00", icon: "banknote" },
-                        { label: "Attendance", value: "92%", icon: "check-circle" },
-                        { label: "Upcoming Classes", value: 2, icon: "calendar" }
-                    ]
-                },
-                courses: [
-                    { id: 1, title: "Advanced Mathematics", progress: 75, instructor: "Dr. Alan Turing", schedule: "Mon, Wed, Fri - 10:00 AM" },
-                    { id: 2, title: "Quantum Physics", progress: 50, instructor: "Dr. Marie Curie", schedule: "Tue, Thu - 2:00 PM" },
-                    { id: 3, title: "History of Art", progress: 90, instructor: "Dr. Vincent Van Gogh", schedule: "Fri - 4:00 PM" }
+                name: "Rohan Sharma",
+                role: "Student (Class X)",
+                stats: [
+                    { label: "Attendance", value: "94%", icon: "user-check", color: "green" },
+                    { label: "Pending Fees", value: "₹2,500", icon: "alert-circle", color: "red" },
+                    { label: "Next Exam", value: "Maths", icon: "calendar", color: "blue" },
+                    { label: "Assignments", value: "2 Due", icon: "file-text", color: "orange" }
                 ],
-                fees: {
-                    total: 1500,
-                    paid: 1250,
-                    pending: 250,
-                    history: [
-                        { id: "TXN728", date: "2024-08-01", amount: 750, status: "Paid" },
-                        { id: "TXN729", date: "2024-09-01", amount: 500, status: "Paid" },
-                        { id: "TXN730", date: "2024-10-01", amount: 250, status: "Pending" }
-                    ]
-                },
-                profile: {
-                    id: "STU1024",
-                    email: "alex.doe@example.com",
-                    phone: "+1 234 567 890",
-                    address: "123 Science Lane, Innovation City"
-                }
+                fees: [
+                    { id: "#INV-001", date: "10 Jan 2026", desc: "Tuition Fee (Jan)", amount: 2500, status: "Paid" },
+                    { id: "#INV-002", date: "10 Feb 2026", desc: "Tuition Fee (Feb)", amount: 2500, status: "Pending" }
+                ]
             };
 
             const adminData = {
-                name: "Dr. Evelyn Reed",
+                name: "Principal Desk",
                 role: "Administrator",
-                dashboard: {
-                    welcome: "Administrator Overview",
-                    stats: [
-                        { label: "Total Students", value: 152, icon: "users" },
-                        { label: "Fees Collected (Month)", value: "$18,500", icon: "trending-up" },
-                        { label: "Fees Pending", value: "$4,200", icon: "alert-circle" },
-                        { label: "Active Courses", value: 12, icon: "book-copy" }
-                    ]
-                },
-                students: [
-                    { id: "STU1024", name: "Alex Doe", course: "Quantum Physics", fees: "Pending", report: "View" },
-                    { id: "STU1025", name: "Ben Carson", course: "Advanced Mathematics", fees: "Paid", report: "View" },
-                    { id: "STU1026", name: "Cathy Dean", course: "History of Art", fees: "Paid", report: "View" },
-                    { id: "STU1027", name: "David Evans", course: "Computer Science", fees: "Overdue", report: "View" },
-                     { id: "STU1028", name: "Eva Green", course: "Literature", fees: "Paid", report: "View" },
+                stats: [
+                    { label: "Total Revenue", value: "₹4.2L", icon: "wallet", color: "green" },
+                    { label: "Pending Dues", value: "₹45k", icon: "alert-triangle", color: "red" },
+                    { label: "Active Students", value: "142", icon: "users", color: "blue" },
+                    { label: "New Inquiries", value: "8", icon: "inbox", color: "orange" }
                 ],
-                 fees: {
-                    history: [
-                        { id: "TXN728", student: "Alex Doe", date: "2024-08-01", amount: 750, status: "Paid" },
-                        { id: "TXN729", student: "Alex Doe", date: "2024-09-01", amount: 500, status: "Paid" },
-                        { id: "TXN731", student: "Ben Carson", date: "2024-09-02", amount: 1200, status: "Paid" },
-                        { id: "TXN732", student: "David Evans", date: "2024-09-01", amount: 600, status: "Pending" }
-                    ]
-                },
+                students: [
+                    { name: "Rohan Sharma", class: "X-A", fee: "Pending", amount: "₹2,500" },
+                    { name: "Anjali Gupta", class: "IX-B", fee: "Paid", amount: "₹0" },
+                    { name: "Vikram Singh", class: "X-A", fee: "Paid", amount: "₹0" },
+                    { name: "Sanya Malhotra", class: "XI-C", fee: "Overdue", amount: "₹5,000" }
+                ]
             };
 
             const navLinks = {
                 student: [
                     { name: "Dashboard", icon: "layout-dashboard", view: "dashboard" },
-                    { name: "My Courses", icon: "book-open-check", view: "courses" },
-                    { name: "Fee Details", icon: "receipt", view: "fees" },
-                    { name: "My Profile", icon: "user", view: "profile" }
+                    { name: "My Fees", icon: "credit-card", view: "fees" },
+                    { name: "Timetable", icon: "calendar-days", view: "timetable" },
+                    { name: "Report Card", icon: "graduation-cap", view: "report" }
                 ],
                 admin: [
-                    { name: "Dashboard", icon: "layout-dashboard", view: "dashboard" },
-                    { name: "Students", icon: "users-2", view: "students" },
-                    { name: "Fee Records", icon: "dollar-sign", view: "fees" },
-                    { name: "Courses", icon: "book-plus", view: "courses" }
+                    { name: "Overview", icon: "bar-chart-3", view: "admin-dash" },
+                    { name: "Student List", icon: "users", view: "students" },
+                    { name: "Fee Collection", icon: "indian-rupee", view: "collection" },
+                    { name: "Settings", icon: "settings", view: "settings" }
                 ]
             };
 
-            // --- UI RENDERING FUNCTIONS ---
-            
-            function renderNav(role) {
-                const links = navLinks[role];
-                navMenu.innerHTML = links.map(link => `
-                    <a href="#" data-view="${link.view}" class="sidebar-link flex items-center space-x-3 py-2 px-3 rounded-md font-medium">
-                        <i data-lucide="${link.icon}" class="h-5 w-5"></i>
-                        <span>${link.name}</span>
-                    </a>
-                `).join('');
-                lucide.createIcons();
-                // Add event listeners to new links
+            // --- GLOBAL FUNCTIONS ---
+            window.switchRole = function(role) {
+                currentRole = role;
+                
+                // Update Toggle UI
+                const btnStudent = document.getElementById('roleStudent');
+                const btnAdmin = document.getElementById('roleAdmin');
+                
+                if(role === 'student') {
+                    btnStudent.className = "px-4 py-1.5 rounded-md text-sm font-bold transition-all bg-blue-100 text-blue-700 shadow-sm";
+                    btnAdmin.className = "px-4 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:bg-slate-50 transition-all";
+                } else {
+                    btnAdmin.className = "px-4 py-1.5 rounded-md text-sm font-bold transition-all bg-blue-100 text-blue-700 shadow-sm";
+                    btnStudent.className = "px-4 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:bg-slate-50 transition-all";
+                }
+
+                initializeApp(role);
+            };
+
+            window.toggleAppSidebar = function() {
+                sidebar.classList.toggle('hidden');
+                sidebar.classList.toggle('flex');
+            }
+
+            window.switchView = function(view) {
+                const user = currentRole === 'student' ? studentData : adminData;
+                let content = '';
+
+                // Generate Content
+                if (currentRole === 'student' && view === 'dashboard') {
+                    content = renderStudentDashboard();
+                } else if (currentRole === 'student' && view === 'fees') {
+                    content = renderStudentFees();
+                } else if (currentRole === 'admin' && view === 'admin-dash') {
+                    content = renderAdminDashboard();
+                } else if (currentRole === 'admin' && view === 'students') {
+                    content = renderAdminStudents();
+                } else {
+                    content = renderPlaceholder(view.replace('-', ' ').toUpperCase());
+                }
+
+                document.getElementById('main-content').innerHTML = `<div class="fade-in space-y-6">${content}</div>`;
+                
+                // Update Nav Active State
                 document.querySelectorAll('.sidebar-link').forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const view = e.currentTarget.dataset.view;
-                        switchView(role, view);
-                        // For mobile view, close sidebar on link click
-                        if(window.innerWidth < 768) {
-                           sidebar.classList.add('-translate-x-full');
-                        }
-                    });
+                    link.classList.remove('active', 'bg-slate-800', 'text-white', 'border-blue-500');
+                    if(link.dataset.view === view) link.classList.add('active', 'bg-slate-800', 'text-white', 'border-blue-500');
                 });
-                // Set first link as active
-                document.querySelector('.sidebar-link').classList.add('active');
+                
+                // Update Mobile Title
+                const cleanTitle = view.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                document.getElementById('mobile-page-title').innerText = cleanTitle;
+
+                if(window.innerWidth < 768) sidebar.classList.add('hidden'); // Close sidebar on mobile
+                lucide.createIcons();
             }
 
-            function renderHeader(role) {
-                const user = role === 'student' ? studentData : adminData;
-                userName.textContent = user.name;
-                userRole.textContent = user.role;
-            }
-
-            function renderStatCard({ label, value, icon }) {
-                return `
-                    <div class="bg-white p-6 rounded-xl shadow-md flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500">${label}</p>
-                            <p class="text-2xl font-bold">${value}</p>
-                        </div>
-                        <div class="bg-blue-100 text-blue-600 p-3 rounded-full">
-                            <i data-lucide="${icon}" class="h-6 w-6"></i>
-                        </div>
-                    </div>
-                `;
-            }
-
+            // --- TEMPLATES ---
             function renderStudentDashboard() {
-                const data = studentData.dashboard;
                 return `
-                    <h3 class="text-xl font-semibold mb-4">${data.welcome}</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        ${data.stats.map(renderStatCard).join('')}
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-2xl font-bold text-slate-800">Welcome, ${studentData.name} 👋</h2>
+                        <span class="text-xs font-bold bg-green-100 text-green-700 px-3 py-1 rounded-full">Academic Year 2025-26</span>
                     </div>
-                    <div class="mt-8 bg-white p-6 rounded-xl shadow-md">
-                         <h3 class="text-lg font-semibold mb-4">Your Courses Progress</h3>
-                         <div class="space-y-4">
-                            ${studentData.courses.map(course => `
-                                <div>
-                                    <div class="flex justify-between items-center mb-1">
-                                        <p class="font-medium">${course.title}</p>
-                                        <p class="text-sm text-gray-600">${course.progress}%</p>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: ${course.progress}%"></div>
-                                    </div>
-                                </div>
-                            `).join('')}
-                         </div>
-                    </div>
-                `;
-            }
 
-            function renderStudentCourses() {
-                return `
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        ${studentData.courses.map(course => `
-                             <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-                                <h4 class="text-xl font-bold text-blue-600">${course.title}</h4>
-                                <p class="text-sm text-gray-500 mt-1">Instructor: ${course.instructor}</p>
-                                <p class="text-sm text-gray-500 mt-1">Schedule: ${course.schedule}</p>
-                                <div class="mt-4">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <p class="text-sm font-medium">Progress</p>
-                                        <p class="text-sm font-medium">${course.progress}%</p>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: ${course.progress}%"></div>
-                                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        ${studentData.stats.map(stat => `
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center justify-between hover:shadow-md transition">
+                                <div>
+                                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">${stat.label}</p>
+                                    <p class="text-2xl font-bold text-slate-800 mt-1">${stat.value}</p>
                                 </div>
-                                <div class="mt-6 flex space-x-2">
-                                    <button class="w-full bg-blue-500 text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-600 transition-colors">View Syllabus</button>
-                                    <button class="w-full bg-gray-200 text-gray-700 py-2 rounded-lg text-sm font-semibold hover:bg-gray-300 transition-colors">Join Class</button>
+                                <div class="p-3 bg-${stat.color}-50 text-${stat.color}-600 rounded-lg">
+                                    <i data-lucide="${stat.icon}" class="h-6 w-6"></i>
                                 </div>
                             </div>
                         `).join('')}
                     </div>
-                `;
-            }
-            
-            function renderStudentFees() {
-                const { total, paid, pending, history } = studentData.fees;
-                return `
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <div class="lg:col-span-1 space-y-4">
-                            <div class="bg-white p-6 rounded-xl shadow-md text-center">
-                                <p class="text-gray-500">Total Fees</p>
-                                <p class="text-3xl font-bold">$${total.toFixed(2)}</p>
-                            </div>
-                             <div class="bg-white p-6 rounded-xl shadow-md text-center">
-                                <p class="text-green-500">Fees Paid</p>
-                                <p class="text-3xl font-bold text-green-500">$${paid.toFixed(2)}</p>
-                            </div>
-                             <div class="bg-white p-6 rounded-xl shadow-md text-center">
-                                <p class="text-red-500">Pending Dues</p>
-                                <p class="text-3xl font-bold text-red-500">$${pending.toFixed(2)}</p>
-                                <button class="mt-4 bg-red-500 text-white py-2 px-6 rounded-lg font-semibold hover:bg-red-600 transition-colors">Pay Now</button>
-                            </div>
-                        </div>
-                        <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-md">
-                            <h4 class="text-lg font-semibold mb-4">Transaction History</h4>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left">
-                                    <thead>
-                                        <tr class="bg-gray-50 border-b">
-                                            <th class="p-3 text-sm font-semibold">Transaction ID</th>
-                                            <th class="p-3 text-sm font-semibold">Date</th>
-                                            <th class="p-3 text-sm font-semibold">Amount</th>
-                                            <th class="p-3 text-sm font-semibold">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${history.map(item => `
-                                            <tr class="border-b">
-                                                <td class="p-3">${item.id}</td>
-                                                <td class="p-3">${item.date}</td>
-                                                <td class="p-3">$${item.amount.toFixed(2)}</td>
-                                                <td class="p-3">
-                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full ${
-                                                        item.status === 'Paid' ? 'bg-green-100 text-green-700' :
-                                                        item.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' :
-                                                        'bg-red-100 text-red-700'
-                                                    }">${item.status}</span>
-                                                </td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
 
-            function renderStudentProfile() {
-                const { id, email, phone, address } = studentData.profile;
-                return `
-                    <div class="bg-white p-8 rounded-xl shadow-md max-w-2xl mx-auto">
-                        <div class="flex flex-col items-center">
-                            <img src="https://placehold.co/100x100/3B82F6/FFFFFF?text=A" alt="Profile" class="rounded-full w-24 h-24 border-4 border-blue-200">
-                            <h3 class="text-2xl font-bold mt-4">${studentData.name}</h3>
-                            <p class="text-gray-500">${id}</p>
-                        </div>
-                        <div class="mt-8 border-t pt-6">
-                            <h4 class="text-lg font-semibold mb-4">Contact Information</h4>
-                            <div class="space-y-4">
-                                <div class="flex items-center">
-                                    <i data-lucide="mail" class="w-5 h-5 mr-3 text-gray-400"></i>
-                                    <span>${email}</span>
-                                </div>
-                                 <div class="flex items-center">
-                                    <i data-lucide="phone" class="w-5 h-5 mr-3 text-gray-400"></i>
-                                    <span>${phone}</span>
-                                </div>
-                                 <div class="flex items-center">
-                                    <i data-lucide="map-pin" class="w-5 h-5 mr-3 text-gray-400"></i>
-                                    <span>${address}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-6 text-right">
-                             <button class="bg-blue-500 text-white py-2 px-6 rounded-lg font-semibold hover:bg-blue-600 transition-colors">Edit Profile</button>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            function renderAdminDashboard() {
-                const data = adminData.dashboard;
-                return `
-                    <h3 class="text-xl font-semibold mb-4">${data.welcome}</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        ${data.stats.map(renderStatCard).join('')}
-                    </div>
-                     <div class="mt-8 bg-white p-6 rounded-xl shadow-md">
-                         <h3 class="text-lg font-semibold mb-4">Recent Fee Transactions</h3>
-                         ${renderFeeTable(adminData.fees.history, true)}
-                    </div>
-                `;
-            }
-
-            function renderAdminStudents() {
-                 return `
-                    <div class="bg-white p-6 rounded-xl shadow-md">
-                        <div class="flex justify-between items-center mb-4">
-                            <h4 class="text-lg font-semibold">All Students</h4>
-                            <button class="flex items-center bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
-                               <i data-lucide="user-plus" class="w-4 h-4 mr-2"></i> Add Student
-                            </button>
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                        <div class="p-5 border-b border-slate-100 flex justify-between items-center">
+                            <h3 class="font-bold text-slate-800">Fee Payment History</h3>
+                            <button onclick="switchView('fees')" class="text-xs font-bold text-blue-600 hover:underline">View All</button>
                         </div>
                         <div class="overflow-x-auto">
-                            <table class="w-full text-left">
-                                <thead>
-                                    <tr class="bg-gray-50 border-b">
-                                        <th class="p-3 text-sm font-semibold">Student ID</th>
-                                        <th class="p-3 text-sm font-semibold">Name</th>
-                                        <th class="p-3 text-sm font-semibold">Course</th>
-                                        <th class="p-3 text-sm font-semibold">Fee Status</th>
-                                        <th class="p-3 text-sm font-semibold">Actions</th>
+                            <table class="w-full text-sm text-left">
+                                <thead class="bg-slate-50 text-slate-500 uppercase text-xs">
+                                    <tr>
+                                        <th class="px-6 py-3">Invoice</th>
+                                        <th class="px-6 py-3">Date</th>
+                                        <th class="px-6 py-3">Description</th>
+                                        <th class="px-6 py-3">Amount</th>
+                                        <th class="px-6 py-3">Status</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    ${adminData.students.map(student => `
-                                        <tr class="border-b">
-                                            <td class="p-3">${student.id}</td>
-                                            <td class="p-3 font-medium">${student.name}</td>
-                                            <td class="p-3">${student.course}</td>
-                                            <td class="p-3">
-                                                 <span class="px-2 py-1 text-xs font-semibold rounded-full ${
-                                                    student.fees === 'Paid' ? 'bg-green-100 text-green-700' :
-                                                    student.fees === 'Pending' ? 'bg-yellow-100 text-yellow-700' :
-                                                    'bg-red-100 text-red-700'
-                                                }">${student.fees}</span>
-                                            </td>
-                                            <td class="p-3">
-                                                <button class="text-blue-600 hover:underline text-sm font-medium">View Report</button>
+                                <tbody class="divide-y divide-slate-100">
+                                    ${studentData.fees.map(fee => `
+                                        <tr class="hover:bg-slate-50">
+                                            <td class="px-6 py-4 font-medium text-blue-600">${fee.id}</td>
+                                            <td class="px-6 py-4 text-slate-500">${fee.date}</td>
+                                            <td class="px-6 py-4 text-slate-600">${fee.desc}</td>
+                                            <td class="px-6 py-4 font-bold">₹${fee.amount}</td>
+                                            <td class="px-6 py-4">
+                                                <span class="px-2 py-1 rounded text-xs font-bold ${fee.status === 'Paid' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">
+                                                    ${fee.status}
+                                                </span>
                                             </td>
                                         </tr>
                                     `).join('')}
@@ -418,146 +290,119 @@
                 `;
             }
 
-            function renderFeeTable(history, includeStudent = false) {
-                 return `
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left">
-                            <thead>
-                                <tr class="bg-gray-50 border-b">
-                                    <th class="p-3 text-sm font-semibold">Transaction ID</th>
-                                    ${includeStudent ? '<th class="p-3 text-sm font-semibold">Student</th>' : ''}
-                                    <th class="p-3 text-sm font-semibold">Date</th>
-                                    <th class="p-3 text-sm font-semibold">Amount</th>
-                                    <th class="p-3 text-sm font-semibold">Status</th>
+            function renderAdminDashboard() {
+                return `
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-2xl font-bold text-slate-800">Admin Overview 📊</h2>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold shadow hover:bg-blue-700 transition">
+                            + Add Fees
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        ${adminData.stats.map(stat => `
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">${stat.label}</p>
+                                    <p class="text-2xl font-bold text-slate-800 mt-1">${stat.value}</p>
+                                </div>
+                                <div class="p-3 bg-${stat.color}-50 text-${stat.color}-600 rounded-lg">
+                                    <i data-lucide="${stat.icon}" class="h-6 w-6"></i>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                        <div class="p-5 border-b border-slate-100">
+                            <h3 class="font-bold text-slate-800">Recent Student Payments</h3>
+                        </div>
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-xs">
+                                <tr>
+                                    <th class="px-6 py-3">Student</th>
+                                    <th class="px-6 py-3">Class</th>
+                                    <th class="px-6 py-3">Amount</th>
+                                    <th class="px-6 py-3">Status</th>
+                                    <th class="px-6 py-3">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                ${history.map(item => `
-                                    <tr class="border-b">
-                                        <td class="p-3">${item.id}</td>
-                                        ${includeStudent ? `<td class="p-3 font-medium">${item.student}</td>` : ''}
-                                        <td class="p-3">${item.date}</td>
-                                        <td class="p-3">$${item.amount.toFixed(2)}</td>
-                                        <td class="p-3">
-                                            <span class="px-2 py-1 text-xs font-semibold rounded-full ${
-                                                item.status === 'Paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
-                                            }">${item.status}</span>
+                            <tbody class="divide-y divide-slate-100">
+                                ${adminData.students.map(stu => `
+                                    <tr>
+                                        <td class="px-6 py-4 font-bold text-slate-700">${stu.name}</td>
+                                        <td class="px-6 py-4 text-slate-500">${stu.class}</td>
+                                        <td class="px-6 py-4 font-mono">${stu.amount}</td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-1 rounded text-xs font-bold ${stu.fee === 'Paid' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">
+                                                ${stu.fee}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <button class="text-blue-600 hover:bg-blue-50 p-2 rounded-full transition"><i data-lucide="mail" class="h-4 w-4"></i></button>
                                         </td>
                                     </tr>
                                 `).join('')}
                             </tbody>
                         </table>
                     </div>
-                 `;
+                `;
             }
 
-            function renderAdminFees() {
-                 return `
-                    <div class="bg-white p-6 rounded-xl shadow-md">
-                         <h4 class="text-lg font-semibold mb-4">All Fee Transactions</h4>
-                         ${renderFeeTable(adminData.fees.history, true)}
+            function renderPlaceholder(title) {
+                return `
+                    <div class="flex flex-col items-center justify-center h-[500px] border-2 border-dashed border-slate-200 rounded-xl bg-slate-50">
+                        <div class="p-4 bg-white rounded-full mb-4 shadow-sm">
+                            <i data-lucide="hammer" class="h-8 w-8 text-slate-300"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-600">${title} Module</h3>
+                        <p class="text-sm text-slate-400 mt-2">This feature is under development.</p>
                     </div>
-                 `;
+                `;
             }
 
-            function renderAdminCourses() {
-                 return `
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center">
-                         <i data-lucide="construct" class="w-16 h-16 mx-auto text-gray-300"></i>
-                         <h3 class="mt-4 text-xl font-semibold">Course Management</h3>
-                         <p class="text-gray-500 mt-2">This feature is under construction. Check back soon!</p>
-                    </div>
-                 `;
+            function renderStudentFees() {
+                // Similar to dashboard table but dedicated page logic can go here
+                return renderPlaceholder("Detailed Fee Breakdown");
             }
-
-
-            // --- VIEW SWITCHING LOGIC ---
-
-            function switchView(role, view) {
-                let content = '';
-                let title = '';
-
-                if (role === 'student') {
-                    switch (view) {
-                        case 'dashboard':
-                            title = 'Dashboard';
-                            content = renderStudentDashboard();
-                            break;
-                        case 'courses':
-                            title = 'My Courses';
-                            content = renderStudentCourses();
-                            break;
-                        case 'fees':
-                            title = 'Fee Details';
-                            content = renderStudentFees();
-                            break;
-                        case 'profile':
-                            title = 'My Profile';
-                            content = renderStudentProfile();
-                            break;
-                        default:
-                            title = 'Dashboard';
-                            content = renderStudentDashboard();
-                    }
-                } else { // admin
-                    switch (view) {
-                         case 'dashboard':
-                            title = 'Admin Dashboard';
-                            content = renderAdminDashboard();
-                            break;
-                        case 'students':
-                            title = 'Student Management';
-                            content = renderAdminStudents();
-                            break;
-                        case 'fees':
-                            title = 'Fee Records';
-                            content = renderAdminFees();
-                            break;
-                        case 'courses':
-                            title = 'Course Management';
-                            content = renderAdminCourses();
-                            break;
-                        default:
-                           title = 'Admin Dashboard';
-                           content = renderAdminDashboard();
-                    }
-                }
-
-                pageTitle.textContent = title;
-                mainContent.innerHTML = `<div class="fade-in">${content}</div>`;
-                lucide.createIcons();
-                
-                // Update active link
-                document.querySelectorAll('.sidebar-link').forEach(link => {
-                    link.classList.remove('active');
-                    if(link.dataset.view === view) {
-                        link.classList.add('active');
-                    }
-                });
+            
+            function renderAdminStudents() {
+                 return renderPlaceholder("Student Directory");
             }
 
             function initializeApp(role) {
-                renderNav(role);
-                renderHeader(role);
-                switchView(role, 'dashboard');
+                const user = role === 'student' ? studentData : adminData;
+                
+                // Update Sidebar Profile
+                document.getElementById('user-name').textContent = user.name;
+                document.getElementById('user-role').textContent = user.role;
+                document.getElementById('user-initial').textContent = user.name.charAt(0);
+                
+                // Render Menu
+                const links = navLinks[role];
+                document.getElementById('nav-menu').innerHTML = links.map(link => `
+                    <a href="#" data-view="${link.view}" class="sidebar-link flex items-center space-x-3 py-3 px-6 text-sm font-medium text-slate-400 hover:text-white border-r-4 border-transparent">
+                        <i data-lucide="${link.icon}" class="h-5 w-5"></i>
+                        <span>${link.name}</span>
+                    </a>
+                `).join('');
+
+                // Add Listeners
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        switchView(e.currentTarget.dataset.view);
+                    });
+                });
+
+                // Load Default View
+                const startView = role === 'student' ? 'dashboard' : 'admin-dash';
+                switchView(startView);
             }
 
-            // --- EVENT LISTENERS ---
-
-            userToggle.addEventListener('change', (e) => {
-                const role = e.target.checked ? 'admin' : 'student';
-                initializeApp(role);
-            });
-
-            menuButton.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
-            });
-            
-            // --- INITIAL LOAD ---
-            initializeApp('student'); // Start with student view
+            // Start
+            initializeApp('student');
         });
     </script>
 </body>
 </html>
-
-

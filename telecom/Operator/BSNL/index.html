@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title id="page-title">Operator Hub</title>
+    <meta id="page-desc" name="description" content="Telecom Operator Landing Page">
+    <meta name="robots" content="index, follow">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        #navbar-placeholder { min-height: 80px; display: block; }
+        #footer-placeholder { min-height: 300px; display: block; }
+        
+        /* Dynamic Theme Variables (Updated by JS) */
+        :root {
+            --brand-color: #2563EB; /* Default */
+            --brand-light: #EFF6FF;
+        }
+        
+        .brand-bg { background-color: var(--brand-color); }
+        .brand-text { color: var(--brand-color); }
+        .brand-border { border-color: var(--brand-color); }
+        .brand-light-bg { background-color: var(--brand-light); }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-extrabold mb-4">BSNL - Bharat Sanchar Nigam Limited</h1>
+            <p class="text-lg text-slate-600 dark:text-slate-400">Explore BSNL's services, plans, and support options.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <a href="https://www.bsnl.co.in/opencms/bsnl/" target="_blank" class="group relative bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:border-green-500 transition-all overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i data-lucide="globe" class="w-24 h-24 text-green-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-2">Official Website</h2>
+                <p class="text-slate 600 dark:text-slate-400">Visit BSNL's official website for comprehensive information.</p>
+            </a>    
+
+            <a href="/telecom/operator/bsnl/complete-guide-2026-plans-recharge-customer-care-all-solutions.html" class="group relative bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:border-green-500 transition-all overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i data-lucide="book-open" class="w-24 h-24 text-green-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-2">Complete Guide 2026</h2>
+                <p class="text-slate-600 dark:text-slate-400">Everything you need to know about BSNL's plans, recharge options, and customer care.</p>
+            </a>    
+
+            <a href="https://play.google.com/store/search?q=bsnl&c=apps" target="_blank" class="group relative bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:border-green-500 transition-all overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i data-lucide="smartphone" class="w-24 h-24 text-green-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-2">BSNL Mobile App</h2>
+                <p class="text-slate-600 dark:text-slate-400">Download the official BSNL mobile app for easy account management.</p>    
+</body>
+</html>

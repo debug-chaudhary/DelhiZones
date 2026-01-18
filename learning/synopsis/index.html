@@ -1,1067 +1,353 @@
-import React, { useState } from 'react';
-import { FileText, Download, CheckCircle } from 'lucide-react';
-
-export default function ProjectSynopsisGenerator() {
-  const [activeSection, setActiveSection] = useState('details');
-  
-  const studentDetails = {
-    name: "Rohit Kumar Chaudhary",
-    enrollment: "2353170296",
-    rcCode: "07",
-    rcName: "DELHI 1 (MOHAN ESTATE - SOUTH DELHI)",
-    studyCenter: "07 - DELHI 1"
-  };
-
-  const projectDetails = {
-    title: "Integrated E-Waste and Household Scrap Management Portal",
-    category: "Web-based Application using RDBMS and Internet Technologies",
-    duration: "3-6 months"
-  };
-
-  const modules = [
-    { id: 1, name: "User Management", desc: "Registration, login, profile management with role-based access" },
-    { id: 2, name: "Waste Category Management", desc: "Display waste types, segregation guidelines, current rates" },
-    { id: 3, name: "Pickup Request System", desc: "Schedule pickups, track status, upload item photos" },
-    { id: 4, name: "Scrap Valuation & Selling", desc: "Price calculator, quotation generation, payment processing" },
-    { id: 5, name: "Collection Management", desc: "Assign collectors, route optimization, completion verification" },
-    { id: 6, name: "Recycling Center Locator", desc: "Map integration, search filters, directions" },
-    { id: 7, name: "Complaint & Feedback", desc: "Register complaints, track status, rate services" },
-    { id: 8, name: "Educational Portal", desc: "Articles, videos, statistics on waste management" },
-    { id: 9, name: "Rewards & Incentives", desc: "Points system, leaderboard, redemption options" },
-    { id: 10, name: "Admin Dashboard", desc: "Analytics, reports, user management, rate updates" }
-  ];
-
-  const techStack = {
-    frontend: "React.js, HTML5, CSS3, Bootstrap, JavaScript",
-    backend: "Node.js with Express.js",
-    database: "MySQL / MongoDB",
-    additional: "Google Maps API, JWT Authentication, Razorpay (Test Mode)"
-  };
-
-  const objectives = [
-    "Develop a user-friendly web platform for efficient e-waste and scrap management",
-    "Enable citizens to easily schedule waste pickups and track collection status",
-    "Provide transparent pricing mechanism for recyclable materials",
-    "Implement route optimization for waste collectors to improve efficiency",
-    "Create awareness about proper waste segregation through educational content",
-    "Establish a reward system to encourage regular participation in recycling",
-    "Generate comprehensive reports for administrative decision-making"
-  ];
-
-  const futureScope = [
-    "Mobile application development for Android and iOS platforms",
-    "Integration with IoT-enabled smart bins for real-time monitoring",
-    "AI-based waste classification using image recognition technology",
-    "Blockchain implementation for transparent waste tracking",
-    "Real-time GPS tracking of collection vehicles",
-    "Integration with municipal waste management systems",
-    "Chatbot for 24/7 customer support"
-  ];
-
-  const downloadSynopsis = () => {
-    const content = generateSynopsisContent();
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'BCSP064_Project_Synopsis_Rohit_Kumar.txt';
-    a.click();
-  };
-
-  const generateSynopsisContent = () => {
-    return `
-═══════════════════════════════════════════════════════════════════════
-                    PROJECT SYNOPSIS FOR BCSP-064
-═══════════════════════════════════════════════════════════════════════
-
-SCHOOL OF COMPUTER AND INFORMATION SCIENCES
-INDIRA GANDHI NATIONAL OPEN UNIVERSITY
-MAIDAN GARHI, NEW DELHI – 110 068
-
-───────────────────────────────────────────────────────────────────────
-STUDENT DETAILS
-───────────────────────────────────────────────────────────────────────
-Name                : ${studentDetails.name}
-Enrolment No.       : ${studentDetails.enrollment}
-Regional Centre     : ${studentDetails.rcCode} - ${studentDetails.rcName}
-Study Centre        : ${studentDetails.studyCenter}
-
-───────────────────────────────────────────────────────────────────────
-PROJECT DETAILS
-───────────────────────────────────────────────────────────────────────
-Project Title       : ${projectDetails.title}
-Project Category    : ${projectDetails.category}
-Expected Duration   : ${projectDetails.duration}
-
-═══════════════════════════════════════════════════════════════════════
-                        1. INTRODUCTION
-═══════════════════════════════════════════════════════════════════════
-
-1.1 Background
-With rapid technological advancement and increasing consumerism, the generation 
-of electronic waste (e-waste) and household scrap has become a critical 
-environmental concern. India generates approximately 3.2 million tonnes of 
-e-waste annually, making it the third-largest e-waste generator globally. 
-However, only 10-15% of this waste is properly collected and recycled through 
-formal channels.
-
-Current challenges in waste management include:
-• Lack of awareness about proper disposal methods
-• Absence of convenient collection mechanisms
-• Informal sector dominance leading to environmental hazards
-• No transparent pricing for recyclable materials
-• Inefficient collection routes and scheduling
-• Limited tracking of waste lifecycle
-
-1.2 Problem Statement
-Citizens lack a convenient, transparent platform to dispose of e-waste and 
-household scrap responsibly. Existing systems are fragmented, unreliable, and 
-fail to provide fair compensation for recyclable materials. There is a critical 
-need for an integrated digital solution that connects citizens, waste collectors, 
-and recycling centers efficiently.
-
-1.3 Proposed Solution
-This project aims to develop a comprehensive web-based portal that facilitates:
-• Easy scheduling of waste pickups from doorstep
-• Transparent valuation and payment for scrap materials
-• Real-time tracking of collection requests
-• Educational content promoting proper waste segregation
-• Incentive mechanisms to encourage recycling behavior
-• Administrative tools for monitoring and optimization
-
-═══════════════════════════════════════════════════════════════════════
-                        2. PROJECT OBJECTIVES
-═══════════════════════════════════════════════════════════════════════
-
-${objectives.map((obj, i) => `${i + 1}. ${obj}`).join('\n')}
-
-═══════════════════════════════════════════════════════════════════════
-                        3. PROJECT CATEGORY
-═══════════════════════════════════════════════════════════════════════
-
-This project falls under: ${projectDetails.category}
-
-The system integrates multiple technologies:
-• Web Technologies: HTML5, CSS3, JavaScript, React.js
-• Backend Framework: Node.js with Express.js
-• Database Management: MySQL/MongoDB (RDBMS/NoSQL)
-• RESTful API Development
-• Third-party API Integration (Google Maps, Payment Gateway)
-• Authentication & Authorization (JWT)
-
-═══════════════════════════════════════════════════════════════════════
-                        4. SYSTEM ANALYSIS
-═══════════════════════════════════════════════════════════════════════
-
-4.1 Entities Identification
-• User (Citizens, Collectors, Recycling Centers, Admin)
-• Waste Category (E-waste, Dry, Wet, Hazardous, Bulky, Scrap)
-• Pickup Request
-• Collection Assignment
-• Scrap Rate
-• Payment Transaction
-• Recycling Center
-• Complaint
-• Feedback
-• Reward Points
-• Notification
-
-4.2 Entity-Relationship (ER) Diagram
-[To be included in final synopsis - showing relationships between all entities]
-
-Key Relationships:
-• User [1] -------- [M] Pickup Request
-• Pickup Request [1] -------- [1] Collection Assignment
-• Waste Category [1] -------- [M] Scrap Rate
-• User [1] -------- [M] Address
-• Pickup Request [1] -------- [M] Feedback
-• User [1] -------- [M] Reward Transaction
-
-4.3 Data Flow Diagrams (DFD)
-
-Level 0 DFD (Context Diagram):
-External Entities: Citizen, Collector, Admin, Recycling Center
-Process: Waste Management System
-Data Flows: Request submission, Collection scheduling, Reports, Payments
-
-Level 1 DFD:
-Major Processes:
-P1: User Management
-P2: Pickup Request Management
-P3: Collection & Route Management
-P4: Payment Processing
-P5: Complaint & Feedback Management
-P6: Reporting & Analytics
-
-Level 2 DFD (for Pickup Request Management):
-P2.1: Create Pickup Request
-P2.2: Validate Request Details
-P2.3: Calculate Scrap Value
-P2.4: Assign Collector
-P2.5: Update Request Status
-P2.6: Send Notifications
-
-4.4 Data Dictionary (Sample)
-
-TABLE: users
----------------------------------------------------------------
-Field Name      | Data Type    | Size | Constraints
----------------------------------------------------------------
-user_id         | INT          | -    | PRIMARY KEY, AUTO_INCREMENT
-name            | VARCHAR      | 100  | NOT NULL
-email           | VARCHAR      | 150  | UNIQUE, NOT NULL
-password        | VARCHAR      | 255  | NOT NULL (hashed)
-phone           | VARCHAR      | 15   | NOT NULL
-role            | ENUM         | -    | 'citizen','collector','admin'
-created_at      | TIMESTAMP    | -    | DEFAULT CURRENT_TIMESTAMP
-status          | ENUM         | -    | 'active','inactive','blocked'
-
-TABLE: pickup_requests
----------------------------------------------------------------
-Field Name      | Data Type    | Size | Constraints
----------------------------------------------------------------
-request_id      | INT          | -    | PRIMARY KEY, AUTO_INCREMENT
-user_id         | INT          | -    | FOREIGN KEY (users)
-category_id     | INT          | -    | FOREIGN KEY (waste_categories)
-address_id      | INT          | -    | FOREIGN KEY (addresses)
-pickup_date     | DATE         | -    | NOT NULL
-time_slot       | VARCHAR      | 20   | NOT NULL
-quantity_est    | DECIMAL      | 10,2 | NULL
-status          | ENUM         | -    | 'pending','assigned','completed'
-special_notes   | TEXT         | -    | NULL
-created_at      | TIMESTAMP    | -    | DEFAULT CURRENT_TIMESTAMP
-
-TABLE: scrap_rates
----------------------------------------------------------------
-Field Name      | Data Type    | Size | Constraints
----------------------------------------------------------------
-rate_id         | INT          | -    | PRIMARY KEY, AUTO_INCREMENT
-category_id     | INT          | -    | FOREIGN KEY (waste_categories)
-item_name       | VARCHAR      | 100  | NOT NULL
-rate_per_kg     | DECIMAL      | 10,2 | NOT NULL
-effective_date  | DATE         | -    | NOT NULL
-updated_by      | INT          | -    | FOREIGN KEY (users)
-
-═══════════════════════════════════════════════════════════════════════
-                        5. SYSTEM DESIGN
-═══════════════════════════════════════════════════════════════════════
-
-5.1 Module Description
-
-${modules.map(m => `
-Module ${m.id}: ${m.name}
-${'─'.repeat(70)}
-Description: ${m.desc}
-`).join('\n')}
-
-5.2 Detailed Module Specifications
-
-MODULE 1: USER MANAGEMENT
-Functions:
-• register() - Create new user account with validation
-• login() - Authenticate user and generate JWT token
-• updateProfile() - Modify user information
-• changePassword() - Update password with encryption
-• forgotPassword() - Send reset link via email
-• manageAddresses() - CRUD operations for user addresses
-
-Data Structures:
-• User object: {id, name, email, password, phone, role, addresses[]}
-• Session token: JWT with expiry
-
-Process Logic:
-1. User submits registration form
-2. Validate input (email format, password strength, phone number)
-3. Check if email already exists
-4. Hash password using bcrypt
-5. Insert record into database
-6. Send welcome email
-7. Return success/failure response
-
-MODULE 3: PICKUP REQUEST SYSTEM
-Functions:
-• createRequest() - Submit new pickup request
-• uploadImages() - Store item photos
-• calculateEstimate() - Compute expected earnings
-• trackRequest() - Get real-time status
-• cancelRequest() - Cancel pending request
-• rescheduleRequest() - Change pickup date/time
-
-Algorithm for Price Estimation:
-Input: waste_category, estimated_weight
-1. Fetch current rate from scrap_rates table
-2. If category = 'e-waste' or 'scrap':
-     estimated_value = estimated_weight × rate_per_kg
-   Else:
-     estimated_value = 0 (service-based pickup)
-3. Return estimated_value
-Output: Estimated earning amount
-
-MODULE 5: COLLECTION MANAGEMENT
-Route Optimization Algorithm:
-Input: List of pickup requests for the day, collector location
-1. Group requests by area/pincode
-2. Sort by time_slot preference
-3. Calculate distance matrix between points (Google Maps API)
-4. Apply nearest neighbor heuristic:
-   a. Start from collector's current location
-   b. Find nearest unvisited pickup point
-   c. Add to route and mark as visited
-   d. Repeat until all points covered
-5. Generate optimized route sequence
-Output: Ordered list of pickup addresses with estimated times
-
-5.3 Database Schema Design
-
-Complete table structure with relationships:
-
-users (user_id PK, name, email, password, phone, role, status, created_at)
-  |
-  |-- addresses (address_id PK, user_id FK, address_line, city, pincode)
-  |
-  |-- pickup_requests (request_id PK, user_id FK, category_id FK, 
-  |                     address_id FK, pickup_date, time_slot, quantity_est,
-  |                     status, special_notes, created_at)
-  |
-  |-- rewards (reward_id PK, user_id FK, points, transaction_type, date)
-  |
-  |-- complaints (complaint_id PK, user_id FK, request_id FK, 
-                   complaint_text, status, response, date)
-
-waste_categories (category_id PK, name, description, image_url, guidelines)
-  |
-  |-- scrap_rates (rate_id PK, category_id FK, item_name, rate_per_kg,
-                    effective_date, updated_by FK)
-
-pickup_requests
-  |
-  |-- assignments (assignment_id PK, request_id FK, collector_id FK,
-  |                assigned_date, route_order, status)
-  |
-  |-- collections (collection_id PK, request_id FK, actual_weight,
-  |                amount_paid, payment_mode, completion_date, otp_verified)
-  |
-  |-- feedback (feedback_id PK, request_id FK, rating, comments, date)
-
-recycling_centers (center_id PK, name, address, phone, latitude, longitude,
-                   waste_types_accepted, operating_hours, rating)
-
-notifications (notification_id PK, user_id FK, message, read_status,
-               notification_type, created_at)
-
-5.4 User Interface Design
-
-Key Screens:
-1. Home Page - Hero section, categories showcase, how it works, testimonials
-2. Registration Page - Multi-step form with validation
-3. Login Page - Email/password with remember me option
-4. User Dashboard - Stats cards, recent requests, quick actions
-5. Schedule Pickup - Category selection, date/time picker, address selector
-6. Track Request - Status timeline, collector details, ETA
-7. Price Calculator - Weight input, category dropdown, instant calculation
-8. Recycling Centers - Interactive map, list view, search filters
-9. My Earnings - Transaction history, total earnings, withdrawal options
-10. Admin Dashboard - Charts, reports, user management, rate updates
-
-Color Scheme: 
-Primary: #10B981 (Green - eco-friendly)
-Secondary: #3B82F6 (Blue - trust)
-Accent: #F59E0B (Orange - energy)
-Background: #F9FAFB (Light gray)
-Text: #1F2937 (Dark gray)
-
-5.5 Security Implementation
-
-Authentication:
-• JWT (JSON Web Tokens) for stateless authentication
-• Token expiry: 24 hours
-• Refresh token mechanism
-• Password hashing using bcrypt (salt rounds: 10)
-
-Authorization:
-• Role-based access control (RBAC)
-• Middleware to verify user roles before API access
-• Protected routes on frontend
-
-Input Validation:
-• Server-side validation for all form inputs
-• Parameterized queries to prevent SQL injection
-• XSS protection using input sanitization
-• File upload validation (type, size limits)
-• CSRF tokens for state-changing operations
-
-Data Protection:
-• HTTPS encryption for data in transit
-• Encrypted storage for sensitive data
-• Regular database backups
-• Compliance with data privacy regulations
-
-═══════════════════════════════════════════════════════════════════════
-                        6. TOOLS & TECHNOLOGIES
-═══════════════════════════════════════════════════════════════════════
-
-6.1 Software Requirements
-
-Development Tools:
-• IDE: Visual Studio Code
-• Version Control: Git, GitHub
-• API Testing: Postman
-• Database Management: MySQL Workbench / MongoDB Compass
-
-Frontend Technologies:
-${techStack.frontend}
-
-Backend Technologies:
-${techStack.backend}
-
-Database:
-${techStack.database}
-
-Additional Libraries & APIs:
-${techStack.additional}
-
-6.2 Hardware Requirements
-
-Development Environment:
-• Processor: Intel Core i5 or equivalent
-• RAM: 8 GB minimum (16 GB recommended)
-• Storage: 256 GB SSD
-• Internet Connection: Broadband (2 Mbps+)
-
-Deployment Environment:
-• Web Server: Apache/Nginx
-• Database Server: MySQL 8.0+ / MongoDB 5.0+
-• Cloud Platform: AWS/Heroku/DigitalOcean (optional)
-
-6.3 System Requirements for End Users
-
-• Modern web browser (Chrome, Firefox, Edge, Safari)
-• Internet connection
-• Screen resolution: 1366x768 or higher
-• JavaScript enabled
-
-═══════════════════════════════════════════════════════════════════════
-                        7. TESTING STRATEGY
-═══════════════════════════════════════════════════════════════════════
-
-7.1 Unit Testing
-Test individual functions and components in isolation
-Example test cases:
-• Test user registration with valid/invalid data
-• Test login authentication
-• Test price calculation algorithm
-• Test route optimization function
-
-7.2 Integration Testing
-Test interaction between modules
-• Test complete pickup request flow (create → assign → collect)
-• Test payment processing integration
-• Test notification system triggers
-• Test API endpoint integration
-
-7.3 System Testing
-End-to-end testing of complete workflows
-• Test user journey from registration to first pickup
-• Test admin workflow for managing requests
-• Test collector workflow for completing collections
-• Performance testing (load time, concurrent users)
-• Security testing (SQL injection, XSS attempts)
-• Browser compatibility testing
-
-7.4 User Acceptance Testing (UAT)
-• Beta testing with sample users
-• Gather feedback on usability
-• Identify improvement areas
-
-═══════════════════════════════════════════════════════════════════════
-                        8. IMPLEMENTATION PLAN
-═══════════════════════════════════════════════════════════════════════
-
-Phase 1: Requirements & Analysis (Week 1-2)
-• Finalize requirements
-• Complete ER diagrams and DFDs
-• Design database schema
-
-Phase 2: Design & Architecture (Week 3-4)
-• Create UI/UX wireframes
-• Define API endpoints
-• Set up development environment
-
-Phase 3: Core Development (Week 5-10)
-• Develop user management module
-• Implement pickup request system
-• Build collection management
-• Create admin dashboard
-
-Phase 4: Advanced Features (Week 11-12)
-• Integrate Google Maps API
-• Implement reward system
-• Add payment gateway
-• Develop educational portal
-
-Phase 5: Testing & Debugging (Week 13-14)
-• Conduct all testing phases
-• Fix identified bugs
-• Performance optimization
-
-Phase 6: Documentation & Deployment (Week 15)
-• Complete project report
-• Prepare deployment package
-• User manual creation
-
-═══════════════════════════════════════════════════════════════════════
-                        9. PROJECT SCOPE
-═══════════════════════════════════════════════════════════════════════
-
-9.1 In Scope
-✓ Web-based application accessible via browsers
-✓ User registration and authentication
-✓ Pickup scheduling and tracking
-✓ Scrap valuation and payment processing
-✓ Collector assignment and route optimization
-✓ Recycling center locator with maps
-✓ Complaint and feedback management
-✓ Educational content portal
-✓ Reward points system
-✓ Admin dashboard with analytics
-✓ Email/SMS notifications
-✓ Responsive design for mobile browsers
-
-9.2 Out of Scope
-✗ Native mobile applications (Android/iOS)
-✗ Real-time GPS tracking of vehicles
-✗ IoT sensor integration
-✗ AI-based waste classification
-✗ Blockchain implementation
-✗ Multi-language support
-✗ Offline mode functionality
-
-═══════════════════════════════════════════════════════════════════════
-                        10. INDUSTRY/CLIENT DETAILS
-═══════════════════════════════════════════════════════════════════════
-
-Is this project for any Industry/Client? No
-
-This is an academic project developed to demonstrate software engineering 
-principles and full-stack development capabilities. However, the system is 
-designed with real-world applicability and can be adapted for:
-• Municipal waste management departments
-• Private waste collection companies
-• Environmental NGOs
-• Residential welfare associations
-• Corporate campuses
-
-═══════════════════════════════════════════════════════════════════════
-                        11. LIMITATIONS
-═══════════════════════════════════════════════════════════════════════
-
-1. Internet Dependency
-   The system requires active internet connection for all operations
-
-2. Manual Weight Verification
-   Actual weight measurement depends on collector's manual input
-
-3. Payment Gateway Limitations
-   Using test/sandbox mode for payment processing in academic version
-
-4. Geographic Coverage
-   Initial version limited to select cities/areas
-
-5. Language Support
-   Currently supports English language only
-
-6. Browser Dependency
-   Requires modern browsers with JavaScript enabled
-
-7. Scalability Constraints
-   Performance testing limited to small user base
-
-═══════════════════════════════════════════════════════════════════════
-                        12. FUTURE SCOPE
-═══════════════════════════════════════════════════════════════════════
-
-${futureScope.map((item, i) => `${i + 1}. ${item}`).join('\n')}
-
-8. Advanced Analytics
-   Machine learning models to predict waste generation patterns
-
-9. Social Media Integration
-   Share recycling achievements and promote awareness
-
-10. Marketplace for Recycled Products
-    Platform to sell products made from recycled materials
-
-═══════════════════════════════════════════════════════════════════════
-                        13. EXPECTED OUTCOMES
-═══════════════════════════════════════════════════════════════════════
-
-Upon successful completion, this project will deliver:
-
-1. A fully functional web-based waste management portal
-2. Comprehensive documentation covering all SDLC phases
-3. Source code with proper commenting and version control
-4. Database with sample data for demonstration
-5. Test reports documenting all testing phases
-6. User manual for citizens, collectors, and administrators
-7. Demonstration of software engineering best practices
-8. Understanding of full-stack web development
-9. Experience with API integration and third-party services
-10. Knowledge of security implementation in web applications
-
-═══════════════════════════════════════════════════════════════════════
-                        14. CONCLUSION
-═══════════════════════════════════════════════════════════════════════
-
-The Integrated E-Waste and Household Scrap Management Portal addresses a 
-critical environmental and social need by providing a digital solution for 
-efficient waste management. The project demonstrates comprehensive application 
-of software engineering principles, database design, web technologies, and 
-system integration.
-
-This project aligns with India's Swachh Bharat Mission and E-Waste Management 
-Rules, 2016, contributing to environmental sustainability while providing 
-economic benefits to citizens through transparent scrap valuation.
-
-The development process will provide hands-on experience in:
-• Full software development lifecycle
-• Modern web technologies and frameworks
-• Database design and optimization
-• API development and integration
-• Security implementation
-• Testing methodologies
-• Project documentation
-
-The system is scalable and can be extended with advanced features in future 
-iterations, making it a viable solution for real-world deployment.
-
-═══════════════════════════════════════════════════════════════════════
-                        15. REFERENCES
-═══════════════════════════════════════════════════════════════════════
-
-1. Central Pollution Control Board (CPCB), "E-Waste Management Rules, 2016"
-2. Ministry of Environment, "Guidelines for E-Waste Management in India"
-3. Sommerville, I., "Software Engineering", 10th Edition, Pearson
-4. Silberschatz, A., "Database System Concepts", 7th Edition, McGraw-Hill
-5. Mozilla Developer Network (MDN), "Web Development Documentation"
-6. React.js Official Documentation, https://react.dev
-7. Node.js Official Documentation, https://nodejs.org
-8. MySQL Documentation, https://dev.mysql.com/doc/
-9. Google Maps Platform Documentation
-10. JWT.io, "Introduction to JSON Web Tokens"
-
-═══════════════════════════════════════════════════════════════════════
-
-                    DECLARATION BY STUDENT
-
-I hereby declare that the project synopsis submitted herewith is my original 
-work and has been prepared under the guidance of my project guide. The 
-information and data included in this synopsis are authentic to the best of 
-my knowledge.
-
-Student Name: ${studentDetails.name}
-Enrolment No.: ${studentDetails.enrollment}
-
-Signature: ___________________
-Date: ___________________
-
-
-                    APPROVAL BY PROJECT GUIDE
-
-The project synopsis submitted by ${studentDetails.name} (Enrolment No.: 
-${studentDetails.enrollment}) has been reviewed and is approved for further 
-development.
-
-Guide Name: [To be filled]
-Designation: [To be filled]
-Qualification: [To be filled]
-
-Signature: ___________________
-Date: ___________________
-
-═══════════════════════════════════════════════════════════════════════
-                            END OF SYNOPSIS
-═══════════════════════════════════════════════════════════════════════
-`;
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-800 mb-2">
-                BCSP-064 Project Synopsis
-              </h1>
-              <p className="text-gray-600">
-                {projectDetails.title}
-              </p>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Project Synopsis Generator | Delhizones</title>
+    <meta name="description" content="Generate and download your BCSP-064 Project Synopsis for IGNOU.">
+    <link rel="canonical" href="https://delhizones.com/learning/synopsis/">
+    <meta name="robots" content="index, follow">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { primary: '#2563EB', darkBg: '#0f172a' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+    /* Prevents Layout Shift (CLS) */
+    #navbar-placeholder {
+        min-height: 80px;
+        display: block;
+        background-color: white;
+    }
+    
+    #footer-placeholder {
+        min-height: 300px;
+        display: block;
+    }
+    .tab-content {
+        display: none;
+    }
+    .tab-content.active {
+        display: block;
+    }
+    .tab-btn.active {
+        background-color: #16a34a; /* green-600 */
+        color: white;
+    }
+</style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
+</head>
+
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="container mx-auto mt-24 px-6 py-8 flex-grow max-w-6xl">
+        <!-- Header Section -->
+        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">
+                        BCSP-064 Project Synopsis
+                    </h1>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Integrated E-Waste and Household Scrap Management Portal
+                    </p>
+                </div>
+                <i data-lucide="file-text" class="w-16 h-16 text-green-600"></i>
             </div>
-            <FileText className="w-16 h-16 text-green-600" />
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-4 mt-6 p-4 bg-gray-50 rounded">
-            <div>
-              <p className="text-sm text-gray-600">Student Name</p>
-              <p className="font-semibold">{studentDetails.name}</p>
+            
+            <div class="grid md:grid-cols-2 gap-4 mt-6 p-4 bg-gray-50 dark:bg-slate-700 rounded">
+                <div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Student Name</p>
+                    <p class="font-semibold dark:text-white">Rohit Kumar Chaudhary</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Enrollment Number</p>
+                    <p class="font-semibold dark:text-white">2353170296</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Regional Centre</p>
+                    <p class="font-semibold dark:text-white">07 - DELHI 1 (MOHAN ESTATE - SOUTH DELHI)</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Project Category</p>
+                    <p class="font-semibold dark:text-white">Web-based Application using RDBMS</p>
+                </div>
             </div>
-            <div>
-              <p className="text-sm text-gray-600">Enrollment Number</p>
-              <p className="font-semibold">{studentDetails.enrollment}</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-600">Regional Centre</p>
-              <p className="font-semibold">{studentDetails.rcCode} - {studentDetails.rcName}</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-600">Project Category</p>
-              <p className="font-semibold">Web-based RDBMS Application</p>
-            </div>
-          </div>
         </div>
 
-        {/* Navigation */}
-        <div className="bg-white rounded-lg shadow-lg mb-6 overflow-hidden">
-          <div className="flex overflow-x-auto">
-            {['details', 'modules', 'tech', 'timeline'].map((section) => (
-              <button
-                key={section}
-                onClick={() => setActiveSection(section)}
-                className={`px-6 py-3 font-medium transition-colors flex-shrink-0 ${
-                  activeSection === section
-                    ? 'bg-green-600 text-white'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
-                }`}
-              >
-                {section === 'details' && 'Project Details'}
-                {section === 'modules' && 'Modules (10)'}
-                {section === 'tech' && 'Tech Stack'}
-                {section === 'timeline' && 'Timeline'}
-              </button>
-            ))}
-          </div>
+        <!-- Navigation Tabs -->
+        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-lg mb-6 overflow-hidden">
+            <div class="flex overflow-x-auto">
+                <button onclick="switchTab('details')" id="btn-details" class="tab-btn active px-6 py-3 font-medium transition-colors flex-shrink-0 bg-white text-gray-600 hover:bg-gray-50 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700">
+                    Project Details
+                </button>
+                <button onclick="switchTab('modules')" id="btn-modules" class="tab-btn px-6 py-3 font-medium transition-colors flex-shrink-0 bg-white text-gray-600 hover:bg-gray-50 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700">
+                    Modules (10)
+                </button>
+                <button onclick="switchTab('tech')" id="btn-tech" class="tab-btn px-6 py-3 font-medium transition-colors flex-shrink-0 bg-white text-gray-600 hover:bg-gray-50 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700">
+                    Tech Stack
+                </button>
+                <button onclick="switchTab('timeline')" id="btn-timeline" class="tab-btn px-6 py-3 font-medium transition-colors flex-shrink-0 bg-white text-gray-600 hover:bg-gray-50 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700">
+                    Timeline
+                </button>
+            </div>
         </div>
 
-        {/* Content Sections */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          {activeSection === 'details' && (
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Project Objectives</h2>
-                <div className="space-y-3">
-                  {objectives.map((obj, i) => (
-                    <div key={i} className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" />
-                      <p className="text-gray-700">{obj}</p>
+        <!-- Content Sections -->
+        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 mb-6">
+            
+            <!-- Details Tab -->
+            <div id="tab-details" class="tab-content active space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Project Objectives</h2>
+                    <div class="space-y-3" id="objectives-list">
+                        <!-- Populated by JS or static -->
+                        <div class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"></i><p class="text-gray-700 dark:text-gray-300">Develop a user-friendly web platform for efficient e-waste and scrap management</p></div>
+                        <div class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"></i><p class="text-gray-700 dark:text-gray-300">Enable citizens to easily schedule waste pickups and track collection status</p></div>
+                        <div class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"></i><p class="text-gray-700 dark:text-gray-300">Provide transparent pricing mechanism for recyclable materials</p></div>
+                        <div class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"></i><p class="text-gray-700 dark:text-gray-300">Implement route optimization for waste collectors to improve efficiency</p></div>
+                        <div class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"></i><p class="text-gray-700 dark:text-gray-300">Create awareness about proper waste segregation through educational content</p></div>
+                        <div class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"></i><p class="text-gray-700 dark:text-gray-300">Establish a reward system to encourage regular participation in recycling</p></div>
+                        <div class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"></i><p class="text-gray-700 dark:text-gray-300">Generate comprehensive reports for administrative decision-making</p></div>
                     </div>
-                  ))}
                 </div>
-              </div>
 
-              <div className="border-t pt-6">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Future Scope</h2>
-                <div className="grid md:grid-cols-2 gap-3">
-                  {futureScope.map((item, i) => (
-                    <div key={i} className="flex items-start p-3 bg-blue-50 rounded">
-                      <span className="font-bold text-blue-600 mr-2">{i + 1}.</span>
-                      <p className="text-gray-700 text-sm">{item}</p>
+                <div class="border-t dark:border-slate-700 pt-6">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Future Scope</h2>
+                    <div class="grid md:grid-cols-2 gap-3" id="future-scope-list">
+                         <div class="flex items-start p-3 bg-blue-50 dark:bg-slate-700 rounded"><span class="font-bold text-blue-600 dark:text-blue-400 mr-2">1.</span><p class="text-gray-700 dark:text-gray-300 text-sm">Mobile application development for Android and iOS platforms</p></div>
+                         <div class="flex items-start p-3 bg-blue-50 dark:bg-slate-700 rounded"><span class="font-bold text-blue-600 dark:text-blue-400 mr-2">2.</span><p class="text-gray-700 dark:text-gray-300 text-sm">Integration with IoT-enabled smart bins for real-time monitoring</p></div>
+                         <div class="flex items-start p-3 bg-blue-50 dark:bg-slate-700 rounded"><span class="font-bold text-blue-600 dark:text-blue-400 mr-2">3.</span><p class="text-gray-700 dark:text-gray-300 text-sm">AI-based waste classification using image recognition technology</p></div>
+                         <div class="flex items-start p-3 bg-blue-50 dark:bg-slate-700 rounded"><span class="font-bold text-blue-600 dark:text-blue-400 mr-2">4.</span><p class="text-gray-700 dark:text-gray-300 text-sm">Blockchain implementation for transparent waste tracking</p></div>
+                         <div class="flex items-start p-3 bg-blue-50 dark:bg-slate-700 rounded"><span class="font-bold text-blue-600 dark:text-blue-400 mr-2">5.</span><p class="text-gray-700 dark:text-gray-300 text-sm">Real-time GPS tracking of collection vehicles</p></div>
+                         <div class="flex items-start p-3 bg-blue-50 dark:bg-slate-700 rounded"><span class="font-bold text-blue-600 dark:text-blue-400 mr-2">6.</span><p class="text-gray-700 dark:text-gray-300 text-sm">Integration with municipal waste management systems</p></div>
+                         <div class="flex items-start p-3 bg-blue-50 dark:bg-slate-700 rounded"><span class="font-bold text-blue-600 dark:text-blue-400 mr-2">7.</span><p class="text-gray-700 dark:text-gray-300 text-sm">Chatbot for 24/7 customer support</p></div>
                     </div>
-                  ))}
                 </div>
-              </div>
             </div>
-          )}
 
-          {activeSection === 'modules' && (
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">System Modules</h2>
-              <div className="grid gap-4">
-                {modules.map((module) => (
-                  <div key={module.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                    <div className="flex items-start">
-                      <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                        {module.id}
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-800 mb-1">
-                          {module.name}
-                        </h3>
-                        <p className="text-gray-600 text-sm">{module.desc}</p>
-                      </div>
+            <!-- Modules Tab -->
+            <div id="tab-modules" class="tab-content">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">System Modules</h2>
+                <div class="grid gap-4" id="modules-list">
+                    <!-- Static content for modules -->
+                    <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start">
+                            <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</div>
+                            <div><h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-1">User Management</h3><p class="text-gray-600 dark:text-gray-400 text-sm">Registration, login, profile management with role-based access</p></div>
+                        </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                    <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start">
+                            <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</div>
+                            <div><h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-1">Waste Category Management</h3><p class="text-gray-600 dark:text-gray-400 text-sm">Display waste types, segregation guidelines, current rates</p></div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start">
+                            <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</div>
+                            <div><h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-1">Pickup Request System</h3><p class="text-gray-600 dark:text-gray-400 text-sm">Schedule pickups, track status, upload item photos</p></div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start">
+                            <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</div>
+                            <div><h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-1">Scrap Valuation & Selling</h3><p class="text-gray-600 dark:text-gray-400 text-sm">Price calculator, quotation generation, payment processing</p></div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start">
+                            <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">5</div>
+                            <div><h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-1">Collection Management</h3><p class="text-gray-600 dark:text-gray-400 text-sm">Assign collectors, route optimization, completion verification</p></div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start">
+                            <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">6</div>
+                            <div><h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-1">Recycling Center Locator</h3><p class="text-gray-600 dark:text-gray-400 text-sm">Map integration, search filters, directions</p></div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start">
+                            <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">7</div>
+                            <div><h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-1">Complaint & Feedback</h3><p class="text-gray-600 dark:text-gray-400 text-sm">Register complaints, track status, rate services</p></div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start">
+                            <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">8</div>
+                            <div><h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-1">Educational Portal</h3><p class="text-gray-600 dark:text-gray-400 text-sm">Articles, videos, statistics on waste management</p></div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start">
+                            <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">9</div>
+                            <div><h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-1">Rewards & Incentives</h3><p class="text-gray-600 dark:text-gray-400 text-sm">Points system, leaderboard, redemption options</p></div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start">
+                            <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">10</div>
+                            <div><h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-1">Admin Dashboard</h3><p class="text-gray-600 dark:text-gray-400 text-sm">Analytics, reports, user management, rate updates</p></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          )}
 
-          {activeSection === 'tech' && (
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">Technology Stack</h2>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="border-l-4 border-green-600 pl-4">
-                  <h3 className="font-semibold text-gray-800 mb-2">Frontend Technologies</h3>
-                  <p className="text-gray-700">{techStack.frontend}</p>
+            <!-- Tech Tab -->
+            <div id="tab-tech" class="tab-content space-y-6">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Technology Stack</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="border-l-4 border-green-600 pl-4">
+                        <h3 class="font-semibold text-gray-800 dark:text-white mb-2">Frontend Technologies</h3>
+                        <p class="text-gray-700 dark:text-gray-300">React.js, HTML5, CSS3, Bootstrap, JavaScript</p>
+                    </div>
+                    <div class="border-l-4 border-blue-600 pl-4">
+                        <h3 class="font-semibold text-gray-800 dark:text-white mb-2">Backend Technologies</h3>
+                        <p class="text-gray-700 dark:text-gray-300">Node.js with Express.js</p>
+                    </div>
+                    <div class="border-l-4 border-purple-600 pl-4">
+                        <h3 class="font-semibold text-gray-800 dark:text-white mb-2">Database</h3>
+                        <p class="text-gray-700 dark:text-gray-300">MySQL / MongoDB</p>
+                    </div>
+                    <div class="border-l-4 border-orange-600 pl-4">
+                        <h3 class="font-semibold text-gray-800 dark:text-white mb-2">Additional Tools</h3>
+                        <p class="text-gray-700 dark:text-gray-300">Google Maps API, JWT Authentication, Razorpay (Test Mode)</p>
+                    </div>
                 </div>
-                
-                <div className="border-l-4 border-blue-600 pl-4">
-                  <h3 className="font-semibold text-gray-800 mb-2">Backend Technologies</h3>
-                  <p className="text-gray-700">{techStack.backend}</p>
+                <div class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg">
+                    <h3 class="font-semibold text-gray-800 dark:text-white mb-2">⚠️ Important Notes</h3>
+                    <ul class="text-sm text-gray-700 dark:text-gray-300 space-y-1">
+                        <li>• This stack complies with IGNOU project guidelines</li>
+                        <li>• No prohibited combinations (VB + MS-Access)</li>
+                        <li>• Modern, industry-standard technologies</li>
+                        <li>• Sufficient complexity for BCSP-064 requirements</li>
+                    </ul>
                 </div>
-                
-                <div className="border-l-4 border-purple-600 pl-4">
-                  <h3 className="font-semibold text-gray-800 mb-2">Database</h3>
-                  <p className="text-gray-700">{techStack.database}</p>
-                </div>
-                
-                <div className="border-l-4 border-orange-600 pl-4">
-                  <h3 className="font-semibold text-gray-800 mb-2">Additional Tools</h3>
-                  <p className="text-gray-700">{techStack.additional}</p>
-                </div>
-              </div>
-
-              <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                <h3 className="font-semibold text-gray-800 mb-2">⚠️ Important Notes</h3>
-                <ul className="text-sm text-gray-700 space-y-1">
-                  <li>• This stack complies with IGNOU project guidelines</li>
-                  <li>• No prohibited combinations (VB + MS-Access)</li>
-                  <li>• Modern, industry-standard technologies</li>
-                  <li>• Sufficient complexity for BCSP-064 requirements</li>
-                </ul>
-              </div>
             </div>
-          )}
 
-          {activeSection === 'timeline' && (
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Implementation Timeline</h2>
-              
-              <div className="space-y-4">
-                <div className="flex items-start">
-                  <div className="bg-green-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                    1
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-800">Requirements & Analysis</h3>
-                    <p className="text-sm text-gray-600">Week 1-2</p>
-                    <p className="text-sm text-gray-700 mt-1">Finalize requirements, complete ER diagrams, DFDs, and database schema</p>
-                  </div>
+            <!-- Timeline Tab -->
+            <div id="tab-timeline" class="tab-content">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Implementation Timeline</h2>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="bg-green-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-800 dark:text-white">Requirements & Analysis</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Week 1-2</p>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">Finalize requirements, complete ER diagrams, DFDs, and database schema</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-800 dark:text-white">Design & Architecture</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Week 3-4</p>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">Create UI wireframes, define API endpoints, setup development environment</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-800 dark:text-white">Core Development</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Week 5-10</p>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">Develop user management, pickup system, collection management, admin dashboard</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-orange-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-800 dark:text-white">Advanced Features</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Week 11-12</p>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">Integrate Maps API, reward system, payment gateway, educational portal</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">5</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-800 dark:text-white">Testing & Debugging</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Week 13-14</p>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">Conduct unit, integration, system testing; fix bugs; optimize performance</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-gray-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">6</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-800 dark:text-white">Documentation & Deployment</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Week 15</p>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">Complete project report, prepare deployment package, create user manual</p>
+                        </div>
+                    </div>
                 </div>
-
-                <div className="flex items-start">
-                  <div className="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                    2
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-800">Design & Architecture</h3>
-                    <p className="text-sm text-gray-600">Week 3-4</p>
-                    <p className="text-sm text-gray-700 mt-1">Create UI wireframes, define API endpoints, setup development environment</p>
-                  </div>
+                <div class="mt-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg">
+                    <p class="text-sm text-gray-700 dark:text-gray-300">
+                        <strong>Total Duration:</strong> 15 weeks (3-4 months) - Suitable for BCSP-064 requirements
+                    </p>
                 </div>
-
-                <div className="flex items-start">
-                  <div className="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                    3
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-800">Core Development</h3>
-                    <p className="text-sm text-gray-600">Week 5-10</p>
-                    <p className="text-sm text-gray-700 mt-1">Develop user management, pickup system, collection management, admin dashboard</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-orange-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                    4
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-800">Advanced Features</h3>
-                    <p className="text-sm text-gray-600">Week 11-12</p>
-                    <p className="text-sm text-gray-700 mt-1">Integrate Maps API, reward system, payment gateway, educational portal</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                    5
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-800">Testing & Debugging</h3>
-                    <p className="text-sm text-gray-600">Week 13-14</p>
-                    <p className="text-sm text-gray-700 mt-1">Conduct unit, integration, system testing; fix bugs; optimize performance</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-gray-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                    6
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-800">Documentation & Deployment</h3>
-                    <p className="text-sm text-gray-600">Week 15</p>
-                    <p className="text-sm text-gray-700 mt-1">Complete project report, prepare deployment package, create user manual</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-sm text-gray-700">
-                  <strong>Total Duration:</strong> 15 weeks (3-4 months) - Suitable for BCSP-064 requirements
-                </p>
-              </div>
             </div>
-          )}
         </div>
 
-        {/* Download Section */}
-        <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-lg shadow-lg p-6 text-white">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-2xl font-bold mb-2">Ready to Submit?</h2>
-              <p className="text-green-100 mb-4">
-                Download the complete 15-page synopsis in text format
-              </p>
-              <ul className="text-sm text-green-100 space-y-1">
-                <li>✓ Complete project details with all sections</li>
-                <li>✓ ER diagrams and DFD descriptions included</li>
-                <li>✓ Module breakdown and technical specifications</li>
-                <li>✓ Testing strategy and implementation plan</li>
-                <li>✓ Ready for guide review and submission</li>
-              </ul>
+        <!-- Download Section -->
+        <div class="bg-gradient-to-r from-green-600 to-blue-600 rounded-lg shadow-lg p-6 text-white mb-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold mb-2">Ready to Submit?</h2>
+                    <p class="text-green-100 mb-4">Download the complete 15-page synopsis in text format</p>
+                    <ul class="text-sm text-green-100 space-y-1">
+                        <li>✓ Complete project details with all sections</li>
+                        <li>✓ ER diagrams and DFD descriptions included</li>
+                        <li>✓ Module breakdown and technical specifications</li>
+                        <li>✓ Testing strategy and implementation plan</li>
+                        <li>✓ Ready for guide review and submission</li>
+                    </ul>
+                </div>
+                <i data-lucide="download" class="w-20 h-20 opacity-50"></i>
             </div>
-            <Download className="w-20 h-20 opacity-50" />
-          </div>
-          
-          <button
-            onClick={downloadSynopsis}
-            className="mt-6 bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors flex items-center shadow-lg"
-          >
-            <Download className="w-5 h-5 mr-2" />
-            Download Complete Synopsis
-          </button>
+            <button onclick="downloadSynopsis()" class="mt-6 bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors flex items-center shadow-lg">
+                <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                Download Complete Synopsis
+            </button>
         </div>
 
-        {/* Next Steps */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mt-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">📋 Next Steps for Submission</h2>
-          
-          <div className="space-y-4">
-            <div className="flex items-start p-4 bg-blue-50 rounded-lg">
-              <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                1
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-1">Find a Project Guide</h3>
-                <p className="text-sm text-gray-700">
-                  Must have PhD/M.Tech in CS OR B.Tech/MCA/M.Sc (CS) with 2+ years experience
-                </p>
-              </div>
+        <!-- Next Steps & Reminders (Static) -->
+        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 mt-6">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">📋 Next Steps for Submission</h2>
+            <div class="space-y-4">
+                <div class="flex items-start p-4 bg-blue-50 dark:bg-slate-700 rounded-lg">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</div>
+                    <div><h3 class="font-semibold text-gray-800 dark:text-white mb-1">Find a Project Guide</h3><p class="text-sm text-gray-700 dark:text-gray-300">Must have PhD/M.Tech in CS OR B.Tech/MCA/M.Sc (CS) with 2+ years experience</p></div>
+                </div>
+                <!-- ... other steps ... -->
+                <div class="flex items-start p-4 bg-green-50 dark:bg-slate-700 rounded-lg">
+                    <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</div>
+                    <div><h3 class="font-semibold text-gray-800 dark:text-white mb-1">Get Guide's Bio-data</h3><p class="text-sm text-gray-700 dark:text-gray-300">Collect guide's complete bio-data with signature and date</p></div>
+                </div>
+                <div class="flex items-start p-4 bg-purple-50 dark:bg-slate-700 rounded-lg">
+                    <div class="bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</div>
+                    <div><h3 class="font-semibold text-gray-800 dark:text-white mb-1">Fill Project Proforma</h3><p class="text-sm text-gray-700 dark:text-gray-300">Complete the proforma on Page 6 of guidelines with both signatures</p></div>
+                </div>
+                <div class="flex items-start p-4 bg-orange-50 dark:bg-slate-700 rounded-lg">
+                    <div class="bg-orange-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</div>
+                    <div><h3 class="font-semibold text-gray-8
+                      h00 dark:text-white mb-1">Review & Submit</h3><p class="text-sm text-gray-700 dark:text-gray-300">Have your guide review the synopsis before submission to IGNOU</p></div>
+                </div>    
             </div>
+        </div>  
 
-            <div className="flex items-start p-4 bg-green-50 rounded-lg">
-              <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                2
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-1">Get Guide's Bio-data</h3>
-                <p className="text-sm text-gray-700">
-                  Collect guide's complete bio-data with signature and date
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start p-4 bg-purple-50 rounded-lg">
-              <div className="bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                3
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-1">Fill Project Proforma</h3>
-                <p className="text-sm text-gray-700">
-                  Complete the proforma on Page 6 of guidelines with both signatures
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start p-4 bg-orange-50 rounded-lg">
-              <div className="bg-orange-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                4
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-1">Print & Review Synopsis</h3>
-                <p className="text-sm text-gray-700">
-                  Print downloaded synopsis (12-15 pages), review with guide, get signature
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start p-4 bg-red-50 rounded-lg">
-              <div className="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                5
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-800 mb-1">Submit to Regional Centre</h3>
-                <p className="text-sm text-gray-700">
-                  Send complete package to Regional Director, RC Code 07 (Delhi) during submission window
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-500">
-            <h3 className="font-semibold text-gray-800 mb-2">⏰ Submission Windows</h3>
-            <div className="text-sm text-gray-700 space-y-1">
-              <p>• <strong>April 1 - June 30</strong> (for approval by July)</p>
-              <p>• <strong>October 1 - December 31</strong> (for approval by January)</p>
-              <p className="mt-2 text-xs text-gray-600">Note: Approval takes 30 days after receipt</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Important Reminders */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mt-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">⚠️ Important Reminders</h2>
-          
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-              <h3 className="font-semibold text-red-800 mb-2">❌ Prohibited</h3>
-              <ul className="text-sm text-gray-700 space-y-1">
-                <li>• VB + MS-Access combination</li>
-                <li>• C/C++ for database projects</li>
-                <li>• Copying existing projects</li>
-                <li>• Changing title after approval</li>
-              </ul>
-            </div>
-
-            <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-              <h3 className="font-semibold text-green-800 mb-2">✅ Required</h3>
-              <ul className="text-sm text-gray-700 space-y-1">
-                <li>• Original, genuine work</li>
-                <li>• All SDLC phases covered</li>
-                <li>• 8-12 substantial modules</li>
-                <li>• Proper documentation</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-sm text-gray-700">
-              <strong>Final Report Requirements:</strong> 50-80 pages (±10%), hard bound, with complete code, 
-              testing reports, and screenshots. Pass marks: 60/150 (report) + 20/50 (viva-voce)
-            </p>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center text-gray-600 text-sm mt-8 pb-6">
-          <p>Student: {studentDetails.name} | Enrollment: {studentDetails.enrollment}</p>
-          <p className="mt-2">BCSP-064 Project | IGNOU BCAOL Programme</p>
-          <p className="mt-4 text-xs text-gray-500">
-            This tool helps format your synopsis. Please review and customize as needed before submission.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
+        

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Page Title Here | Delhizones</title>
+    <meta name="description" content="Page description goes here.">
+    <link rel="canonical" href="https://delhizones.com/your-page.html">
+    <meta name="robots" content="index, follow">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { primary: '#2563EB', darkBg: '#0f172a' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+    /* Prevents Layout Shift (CLS) */
+    #navbar-placeholder {
+        min-height: 80px; /* Match the height of your actual navbar */
+        display: block;
+        background-color: white; /* Optional: prevents flickering */
+    }
+    
+    #footer-placeholder {
+        min-height: 300px; /* Approximate height of your footer */
+        display: block;
+    }
+</style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
+</head>
+
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="container mx-auto mt-24 px-6 py-8 flex-grow">
+        <h1 class="text-4xl font-bold font-serif mb-6">Page Title</h1>
+        <p class="text-lg text-slate-600 dark:text-slate-400">
+            Content goes here...
+        </p>
+        </main>
+
+    <div id="footer-placeholder"></div>
+
+</body>
+</html>
