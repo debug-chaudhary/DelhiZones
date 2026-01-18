@@ -1,11 +1,11 @@
 /**
- * Delhizones Master Loader (v7.0 - PWA Multi-Button Fix)
+ * Delhizones Master Loader (v8.0 - PWA Multi-Button Fix)
  * Integrates: Themes, PWA (Hero+Nav), Navigation, and Component Injection
  */
 
 (function () {
     
-    const SITE_VERSION = '?v=7.0'; // Version bump for cache busting
+    const SITE_VERSION = '?v=8.0'; // Version bump for cache busting
     
     // Paths
     const PATHS = {

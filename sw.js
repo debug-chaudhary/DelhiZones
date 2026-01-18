@@ -1,10 +1,10 @@
 /**
- * Delhizones Service Worker (v7.0 - PWA & SEO Optimized)
+ * Delhizones Service Worker (v8.0 - PWA & SEO Optimized)
  * Strategy: Stale-While-Revalidate for Assets, Network-First for HTML
  */
 
-const CACHE_NAME = 'delhizones-static-v7'; // Bumped to match Loader
-const DATA_CACHE_NAME = 'delhizones-data-v7';
+const CACHE_NAME = 'delhizones-static-v8'; // Bumped to match Loader
+const DATA_CACHE_NAME = 'delhizones-data-v8';
 
 // CRITICAL: Files to cache immediately.
 // If any of these are missing from your server, the PWA Install will fail.
@@ -24,7 +24,7 @@ const PRECACHE_URLS = [
 
 // 1. INSTALL PHASE
 self.addEventListener('install', (event) => {
-    console.log('[SW] Installing v7.0...');
+    console.log('[SW] Installing v8.0...');
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
