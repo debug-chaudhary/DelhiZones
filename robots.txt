@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /assets/
+Allow: /sitemap.xml
+Allow: /robots.txt
 
 # Disallow admin or private system files if you have them
 Disallow: /admin/
