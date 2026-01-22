@@ -12,6 +12,7 @@ const PRECACHE_URLS = [
     '/',
     '/index.html',
     '/404.html',
+    '/favicon.ico',       // Root favicon (browsers look here first)
     '/donate.html',       // Added
     '/subscribe.html',    // Added
     '/includes/navbar.html',
@@ -24,7 +25,7 @@ const PRECACHE_URLS = [
 
 // 1. INSTALL PHASE
 self.addEventListener('install', (event) => {
-    console.log('[SW] Installing v9.0...');
+    console.log('[SW] Installing v9.1...');
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {

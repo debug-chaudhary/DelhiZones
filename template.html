@@ -39,19 +39,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <script src="/assets/js/loader.js?v=9.1" defer></script>
+    <script src="/assets/js/theme-manager.js"></script>
+    <script src="/assets/js/loader.js?v=4.2" defer></script>
+    
+    <style>
+        /* Theme CSS Variables */
+        :root {
+            --accent: #2563EB;
+            --theme-accent: #2563EB;
+            --theme-dominant: #f8fafc;
+            --theme-text-main: #1e293b;
+            --theme-text-sec: #64748b;
+        }
+        
+        [data-theme="nature"] {
+            --accent: #22c55e;
+            --theme-accent: #22c55e;
+            --theme-dominant: #f0fdf4;
+        }
+        
+        [data-theme="sunset"] {
+            --accent: #f97316;
+            --theme-accent: #f97316;
+            --theme-dominant: #fff7ed;
+        }
+        
+        [data-theme="ocean"] {
+            --accent: #06b6d4;
+            --theme-accent: #06b6d4;
+            --theme-dominant: #ecf0f1;
+        }
+        
+        [data-theme="dark"] {
+            --accent: #3b82f6;
+            --theme-accent: #3b82f6;
+            --theme-dominant: #1e293b;
+            --theme-text-main: #f1f5f9;
+            --theme-text-sec: #cbd5e1;
+        }
+        
+        /* Theme-aware body */
+        body.theme-body {
+            color: var(--theme-text-main);
+            background-color: var(--theme-dominant);
+            transition: all 0.3s ease;
+        }
+        
+        .theme-text-accent {
+            color: var(--theme-accent);
+        }
+    </style>
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
 </head>
 
-<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased flex flex-col min-h-screen">
+<body class="theme-body text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased flex flex-col min-h-screen transition-colors duration-300">
 
     <div id="navbar-placeholder"></div>
 
     <main class="container mx-auto mt-24 px-6 py-8 flex-grow">
-        <h1 class="text-4xl font-bold font-serif mb-6">Page Title</h1>
-        <p class="text-lg text-slate-600 dark:text-slate-400">
+        <h1 class="text-4xl font-bold font-serif mb-6 theme-text-main" style="color: var(--theme-text-main);">Page Title</h1>
+        <p class="text-lg theme-text-sec" style="color: var(--theme-text-sec);">
             Content goes here...
         </p>
-        </main>
+    </main>
 
     <div id="footer-placeholder"></div>
 

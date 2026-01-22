@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Exam Announcements & Datesheets | Delhizones Student Portal</title>
+    <meta name="description" content="Official Term-End Practical Examination Datesheet (December 2025 / February 2026). Search schedule for BCA, MCA, PGDCA (Online & Offline modes).">
+    <meta name="keywords" content="ignou datesheet, practical exam 2026, bca online exam, mca viva schedule, delhizones announcements">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://delhizones.com/announcements.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { primary: '#2563EB', darkBg: '#0f172a' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/loader.js?v=4.0" defer></script>
+
+    <style>
+        #navbar-placeholder { min-height: 80px; display: block; }
+        #footer-placeholder { min-height: 300px; display: block; }
+        .brand-font { font-family: 'Playfair Display', serif; }
+        
+        /* Table Row Animation */
+        .fade-in-row { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+
+<body class="text-slate-800 bg-slate-50 dark:bg-slate-900 dark:text-slate-200 antialiased selection:bg-blue-100 selection:text-blue-900 flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <main class="flex-grow pt-10">
+        
+        <div class="relative bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+            <div class="container mx-auto px-6 py-16 relative z-10 text-center">
+                <span class="inline-block py-1 px-3 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs font-bold uppercase tracking-wider mb-4 border border-red-200 dark:border-red-800">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse inline-block mr-1"></span> Exam Updates
+                </span>
+                
+                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white brand-font mb-6 leading-tight">
+                    Practical Exam <span class="text-blue-600">Search Engine</span>
+                </h1>
+                
+                <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8 max-w-2xl mx-auto">
+                    Search and filter datesheets for Offline (Dec 2025) and Online (Feb 2026) term-end practical exams.
+                </p>
+                
+                <div class="relative max-w-xl mx-auto">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
+                        <div class="relative">
+                            <input type="text" id="subjectSearch" placeholder="Enter Course Code (e.g., MCSL016, BCSL033)..." 
+                                class="w-full pl-12 pr-4 py-4 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition text-slate-900 dark:text-white font-mono uppercase">
+                            <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2 text-left pl-2">Try: 'MCA', 'BCSL058', 'Online', '22 Jan'</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 mt-8">
+            <details class="group bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl open:shadow-md transition-all">
+                <summary class="flex justify-between items-center p-4 cursor-pointer font-bold text-amber-800 dark:text-amber-200">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                        <span>Important Guidelines for Online Exams (Feb 2026)</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 transition group-open:rotate-180"></i>
+                </summary>
+                <div class="p-4 pt-0 text-sm text-amber-900/80 dark:text-amber-100/80 leading-relaxed border-t border-amber-200 dark:border-amber-800 mt-2">
+                    <ul class="list-disc pl-5 space-y-2 mt-2">
+                        <li><strong>Platform:</strong> Exams will be conducted virtually via <strong>Zoom App</strong>. Download it beforehand.</li>
+                        <li><strong>Identity:</strong> IGNOU Identity Card is <strong>mandatory</strong> to appear for the viva.</li>
+                        <li><strong>Login:</strong> Join using your <strong>Name</strong>. Device names (e.g., "Galaxy A50") will not be admitted.</li>
+                        <li><strong>Video:</strong> Camera must be <strong>ON</strong> during the viva. Mic should be muted until asked.</li>
+                        <li><strong>Helpline:</strong> Technical assistance available at <strong>93555359191</strong> (10 AM - 6 PM, Exam Days only).</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+
+        <div class="container mx-auto px-6 py-10">
+            
+            <div class="flex flex-wrap gap-2 mb-8 justify-center md:justify-start">
+                <button class="filter-btn active px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-bold shadow-md transition" data-filter="all">All Exams</button>
+                <button class="filter-btn px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-filter="Offline">Offline (Jan-Feb)</button>
+                <button class="filter-btn px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-filter="Online">Online (Feb-Mar)</button>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50 dark:bg-slate-700/50 border-b border-slate-200 dark:border-slate-700">
+                            <tr>
+                                <th class="px-6 py-4">Date</th>
+                                <th class="px-6 py-4">Day</th>
+                                <th class="px-6 py-4">Mode</th>
+                                <th class="px-6 py-4">Programme</th>
+                                <th class="px-6 py-4">Course Code</th>
+                                <th class="px-6 py-4">Timing / Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody id="examTableBody" class="divide-y divide-slate-100 dark:divide-slate-700">
+                            </tbody>
+                    </table>
+                </div>
+                
+                <div id="noResults" class="hidden text-center py-12">
+                    <i data-lucide="calendar-x" class="mx-auto h-12 w-12 text-slate-300 mb-4"></i>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">No exams found</h3>
+                    <p class="text-slate-500">Try checking the course code or changing the filter.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+
+            // --- 1. EXAM DATABASE (Parsed from PDF) ---
+            const examData = [
+                // OFFLINE EXAMS (Datesheet 17)
+                { date: "22.01.2026", day: "Thursday", mode: "Offline", prog: "CIT/CBS/CMAD", code: "CITL001 / BCSL091", time: "Sets I, II, III (3 Hrs)" },
+                { date: "23.01.2026", day: "Friday", mode: "Offline", prog: "MCA New", code: "MCSL216", time: "Sets I-IV (2 Hrs)" },
+                { date: "24.01.2026", day: "Saturday", mode: "Offline", prog: "MCA New", code: "MCSL217", time: "Sets I-IV (2 Hrs)" },
+                { date: "27.01.2026", day: "Tuesday", mode: "Offline", prog: "MCA New", code: "MCSL222", time: "Sets I-IV (2 Hrs)" },
+                { date: "28.01.2026", day: "Wednesday", mode: "Offline", prog: "MCA New", code: "MCSL223", time: "Sets I-IV (2 Hrs)" },
+                { date: "29.01.2026", day: "Thursday", mode: "Offline", prog: "MCA New", code: "MCSL228", time: "Sets I-IV (2 Hrs)" },
+                { date: "30.01.2026", day: "Friday", mode: "Offline", prog: "MCA New", code: "MCSL229", time: "Sets I-IV (2 Hrs)" },
+                { date: "31.01.2026", day: "Saturday", mode: "Offline", prog: "BCA/CRCS", code: "BCSL013", time: "Sets I-IV (2 Hrs)" },
+                { date: "02.02.2026", day: "Monday", mode: "Offline", prog: "BCA Revised", code: "BCSL021 / BCSL022", time: "Hourly Batches (1 Hr)" },
+                { date: "03.02.2026", day: "Tuesday", mode: "Offline", prog: "BCA Revised", code: "BCSL032 / BCSL033", time: "Hourly Batches (1 Hr)" },
+                { date: "04.02.2026", day: "Wednesday", mode: "Offline", prog: "BCA Revised", code: "BCSL034 / BCSL043", time: "Hourly Batches (1 Hr)" },
+                { date: "05.02.2026", day: "Thursday", mode: "Offline", prog: "BCA Revised", code: "BCSL044 / BCSL045", time: "Hourly Batches (1 Hr)" },
+                { date: "06.02.2026", day: "Friday", mode: "Offline", prog: "BCA Revised", code: "BCSL056 / BCSL057", time: "Hourly Batches (1 Hr)" },
+                { date: "07.02.2026", day: "Saturday", mode: "Offline", prog: "BCA Revised", code: "BCSL058 / BCSL063", time: "Hourly Batches (1 Hr)" },
+                { date: "09.02.2026", day: "Monday", mode: "Offline", prog: "MCA/BCA/PGDCA", code: "MCSL016", time: "Sets I-IV (2 Hrs)" },
+                { date: "10.02.2026", day: "Tuesday", mode: "Offline", prog: "MCA/BCA/PGDCA", code: "MCSL204", time: "Sets I-IV (2 Hrs)" },
+                { date: "11.02.2026", day: "Wednesday", mode: "Offline", prog: "MCA/BCA/PGDCA", code: "MCSL205", time: "Sets I-IV (2 Hrs)" },
+                { date: "12.02.2026", day: "Thursday", mode: "Offline", prog: "BCA New/PGDCA", code: "MCSL209", time: "Sets I-IV (2 Hrs)" },
+                { date: "13.02.2026", day: "Friday", mode: "Offline", prog: "BCA New/PGDCA", code: "MCSL210", time: "Sets I-IV (2 Hrs)" },
+                { date: "14.02.2026", day: "Saturday", mode: "Offline", prog: "BCA New", code: "BCSL135", time: "Sets I-IV (2 Hrs)" },
+                { date: "16.02.2026", day: "Monday", mode: "Offline", prog: "MCA Revised", code: "MCSL045", time: "Sets I-IV (2 Hrs)" },
+                { date: "17.02.2026", day: "Tuesday", mode: "Offline", prog: "MCA Revised", code: "MCSL017", time: "Sets I-IV (2 Hrs)" },
+                { date: "18.02.2026", day: "Wednesday", mode: "Offline", prog: "MCA Revised", code: "MCSL054", time: "Sets I-IV (2 Hrs)" },
+                { date: "19.02.2026", day: "Thursday", mode: "Offline", prog: "MCA/PGDCA", code: "MCSL025", time: "Sets I-III (3 Hrs)" },
+                { date: "20.02.2026", day: "Friday", mode: "Offline", prog: "MCA Revised", code: "MCSL036", time: "Sets I-III (3 Hrs)" },
+
+                // ONLINE EXAMS (BCAOL/MCAOL)
+                { date: "16.02.2026", day: "Monday", mode: "Online", prog: "CITOL", code: "CITL001", time: "Zoom Viva" },
+                { date: "17.02.2026", day: "Tuesday", mode: "Online", prog: "BCAOL", code: "BCSL021", time: "Zoom Viva" },
+                { date: "17.02.2026", day: "Tuesday", mode: "Online", prog: "BCAOL", code: "BCSL022", time: "Zoom Viva" },
+                { date: "18.02.2026", day: "Wednesday", mode: "Online", prog: "BCAOL", code: "BCSL032", time: "Zoom Viva" },
+                { date: "18.02.2026", day: "Wednesday", mode: "Online", prog: "BCAOL", code: "BCSL033", time: "Zoom Viva" },
+                { date: "19.02.2026", day: "Thursday", mode: "Online", prog: "BCAOL", code: "BCSL034", time: "Zoom Viva" },
+                { date: "19.02.2026", day: "Thursday", mode: "Online", prog: "BCAOL", code: "BCSL043", time: "Zoom Viva" },
+                { date: "20.02.2026", day: "Friday", mode: "Online", prog: "BCAOL", code: "MCSL016", time: "Zoom Viva" },
+                { date: "21.02.2026", day: "Saturday", mode: "Online", prog: "BCAOL", code: "BCSL044", time: "Zoom Viva" },
+                { date: "21.02.2026", day: "Saturday", mode: "Online", prog: "BCAOL", code: "BCSL045", time: "Zoom Viva" },
+                { date: "22.02.2026", day: "Sunday", mode: "Online", prog: "BCAOL", code: "BCSL056", time: "Zoom Viva" },
+                { date: "22.02.2026", day: "Sunday", mode: "Online", prog: "BCAOL", code: "BCSL057", time: "Zoom Viva" },
+                { date: "23.02.2026", day: "Monday", mode: "Online", prog: "BCAOL", code: "BCSL058", time: "Zoom Viva" },
+                { date: "23.02.2026", day: "Monday", mode: "Online", prog: "BCAOL", code: "BCSL063", time: "Zoom Viva" },
+                { date: "24.02.2026", day: "Tuesday", mode: "Online", prog: "BCA NEWOL/OL", code: "BCSL13", time: "Zoom Viva" },
+                { date: "26.02.2026", day: "Thursday", mode: "Online", prog: "BCA NEWOL", code: "MCSL204", time: "Zoom Viva" },
+                { date: "27.02.2026", day: "Friday", mode: "Online", prog: "BCA NEWOL", code: "MCSL205", time: "Zoom Viva" },
+                { date: "27.02.2026", day: "Friday", mode: "Online", prog: "BCA NEWOL", code: "MCSL209", time: "Zoom Viva" },
+                { date: "28.02.2026", day: "Saturday", mode: "Online", prog: "BCA NEWOL", code: "BCSL135", time: "Zoom Viva" },
+                { date: "01.03.2026", day: "Sunday", mode: "Online", prog: "MCAOL", code: "MCSL216", time: "Zoom Viva" },
+                { date: "03.03.2026", day: "Tuesday", mode: "Online", prog: "MCAOL", code: "MCSL217", time: "Zoom Viva" },
+                { date: "05.03.2026", day: "Thursday", mode: "Online", prog: "MCAOL", code: "MCSL222", time: "Zoom Viva" },
+                { date: "06.03.2026", day: "Friday", mode: "Online", prog: "MCAOL", code: "MCSL223", time: "Zoom Viva" },
+                { date: "07.03.2026", day: "Saturday", mode: "Online", prog: "MCAOL", code: "MCSL228", time: "Zoom Viva" },
+                { date: "08.03.2026", day: "Sunday", mode: "Online", prog: "MCAOL", code: "MCSL229", time: "Zoom Viva" }
+            ];
+
+            const tableBody = document.getElementById('examTableBody');
+            const searchInput = document.getElementById('subjectSearch');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const noResults = document.getElementById('noResults');
+
+            // --- 2. RENDER FUNCTION ---
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                
+                if(data.length === 0) {
+                    noResults.classList.remove('hidden');
+                    return;
+                }
+                noResults.classList.add('hidden');
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = "hover:bg-slate-50 dark:hover:bg-slate-700/50 fade-in-row";
+                    
+                    const modeBadge = item.mode === 'Online' 
+                        ? `<span class="bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 px-2 py-1 rounded text-xs font-bold uppercase">Online</span>` 
+                        : `<span class="bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300 px-2 py-1 rounded text-xs font-bold uppercase">Offline</span>`;
+
+                    row.innerHTML = `
+                        <td class="px-6 py-4 font-bold text-slate-900 dark:text-white whitespace-nowrap">${item.date}</td>
+                        <td class="px-6 py-4 text-slate-500 dark:text-slate-400">${item.day}</td>
+                        <td class="px-6 py-4">${modeBadge}</td>
+                        <td class="px-6 py-4 font-medium">${item.prog}</td>
+                        <td class="px-6 py-4 font-mono font-bold text-blue-600 dark:text-blue-400 text-lg">${item.code}</td>
+                        <td class="px-6 py-4 text-slate-600 dark:text-slate-300 text-xs">${item.time}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // --- 3. FILTER LOGIC ---
+            function filterExams() {
+                const query = searchInput.value.toLowerCase();
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+
+                const filtered = examData.filter(item => {
+                    const matchesMode = activeFilter === 'all' || item.mode === activeFilter;
+                    const matchesSearch = item.code.toLowerCase().includes(query) || 
+                                          item.prog.toLowerCase().includes(query) ||
+                                          item.date.includes(query);
+                    return matchesMode && matchesSearch;
+                });
+
+                renderTable(filtered);
+            }
+
+            // --- 4. EVENT LISTENERS ---
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-blue-600', 'text-white', 'active');
+                        b.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+                    });
+                    btn.classList.add('bg-blue-600', 'text-white', 'active');
+                    btn.classList.remove('bg-white', 'text-slate-600');
+                    filterExams();
+                });
+            });
+
+            searchInput.addEventListener('input', filterExams);
+
+            // Initial Render
+            renderTable(examData);
+        });
+    </script>
+</body>
+</html>

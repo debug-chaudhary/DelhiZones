@@ -5,7 +5,9 @@
 
 (function () {
     
-    const SITE_VERSION = '?v=9.1'; // Version bump for cache busting
+    // Import version from central config
+    const SITE_VERSION_NUM = typeof window !== 'undefined' && window.SITE_VERSION ? window.SITE_VERSION : '4.1';
+    const SITE_VERSION = '?v=' + SITE_VERSION_NUM;
     
     // Paths
     const PATHS = {
@@ -274,12 +276,14 @@
                 reg.update(); // Check for updates immediately
             }).catch(err => console.error('SW Failed:', err));
 
-            // Auto-reload when new version takes control
+            // Notify user of updates instead of auto-reloading (prevents favicon flicker)
             let refreshing = false;
             navigator.serviceWorker.addEventListener('controllerchange', () => {
                 if (!refreshing) {
                     refreshing = true;
-                    window.location.reload();
+                    console.log('New SW version available. Page will refresh on next visit.');
+                    // Don't auto-reload - let user manually refresh when convenient
+                    // This prevents favicon and UI flicker
                 }
             });
         }

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding Hub | Rahul & Priya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .brand-title { font-family: 'Dancing Script', cursive; }
+        .hidden { display: none; }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 40;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .section {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+        .countdown-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-30 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="brand-title text-3xl text-rose-500" onclick="app.navigateTo('home')">Rahul & Priya</a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#home" onclick="app.navigateTo('home')" class="text-gray-600 hover:text-rose-500 transition">Home</a>
+                <a href="#story" onclick="app.navigateTo('story')" class="text-gray-600 hover:text-rose-500 transition">Our Story</a>
+                <a href="#events" onclick="app.navigateTo('events')" class="text-gray-600 hover:text-rose-500 transition">Events</a>
+                <a href="#gallery" onclick="app.navigateTo('gallery')" class="text-gray-600 hover:text-rose-500 transition">Gallery</a>
+                <a href="#rsvp" onclick="app.navigateTo('rsvp')" class="text-gray-600 hover:text-rose-500 transition">RSVP</a>
+                <a href="#shagun" onclick="app.navigateTo('shagun')" class="text-gray-600 hover:text-rose-500 transition">Shagun & Gifts</a>
+                <a href="#vendors" onclick="app.navigateTo('vendors')" class="text-gray-600 hover:text-rose-500 transition">Vendors</a>
+            </div>
+            <div class="flex items-center space-x-2">
+                 <button id="vendorAuthBtn" onclick="app.openAuthModal('vendor')" class="px-4 py-2 text-sm bg-rose-500 text-white rounded-full hover:bg-rose-600 transition">Vendor Portal</button>
+                 <button id="adminAuthBtn" onclick="app.openAuthModal('admin')" class="hidden px-4 py-2 text-sm bg-gray-600 text-white rounded-full hover:bg-gray-700 transition">Admin</button>
+                 <button id="logoutBtn" onclick="app.logout()" class="hidden px-4 py-2 text-sm bg-red-500 text-white rounded-full hover:bg-red-600 transition">Logout</button>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+            <a href="#home" onclick="app.navigateTo('home')" class="block text-gray-600 hover:text-rose-500 transition">Home</a>
+            <a href="#story" onclick="app.navigateTo('story')" class="block text-gray-600 hover:text-rose-500 transition">Our Story</a>
+            <a href="#events" onclick="app.navigateTo('events')" class="block text-gray-600 hover:text-rose-500 transition">Events</a>
+            <a href="#gallery" onclick="app.navigateTo('gallery')" class="block text-gray-600 hover:text-rose-500 transition">Gallery</a>
+            <a href="#rsvp" onclick="app.navigateTo('rsvp')" class="block text-gray-600 hover:text-rose-500 transition">RSVP</a>
+            <a href="#shagun" onclick="app.navigateTo('shagun')" class="block text-gray-600 hover:text-rose-500 transition">Shagun & Gifts</a>
+            <a href="#vendors" onclick="app.navigateTo('vendors')" class="block text-gray-600 hover:text-rose-500 transition">Vendors</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sections will be dynamically shown/hidden -->
+        <div id="page-home" class="page">
+            <section id="home" class="section h-[80vh] bg-cover bg-center bg-fixed text-white flex items-center justify-center" style="background-image: url('https://placehold.co/1920x1080/ffe4e6/333333?text=Our+Wedding')">
+                <div class="text-center bg-black/50 p-10 rounded-lg">
+                    <h1 id="home-title" class="text-6xl md:text-8xl brand-title">Rahul & Priya</h1>
+                    <p class="text-xl md:text-2xl mt-4">ARE GETTING MARRIED</p>
+                    <p id="home-date" class="text-lg md:text-xl mt-2 font-semibold">December 15, 2025</p>
+                    <div id="countdown" class="mt-8 grid grid-cols-4 gap-4 text-lg"></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-story" class="page hidden">
+             <section id="story" class="section container mx-auto px-6">
+                <h2 class="text-4xl text-center mb-12">Our Story</h2>
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <img src="https://placehold.co/600x400/e2e8f0/333333?text=Couple" alt="Couple" class="w-full md:w-1/2 rounded-lg shadow-xl">
+                    <div class="md:w-1/2">
+                        <p id="story-content" class="text-lg leading-relaxed text-gray-600">
+                            Our journey began on a sunny afternoon at a friend's cafe. What started with a shared love for coffee and old movies soon blossomed into a beautiful story of love, laughter, and companionship. We've built countless memories together, from spontaneous road trips to quiet evenings spent dreaming about the future. Now, we're thrilled to be starting our most exciting chapter yet, and we can't wait to celebrate it with you, our dearest family and friends.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-events" class="page hidden">
+            <section id="events" class="section bg-rose-50/50">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-4xl text-center mb-12">Wedding Events</h2>
+                    <div id="events-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Event cards will be injected by JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-gallery" class="page hidden">
+            <section id="gallery" class="section container mx-auto px-6">
+                <h2 class="text-4xl text-center mb-12">Our Moments</h2>
+                <div id="gallery-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                     <!-- Gallery images will be injected by JS -->
+                </div>
+            </section>
+        </div>
+
+        <div id="page-rsvp" class="page hidden">
+             <section id="rsvp" class="section container mx-auto px-6 text-center">
+                <h2 class="text-4xl mb-4">Will You Be Joining Us?</h2>
+                <p class="max-w-2xl mx-auto mb-8 text-gray-600">Please let us know if you can make it by November 20, 2025. We can't wait to celebrate with you!</p>
+                <form id="rsvp-form" class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md">
+                    <div class="mb-4">
+                        <label for="rsvp-name" class="block text-left mb-1 font-medium">Full Name</label>
+                        <input type="text" id="rsvp-name" class="w-full p-2 border rounded-md" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-left mb-1 font-medium">Will you attend?</label>
+                        <select id="rsvp-attending" class="w-full p-2 border rounded-md" required>
+                            <option value="Yes">Yes, with pleasure!</option>
+                            <option value="No">No, will miss it</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="rsvp-guests" class="block text-left mb-1 font-medium">Number of Guests</label>
+                        <input type="number" id="rsvp-guests" min="1" value="1" class="w-full p-2 border rounded-md" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="rsvp-message" class="block text-left mb-1 font-medium">Message (Optional)</label>
+                        <textarea id="rsvp-message" rows="3" class="w-full p-2 border rounded-md"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-rose-500 text-white py-3 rounded-full hover:bg-rose-600 transition text-lg font-semibold">Submit RSVP</button>
+                </form>
+            </section>
+        </div>
+
+        <div id="page-shagun" class="page hidden">
+            <section id="shagun" class="section bg-rose-50/50">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-4xl mb-4">Shagun & Gifts</h2>
+                    <p class="max-w-2xl mx-auto mb-8 text-gray-600">Your presence at our wedding is the greatest gift of all. However, if you wish to bless us with a token of love, we would be deeply grateful. Below, you can digitally log your shagun for our records.</p>
+                    <form id="shagun-form" class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md">
+                        <div class="mb-4">
+                            <label for="shagun-name" class="block text-left mb-1 font-medium">Your Full Name</label>
+                            <input type="text" id="shagun-name" class="w-full p-2 border rounded-md" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="shagun-gift" class="block text-left mb-1 font-medium">Gift/Shagun Details (e.g., Amount or Item)</label>
+                            <input type="text" id="shagun-gift" class="w-full p-2 border rounded-md" required>
+                        </div>
+                         <div class="mb-6">
+                            <label for="shagun-message" class="block text-left mb-1 font-medium">Your Blessings (Optional)</label>
+                            <textarea id="shagun-message" rows="3" class="w-full p-2 border rounded-md"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-rose-500 text-white py-3 rounded-full hover:bg-rose-600 transition text-lg font-semibold">Send Blessings</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+        
+        <div id="page-vendors" class="page hidden">
+            <section id="vendors" class="section">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-4xl text-center mb-4">Our Wedding Partners</h2>
+                    <p class="max-w-3xl mx-auto text-center mb-8 text-gray-600">Meet the talented professionals who are helping us bring our dream wedding to life. Find your perfect vendor here!</p>
+                    <div class="text-center mb-8">
+                        <select id="vendor-filter" class="p-2 border rounded-md">
+                            <option value="all">All Categories</option>
+                            <option value="Photography">Photography</option>
+                            <option value="Catering">Catering</option>
+                            <option value="Jewellery">Jewellery</option>
+                            <option value="Apparel">Apparel</option>
+                            <option value="Decor">Decor</option>
+                             <option value="Makeup">Makeup Artist</option>
+                        </select>
+                    </div>
+                    <div id="vendors-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Vendor cards injected by JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-admin-dashboard" class="page hidden">
+            <section class="section container mx-auto px-6">
+                <h2 class="text-4xl mb-8">Admin Dashboard</h2>
+                <!-- Wedding details form -->
+                <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                    <h3 class="text-2xl mb-4">Edit Wedding Details</h3>
+                    <form id="admin-details-form">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" id="admin-couple-name1" placeholder="Couple Name 1" class="p-2 border rounded">
+                            <input type="text" id="admin-couple-name2" placeholder="Couple Name 2" class="p-2 border rounded">
+                        </div>
+                        <input type="datetime-local" id="admin-wedding-date" class="w-full mt-4 p-2 border rounded">
+                        <textarea id="admin-story" rows="5" placeholder="Our Story" class="w-full mt-4 p-2 border rounded"></textarea>
+                        <button type="submit" class="mt-4 px-6 py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600">Save Details</button>
+                    </form>
+                </div>
+
+                <!-- RSVPs list -->
+                <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                    <h3 class="text-2xl mb-4">Guest RSVPs</h3>
+                    <div id="admin-rsvps-list" class="space-y-2 max-h-96 overflow-y-auto"></div>
+                </div>
+
+                <!-- Shagun list -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl mb-4">Shagun & Gifts Log</h3>
+                    <div id="admin-gifts-list" class="space-y-2 max-h-96 overflow-y-auto"></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-vendor-dashboard" class="page hidden">
+             <section class="section container mx-auto px-6">
+                <h2 class="text-4xl mb-8">Vendor Dashboard</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl mb-4">Your Business Profile</h3>
+                    <p class="mb-4 text-gray-600">Keep your profile updated to attract more clients.</p>
+                    <form id="vendor-profile-form">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <input type="text" id="vendor-business-name" placeholder="Business Name" class="p-2 border rounded" required>
+                            <select id="vendor-category" class="p-2 border rounded" required>
+                                <option value="">Select Category</option>
+                                <option value="Photography">Photography</option>
+                                <option value="Catering">Catering</option>
+                                <option value="Jewellery">Jewellery</option>
+                                <option value="Apparel">Apparel</option>
+                                <option value="Decor">Decor</option>
+                                <option value="Makeup">Makeup Artist</option>
+                            </select>
+                        </div>
+                        <input type="text" id="vendor-contact" placeholder="Contact Phone or Email" class="w-full mb-4 p-2 border rounded" required>
+                        <input type="url" id="vendor-portfolio" placeholder="https://your-portfolio.com" class="w-full mb-4 p-2 border rounded">
+                        <input type="url" id="vendor-image" placeholder="https://.../image.jpg (Logo/Showcase)" class="w-full mb-4 p-2 border rounded">
+                        <textarea id="vendor-description" rows="4" placeholder="Brief description of your services" class="w-full mb-4 p-2 border rounded" required></textarea>
+                        <button type="submit" class="px-8 py-3 bg-rose-500 text-white rounded-full hover:bg-rose-600">Save Profile</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal-overlay hidden">
+        <div class="modal-content relative">
+            <button onclick="app.closeAuthModal()" class="absolute top-4 right-4 text-2xl font-bold">&times;</button>
+            <h3 id="auth-title" class="text-2xl text-center mb-6">Login / Register</h3>
+            <form id="auth-form">
+                <input type="email" id="auth-email" placeholder="Email" class="w-full p-3 mb-4 border rounded-md" required>
+                <input type="password" id="auth-password" placeholder="Password" class="w-full p-3 mb-4 border rounded-md" required>
+                <div class="flex justify-between items-center">
+                    <button type="button" id="login-btn" class="px-6 py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600">Login</button>
+                    <button type="button" id="register-btn" class="px-6 py-2 bg-gray-600 text-white rounded-full hover:bg-gray-700">Register</button>
+                </div>
+            </form>
+            <p id="auth-error" class="text-red-500 text-center mt-4"></p>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-green-500 text-white px-6 py-3 rounded-lg shadow-xl transition-transform translate-x-[120%]">
+        <p id="toast-message">Success!</p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            onAuthStateChanged, 
+            signOut,
+            setPersistence,
+            browserLocalPersistence
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            doc, 
+            getDoc, 
+            setDoc,
+            updateDoc,
+            addDoc,
+            collection, 
+            onSnapshot,
+            query, 
+            where,
+            getDocs
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- CONFIG ---
+        const firebaseConfig = {
+            // Your Firebase config will be injected here in a real environment
+            // For now, using placeholder values. Replace with your actual config.
+            apiKey: "AIzaSyB-...",
+            authDomain: "your-project-id.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project-id.appspot.com",
+            messagingSenderId: "...",
+            appId: "..."
+        };
+
+        const WEDDING_ADMIN_UID = 'couple-admin-user-id'; // A unique ID for the couple's data
+
+        // --- APP STATE & LOGIC ---
+        const app = {
+            db: null,
+            auth: null,
+            currentUser: null,
+            currentRole: null, // 'admin' or 'vendor'
+            
+            init() {
+                try {
+                    const firebaseApp = initializeApp(firebaseConfig);
+                    this.db = getFirestore(firebaseApp);
+                    this.auth = getAuth(firebaseApp);
+                    this.setupEventListeners();
+                    this.checkAuthState();
+                    this.fetchWeddingData();
+                    this.fetchAndRenderVendors();
+                } catch (error) {
+                    console.error("Firebase initialization failed:", error);
+                    alert("Could not connect to the wedding server. Please check your connection or contact support.");
+                }
+            },
+
+            showToast(message, isError = false) {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toast-message');
+                toastMessage.textContent = message;
+                toast.className = `fixed bottom-5 right-5 px-6 py-3 rounded-lg shadow-xl transition-transform ${isError ? 'bg-red-500' : 'bg-green-500'} text-white translate-x-0`;
+                setTimeout(() => {
+                    toast.classList.add('translate-x-[120%]');
+                }, 3000);
+            },
+
+            navigateTo(pageId) {
+                document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+                document.getElementById(`page-${pageId}`).classList.remove('hidden');
+                window.scrollTo(0, 0);
+                 // Close mobile menu on navigation
+                document.getElementById('mobile-menu').classList.add('hidden');
+            },
+
+            setupEventListeners() {
+                // Mobile menu
+                document.getElementById('mobile-menu-button').addEventListener('click', () => {
+                    document.getElementById('mobile-menu').classList.toggle('hidden');
+                });
+                
+                // Auth modal buttons
+                document.getElementById('login-btn').addEventListener('click', () => this.handleAuth(false));
+                document.getElementById('register-btn').addEventListener('click', () => this.handleAuth(true));
+
+                // Forms
+                document.getElementById('rsvp-form').addEventListener('submit', this.handleRsvpSubmit);
+                document.getElementById('shagun-form').addEventListener('submit', this.handleShagunSubmit);
+                document.getElementById('admin-details-form').addEventListener('submit', this.handleAdminDetailsUpdate);
+                document.getElementById('vendor-profile-form').addEventListener('submit', this.handleVendorProfileUpdate);
+                document.getElementById('vendor-filter').addEventListener('change', (e) => this.fetchAndRenderVendors(e.target.value));
+            },
+
+            checkAuthState() {
+                onAuthStateChanged(this.auth, user => {
+                    this.currentUser = user;
+                    this.updateUIForAuthState();
+                    if(user) {
+                        this.loadDashboardData();
+                    }
+                });
+            },
+
+            updateUIForAuthState() {
+                const adminBtn = document.getElementById('adminAuthBtn');
+                const vendorBtn = document.getElementById('vendorAuthBtn');
+                const logoutBtn = document.getElementById('logoutBtn');
+                
+                adminBtn.classList.add('hidden'); // Always hide by default
+                vendorBtn.classList.remove('hidden');
+                logoutBtn.classList.add('hidden');
+                
+                if (this.currentUser) {
+                    logoutBtn.classList.remove('hidden');
+                    vendorBtn.classList.add('hidden');
+                }
+            },
+            
+            async loadDashboardData() {
+                if (!this.currentUser) return;
+                
+                // Check if user is the wedding admin (by convention, not true security)
+                const docRef = doc(this.db, "users", this.currentUser.uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists() && docSnap.data().role === 'admin') {
+                    this.currentRole = 'admin';
+                    this.navigateTo('admin-dashboard');
+                    document.getElementById('adminAuthBtn').classList.remove('hidden');
+                    this.listenForRsvps();
+                    this.listenForGifts();
+                } else {
+                    this.currentRole = 'vendor';
+                    this.navigateTo('vendor-dashboard');
+                    this.loadVendorProfile();
+                }
+            },
+
+            openAuthModal(role) {
+                this.currentRole = role; // 'admin' or 'vendor'
+                document.getElementById('auth-title').textContent = `${role.charAt(0).toUpperCase() + role.slice(1)} Portal`;
+                document.getElementById('auth-modal').classList.remove('hidden');
+            },
+
+            closeAuthModal() {
+                document.getElementById('auth-modal').classList.add('hidden');
+                document.getElementById('auth-error').textContent = '';
+                document.getElementById('auth-form').reset();
+            },
+
+            async handleAuth(isRegister) {
+                const email = document.getElementById('auth-email').value;
+                const password = document.getElementById('auth-password').value;
+                const errorEl = document.getElementById('auth-error');
+                errorEl.textContent = '';
+
+                try {
+                    let userCredential;
+                    if (isRegister) {
+                        userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+                        // Store role in Firestore
+                        await setDoc(doc(this.db, "users", userCredential.user.uid), {
+                            email: userCredential.user.email,
+                            role: this.currentRole
+                        });
+                        this.showToast('Registration successful!');
+                    } else {
+                        userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+                        this.showToast('Login successful!');
+                    }
+                    this.closeAuthModal();
+                } catch (error) {
+                    errorEl.textContent = error.message;
+                    console.error("Auth error:", error);
+                }
+            },
+
+            async logout() {
+                await signOut(this.auth);
+                this.currentRole = null;
+                this.navigateTo('home');
+                this.showToast('Logged out successfully.');
+            },
+
+            // --- Wedding Data Functions ---
+            fetchWeddingData() {
+                 onSnapshot(doc(this.db, "weddingDetails", WEDDING_ADMIN_UID), (doc) => {
+                    if (doc.exists()) {
+                        const data = doc.data();
+                        document.getElementById('home-title').textContent = `${data.coupleName1} & ${data.coupleName2}`;
+                        document.querySelector('.brand-title').textContent = `${data.coupleName1} & ${data.coupleName2}`;
+                        const weddingDate = new Date(data.weddingDate);
+                        document.getElementById('home-date').textContent = weddingDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                        document.getElementById('story-content').textContent = data.story;
+                        
+                        // Populate admin form
+                        document.getElementById('admin-couple-name1').value = data.coupleName1;
+                        document.getElementById('admin-couple-name2').value = data.coupleName2;
+                        document.getElementById('admin-wedding-date').value = data.weddingDate;
+                        document.getElementById('admin-story').value = data.story;
+                        
+                        this.startCountdown(data.weddingDate);
+                        this.renderEvents(data.events || []);
+                        this.renderGallery(data.gallery || []);
+                    } else {
+                        console.log("No wedding data found!");
+                    }
+                });
+            },
+
+            async handleAdminDetailsUpdate(e) {
+                e.preventDefault();
+                const weddingData = {
+                    coupleName1: document.getElementById('admin-couple-name1').value,
+                    coupleName2: document.getElementById('admin-couple-name2').value,
+                    weddingDate: document.getElementById('admin-wedding-date').value,
+                    story: document.getElementById('admin-story').value,
+                    // Note: Events and Gallery are managed separately for simplicity
+                };
+
+                try {
+                    await setDoc(doc(this.db, "weddingDetails", WEDDING_ADMIN_UID), weddingData, { merge: true });
+                    app.showToast('Wedding details updated!');
+                } catch (error) {
+                    console.error("Error updating details:", error);
+                    app.showToast('Update failed!', true);
+                }
+            },
+
+            // --- UI Rendering ---
+            renderEvents(events) {
+                const container = document.getElementById('events-container');
+                container.innerHTML = events.map(event => `
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-2xl text-rose-500 mb-2">${event.name}</h3>
+                        <p class="text-lg font-semibold">${event.date}</p>
+                        <p class="text-gray-600">${event.time}</p>
+                        <p class="mt-2 text-gray-700">${event.venue}</p>
+                        <a href="${event.mapLink}" target="_blank" class="inline-block mt-4 text-rose-500 hover:underline">View Map</a>
+                    </div>
+                `).join('');
+                 if(events.length === 0) container.innerHTML = '<p class="text-center col-span-full">Event details coming soon!</p>';
+            },
+
+             renderGallery(images) {
+                const container = document.getElementById('gallery-container');
+                container.innerHTML = images.map(src => `
+                    <div class="overflow-hidden rounded-lg shadow-md">
+                        <img src="${src}" alt="Gallery image" class="w-full h-full object-cover aspect-square hover:scale-105 transition-transform duration-300">
+                    </div>
+                `).join('');
+                if(images.length === 0) container.innerHTML = '<p class="text-center col-span-full">Gallery coming soon!</p>';
+            },
+
+            startCountdown(dateString) {
+                const countDownDate = new Date(dateString).getTime();
+                const countdownEl = document.getElementById('countdown');
+
+                const interval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = countDownDate - now;
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    countdownEl.innerHTML = `
+                        <div class="countdown-item"><div>${days}</div><div class="text-xs">Days</div></div>
+                        <div class="countdown-item"><div>${hours}</div><div class="text-xs">Hours</div></div>
+                        <div class="countdown-item"><div>${minutes}</div><div class="text-xs">Minutes</div></div>
+                        <div class="countdown-item"><div>${seconds}</div><div class="text-xs">Seconds</div></div>
+                    `;
+
+                    if (distance < 0) {
+                        clearInterval(interval);
+                        countdownEl.innerHTML = "<div class='col-span-4 text-xl'>The big day is here!</div>";
+                    }
+                }, 1000);
+            },
+            
+            // --- Guest Interactions ---
+            async handleRsvpSubmit(e) {
+                e.preventDefault();
+                const rsvpData = {
+                    name: document.getElementById('rsvp-name').value,
+                    attending: document.getElementById('rsvp-attending').value,
+                    guests: document.getElementById('rsvp-guests').value,
+                    message: document.getElementById('rsvp-message').value,
+                };
+                try {
+                    await addDoc(collection(app.db, "rsvps"), rsvpData);
+                    app.showToast('Thank you for your RSVP!');
+                    e.target.reset();
+                } catch (error) {
+                    console.error("Error adding RSVP:", error);
+                    app.showToast('Something went wrong!', true);
+                }
+            },
+
+            async handleShagunSubmit(e) {
+                e.preventDefault();
+                 const giftData = {
+                    from: document.getElementById('shagun-name').value,
+                    gift: document.getElementById('shagun-gift').value,
+                    message: document.getElementById('shagun-message').value,
+                };
+                try {
+                    await addDoc(collection(app.db, "gifts"), giftData);
+                    app.showToast('Thank you for your blessings!');
+                    e.target.reset();
+                } catch (error) {
+                    console.error("Error adding gift:", error);
+                    app.showToast('Something went wrong!', true);
+                }
+            },
+
+            // --- Admin Dashboard Lists ---
+            listenForRsvps() {
+                const q = query(collection(this.db, "rsvps"));
+                onSnapshot(q, (querySnapshot) => {
+                    const listEl = document.getElementById('admin-rsvps-list');
+                    listEl.innerHTML = '';
+                    querySnapshot.forEach((doc) => {
+                        const rsvp = doc.data();
+                        const isAttending = rsvp.attending === 'Yes';
+                        const el = document.createElement('div');
+                        el.className = `p-2 rounded border-l-4 ${isAttending ? 'border-green-500' : 'border-red-500'}`;
+                        el.innerHTML = `<p><strong>${rsvp.name}</strong> (${rsvp.guests} guests) - <span class="font-bold">${rsvp.attending}</span></p><p class="text-sm text-gray-500">${rsvp.message || 'No message.'}</p>`;
+                        listEl.appendChild(el);
+                    });
+                });
+            },
+
+            listenForGifts() {
+                const q = query(collection(this.db, "gifts"));
+                onSnapshot(q, (querySnapshot) => {
+                    const listEl = document.getElementById('admin-gifts-list');
+                    listEl.innerHTML = '';
+                    querySnapshot.forEach((doc) => {
+                        const gift = doc.data();
+                        const el = document.createElement('div');
+                        el.className = 'p-2 rounded border';
+                        el.innerHTML = `<p><strong>From:</strong> ${gift.from}</p><p><strong>Gift:</strong> ${gift.gift}</p><p class="text-sm text-gray-500">${gift.message || 'No message.'}</p>`;
+                        listEl.appendChild(el);
+                    });
+                });
+            },
+
+            // --- Vendor Functions ---
+            async fetchAndRenderVendors(category = 'all') {
+                const container = document.getElementById('vendors-container');
+                container.innerHTML = '<p class="text-center col-span-full">Loading vendors...</p>';
+                try {
+                    let q = collection(this.db, "vendors");
+                    if (category !== 'all') {
+                        q = query(q, where("category", "==", category));
+                    }
+                    const querySnapshot = await getDocs(q);
+                    const vendors = [];
+                    querySnapshot.forEach(doc => vendors.push(doc.data()));
+                    
+                    if (vendors.length === 0) {
+                        container.innerHTML = '<p class="text-center col-span-full">No vendors found for this category.</p>';
+                        return;
+                    }
+
+                    container.innerHTML = vendors.map(v => `
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                           <img src="${v.imageUrl || 'https://placehold.co/600x400/e2e8f0/333333?text=Vendor'}" alt="${v.businessName}" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <p class="text-sm text-rose-500 font-semibold">${v.category}</p>
+                                <h3 class="text-2xl mt-1">${v.businessName}</h3>
+                                <p class="text-gray-600 mt-2">${v.description}</p>
+                                <div class="mt-4">
+                                    <p class="text-sm"><strong>Contact:</strong> ${v.contact}</p>
+                                    ${v.portfolioUrl ? `<a href="${v.portfolioUrl}" target="_blank" class="inline-block mt-2 text-rose-500 hover:underline">View Portfolio</a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+
+                } catch (error) {
+                    console.error("Error fetching vendors:", error);
+                    container.innerHTML = '<p class="text-center col-span-full text-red-500">Could not load vendors.</p>';
+                }
+            },
+
+            async handleVendorProfileUpdate(e) {
+                e.preventDefault();
+                if (!app.currentUser) {
+                    app.showToast('You must be logged in!', true);
+                    return;
+                }
+                const profileData = {
+                    businessName: document.getElementById('vendor-business-name').value,
+                    category: document.getElementById('vendor-category').value,
+                    contact: document.getElementById('vendor-contact').value,
+                    portfolioUrl: document.getElementById('vendor-portfolio').value,
+                    imageUrl: document.getElementById('vendor-image').value,
+                    description: document.getElementById('vendor-description').value,
+                    ownerId: app.currentUser.uid,
+                };
+
+                try {
+                    await setDoc(doc(app.db, "vendors", app.currentUser.uid), profileData);
+                    app.showToast('Profile saved successfully!');
+                    app.fetchAndRenderVendors(); // Refresh the list
+                } catch (error) {
+                    console.error("Error saving profile:", error);
+                    app.showToast('Failed to save profile!', true);
+                }
+            },
+            
+            async loadVendorProfile() {
+                if(!this.currentUser) return;
+                const docRef = doc(this.db, "vendors", this.currentUser.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('vendor-business-name').value = data.businessName || '';
+                    document.getElementById('vendor-category').value = data.category || '';
+                    document.getElementById('vendor-contact').value = data.contact || '';
+                    document.getElementById('vendor-portfolio').value = data.portfolioUrl || '';
+                    document.getElementById('vendor-image').value = data.imageUrl || '';
+                    document.getElementById('vendor-description').value = data.description || '';
+                }
+            }
+        };
+
+        // Initialize the app
+        app.init();
+        window.app = app; // For inline event handlers
+
+    </script>
+</body>
+</html>
