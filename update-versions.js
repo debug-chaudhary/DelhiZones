@@ -9,7 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const VERSION = '4.2'; // Update this to bump all versions
+const VERSION = '4.3'; // Update this to bump all versions
 const rootDir = __dirname;
 
 // Find all HTML files
