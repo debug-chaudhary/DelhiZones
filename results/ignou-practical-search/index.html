@@ -49,6 +49,20 @@
                 <h2 class="text-lg text-gray-600 font-medium">Centre: 38044 , 38036 & 0775  | Dec 2025</h2>
             </div>
 
+            <!-- Program Type Tabs -->
+            <div class="max-w-xl mx-auto mb-8 no-print">
+                <div class="flex gap-0 border-b-2 border-gray-300">
+                    <button onclick="switchProgram('regular')" id="tabRegular" 
+                        class="px-6 py-3 font-bold text-blue-600 border-b-2 border-blue-600 transition-all hover:bg-blue-50 rounded-t">
+                        Regular Programs
+                    </button>
+                    <button onclick="switchProgram('ol')" id="tabOL" 
+                        class="px-6 py-3 font-bold text-gray-600 border-b-2 border-transparent transition-all hover:bg-gray-100 hover:text-blue-600 rounded-t">
+                        OL Programs
+                    </button>
+                </div>
+            </div>
+
             <div id="searchBox" class="max-w-xl mx-auto mb-10 no-print">
                 <div class="flex gap-3">
                     <input type="text" id="searchInput" placeholder="Enter Enrollment No." 
@@ -95,7 +109,7 @@
                 <div class="overflow-x-auto border rounded-lg border-gray-200">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-gray-100 text-sm uppercase text-gray-600">
+                            <tr class="bg-gray-100 text-sm uppercase text-gray-600" id="tableHeader">
                                 <th class="p-4 border-b">Course</th>
                                 <th class="p-4 border-b">Date</th>
                                 <th class="p-4 border-b">Batch</th>
