@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load both data files - try different paths
     const dataPath1 = '/results/ignou-practical-search/data.json';
-    const dataPath2 = '../../data.json';
+    const dataPath2 = './data.json';
     const bcaolPath1 = '/results/ignou-practical-search/BCAOL.json';
-    const bcaolPath2 = '../../BCAOL.json';
+    const bcaolPath2 = './BCAOL.json';
     
     Promise.all([
         fetch(dataPath1)
@@ -110,7 +110,7 @@ function findSchedule() {
     } else {
         // For BCAOL data, match Column2 (enrollment number) - skip header row
         currentData = dataSource
-            .filter(s => s.Column2 && typeof s.Column2 === 'number')
+            .filter(s => s && s.Column2 && typeof s.Column2 === 'number')
             .filter(s => String(s.Column2).trim() == val);
     }
 
