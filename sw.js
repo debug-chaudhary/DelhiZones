@@ -3,8 +3,8 @@
  * Strategy: Stale-While-Revalidate for Assets, Network-First for HTML
  */
 
-const CACHE_NAME = 'delhizones-static-v9'; // Bumped to match Loader
-const DATA_CACHE_NAME = 'delhizones-data-v9';
+const CACHE_NAME = 'delhizones-static-v10'; // Bumped to match Loader
+const DATA_CACHE_NAME = 'delhizones-data-v10';
 
 // CRITICAL: Files to cache immediately.
 // If any of these are missing from your server, the PWA Install will fail.
@@ -25,7 +25,7 @@ const PRECACHE_URLS = [
 
 // 1. INSTALL PHASE
 self.addEventListener('install', (event) => {
-    console.log('[SW] Installing v9.1...');
+    console.log('[SW] Installing v10.0...');
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {

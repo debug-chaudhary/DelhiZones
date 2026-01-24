@@ -6,7 +6,7 @@
 (function () {
     
     // Import version from central config
-    const SITE_VERSION_NUM = typeof window !== 'undefined' && window.SITE_VERSION ? window.SITE_VERSION : '4.1';
+    const SITE_VERSION_NUM = typeof window !== 'undefined' && window.SITE_VERSION ? window.SITE_VERSION : '4.4';
     const SITE_VERSION = '?v=' + SITE_VERSION_NUM;
     
     // Paths
